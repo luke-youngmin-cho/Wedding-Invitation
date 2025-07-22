@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>채린 ❤ 영민 결혼식 초대장</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Swiper & Kakao SDK -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" defer></script>
+  <!-- Naver Map -->
+  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_ID" defer></script>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+  <!-- 1️⃣ 타이틀 -->
+  <header class="text-center py-8">
+    <h1 class="text-3xl font-bold">권채린 · 조영민의 결혼식에 초대합니다</h1>
+  </header>
+
+  <!-- 2️⃣ 메인 사진 -->
+  <section class="w-full">
+    <img src="/assets/hero.jpg" alt="신랑신부 메인 사진" class="w-full object-cover max-h-[460px]">
+  </section>
+
+  <!-- 3️⃣ 예식 일자·장소 -->
+  <section class="py-8 text-center">
+    <p class="text-xl font-medium">2025년 9월 27일 (토) 오후 <time class="font-bold">12:00</time></p>
+    <p class="mt-2">켄싱턴호텔 여의도 15층&nbsp;【국회의사당역 3번 출구 도보 3분】</p>
+  </section>
+
+  <!-- 4️⃣ 초대 메시지 -->
+  <section class="px-6 py-10 text-center whitespace-pre-line leading-relaxed">
+    두 사람이 만나 <br>사랑과 신뢰로 한 가정을 이루려 합니다.<br>
+    바쁘시더라도 참석하셔서 <br>축복해 주시면 감사하겠습니다.
+  </section>
+
+  <!-- 5️⃣ 혼주 연락처 -->
+  <section class="px-4 py-6">
+    <h2 class="text-lg font-semibold mb-4">혼주 연락처</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <!-- 예시 카드 -->
+      <div class="p-4 bg-white rounded-xl shadow">
+        <h3 class="font-semibold">신부 아버지&nbsp;권순문</h3>
+        <div class="flex gap-2 mt-2">
+          <a href="tel:01012345678" class="flex-1 py-2 rounded bg-green-600 text-white text-center">통화</a>
+          <a href="sms:01012345678?body=결혼식 축하드립니다!" class="flex-1 py-2 rounded bg-blue-600 text-white text-center">메시지</a>
+        </div>
+      </div>
+      <!-- …동일 패턴으로 4명 -->
+    </div>
+  </section>
+
+  <!-- 6️⃣ 달력 -->
+  <section id="calendar" class="flex justify-center py-8"></section>
+
+  <!-- 7️⃣ 사진 앨범 -->
+  <section class="py-8">
+    <div class="swiper w-full">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="/assets/album1.jpg" class="w-full"/></div>
+        <!-- ... -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 8️⃣ 오시는 길 -->
+  <section class="px-4 py-8 space-y-4">
+    <h2 class="text-lg font-semibold">오시는 길</h2>
+    <div id="map" class="w-full h-60 rounded-xl"></div>
+    <button id="openNaverApp" class="w-full py-3 bg-emerald-600 text-white rounded-lg">네이버지도 앱으로 열기</button>
+
+    <details class="bg-white rounded-lg shadow p-4">
+      <summary class="cursor-pointer font-medium">대중교통 이용 안내</summary>
+      <ul class="list-disc ml-6 mt-2 text-sm">
+        <li>지하철&nbsp;9호선&nbsp;국회의사당역&nbsp;3번 출구(도보 3분)</li>
+        <li>버스&nbsp;5615·5618·6623·753&nbsp;— “여의도 순복음교회” 하차</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- 9️⃣ 방명록 -->
+  <section class="px-4 py-8">
+    <h2 class="text-lg font-semibold mb-4">방명록</h2>
+    <form id="guestbookForm" class="space-y-2">
+      <input name="name" required placeholder="이름" class="w-full p-2 border rounded">
+      <textarea name="msg" required rows="2" placeholder="메시지" class="w-full p-2 border rounded"></textarea>
+      <button class="w-full py-2 bg-indigo-600 text-white rounded">작성하기</button>
+    </form>
+    <ul id="guestbookList" class="mt-6 space-y-3"></ul>
+  </section>
+
+  <!-- 🔟 RSVP -->
+  <section class="px-4 py-8">
+    <button id="openRsvp" class="w-full py-3 bg-pink-600 text-white rounded-lg">참석 여부 알리기</button>
+  </section>
+
+  <!-- ⓫ 마음을 전하는 곳 -->
+  <section class="px-4 py-8">
+    <h2 class="text-lg font-semibold mb-4">마음을 전하는 곳</h2>
+    <div class="space-y-3">
+      <div class="flex items-center justify-between bg-white p-3 rounded-lg shadow">
+        <span>신랑&nbsp;조영민&nbsp;│&nbsp;우리 은행&nbsp;1002-123-456789</span>
+        <button data-acct="1002123456789" class="copy-btn text-sm px-2 py-1 bg-gray-200 rounded">복사</button>
+      </div>
+      <!-- …목록 계속 -->
+    </div>
+  </section>
+
+  <!-- ⓬ 카카오톡 공유 & ⓭ URL 복사 -->
+  <footer class="px-4 py-8 flex flex-col gap-3">
+    <button id="shareKakao" class="py-3 bg-yellow-400 rounded-lg font-semibold">카카오톡으로 공유하기</button>
+    <button id="copyUrl" class="py-3 bg-gray-300 rounded-lg font-semibold">주소 복사하기</button>
+    <p class="text-center text-xs text-gray-500 mt-2">© 2025 권채린 · 조영민</p>
+  </footer>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
