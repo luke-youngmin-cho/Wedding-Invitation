@@ -1,183 +1,872 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <title>권채린 · 조영민 결혼식 초대장</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>권채린 ❤️ 조영민 청첩장</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Tailwind (CDN 빌드) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
 
-  <!-- Swiper (앨범) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
 
-  <!-- Kakao SDK - 공유 -->
-  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" defer></script>
+        .section {
+            padding: 20px;
+            margin-bottom: 10px;
+        }
 
-  <!-- NAVER 지도 -->
-  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_NAVER_CLIENT_ID" defer></script>
+        /* 타이틀 섹션 */
+        .title-section {
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .title-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title-section p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* 메인 사진 */
+        .main-photo {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .main-photo img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #ff9a9e;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* 예식 정보 */
+        .wedding-info {
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin: 20px;
+            padding: 30px 20px;
+        }
+
+        .date {
+            font-size: 2em;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .time {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .venue {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* 초대 메시지 */
+        .invitation-msg {
+            text-align: center;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
+            padding: 30px;
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            margin: 20px;
+            border-radius: 15px;
+        }
+
+        /* 혼주 연락처 */
+        .parents-contact {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .parents-contact h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        .parent-group {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .parent-group h4 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ff6b6b;
+        }
+
+        .parent-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .contact-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .call-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .sms-btn {
+            background: #2196F3;
+            color: white;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* 달력 */
+        .calendar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .calendar h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+
+        .calendar-header {
+            font-weight: bold;
+            padding: 10px 5px;
+            background: #ff9a9e;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .calendar-day {
+            padding: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .calendar-day:hover {
+            background: #f0f0f0;
+        }
+
+        .wedding-day {
+            background: #ff6b6b !important;
+            color: white;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* 사진 앨범 */
+        .photo-album {
+            padding: 20px;
+        }
+
+        .photo-album h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .photo-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 300px;
+        }
+
+        .photo-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .photo-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .photo-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-controls {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .slider-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: #ff5252;
+        }
+
+        /* 오시는 길 */
+        .directions {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .directions h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .naver-map-btn {
+            width: 100%;
+            padding: 12px;
+            background: #00C73C;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .naver-map-btn:hover {
+            background: #00B135;
+        }
+
+        .transport-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .transport-info h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        /* 방명록 */
+        .guestbook {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .guestbook h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .write-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .write-btn:hover {
+            background: #ff5252;
+        }
+
+        .guestbook-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .guestbook-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .guest-name {
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 5px;
+        }
+
+        .guest-date {
+            font-size: 0.8em;
+            color: #666;
+            text-align: right;
+        }
+
+        /* 참석 여부 */
+        .attendance {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .attendance-btn {
+            width: 80%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #ff9a9e);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .attendance-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 마음 전하는 곳 */
+        .account-info {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .account-info h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .account-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .account-group h4 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .copy-btn {
+            padding: 5px 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+
+        /* 공유 버튼들 */
+        .share-buttons {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .share-btn {
+            width: 80%;
+            padding: 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .kakao-btn {
+            background: #FEE500;
+            color: #3C1E1E;
+        }
+
+        .copy-btn-large {
+            background: #666;
+            color: white;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* 모달 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #ff5252;
+        }
+
+        /* 반응형 */
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+            }
+            
+            .title-section h1 {
+                font-size: 2em;
+            }
+            
+            .main-photo img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body>
+    <div class="container">
+        <!-- 1. 타이틀 -->
+        <section class="title-section">
+            <h1>권채린 ❤️ 조영민</h1>
+            <p>우리 결혼합니다</p>
+        </section>
 
-  <!-- 1️⃣ 타이틀 -->
-  <header class="text-center py-10">
-    <h1 class="text-3xl font-bold">권채린 &amp; 조영민</h1>
-    <p class="mt-1 text-gray-500">Wedding Invitation</p>
-  </header>
+        <!-- 2. 메인 사진 -->
+        <section class="main-photo">
+            <img src="https://via.placeholder.com/280x280/ff9a9e/ffffff?text=💑" alt="신랑신부 사진" id="mainPhoto">
+        </section>
 
-  <!-- 2️⃣ 메인 사진 -->
-  <section>
-    <img src="/assets/hero.jpg" alt="신랑신부 메인" class="w-full object-cover max-h-[480px]">
-  </section>
+        <!-- 3. 예식 일자 및 장소 -->
+        <section class="wedding-info">
+            <div class="date">2025년 9월 27일 토요일</div>
+            <div class="time">오후 12시 30분</div>
+            <div class="venue">켄싱턴호텔 여의도 15층</div>
+        </section>
 
-  <!-- 3️⃣ 예식 정보 -->
-  <section class="py-10 text-center space-y-2">
-    <p class="text-xl font-semibold">2025 년 9 월 27 일 (토) 오후 12:00</p>
-    <p class="text-lg">켄싱턴호텔 여의도 15F 스카이홀</p>
-    <p class="text-sm text-gray-500">(9호선 국회의사당역 3번 출구 도보 3분)</p>
-  </section>
+        <!-- 4. 초대 메시지 -->
+        <section class="invitation-msg">
+            소중한 분들을 초대합니다.<br>
+            저희 두 사람이 사랑의 결실을 맺어<br>
+            하나가 되는 뜻깊은 자리에<br>
+            오셔서 축복해 주시면<br>
+            더없는 기쁨이겠습니다.
+        </section>
 
-  <!-- 4️⃣ 초대 메시지 -->
-  <section class="px-6 py-8 text-center leading-relaxed whitespace-pre-line">
-두 사람이 만나
-사랑과 신뢰로
-한 가정을 이루려 합니다.
+        <!-- 5. 혼주 연락처 -->
+        <section class="parents-contact">
+            <h3><i class="fas fa-phone"></i> 혼주 연락처</h3>
+            
+            <div class="parent-group">
+                <h4>신랑측</h4>
+                <div class="parent-info">
+                    <div>
+                        <strong>아버지</strong> 조국제<br>
+                        <strong>어머니</strong> 김명선
+                    </div>
+                    <div class="contact-buttons">
+                        <button class="contact-btn call-btn" onclick="callParent('groom', 'father')">
+                            <i class="fas fa-phone"></i> 통화
+                        </button>
+                        <button class="contact-btn sms-btn" onclick="smsParent('groom', 'father')">
+                            <i class="fas fa-sms"></i> 메시지
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-바쁘시더라도 참석하시어
-축복해 주시면 감사하겠습니다.
-  </section>
+            <div class="parent-group">
+                <h4>신부측</h4>
+                <div class="parent-info">
+                    <div>
+                        <strong>아버지</strong> 권순문<br>
+                        <strong>어머니</strong> 이은숙
+                    </div>
+                    <div class="contact-buttons">
+                        <button class="contact-btn call-btn" onclick="callParent('bride', 'father')">
+                            <i class="fas fa-phone"></i> 통화
+                        </button>
+                        <button class="contact-btn sms-btn" onclick="smsParent('bride', 'father')">
+                            <i class="fas fa-sms"></i> 메시지
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- 5️⃣ 혼주 연락처 -->
-  <section class="px-4 py-10">
-    <h2 class="text-lg font-semibold mb-4">혼주 연락처</h2>
+        <!-- 6. 달력 -->
+        <section class="calendar">
+            <h3><i class="fas fa-calendar-alt"></i> 2025년 9월</h3>
+            <div class="calendar-grid" id="calendar">
+                <!-- 달력이 여기에 생성됩니다 -->
+            </div>
+        </section>
 
-    <div class="grid grid-cols-2 gap-4 text-sm">
-      <!-- 카드 -->
-      <div class="p-4 bg-white rounded-xl shadow">
-        <h3 class="font-semibold">신부 아버지 │ 권순문</h3>
-        <div class="flex gap-2 mt-2">
-          <a class="flex-1 py-2 rounded bg-emerald-600 text-white text-center" href="tel:01012345678">통화</a>
-          <a class="flex-1 py-2 rounded bg-sky-600 text-white text-center" href="sms:01012345678?body=결혼식%20축하드립니다!">문자</a>
+        <!-- 7. 사진 앨범 -->
+        <section class="photo-album">
+            <h3><i class="fas fa-images"></i> 사진 앨범</h3>
+            <div class="photo-slider">
+                <div class="photo-track" id="photoTrack">
+                    <div class="photo-slide">
+                        <img src="https://via.placeholder.com/400x300/ff9a9e/ffffff?text=사진1" alt="웨딩사진 1">
+                    </div>
+                    <div class="photo-slide">
+                        <img src="https://via.placeholder.com/400x300/fecfef/ffffff?text=사진2" alt="웨딩사진 2">
+                    </div>
+                    <div class="photo-slide">
+                        <img src="https://via.placeholder.com/400x300/fab1a0/ffffff?text=사진3" alt="웨딩사진 3">
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="previousPhoto()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn" onclick="nextPhoto()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 8. 오시는 길 -->
+        <section class="directions">
+            <h3><i class="fas fa-map-marker-alt"></i> 오시는 길</h3>
+            
+            <div class="map-container">
+                <iframe src="https://map.naver.com/v5/search/켄싱턴호텔%20여의도" 
+                        width="100%" height="250" frameborder="0"></iframe>
+            </div>
+            
+            <button class="naver-map-btn" onclick="openNaverMap()">
+                <i class="fas fa-map"></i> 네이버 지도에서 자세히 보기
+            </button>
+
+            <div class="transport-info">
+                <h4><i class="fas fa-subway"></i> 지하철 이용시</h4>
+                <p>• 9호선 국회의사당역 3번출구 (도보 3분)<br>
+                • 5호선 여의나루역 1번출구 (도보 10분)</p>
+            </div>
+
+            <div class="transport-info">
+                <h4><i class="fas fa-bus"></i> 버스 이용시</h4>
+                <p>여의도 순복음교회 하차<br>
+                5615번, 5618번, 6623번, 753번</p>
+            </div>
+
+            <div class="transport-info">
+                <h4><i class="fas fa-map-marker-alt"></i> 주소</h4>
+                <p>서울특별시 영등포구 국회대로 76길 16, 15층<br>
+                전화: 02-6670-7000</p>
+            </div>
+        </section>
+
+        <!-- 9. 방명록 -->
+        <section class="guestbook">
+            <h3><i class="fas fa-book"></i> 방명록</h3>
+            <button class="write-btn" onclick="openGuestbookModal()">
+                <i class="fas fa-pen"></i> 방명록 작성하기
+            </button>
+            <div class="guestbook-list" id="guestbookList">
+                <!-- 방명록 목록이 여기에 표시됩니다 -->
+            </div>
+        </section>
+
+        <!-- 10. 참석 여부 -->
+        <section class="attendance">
+            <button class="attendance-btn" onclick="openAttendanceModal()">
+                <i class="fas fa-check-circle"></i> 참석 여부 알려주기
+            </button>
+        </section>
+
+        <!-- 11. 마음 전하는 곳 -->
+        <section class="account-info">
+            <h3><i class="fas fa-gift"></i> 마음 전하는 곳</h3>
+            
+            <div class="account-group">
+                <h4>신랑측</h4>
+                <div class="account-item">
+                    <div>
+                        <strong>조영민</strong><br>
+                        <small>○○은행 123-456-789012</small>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('123-456-789012')">복사</button>
+                </div>
+                <div class="account-item">
+                    <div>
+                        <strong>조국제 (아버지)</strong><br>
+                        <small>○○은행 234-567-890123</small>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('234-567-890123')">복사</button>
+                </div>
+                <div class="account-item">
+                    <div>
+                        <strong>김명선 (어머니)</strong><br>
+                        <small>○○은행 345-678-901234</small>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('345-678-901234')">복사</button>
+                </div>
+            </div>
+
+            <div class="account-group">
+                <h4>신부측</h4>
+                <div class="account-item">
+                    <div>
+                        <strong>권채린</strong><br>
+                        <small>○○은행 456-789-012345</small>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('456-789-012345')">복사</button>
+                </div>
+                <div class="account-item">
+                    <div>
+                        <strong>권순문 (아버지)</strong><br>
+                        <small>○○은행 567-890-123456</small>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('567-890-123456')">복사</button>
+                </div>
+                <div class="account-item">
+                    <div>
+                        <strong>이은숙 (어머니)</strong><br>
+                        <small>○○은행 678-901-234567</small>
+                    </div>
+                    <button class="copy-btn" onclick="copyAccount('678-901-234567')">복사</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12, 13. 공유 버튼들 -->
+        <section class="share-buttons">
+            <button class="share-btn kakao-btn" onclick="shareKakao()">
+                <i class="fas fa-comment"></i> 카카오톡으로 공유하기
+            </button>
+            <button class="share-btn copy-btn-large" onclick="copyURL()">
+                <i class="fas fa-link"></i> 주소 복사하기
+            </button>
+        </section>
+    </div>
+
+    <!-- 방명록 모달 -->
+    <div id="guestbookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeGuestbookModal()">&times;</span>
+            <h3>방명록 작성</h3>
+            <form id="guestbookForm">
+                <div class="form-group">
+                    <label for="guestName">이름</label>
+                    <input type="text" id="guestName" required>
+                </div>
+                <div class="form-group">
+                    <label for="guestMessage">메시지</label>
+                    <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">작성 완료</button>
+            </form>
         </div>
-      </div>
-      <!-- 동일 패턴으로 3–4개 추가 -->
     </div>
-  </section>
 
-  <!-- 6️⃣ 달력 -->
-  <section id="calendar" class="flex justify-center py-8"></section>
-
-  <!-- 7️⃣ 앨범 -->
-  <section class="py-10">
-    <h2 class="text-lg font-semibold text-center mb-4">우리의 순간</h2>
-    <div class="swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="/assets/album1.jpg" class="w-full"></div>
-        <div class="swiper-slide"><img src="/assets/album2.jpg" class="w-full"></div>
-        <!-- 필요만큼 추가 -->
-      </div>
+    <!-- 참석 여부 모달 -->
+    <div id="attendanceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAttendanceModal()">&times;</span>
+            <h3>참석 여부 확인</h3>
+            <form id="attendanceForm">
+                <div class="form-group">
+                    <label for="attendeeName">이름</label>
+                    <input type="text" id="attendeeName" required>
+                </div>
+                <div class="form-group">
+                    <label for="attendeePhone">연락처</label>
+                    <input type="tel" id="attendeePhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="attendanceStatus">참석 여부</label>
+                    <select id="attendanceStatus" required>
+                        <option value="">선택해주세요</option>
+                        <option value="attend">참석</option>
+                        <option value="absent">불참</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mealOption">식사 여부</label>
+                    <select id="mealOption" required>
+                        <option value="">선택해주세요</option>
+                        <option value="yes">식사함</option>
+                        <option value="no">식사안함</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guestCount">총 참석 인원 (본인 포함)</label>
+                    <input type="number" id="guestCount" min="1" max="10" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="relation">관계</label>
+                    <select id="relation" required>
+                        <option value="">선택해주세요</option>
+                        <option value="groom">신랑측</option>
+                        <option value="bride">신부측</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">확인</button>
+            </form>
+        </div>
     </div>
-  </section>
-
-  <!-- 8️⃣ 오시는 길 -->
-  <section class="px-4 py-10 space-y-4">
-    <h2 class="text-lg font-semibold">오시는 길</h2>
-    <div id="map" class="w-full h-64 rounded-xl"></div>
-
-    <button id="openNaverApp" class="w-full py-3 bg-emerald-600 text-white rounded-lg">
-      네이버지도 앱으로 열기
-    </button>
-
-    <details class="bg-white rounded-lg shadow p-4">
-      <summary class="cursor-pointer font-medium">대중교통 안내</summary>
-      <ul class="list-disc ml-6 mt-2 text-sm">
-        <li>지하철 9호선 국회의사당역 3번 출구 도보 3분</li>
-        <li>버스 5615·6623 — “여의도 순복음교회” 정류장</li>
-      </ul>
-    </details>
-  </section>
-
-  <!-- 9️⃣ 방명록 -->
-  <section class="px-4 py-10">
-    <h2 class="text-lg font-semibold mb-4">방명록</h2>
-    <form id="guestbookForm" class="space-y-3">
-      <input name="name" required placeholder="이름" class="w-full p-3 border rounded">
-      <textarea name="msg" required rows="2" placeholder="메시지" class="w-full p-3 border rounded"></textarea>
-      <button class="w-full py-3 bg-indigo-600 text-white rounded-lg">작성하기</button>
-    </form>
-
-    <ul id="guestbookList" class="mt-6 space-y-3"></ul>
-  </section>
-
-  <!-- 🔟 RSVP 팝업 트리거 버튼 -->
-  <section class="px-4 py-10">
-    <button id="openRsvp" class="w-full py-3 bg-pink-600 text-white rounded-lg">
-      참석 여부 알리기
-    </button>
-  </section>
-
-  <!-- 🔟 RSVP 모달 -->
-  <div id="rsvpModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-xl w-11/12 max-w-md p-6 space-y-4">
-      <h3 class="text-lg font-semibold text-center">참석 여부</h3>
-
-      <input id="rsvpName" placeholder="이름" class="w-full p-3 border rounded">
-      <input id="rsvpPhone" placeholder="연락처(- 없이)" class="w-full p-3 border rounded">
-
-      <div class="flex gap-2">
-        <select id="rsvpSide" class="flex-1 p-3 border rounded">
-          <option value="groom">신랑측</option>
-          <option value="bride">신부측</option>
-        </select>
-        <select id="rsvpMeal" class="flex-1 p-3 border rounded">
-          <option value="yes">식사 함</option>
-          <option value="no">식사 안함</option>
-        </select>
-      </div>
-
-      <div class="flex gap-2">
-        <input id="rsvpTotal" type="number" min="1" max="10" value="1"
-               class="w-1/2 p-3 border rounded text-center"
-               placeholder="인원수">
-        <select id="rsvpAttend" class="w-1/2 p-3 border rounded">
-          <option value="yes">참석</option>
-          <option value="no">불참</option>
-        </select>
-      </div>
-
-      <div class="flex gap-2">
-        <button id="submitRsvp" class="flex-1 py-3 bg-pink-600 text-white rounded-lg">제출</button>
-        <button id="closeRsvp"  class="flex-1 py-3 bg-gray-300 rounded-lg">닫기</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ⓫ 마음을 전하는 곳 -->
-  <section class="px-4 py-10">
-    <h2 class="text-lg font-semibold mb-4">마음을 전하는 곳</h2>
-    <div class="space-y-3 text-sm">
-      <div class="flex justify-between items-center bg-white p-3 rounded-lg shadow">
-        <span>신랑 조영민 │ 우리 1002-123-456789</span>
-        <button data-acct="1002123456789"
-                class="copy-btn px-2 py-1 bg-gray-200 rounded">복사</button>
-      </div>
-      <div class="flex justify-between items-center bg-white p-3 rounded-lg shadow">
-        <span>신부 채린 │ 국민 110-987-654321</span>
-        <button data-acct="110987654321"
-                class="copy-btn px-2 py-1 bg-gray-200 rounded">복사</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⓬ 공유 & ⓭ URL 복사 -->
-  <footer class="px-4 py-10 flex flex-col gap-3">
-    <button id="shareKakao" class="py-3 bg-yellow-400 rounded-lg font-semibold">카카오톡으로 공유</button>
-    <button id="copyUrl"   class="py-3 bg-gray-300  rounded-lg font-semibold">주소 복사하기</button>
-    <p class="text-center text-xs text-gray-500 mt-4">© 2025 권채린 · 조영민</p>
-  </footer>
-
-  <!-- 메인 스크립트 -->
-  <script type="module" src="/js/main.js"></script>
-</body>
-</html>
