@@ -551,4 +551,100 @@ body {
 .form-group textarea,
 .form-group select {
     width: 100%;
-    padding:
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.form-group textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #ff5252;
+}
+
+/* 알림 */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 9999;
+    font-size: 14px;
+    max-width: 300px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification-success {
+    background: #4CAF50;
+    color: white;
+}
+
+.notification-error {
+    background: #f44336;
+    color: white;
+}
+
+.notification-warning {
+    background: #ff9800;
+    color: white;
+}
+
+.notification-info {
+    background: #2196F3;
+    color: white;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+    }
+    
+    .title-section h1 {
+        font-size: 2em;
+    }
+    
+    .main-photo img {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .map-buttons {
+        flex-direction: column;
+    }
+    
+    .parent-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .contact-buttons {
+        align-self: stretch;
+        justify-content: center;
+    }
+}
