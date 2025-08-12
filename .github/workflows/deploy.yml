@@ -30,21 +30,34 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
       
-      - name: Install dependencies
+      - name: Check if package-lock.json exists
+        id: check_files
+        run: |
+          if [ -f "package-lock.json" ]; then
+            echo "package_lock_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "package_lock_exists=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Install dependencies (with package-lock.json)
+        if: steps.check_files.outputs.package_lock_exists == 'true'
         run: npm ci
+      
+      - name: Install dependencies (without package-lock.json)
+        if: steps.check_files.outputs.package_lock_exists == 'false'
+        run: npm install
       
       - name: Build project
         run: npm run build
         env:
-          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
-          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
-          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
-          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
-          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
-          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
-          VITE_KAKAO_JS_KEY: ${{ secrets.VITE_KAKAO_JS_KEY }}
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY || 'AIzaSyCfJ2xA0htQIlwvnFp5oTcKmEjXJLcj9Cs' }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN || 'wedding-invitation-46ad9.firebaseapp.com' }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID || 'wedding-invitation-46ad9' }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET || 'wedding-invitation-46ad9.appspot.com' }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID || '281364628692' }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID || '1:281364628692:web:c169a60fca936dca38a741' }}
+          VITE_KAKAO_JS_KEY: ${{ secrets.VITE_KAKAO_JS_KEY || '' }}
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

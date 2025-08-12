@@ -28,9 +28,11 @@ jobs:
       
       - name: Deploy Firestore Rules
         run: |
-          firebase deploy --only firestore:rules --token "${{ secrets.FIREBASE_TOKEN }}" --project ${{ secrets.FIREBASE_PROJECT_ID }}
+          firebase deploy --only firestore:rules --token "${{ secrets.FIREBASE_TOKEN }}" --project "${{ secrets.FIREBASE_PROJECT_ID }}"
+        if: ${{ secrets.FIREBASE_TOKEN != '' && secrets.FIREBASE_PROJECT_ID != '' }}
       
       - name: Deploy Storage Rules
         run: |
-          firebase deploy --only storage:rules --token "${{ secrets.FIREBASE_TOKEN }}" --project ${{ secrets.FIREBASE_PROJECT_ID }}
+          firebase deploy --only storage:rules --token "${{ secrets.FIREBASE_TOKEN }}" --project "${{ secrets.FIREBASE_PROJECT_ID }}"
+        if: ${{ secrets.FIREBASE_TOKEN != '' && secrets.FIREBASE_PROJECT_ID != '' }}
         continue-on-error: true

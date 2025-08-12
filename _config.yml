@@ -1,0 +1,17 @@
+# GitHub Pages Configuration
+theme: null
+plugins: []
+exclude:
+  - node_modules/
+  - src/
+  - package.json
+  - package-lock.json
+  - vite.config.js
+  - firebase.json
+  - firestore.rules
+  - storage.rules
+  - .env
+  - .env.local
+  - .firebaserc
+  - README.md
+  - .gitignore
