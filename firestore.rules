@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 방명록 규칙
+    match /guestbook/{document} {
+      // 누구나 읽기 가능
+      allow read: if true;
+      
+      // 작성 규칙: 필수 필드 검증
+      allow create: if isValidGuestbook(request.resource.data);
+      
+      // 수정 및 삭제 금지
+      allow update, delete: if false;
+    }
+    
+    // 참석 여부 규칙
+    match /rsvp/{document} {
+      // 읽기 금지 (관리자만 가능하도록)
+      allow read: if false;
+      
+      // 작성 규칙: 필수 필드 검증
+      allow create: if isValidRsvp(request.resource.data);
+      
+      // 중복 방지를 위한 업데이트 허용 (같은 전화번호)
+      allow update: if isValidRsvp(request.resource.data) && 
+                      resource.data.phone == request.resource.data.phone;
+      
+      // 삭제 금지
+      allow delete: if false;
+    }
+    
+    // 관리자 통계 데이터 (읽기 전용)
+    match /statistics/{document} {
+      allow read: if true;
+      allow write: if false;
+    }
+    
+    // 유효성 검증 함수들
+    function isValidGuestbook(data) {
+      return data.keys().hasAll(['name', 'msg', 'ts']) &&
+             data.name is string &&
+             data.name.size() > 0 &&
+             data.name.size() <= 50 &&
+             data.msg is string &&
+             data.msg.size() > 0 &&
+             data.msg.size() <= 500 &&
+             data.ts == request.time;
+    }
+    
+    function isValidRsvp(data) {
+      return data.keys().hasAll(['name', 'phone', 'attend', 'ts']) &&
+             data.name is string &&
+             data.name.size() > 0 &&
+             data.name.size() <= 50 &&
+             data.phone is string &&
+             data.phone.matches('^[0-9-]+$') &&
+             data.phone.size() >= 10 &&
+             data.phone.size() <= 15 &&
+             data.attend is string &&
+             data.attend in ['yes', 'no'] &&
+             data.ts == request.time &&
+             (!('totalGuests' in data) || (data.totalGuests is number && data.totalGuests >= 0 && data.totalGuests <= 10)) &&
+             (!('meal' in data) || (data.meal is string && data.meal in ['yes', 'no'])) &&
+             (!('side' in data) || (data.side is string && data.side in ['groom', 'bride']));
+    }
+  }
+}
