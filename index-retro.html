@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 권채린 ❤️ 조영민 - GAME START!</title>
+    
+    <!-- Retro Game Style -->
+    <link rel="stylesheet" href="retro-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Game Title Screen -->
+        <section class="title-section ascii-border">
+            <pre style="font-size: 8px; line-height: 1.2; color: var(--pixel-pink);">
+╔══════════════════════════════════╗
+║                                  ║
+║    WEDDING INVITATION GAME       ║
+║         PRESS START              ║
+║                                  ║
+╚══════════════════════════════════╝
+            </pre>
+            <h1>권채린 <span class="pixel-heart"></span> 조영민</h1>
+            <p>[ STAGE: WEDDING ]</p>
+            <p style="font-size: 10px; margin-top: 10px;">LOADING... 2025.09.27</p>
+        </section>
+
+        <!-- Main Character Photo -->
+        <section class="main-photo">
+            <img src="assets/main.png" alt="PLAYER 1 & PLAYER 2" id="mainPhoto">
+        </section>
+
+        <!-- Game Info -->
+        <section class="wedding-info pixel-border">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <span style="font-size: 10px;">═══ GAME INFO ═══</span>
+            </div>
+            <div class="date">2025-09-27 SAT</div>
+            <div class="time">TIME: 12:30 PM</div>
+            <div class="venue">LOCATION: KENSINGTON LV.15</div>
+            <div style="text-align: center; margin-top: 15px;">
+                <span style="font-size: 8px;">[ 켄싱턴호텔 여의도 15F ]</span>
+            </div>
+        </section>
+
+        <!-- Quest Message -->
+        <section class="invitation-msg">
+            <pre style="font-size: 10px; line-height: 1.6; text-align: center;">
+┌─────────────────────────────┐
+│  💌 NEW QUEST RECEIVED!     │
+├─────────────────────────────┤
+│  소중한 분들을 초대합니다   │
+│  저희 두 사람이 사랑의      │
+│  결실을 맺어 하나가 되는    │
+│  뜻깊은 자리에 오셔서       │
+│  축복해 주시면 더없는       │
+│  기쁨이겠습니다.            │
+│                             │
+│  REWARD: ♥ +999            │
+└─────────────────────────────┘
+            </pre>
+        </section>
+
+        <!-- NPC Contact (Parents) -->
+        <section class="parents-contact">
+            <h3 style="text-align: center; margin-bottom: 20px;">
+                <span>[ NPC CONTACT LIST ]</span>
+            </h3>
+            
+            <div style="margin-bottom: 20px;">
+                <div style="text-align: center; margin-bottom: 10px; font-size: 10px;">
+                    ▼ PLAYER 1 TEAM ▼
+                </div>
+                <div style="padding: 10px; border: 2px dashed var(--pixel-pink);">
+                    <div>FATHER: 조국제</div>
+                    <div>MOTHER: 김명선</div>
+                    <div style="margin-top: 10px; text-align: center;">
+                        <button onclick="callParent('groom', 'father')" style="margin: 5px;">
+                            📞 CALL
+                        </button>
+                        <button onclick="smsParent('groom', 'father')" style="margin: 5px;">
+                            💬 MSG
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div style="text-align: center; margin-bottom: 10px; font-size: 10px;">
+                    ▼ PLAYER 2 TEAM ▼
+                </div>
+                <div style="padding: 10px; border: 2px dashed var(--pixel-pink);">
+                    <div>FATHER: 권순문</div>
+                    <div>MOTHER: 이은숙</div>
+                    <div style="margin-top: 10px; text-align: center;">
+                        <button onclick="callParent('bride', 'father')" style="margin: 5px;">
+                            📞 CALL
+                        </button>
+                        <button onclick="smsParent('bride', 'father')" style="margin: 5px;">
+                            💬 MSG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Calendar -->
+        <section class="calendar">
+            <h3 style="text-align: center;">[ SEPTEMBER 2025 ]</h3>
+            <div class="calendar-grid" id="calendar">
+                <!-- Calendar will be generated here -->
+            </div>
+        </section>
+
+        <!-- Photo Gallery -->
+        <section class="photo-album">
+            <h3>[ GALLERY MODE ]</h3>
+            <div class="photo-slider">
+                <div class="photo-track" id="photoTrack">
+                    <!-- Photos will be loaded here -->
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="previousPhoto()">
+                    ◄ PREV
+                </button>
+                <button class="slider-btn" onclick="nextPhoto()">
+                    NEXT ►
+                </button>
+            </div>
+        </section>
+
+        <!-- Map -->
+        <section class="directions pixel-border">
+            <h3 style="text-align: center;">[ MAP: WEDDING STAGE ]</h3>
+            
+            <pre style="font-size: 8px; text-align: center; margin: 20px 0;">
+    ┌──────────────┐
+    │   KENSINGTON │
+    │      ★       │
+    │   HOTEL      │
+    │   YEOUIDO    │
+    └──────────────┘
+         ▼
+    [ 국회의사당역 ]
+            </pre>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <button onclick="openNaverMap()" style="margin: 5px;">
+                    🗺️ NAVER MAP
+                </button>
+                <button onclick="openKakaoMap()" style="margin: 5px;">
+                    🗺️ KAKAO MAP
+                </button>
+            </div>
+
+            <div style="padding: 15px; border: 2px dashed var(--pixel-pink); margin: 10px 0;">
+                <div style="font-size: 10px; margin-bottom: 10px;">[ SUBWAY ]</div>
+                <div style="font-size: 8px; line-height: 1.6;">
+                    • LINE 9: 국회의사당 EXIT 3<br>
+                    • LINE 5: 여의나루 EXIT 1
+                </div>
+            </div>
+
+            <div style="padding: 15px; border: 2px dashed var(--pixel-pink); margin: 10px 0;">
+                <div style="font-size: 10px; margin-bottom: 10px;">[ ADDRESS ]</div>
+                <div style="font-size: 8px; line-height: 1.6;">
+                    서울 영등포구 국회대로 76길 16<br>
+                    TEL: 02-6670-7000
+                </div>
+            </div>
+        </section>
+
+        <!-- Guestbook -->
+        <section class="guestbook">
+            <h3 style="text-align: center;">[ MESSAGE BOARD ]</h3>
+            <div style="text-align: center; margin: 20px 0;">
+                <button onclick="openGuestbookModal()">
+                    ✏️ WRITE MESSAGE
+                </button>
+            </div>
+            <div class="guestbook-list" id="guestbookList">
+                <div style="text-align: center; padding: 20px; font-size: 8px;">
+                    NO MESSAGES YET...<br>
+                    BE THE FIRST PLAYER!
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section class="attendance" style="text-align: center; padding: 30px 0;">
+            <button onclick="openAttendanceModal()" style="padding: 15px 30px; font-size: 12px;">
+                🎮 JOIN GAME (RSVP)
+            </button>
+        </section>
+
+        <!-- Credits (Account) -->
+        <section class="account-info">
+            <h3 style="text-align: center;">[ SUPPORT PLAYERS ]</h3>
+            <pre style="font-size: 8px; text-align: center; margin: 20px 0;">
+════════════════════════
+    INSERT COIN HERE
+════════════════════════
+            </pre>
+            
+            <div style="margin: 20px 0;">
+                <div style="text-align: center; margin-bottom: 15px; font-size: 10px;">
+                    PLAYER 1 TEAM
+                </div>
+                <div style="padding: 10px; border: 2px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 8px;">조영민: ○○BANK 123-456-789012</span>
+                        <button onclick="copyAccount('123-456-789012')" style="font-size: 8px; padding: 5px;">
+                            COPY
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <div style="text-align: center; margin-bottom: 15px; font-size: 10px;">
+                    PLAYER 2 TEAM
+                </div>
+                <div style="padding: 10px; border: 2px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 8px;">권채린: ○○BANK 456-789-012345</span>
+                        <button onclick="copyAccount('456-789-012345')" style="font-size: 8px; padding: 5px;">
+                            COPY
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Share -->
+        <section class="share-buttons">
+            <button class="share-btn" onclick="shareKakao()">
+                💬 SHARE TO KAKAO
+            </button>
+            <button class="share-btn" onclick="copyURL()">
+                🔗 COPY LINK
+            </button>
+        </section>
+
+        <!-- End Credits -->
+        <section style="text-align: center; padding: 40px 20px;">
+            <pre style="font-size: 8px; color: var(--pixel-pink);">
+╔════════════════════════╗
+║     GAME CREDITS       ║
+║                        ║
+║   DEVELOPED WITH ❤️    ║
+║   FOR OUR SPECIAL DAY  ║
+║                        ║
+║    © 2025 C&Y SOFT    ║
+╚════════════════════════╝
+            </pre>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <div id="guestbookModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeGuestbookModal()">×</span>
+            <h3>[ WRITE MESSAGE ]</h3>
+            <form id="guestbookForm">
+                <div class="form-group">
+                    <label>NAME:</label>
+                    <input type="text" id="guestName" name="name" required maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label>MESSAGE:</label>
+                    <textarea id="guestMessage" name="message" rows="4" required maxlength="200"></textarea>
+                </div>
+                <button type="submit" style="width: 100%;">SEND MESSAGE</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="attendanceModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAttendanceModal()">×</span>
+            <h3>[ JOIN GAME ]</h3>
+            <form id="attendanceForm">
+                <div class="form-group">
+                    <label>PLAYER NAME:</label>
+                    <input type="text" id="attendeeName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>PHONE:</label>
+                    <input type="tel" id="attendeePhone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>JOIN STATUS:</label>
+                    <select id="attendanceStatus" name="status" required>
+                        <option value="">SELECT</option>
+                        <option value="attend">JOIN</option>
+                        <option value="absent">SKIP</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>PLAYERS COUNT:</label>
+                    <input type="number" id="guestCount" name="count" min="1" max="10" value="1">
+                </div>
+                <div class="form-group">
+                    <label>TEAM:</label>
+                    <select id="relation" name="relation" required>
+                        <option value="">SELECT</option>
+                        <option value="groom">PLAYER 1</option>
+                        <option value="bride">PLAYER 2</option>
+                    </select>
+                </div>
+                <button type="submit" style="width: 100%;">CONFIRM</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize photo gallery with album images
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup calendar
+            setupCalendar();
+            
+            // Setup photo gallery
+            const photoTrack = document.getElementById('photoTrack');
+            const albumPhotos = [
+                'assets/AlbumSlides/album1.jpg',
+                'assets/AlbumSlides/album2.jpg',
+                'assets/AlbumSlides/album3.jpg',
+                'assets/AlbumSlides/album4.jpg',
+                'assets/AlbumSlides/album5.jpg',
+                'assets/AlbumSlides/album6.jpg',
+                'assets/AlbumSlides/album7.jpg'
+            ];
+            
+            albumPhotos.forEach((photo, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'photo-slide';
+                slide.innerHTML = `<img src="${photo}" alt="SCREENSHOT ${index + 1}">`;
+                photoTrack.appendChild(slide);
+            });
+            
+            // Add retro sound effects (optional)
+            addRetroEffects();
+        });
+
+        let currentPhotoIndex = 0;
+        
+        function nextPhoto() {
+            const track = document.getElementById('photoTrack');
+            const slides = track.querySelectorAll('.photo-slide');
+            currentPhotoIndex = (currentPhotoIndex + 1) % slides.length;
+            track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+        }
+        
+        function previousPhoto() {
+            const track = document.getElementById('photoTrack');
+            const slides = track.querySelectorAll('.photo-slide');
+            currentPhotoIndex = (currentPhotoIndex - 1 + slides.length) % slides.length;
+            track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+        }
+
+        function setupCalendar() {
+            const calendar = document.getElementById('calendar');
+            const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+            
+            // Headers
+            days.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-header';
+                header.textContent = day;
+                calendar.appendChild(header);
+            });
+            
+            // September 2025 starts on Monday
+            const emptyDays = 1; // Monday is index 1
+            for (let i = 0; i < emptyDays; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'calendar-day';
+                calendar.appendChild(empty);
+            }
+            
+            // Days
+            for (let day = 1; day <= 30; day++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                if (day === 27) {
+                    dayEl.className += ' wedding-day';
+                    dayEl.innerHTML = `${day}<br><span style="font-size: 6px;">WEDDING!</span>`;
+                } else {
+                    dayEl.textContent = day;
+                }
+                calendar.appendChild(dayEl);
+            }
+        }
+
+        function addRetroEffects() {
+            // Add typing effect to title
+            const title = document.querySelector('.title-section h1');
+            if (title) {
+                const text = title.textContent;
+                title.textContent = '';
+                let i = 0;
+                const typeWriter = setInterval(() => {
+                    if (i < text.length) {
+                        title.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typeWriter);
+                    }
+                }, 100);
+            }
+        }
+
+        // Modal functions
+        function openGuestbookModal() {
+            document.getElementById('guestbookModal').style.display = 'flex';
+        }
+        
+        function closeGuestbookModal() {
+            document.getElementById('guestbookModal').style.display = 'none';
+        }
+        
+        function openAttendanceModal() {
+            document.getElementById('attendanceModal').style.display = 'flex';
+        }
+        
+        function closeAttendanceModal() {
+            document.getElementById('attendanceModal').style.display = 'none';
+        }
+
+        // Contact functions
+        function callParent(side, parent) {
+            const phones = {
+                groom: { father: '010-1234-5678', mother: '010-2345-6789' },
+                bride: { father: '010-3456-7890', mother: '010-4567-8901' }
+            };
+            window.location.href = `tel:${phones[side][parent]}`;
+        }
+        
+        function smsParent(side, parent) {
+            const phones = {
+                groom: { father: '010-1234-5678', mother: '010-2345-6789' },
+                bride: { father: '010-3456-7890', mother: '010-4567-8901' }
+            };
+            window.location.href = `sms:${phones[side][parent]}`;
+        }
+
+        // Map functions
+        function openNaverMap() {
+            window.open('https://map.naver.com/v5/search/켄싱턴호텔%20여의도', '_blank');
+        }
+        
+        function openKakaoMap() {
+            window.open('https://map.kakao.com/link/search/켄싱턴호텔 여의도', '_blank');
+        }
+
+        // Copy functions
+        function copyAccount(account) {
+            navigator.clipboard.writeText(account);
+            alert('COPIED TO CLIPBOARD!');
+        }
+        
+        function copyURL() {
+            navigator.clipboard.writeText(window.location.href);
+            alert('LINK COPIED!');
+        }
+        
+        function shareKakao() {
+            alert('KAKAO SHARE - COMING SOON!');
+        }
+
+        // Form submissions
+        document.getElementById('guestbookForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('MESSAGE SAVED! THANK YOU!');
+            closeGuestbookModal();
+            this.reset();
+        });
+        
+        document.getElementById('attendanceForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('REGISTRATION COMPLETE!');
+            closeAttendanceModal();
+            this.reset();
+        });
+    </script>
+</body>
+</html>

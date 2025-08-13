@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 권채린 ❤️ 조영민 청첩장</title>
+    
+    <!-- Enhanced Retro Game Style -->
+    <link rel="stylesheet" href="retro-styles-enhanced.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 화려한 배경 효과 -->
+    <div class="fireworks" id="fireworks"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <div class="container">
+        <!-- 게임 타이틀 화면 -->
+        <section class="title-section">
+            <div class="sparkle" style="top: 20px; left: 20px;">✨</div>
+            <div class="sparkle" style="top: 30px; right: 30px;">💫</div>
+            <div class="sparkle" style="bottom: 20px; left: 40px;">⭐</div>
+            
+            <h1 class="celebrate-text">
+                권채린 <span class="big-pixel-heart"></span> 조영민
+            </h1>
+            <p class="subtitle">🎊 우리 결혼합니다 🎊</p>
+            <p style="font-size: 14px; margin-top: 20px; animation: blink 2s infinite;">
+                💒 2025년 9월 27일 토요일 💒
+            </p>
+        </section>
+
+        <!-- 메인 사진 -->
+        <section class="main-photo special-border">
+            <img src="assets/main.png" alt="신랑 신부 사진" id="mainPhoto">
+        </section>
+
+        <!-- 결혼식 정보 -->
+        <section class="wedding-info special-border">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span style="font-size: 16px;">💝 결혼식 정보 💝</span>
+            </div>
+            <div class="date">2025년 9월 27일 토요일</div>
+            <div class="time">오후 12시 30분</div>
+            <div class="venue">
+                켄싱턴호텔 여의도<br>
+                15층 그랜드볼룸
+            </div>
+        </section>
+
+        <!-- 초대 메시지 -->
+        <section class="invitation-msg special-border">
+            <div style="font-size: 16px; margin-bottom: 20px;">💌 초대합니다 💌</div>
+            <p style="line-height: 2.5;">
+                소중한 분들을 초대합니다<br>
+                저희 두 사람이 사랑의 결실을 맺어<br>
+                하나가 되는 뜻깊은 자리에<br>
+                오셔서 축복해 주시면<br>
+                더없는 기쁨이겠습니다
+            </p>
+            <div style="margin-top: 20px;">
+                💕 💕 💕
+            </div>
+        </section>
+
+        <!-- 혼주 연락처 -->
+        <section class="parents-contact">
+            <h3 style="text-align: center; margin-bottom: 30px; font-size: 18px;">
+                📞 혼주 연락처 📞
+            </h3>
+            
+            <div style="margin-bottom: 30px;">
+                <div style="text-align: center; margin-bottom: 15px; font-size: 16px;">
+                    🤵 신랑측 혼주
+                </div>
+                <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
+                    <div style="font-size: 14px; line-height: 2;">
+                        <strong>아버지</strong> 조국제<br>
+                        <strong>어머니</strong> 김명선
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <button onclick="callParent('groom', 'father')" style="margin: 5px;">
+                            📞 전화하기
+                        </button>
+                        <button onclick="smsParent('groom', 'father')" style="margin: 5px;">
+                            💬 문자보내기
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div style="text-align: center; margin-bottom: 15px; font-size: 16px;">
+                    👰 신부측 혼주
+                </div>
+                <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
+                    <div style="font-size: 14px; line-height: 2;">
+                        <strong>아버지</strong> 권순문<br>
+                        <strong>어머니</strong> 이은숙
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <button onclick="callParent('bride', 'father')" style="margin: 5px;">
+                            📞 전화하기
+                        </button>
+                        <button onclick="smsParent('bride', 'father')" style="margin: 5px;">
+                            💬 문자보내기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 달력 -->
+        <section class="calendar">
+            <h3 style="text-align: center; font-size: 18px;">📅 2025년 9월 📅</h3>
+            <div class="calendar-grid" id="calendar">
+                <!-- 달력 생성 -->
+            </div>
+        </section>
+
+        <!-- 사진 갤러리 -->
+        <section class="photo-album">
+            <h3 style="font-size: 18px;">📸 웨딩 갤러리 📸</h3>
+            <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: var(--pixel-pink);">
+                ※ 사진을 클릭하면 크게 볼 수 있습니다
+            </div>
+            <div class="photo-slider" id="photoSlider">
+                <div class="photo-track" id="photoTrack">
+                    <!-- 사진들이 여기에 로드됩니다 -->
+                </div>
+            </div>
+            <div class="slider-controls" style="text-align: center; margin-top: 20px;">
+                <button class="slider-btn" onclick="previousPhoto()" style="margin: 10px;">
+                    ◀ 이전 사진
+                </button>
+                <span id="photoCounter" style="margin: 0 20px; font-size: 14px;">1 / 7</span>
+                <button class="slider-btn" onclick="nextPhoto()" style="margin: 10px;">
+                    다음 사진 ▶
+                </button>
+            </div>
+        </section>
+
+        <!-- 사진 확대 모달 -->
+        <div class="photo-modal" id="photoModal">
+            <span class="close-photo" onclick="closePhotoModal()">×</span>
+            <img id="modalPhoto" src="" alt="확대 사진">
+        </div>
+
+        <!-- 오시는 길 -->
+        <section class="directions special-border">
+            <h3 style="text-align: center; font-size: 18px;">🗺️ 오시는 길 🗺️</h3>
+            
+            <div style="padding: 20px; margin: 20px 0; border: 3px solid var(--pixel-pink); text-align: center;">
+                <div style="font-size: 16px; margin-bottom: 15px;">
+                    📍 켄싱턴호텔 여의도
+                </div>
+                <div style="font-size: 14px; line-height: 2;">
+                    서울특별시 영등포구<br>
+                    국회대로 76길 16, 15층<br>
+                    ☎️ 02-6670-7000
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button onclick="openNaverMap()" style="margin: 10px; padding: 20px 30px;">
+                    🗺️ 네이버 지도로 보기
+                </button>
+                <button onclick="openKakaoMap()" style="margin: 10px; padding: 20px 30px;">
+                    🗺️ 카카오맵으로 보기
+                </button>
+            </div>
+
+            <div style="padding: 20px; border: 3px dashed var(--pixel-pink); margin: 15px 0;">
+                <div style="font-size: 16px; margin-bottom: 15px;">🚇 지하철 이용시</div>
+                <div style="font-size: 14px; line-height: 2;">
+                    • 9호선 국회의사당역 3번 출구 (도보 3분)<br>
+                    • 5호선 여의나루역 1번 출구 (도보 10분)
+                </div>
+            </div>
+
+            <div style="padding: 20px; border: 3px dashed var(--pixel-pink); margin: 15px 0;">
+                <div style="font-size: 16px; margin-bottom: 15px;">🚌 버스 이용시</div>
+                <div style="font-size: 14px; line-height: 2;">
+                    여의도 순복음교회 하차<br>
+                    5615, 5618, 6623, 753번
+                </div>
+            </div>
+        </section>
+
+        <!-- 방명록 -->
+        <section class="guestbook">
+            <h3 style="text-align: center; font-size: 18px;">📝 방명록 📝</h3>
+            <div style="text-align: center; margin: 30px 0;">
+                <button onclick="openGuestbookModal()" style="padding: 20px 40px; font-size: 16px;">
+                    ✏️ 축하 메시지 남기기
+                </button>
+            </div>
+            <div class="guestbook-list" id="guestbookList">
+                <div style="text-align: center; padding: 30px; font-size: 12px; color: var(--pixel-pink);">
+                    아직 작성된 메시지가 없습니다<br>
+                    첫 번째 축하 메시지를 남겨주세요! 💕
+                </div>
+            </div>
+        </section>
+
+        <!-- 참석 여부 -->
+        <section class="attendance" style="text-align: center; padding: 40px 0;">
+            <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px;" class="special-border">
+                🎊 참석 여부 알려주기 🎊
+            </button>
+        </section>
+
+        <!-- 마음 전하는 곳 -->
+        <section class="account-info special-border">
+            <h3 style="text-align: center; font-size: 18px;">💝 마음 전하는 곳 💝</h3>
+            
+            <div style="margin: 30px 0;">
+                <div style="text-align: center; margin-bottom: 20px; font-size: 16px;">
+                    🤵 신랑측 계좌
+                </div>
+                <div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">조영민: 카카오뱅크 3333-01-1234567</span>
+                        <button onclick="copyAccount('3333-01-1234567')" style="font-size: 12px; padding: 8px 15px;">
+                            복사
+                        </button>
+                    </div>
+                </div>
+                <div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">조국제(부): 국민은행 123456-01-234567</span>
+                        <button onclick="copyAccount('123456-01-234567')" style="font-size: 12px; padding: 8px 15px;">
+                            복사
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin: 30px 0;">
+                <div style="text-align: center; margin-bottom: 20px; font-size: 16px;">
+                    👰 신부측 계좌
+                </div>
+                <div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">권채린: 토스뱅크 1000-1234-5678</span>
+                        <button onclick="copyAccount('1000-1234-5678')" style="font-size: 12px; padding: 8px 15px;">
+                            복사
+                        </button>
+                    </div>
+                </div>
+                <div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">권순문(부): 신한은행 110-123-456789</span>
+                        <button onclick="copyAccount('110-123-456789')" style="font-size: 12px; padding: 8px 15px;">
+                            복사
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 공유하기 -->
+        <section class="share-buttons" style="text-align: center; padding: 40px 20px;">
+            <button class="share-btn" onclick="shareKakao()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
+                💬 카카오톡 공유하기
+            </button>
+            <button class="share-btn" onclick="copyURL()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
+                🔗 링크 복사하기
+            </button>
+        </section>
+
+        <!-- 엔딩 크레딧 -->
+        <section style="text-align: center; padding: 60px 20px;">
+            <div class="celebrate-text" style="font-size: 20px; margin-bottom: 30px;">
+                💕 감사합니다 💕
+            </div>
+            <p style="font-size: 12px; line-height: 2;">
+                소중한 날에 함께해 주셔서<br>
+                진심으로 감사드립니다
+            </p>
+        </section>
+    </div>
+
+    <!-- 방명록 모달 -->
+    <div id="guestbookModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeGuestbookModal()" style="font-size: 30px;">×</span>
+            <h3 style="font-size: 18px;">💌 축하 메시지 💌</h3>
+            <form id="guestbookForm">
+                <div class="form-group">
+                    <label>이름</label>
+                    <input type="text" id="guestName" name="name" required maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label>메시지</label>
+                    <textarea id="guestMessage" name="message" rows="5" required maxlength="200" 
+                              placeholder="축하 메시지를 남겨주세요"></textarea>
+                </div>
+                <button type="submit" style="width: 100%; font-size: 16px; padding: 20px;">
+                    메시지 남기기
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 참석 여부 모달 -->
+    <div id="attendanceModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAttendanceModal()" style="font-size: 30px;">×</span>
+            <h3 style="font-size: 18px;">🎊 참석 여부 🎊</h3>
+            <form id="attendanceForm">
+                <div class="form-group">
+                    <label>성함</label>
+                    <input type="text" id="attendeeName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>연락처</label>
+                    <input type="tel" id="attendeePhone" name="phone" required placeholder="010-0000-0000">
+                </div>
+                <div class="form-group">
+                    <label>참석 여부</label>
+                    <select id="attendanceStatus" name="status" required style="font-size: 14px;">
+                        <option value="">선택해주세요</option>
+                        <option value="attend">참석합니다</option>
+                        <option value="absent">참석이 어렵습니다</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>참석 인원 (본인 포함)</label>
+                    <input type="number" id="guestCount" name="count" min="1" max="10" value="1">
+                </div>
+                <div class="form-group">
+                    <label>구분</label>
+                    <select id="relation" name="relation" required style="font-size: 14px;">
+                        <option value="">선택해주세요</option>
+                        <option value="groom">신랑측 하객</option>
+                        <option value="bride">신부측 하객</option>
+                    </select>
+                </div>
+                <button type="submit" style="width: 100%; font-size: 16px; padding: 20px;">
+                    확인
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 페이지 로드시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // 폭죽 효과 생성
+            createFireworks();
+            // 하트 효과 생성
+            createFloatingHearts();
+            // 달력 생성
+            setupCalendar();
+            // 갤러리 초기화
+            initGallery();
+        });
+
+        // 폭죽 효과
+        function createFireworks() {
+            const container = document.getElementById('fireworks');
+            setInterval(() => {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * 100 + '%';
+                firework.style.setProperty('--x', (Math.random() - 0.5) * 200 + 'px');
+                firework.style.setProperty('--y', -Math.random() * 200 + 'px');
+                firework.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(firework);
+                
+                setTimeout(() => firework.remove(), 3000);
+            }, 500);
+        }
+
+        // 떠다니는 하트
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['❤️', '💕', '💖', '💗', '💝'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'float-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 15000);
+            }, 2000);
+        }
+
+        // 갤러리 초기화
+        let currentPhotoIndex = 0;
+        const albumPhotos = [
+            'assets/AlbumSlides/album1.jpg',
+            'assets/AlbumSlides/album2.jpg',
+            'assets/AlbumSlides/album3.jpg',
+            'assets/AlbumSlides/album4.jpg',
+            'assets/AlbumSlides/album5.jpg',
+            'assets/AlbumSlides/album6.jpg',
+            'assets/AlbumSlides/album7.jpg'
+        ];
+
+        function initGallery() {
+            const photoTrack = document.getElementById('photoTrack');
+            
+            albumPhotos.forEach((photo, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'photo-slide';
+                slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}" onclick="openPhotoModal('${photo}')">`;
+                photoTrack.appendChild(slide);
+            });
+            
+            updatePhotoCounter();
+        }
+
+        function nextPhoto() {
+            const track = document.getElementById('photoTrack');
+            currentPhotoIndex = (currentPhotoIndex + 1) % albumPhotos.length;
+            track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+            updatePhotoCounter();
+        }
+
+        function previousPhoto() {
+            const track = document.getElementById('photoTrack');
+            currentPhotoIndex = (currentPhotoIndex - 1 + albumPhotos.length) % albumPhotos.length;
+            track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+            updatePhotoCounter();
+        }
+
+        function updatePhotoCounter() {
+            document.getElementById('photoCounter').textContent = `${currentPhotoIndex + 1} / ${albumPhotos.length}`;
+        }
+
+        // 사진 확대 모달
+        function openPhotoModal(photoSrc) {
+            const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalPhoto');
+            modal.style.display = 'block';
+            modalImg.src = photoSrc;
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photoModal').style.display = 'none';
+        }
+
+        // 모달 외부 클릭시 닫기
+        document.getElementById('photoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePhotoModal();
+            }
+        });
+
+        // 달력 생성
+        function setupCalendar() {
+            const calendar = document.getElementById('calendar');
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            
+            // 요일 헤더
+            days.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-header';
+                header.textContent = day;
+                calendar.appendChild(header);
+            });
+            
+            // 2025년 9월 1일은 월요일
+            const emptyDays = 1;
+            for (let i = 0; i < emptyDays; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'calendar-day';
+                calendar.appendChild(empty);
+            }
+            
+            // 날짜
+            for (let day = 1; day <= 30; day++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                if (day === 27) {
+                    dayEl.className += ' wedding-day';
+                    dayEl.innerHTML = `<strong>${day}</strong><br><span style="font-size: 10px;">결혼식</span>`;
+                } else {
+                    dayEl.textContent = day;
+                }
+                calendar.appendChild(dayEl);
+            }
+        }
+
+        // 모달 함수들
+        function openGuestbookModal() {
+            document.getElementById('guestbookModal').style.display = 'flex';
+        }
+        
+        function closeGuestbookModal() {
+            document.getElementById('guestbookModal').style.display = 'none';
+        }
+        
+        function openAttendanceModal() {
+            document.getElementById('attendanceModal').style.display = 'flex';
+        }
+        
+        function closeAttendanceModal() {
+            document.getElementById('attendanceModal').style.display = 'none';
+        }
+
+        // 연락처 함수
+        function callParent(side, parent) {
+            const phones = {
+                groom: { father: '010-1234-5678', mother: '010-2345-6789' },
+                bride: { father: '010-3456-7890', mother: '010-4567-8901' }
+            };
+            window.location.href = `tel:${phones[side][parent]}`;
+        }
+        
+        function smsParent(side, parent) {
+            const phones = {
+                groom: { father: '010-1234-5678', mother: '010-2345-6789' },
+                bride: { father: '010-3456-7890', mother: '010-4567-8901' }
+            };
+            window.location.href = `sms:${phones[side][parent]}`;
+        }
+
+        // 지도 함수
+        function openNaverMap() {
+            window.open('https://map.naver.com/v5/search/켄싱턴호텔%20여의도', '_blank');
+        }
+        
+        function openKakaoMap() {
+            window.open('https://map.kakao.com/link/search/켄싱턴호텔 여의도', '_blank');
+        }
+
+        // 복사 함수
+        function copyAccount(account) {
+            navigator.clipboard.writeText(account).then(() => {
+                alert('계좌번호가 복사되었습니다!');
+            });
+        }
+        
+        function copyURL() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('링크가 복사되었습니다!');
+            });
+        }
+        
+        function shareKakao() {
+            alert('카카오톡 공유 기능 준비중입니다!');
+        }
+
+        // 폼 제출
+        document.getElementById('guestbookForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('축하 메시지가 등록되었습니다! 감사합니다 💕');
+            closeGuestbookModal();
+            this.reset();
+        });
+        
+        document.getElementById('attendanceForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('참석 여부가 등록되었습니다! 감사합니다 🎊');
+            closeAttendanceModal();
+            this.reset();
+        });
+    </script>
+</body>
+</html>

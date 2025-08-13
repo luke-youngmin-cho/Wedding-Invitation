@@ -1,0 +1,548 @@
+/* ====================================
+   16-BIT RETRO GAME WEDDING INVITATION
+   ==================================== */
+
+/* Import Pixel Font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Color Palette - 2 colors only */
+:root {
+  --pixel-pink: #ff006e;  /* Hot Pink */
+  --pixel-dark: #0a0a0a;   /* Near Black */
+  --pixel-size: 4px;       /* Base pixel size */
+}
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+body {
+  font-family: 'Press Start 2P', monospace;
+  background: var(--pixel-dark);
+  color: var(--pixel-pink);
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Scanline Effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(255, 0, 110, 0.03) 50%,
+    transparent 100%
+  );
+  background-size: 100% 4px;
+  animation: scanlines 8s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Pixel Border Mixin */
+.pixel-border {
+  border: var(--pixel-size) solid var(--pixel-pink);
+  position: relative;
+  background: var(--pixel-dark);
+  box-shadow: 
+    0 var(--pixel-size) 0 0 var(--pixel-pink),
+    var(--pixel-size) 0 0 0 var(--pixel-pink),
+    0 calc(var(--pixel-size) * -1) 0 0 var(--pixel-pink),
+    calc(var(--pixel-size) * -1) 0 0 0 var(--pixel-pink);
+}
+
+/* Title Section */
+.title-section {
+  text-align: center;
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  animation: blink 2s infinite;
+}
+
+.title-section h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-shadow: 
+    var(--pixel-size) var(--pixel-size) 0 rgba(255, 0, 110, 0.5);
+}
+
+.title-section .heart {
+  display: inline-block;
+  animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  95% { opacity: 0.8; }
+}
+
+/* Main Photo */
+.main-photo {
+  margin: 30px auto;
+  max-width: 400px;
+  position: relative;
+}
+
+.main-photo img {
+  width: 100%;
+  height: auto;
+  border: calc(var(--pixel-size) * 2) solid var(--pixel-pink);
+  filter: contrast(1.2) saturate(0.8);
+  display: block;
+}
+
+.main-photo::before,
+.main-photo::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: var(--pixel-size) solid var(--pixel-pink);
+}
+
+.main-photo::before {
+  top: calc(var(--pixel-size) * -2);
+  left: calc(var(--pixel-size) * -2);
+  z-index: -1;
+}
+
+.main-photo::after {
+  bottom: calc(var(--pixel-size) * -2);
+  right: calc(var(--pixel-size) * -2);
+  z-index: -1;
+}
+
+/* Info Sections */
+.wedding-info,
+.invitation-msg,
+.parents-contact,
+.calendar,
+.directions,
+.guestbook,
+.account-info {
+  margin: 40px 0;
+  padding: 20px;
+  border: var(--pixel-size) solid var(--pixel-pink);
+  background: var(--pixel-dark);
+  position: relative;
+}
+
+.wedding-info::before,
+.invitation-msg::before {
+  content: "▼ ▼ ▼";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--pixel-dark);
+  padding: 0 10px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* Text Styles */
+.date {
+  font-size: 18px;
+  text-align: center;
+  margin: 10px 0;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 10px var(--pixel-pink); }
+  50% { text-shadow: 0 0 20px var(--pixel-pink), 0 0 30px var(--pixel-pink); }
+}
+
+.time, .venue {
+  font-size: 14px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Buttons */
+button, .btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 12px 20px;
+  background: var(--pixel-dark);
+  color: var(--pixel-pink);
+  border: var(--pixel-size) solid var(--pixel-pink);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.1s;
+  text-transform: uppercase;
+}
+
+button:hover, .btn:hover {
+  background: var(--pixel-pink);
+  color: var(--pixel-dark);
+  transform: translate(-2px, -2px);
+  box-shadow: 
+    calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 var(--pixel-pink);
+}
+
+button:active, .btn:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+/* Photo Album - Retro Style */
+.photo-album {
+  margin: 40px 0;
+}
+
+.photo-album h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.photo-slider {
+  position: relative;
+  overflow: hidden;
+  border: calc(var(--pixel-size) * 2) solid var(--pixel-pink);
+  background: var(--pixel-dark);
+  height: 300px;
+}
+
+.photo-track {
+  display: flex;
+  transition: transform 0.3s steps(10);
+  height: 100%;
+}
+
+.photo-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.photo-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--pixel-dark);
+  filter: contrast(1.3) brightness(0.9);
+}
+
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.slider-btn {
+  width: 60px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Calendar - Pixel Style */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-top: 20px;
+  padding: 10px;
+  border: var(--pixel-size) solid var(--pixel-pink);
+}
+
+.calendar-header,
+.calendar-day {
+  padding: 8px;
+  text-align: center;
+  font-size: 8px;
+  border: 1px solid var(--pixel-pink);
+}
+
+.calendar-header {
+  background: var(--pixel-pink);
+  color: var(--pixel-dark);
+}
+
+.calendar-day:hover {
+  background: var(--pixel-pink);
+  color: var(--pixel-dark);
+  cursor: pointer;
+}
+
+.wedding-day {
+  background: var(--pixel-pink) !important;
+  color: var(--pixel-dark) !important;
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Guestbook List */
+.guestbook-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 20px;
+  padding: 10px;
+  border: var(--pixel-size) solid var(--pixel-pink);
+}
+
+.guestbook-item {
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 2px dashed var(--pixel-pink);
+  position: relative;
+}
+
+.guestbook-item::before {
+  content: ">";
+  position: absolute;
+  left: 5px;
+  animation: blink 1s infinite;
+}
+
+.guest-name {
+  font-size: 10px;
+  margin-bottom: 8px;
+  margin-left: 15px;
+}
+
+.guest-message {
+  font-size: 8px;
+  margin-left: 15px;
+  line-height: 1.6;
+}
+
+/* Modal - Retro Style */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.95);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: var(--pixel-dark);
+  border: calc(var(--pixel-size) * 2) solid var(--pixel-pink);
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 
+    0 0 0 var(--pixel-size) var(--pixel-dark),
+    0 0 0 calc(var(--pixel-size) * 2) var(--pixel-pink);
+}
+
+.modal-content h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--pixel-pink);
+}
+
+.close:hover {
+  animation: rotate 0.5s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 10px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  background: var(--pixel-dark);
+  border: 2px solid var(--pixel-pink);
+  color: var(--pixel-pink);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--pixel-pink);
+}
+
+/* Share Buttons */
+.share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  align-items: center;
+}
+
+.share-btn {
+  width: 80%;
+  max-width: 300px;
+}
+
+/* Loading Animation */
+.loading {
+  animation: loading 0.5s steps(4) infinite;
+}
+
+@keyframes loading {
+  0% { content: "LOADING"; }
+  25% { content: "LOADING."; }
+  50% { content: "LOADING.."; }
+  75% { content: "LOADING..."; }
+  100% { content: "LOADING"; }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  body {
+    font-size: 10px;
+  }
+  
+  .title-section h1 {
+    font-size: 18px;
+  }
+  
+  .date {
+    font-size: 14px;
+  }
+  
+  button, .btn {
+    font-size: 8px;
+    padding: 10px 15px;
+  }
+}
+
+/* ASCII Art Decorations */
+.ascii-border::before {
+  content: "════════════════════════════════";
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+  color: var(--pixel-pink);
+  font-size: 10px;
+}
+
+.ascii-border::after {
+  content: "════════════════════════════════";
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+  color: var(--pixel-pink);
+  font-size: 10px;
+}
+
+/* Pixel Heart Animation */
+.pixel-heart {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  transform: rotate(-45deg);
+  background: var(--pixel-pink);
+  margin: 0 10px;
+}
+
+.pixel-heart::before,
+.pixel-heart::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--pixel-pink);
+  border-radius: 50%;
+}
+
+.pixel-heart::before {
+  top: -8px;
+  left: 0;
+}
+
+.pixel-heart::after {
+  left: 8px;
+  top: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pixel-dark);
+  border: 1px solid var(--pixel-pink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pixel-pink);
+  border: 2px solid var(--pixel-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-pink);
+}
