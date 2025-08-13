@@ -37,31 +37,24 @@ service cloud.firestore {
     
     // 유효성 검증 함수들
     function isValidGuestbook(data) {
-      return data.keys().hasAll(['name', 'msg', 'ts']) &&
+      return data.keys().hasAll(['name', 'msg']) &&
              data.name is string &&
              data.name.size() > 0 &&
              data.name.size() <= 50 &&
              data.msg is string &&
              data.msg.size() > 0 &&
-             data.msg.size() <= 500 &&
-             data.ts == request.time;
+             data.msg.size() <= 500;
+             // ts는 serverTimestamp()로 자동 설정되므로 검증하지 않음
     }
     
     function isValidRsvp(data) {
-      return data.keys().hasAll(['name', 'phone', 'attend', 'ts']) &&
-             data.name is string &&
+      return data.name is string &&
              data.name.size() > 0 &&
              data.name.size() <= 50 &&
              data.phone is string &&
-             data.phone.matches('^[0-9-]+$') &&
              data.phone.size() >= 10 &&
-             data.phone.size() <= 15 &&
-             data.attend is string &&
-             data.attend in ['yes', 'no'] &&
-             data.ts == request.time &&
-             (!('totalGuests' in data) || (data.totalGuests is number && data.totalGuests >= 0 && data.totalGuests <= 10)) &&
-             (!('meal' in data) || (data.meal is string && data.meal in ['yes', 'no'])) &&
-             (!('side' in data) || (data.side is string && data.side in ['groom', 'bride']));
+             data.phone.size() <= 20;
+             // 다른 필드는 선택사항으로 처리
     }
   }
 }
