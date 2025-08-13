@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>권채린 ❤️ 조영민 결혼합니다</title>
+    
+    <!-- Modern Theme CSS (Default) -->
+    <link rel="stylesheet" href="modern-theme.css" id="modern-styles">
+    
+    <!-- Retro Game Style (Disabled by default) -->
+    <link rel="stylesheet" href="retro-final.css" id="retro-styles" disabled>
+    
+    <!-- Press Start 2P Font for transition panel -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Portal Trigger (균열 이미지) -->
+    <div class="portal-trigger" id="portalTrigger" title="다른 차원으로...">
+        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="crack-glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <path d="M30 5 L35 20 L45 15 L40 30 L50 35 L35 35 L40 50 L30 40 L20 50 L25 35 L10 35 L20 30 L15 15 L25 20 Z" 
+                  fill="none" 
+                  stroke="#ff006e" 
+                  stroke-width="2" 
+                  filter="url(#crack-glow)"
+                  opacity="0.8"/>
+            <circle cx="30" cy="30" r="25" fill="none" stroke="#ff006e" stroke-width="1" opacity="0.3" stroke-dasharray="2 3"/>
+        </svg>
+    </div>
+    
+    <!-- Return Portal (게임에서 돌아오기) -->
+    <div class="return-portal" id="returnPortal" title="원래 차원으로..." style="display: none;">
+        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="white-glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <path d="M30 5 L25 20 L15 15 L20 30 L10 35 L25 35 L20 50 L30 40 L40 50 L35 35 L50 35 L40 30 L45 15 L35 20 Z" 
+                  fill="none" 
+                  stroke="#ffffff" 
+                  stroke-width="2" 
+                  filter="url(#white-glow)"
+                  opacity="0.9"/>
+            <circle cx="30" cy="30" r="25" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.5" stroke-dasharray="2 3"/>
+        </svg>
+    </div>
+
+    <!-- Transition Warning Panel -->
+    <div class="transition-panel" id="transitionPanel" style="display: none;">
+        <div class="warning-content">
+            <div class="warning-icon">⚠️</div>
+            <h2 class="warning-title">경고!</h2>
+            <p class="warning-message">게임 차원으로 빨려들어갑니다</p>
+            <div class="portal-effect">
+                <div class="portal-ring"></div>
+                <div class="portal-ring"></div>
+                <div class="portal-ring"></div>
+            </div>
+            <p class="click-anywhere">아무 곳이나 터치하세요</p>
+        </div>
+    </div>
+    <!-- 화려한 배경 효과 -->
+    <div class="fireworks" id="fireworks"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <div class="container">
+        <!-- 모던 테마 타이틀 (기본) -->
+        <section class="title-section modern-section">            
+            <h1 class="wedding-title">
+                <span class="bride-name">권채린</span> 
+                <span class="heart-symbol">♥</span> 
+                <span class="groom-name">조영민</span>
+            </h1>
+            <p class="subtitle">결혼식에 초대합니다</p>
+            <p class="wedding-date-preview">
+                2025년 9월 27일 토요일 오전 11시
+            </p>
+        </section>
+        
+        <!-- 레트로 게임 타이틀 (숨김) -->
+        <section class="title-section retro-section" style="display: none;">            
+            <h1 class="celebrate-text">
+                <span class="bride-name">권채린</span> 
+                <span class="pixel-heart"></span> 
+                <span class="groom-name">조영민</span>
+            </h1>
+            <p class="subtitle">♪ WEDDING INVITATION ♪</p>
+            <p style="font-size: 14px; margin-top: 20px; animation: glow 2s infinite;">
+                <span class="pixel-icon pixel-icon-calendar"></span> 2025년 9월 27일 토요일
+            </p>
+        </section>
+
+        <!-- 메인 사진 -->
+        <section class="main-photo special-border">
+            <img src="assets/main.png" alt="신랑 신부 사진" id="mainPhoto">
+        </section>
+
+        <!-- 모던 결혼식 정보 -->
+        <section class="wedding-info modern-section">
+            <h3 class="info-title">예식 안내</h3>
+            <div class="date">2025년 9월 27일 토요일</div>
+            <div class="time">오전 11시</div>
+            <div class="venue">
+                켄싱턴호텔 여의도<br>
+                15층 그랜드볼룸
+            </div>
+        </section>
+        
+        <!-- 레트로 결혼식 정보 -->
+        <section class="wedding-info special-border retro-section" style="display: none;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span class="pixel-icon pixel-icon-gift"></span>
+                <span style="font-size: 16px;"> STAGE INFO </span>
+                <span class="pixel-icon pixel-icon-gift"></span>
+            </div>
+            <div class="date">2025년 9월 27일 토요일</div>
+            <div class="time">오후 11시 00분</div>
+            <div class="venue">
+                켄싱턴호텔 여의도<br>
+                15층 그랜드볼룸
+            </div>
+        </section>
+
+        <!-- 모던 초대 메시지 -->
+        <section class="invitation-msg modern-section">
+            <div style="text-align: center; font-size: 16px; margin-bottom: 20px;">
+                <div class="pixel-icon" style="font-size: 40px; margin-bottom: 20px;">💌</div>
+            </div>
+            <div style="font-size: 15px; line-height: 2; padding: 0 20px; text-align: center;">
+                두 사람이 사랑으로 만나<br>
+                진실과 이해로써 하나를 이루려 합니다.<br>
+                <br>
+                저희 두 사람이 하나의 길을 걸어가고자<br>
+                약속의 예식을 올리는 날,<br>
+                <br>
+                오로지 믿음과 사랑만을 약속하는<br>
+                이 날에 축복의 걸음을 하시어<br>
+                저희의 하나 되는 자리를<br>
+                빛내 주시면 감사하겠습니다.
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; padding: 0 20px;">
+                <div style="display: inline-block; margin: 20px 10px;">
+                    <div style="font-weight: 700; margin-bottom: 10px;">신랑측</div>
+                    <div>조국제 · 김명선의 장남 조영민</div>
+                </div>
+                <div style="display: inline-block; margin: 20px 10px;">
+                    <div style="font-weight: 700; margin-bottom: 10px;">신부측</div>
+                    <div>권순문 · 이은숙의 장녀 권채린</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 레트로 초대 메시지 -->
+        <section class="invitation-msg special-border retro-section" style="display: none;">
+            <div style="text-align: center; font-size: 16px; margin-bottom: 20px;">
+                <span class="pixel-icon pixel-icon-message"></span> INVITATION MESSAGE <span class="pixel-icon pixel-icon-message"></span>
+            </div>
+            <p style="text-align: center; line-height: 2.5;">
+                소중한 분들을 초대합니다<br>
+                저희 두 사람이 사랑의 결실을 맺어<br>
+                하나가 되는 뜻깊은 자리에<br>
+                오셔서 축복해 주시면<br>
+                더없는 기쁨이겠습니다
+            </p>
+            <div style="text-align: center; margin-top: 20px;">
+                <span class="pixel-heart"></span>
+                <span class="pixel-heart"></span>
+                <span class="pixel-heart"></span>
+            </div>
+        </section>
+
+        <!-- 모던 혼주 연락처 -->
+        <section class="parents-contact modern-section">
+            <h3 style="text-align: center; margin-bottom: 30px; margin-top: 50px; font-size: 22px;">
+                혼주 연락처
+            </h3>
+            
+            <div style="margin-bottom: 30px;">
+                <div style="text-align: center; margin-bottom: 15px; font-size: 16px;">
+                    신랑측
+                </div>
+                <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
+                    <div style="font-size: 14px; line-height: 2;">
+                        <strong>아버지</strong> 조국제<br>
+                        <strong>어머니</strong> 김명선
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <div style="margin-bottom: 10px;">
+                            <span style="margin-right: 10px;">아버지</span>
+                            <button onclick="callParent('groom', 'father')" style="margin: 5px;">
+                                📞 전화
+                            </button>
+                            <button onclick="smsParent('groom', 'father')" style="margin: 5px;">
+                                💬 문자
+                            </button>
+                        </div>
+                        <div>
+                            <span style="margin-right: 10px;">어머니</span>
+                            <button onclick="callParent('groom', 'mother')" style="margin: 5px;">
+                                📞 전화
+                            </button>
+                            <button onclick="smsParent('groom', 'mother')" style="margin: 5px;">
+                                💬 문자
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div style="text-align: center; margin-bottom: 15px; font-size: 16px;">
+                    신부측
+                </div>
+                <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
+                    <div style="font-size: 14px; line-height: 2;">
+                        <strong>아버지</strong> 권순문<br>
+                        <strong>어머니</strong> 이은숙
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <div style="margin-bottom: 10px;">
+                            <span style="margin-right: 10px;">아버지</span>
+                            <button onclick="callParent('bride', 'father')" style="margin: 5px;">
+                                📞 전화
+                            </button>
+                            <button onclick="smsParent('bride', 'father')" style="margin: 5px;">
+                                💬 문자
+                            </button>
+                        </div>
+                        <div>
+                            <span style="margin-right: 10px;">어머니</span>
+                            <button onclick="callParent('bride', 'mother')" style="margin: 5px;">
+                                📞 전화
+                            </button>
+                            <button onclick="smsParent('bride', 'mother')" style="margin: 5px;">
+                                💬 문자
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 레트로 혼주 연락처 -->
+        <section class="parents-contact retro-section" style="display: none;">
+            <h3 style="text-align: center; margin-bottom: 30px; margin-top: 50px; font-size: 22px;">
+                <span class="pixel-icon pixel-icon-phone"></span> GAME MASTERS <span class="pixel-icon pixel-icon-phone"></span>
+            </h3>
+            
+            <div style="margin-bottom: 30px;">
+                <div style="text-align: center; margin-bottom: 15px; font-size: 16px; color: var(--pixel-yellow);">
+                    PLAYER 1 TEAM
+                </div>
+                <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
+                    <div style="font-size: 14px; line-height: 2;">
+                        <strong>아버지</strong> 조국제<br>
+                        <strong>어머니</strong> 김명선
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <div style="margin-bottom: 10px;">
+                            <span style="margin-right: 10px; color: var(--pixel-yellow);">FATHER</span>
+                            <button onclick="callParent('groom', 'father')" style="margin: 5px;">
+                                📞 CALL
+                            </button>
+                            <button onclick="smsParent('groom', 'father')" style="margin: 5px;">
+                                💬 MESSAGE
+                            </button>
+                        </div>
+                        <div>
+                            <span style="margin-right: 10px; color: var(--pixel-yellow);">MOTHER</span>
+                            <button onclick="callParent('groom', 'mother')" style="margin: 5px;">
+                                📞 CALL
+                            </button>
+                            <button onclick="smsParent('groom', 'mother')" style="margin: 5px;">
+                                💬 MESSAGE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div style="text-align: center; margin-bottom: 15px; font-size: 16px; color: var(--pixel-yellow);">
+                    PLAYER 2 TEAM
+                </div>
+                <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
+                    <div style="font-size: 14px; line-height: 2;">
+                        <strong>아버지</strong> 권순문<br>
+                        <strong>어머니</strong> 이은숙
+                    </div>
+                    <div style="margin-top: 15px; text-align: center;">
+                        <div style="margin-bottom: 10px;">
+                            <span style="margin-right: 10px; color: var(--pixel-yellow);">FATHER</span>
+                            <button onclick="callParent('bride', 'father')" style="margin: 5px;">
+                                📞 CALL
+                            </button>
+                            <button onclick="smsParent('bride', 'father')" style="margin: 5px;">
+                                💬 MESSAGE
+                            </button>
+                        </div>
+                        <div>
+                            <span style="margin-right: 10px; color: var(--pixel-yellow);">MOTHER</span>
+                            <button onclick="callParent('bride', 'mother')" style="margin: 5px;">
+                                📞 CALL
+                            </button>
+                            <button onclick="smsParent('bride', 'mother')" style="margin: 5px;">
+                                💬 MESSAGE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 모던 달력 -->
+        <section class="calendar modern-section">
+            <h3 style="text-align: center; font-size: 18px;">
+                2025년 9월
+            </h3>
+            <div class="calendar-grid" id="calendar-modern">
+                <!-- 달력 생성 -->
+            </div>
+        </section>
+        
+        <!-- 레트로 달력 -->
+        <section class="calendar retro-section" style="display: none;">
+            <h3 style="text-align: center; font-size: 18px;">
+                <span class="pixel-icon pixel-icon-calendar"></span> 2025년 9월 <span class="pixel-icon pixel-icon-calendar"></span>
+            </h3>
+            <div class="calendar-grid" id="calendar-retro">
+                <!-- 달력 생성 -->
+            </div>
+        </section>
+
+        <!-- 모던 사진 갤러리 -->
+        <section class="photo-album modern-section">
+            <h3 style="font-size: 18px; text-align: center;">
+                사진 갤러리
+            </h3>
+            <div style="text-align: center; margin-bottom: 15px; font-size: 12px;">
+                ※ 사진을 클릭하시면 크게 보실 수 있습니다 ※
+            </div>
+            <div class="photo-slider" id="photoSlider" onclick="openCurrentPhoto()">
+                <div class="photo-track" id="photoTrack">
+                    <!-- 사진들이 여기에 로드됩니다 -->
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="previousPhoto()">
+                    ◀ 이전
+                </button>
+                <span id="photoCounter">1 / 7</span>
+                <button class="slider-btn" onclick="nextPhoto()">
+                    다음 ▶
+                </button>
+            </div>
+        </section>
+        
+        <!-- 레트로 사진 갤러리 -->
+        <section class="photo-album retro-section" style="display: none;">
+            <h3 style="font-size: 18px;">
+                <span class="pixel-icon pixel-icon-photo"></span> PHOTO GALLERY <span class="pixel-icon pixel-icon-photo"></span>
+            </h3>
+            <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: var(--pixel-yellow);">
+                ※ CLICK TO ZOOM ※
+            </div>
+            <div class="photo-slider" id="photoSlider2" onclick="openCurrentPhoto()">
+                <div class="photo-track" id="photoTrack2">
+                    <!-- 사진들이 여기에 로드됩니다 -->
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="previousPhoto()">
+                    ◀ PREV
+                </button>
+                <span id="photoCounter2">1 / 7</span>
+                <button class="slider-btn" onclick="nextPhoto()">
+                    NEXT ▶
+                </button>
+            </div>
+        </section>
+
+        <!-- 사진 확대 모달 -->
+        <div class="photo-modal" id="photoModal">
+            <span class="close-photo" onclick="closePhotoModal()">×</span>
+            <img id="modalPhoto" src="" alt="확대 사진">
+        </div>
+
+        <!-- 모던 오시는 길 -->
+        <section class="directions modern-section">
+            <h3 style="text-align: center; font-size: 18px;">
+                오시는 길
+            </h3>
+            
+            <div style="padding: 20px; margin: 20px 0; border: 3px solid var(--pixel-pink); text-align: center;">
+                <div style="font-size: 16px; margin-bottom: 15px; color: var(--pixel-yellow);">
+                    켄싱턴호텔 여의도
+                </div>
+                <div style="font-size: 14px; line-height: 2;">
+                    서울특별시 영등포구<br>
+                    국회대로 76길 16, 15층<br>
+                    ☎️ 02-6670-7000
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button onclick="openNaverMap()" style="margin: 10px; padding: 20px 30px;">
+                    🗺️ 네이버 지도
+                </button>
+                <button onclick="openKakaoMap()" style="margin: 10px; padding: 20px 30px;">
+                    🗺️ 카카오맵
+                </button>
+            </div>
+
+            <div style="padding: 20px; border: 3px dashed var(--pixel-pink); margin: 15px 0;">
+                <div style="font-size: 16px; margin-bottom: 15px;">🚇 지하철</div>
+                <div style="font-size: 14px; line-height: 2;">
+                    • 9호선 국회의사당역 3번 출구 (도보 3분)<br>
+                    • 5호선 여의나루역 1번 출구 (도보 10분)
+                </div>
+            </div>
+
+            <div style="padding: 20px; border: 3px dashed var(--pixel-pink); margin: 15px 0;">
+                <div style="font-size: 16px; margin-bottom: 15px;">🚌 버스</div>
+                <div style="font-size: 14px; line-height: 2;">
+                    여의도 순복음교회 하차<br>
+                    5615, 5618, 6623, 753번
+                </div>
+            </div>
+        </section>
+        
+        <!-- 레트로 오시는 길 -->
+        <section class="directions special-border retro-section" style="display: none;">
+            <h3 style="text-align: center; font-size: 18px;">
+                <span class="pixel-icon pixel-icon-map"></span> GAME LOCATION <span class="pixel-icon pixel-icon-map"></span>
+            </h3>
+            
+            <div style="padding: 20px; margin: 20px 0; border: 3px solid var(--pixel-pink); text-align: center;">
+                <div style="font-size: 16px; margin-bottom: 15px; color: var(--pixel-yellow);">
+                    켄싱턴호텔 여의도
+                </div>
+                <div style="font-size: 14px; line-height: 2;">
+                    서울특별시 영등포구<br>
+                    국회대로 76길 16, 15층<br>
+                    ☎️ 02-6670-7000
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button onclick="openNaverMap()" style="margin: 10px; padding: 20px 30px;">
+                    🗺️ NAVER MAP
+                </button>
+                <button onclick="openKakaoMap()" style="margin: 10px; padding: 20px 30px;">
+                    🗺️ KAKAO MAP
+                </button>
+            </div>
+
+            <div style="padding: 20px; border: 3px dashed var(--pixel-pink); margin: 15px 0;">
+                <div style="font-size: 16px; margin-bottom: 15px; color: var(--pixel-yellow);">🚇 SUBWAY ROUTE</div>
+                <div style="font-size: 14px; line-height: 2;">
+                    • 9호선 국회의사당역 3번 출구 (도보 3분)<br>
+                    • 5호선 여의나루역 1번 출구 (도보 10분)
+                </div>
+            </div>
+
+            <div style="padding: 20px; border: 3px dashed var(--pixel-pink); margin: 15px 0;">
+                <div style="font-size: 16px; margin-bottom: 15px; color: var(--pixel-yellow);">🚌 BUS ROUTE</div>
+                <div style="font-size: 14px; line-height: 2;">
+                    여의도 순복음교회 하차<br>
+                    5615, 5618, 6623, 753번
+                </div>
+            </div>
+        </section>
+
+        <!-- 모던 방명록 -->
+        <section class="guestbook modern-section">
+            <h3 style="text-align: center; font-size: 18px;">
+                방명록
+            </h3>
+            <div style="text-align: center; margin: 30px 0;">
+                <button onclick="openGuestbookModal()" style="padding: 20px 40px; font-size: 16px;">
+                    ✏️ 축하 메시지 작성하기
+                </button>
+            </div>
+            <!-- 방명록 컨테이너 (페이지 표시 포함) -->
+            <div style="position: relative; margin: 20px 0;">
+                <!-- 페이지 번호 표시 (테두리 밖 상단) -->
+                <div style="
+                    position: absolute;
+                    top: -25px;
+                    right: 10px;
+                    background: var(--pixel-dark);
+                    padding: 5px 15px;
+                    border: 2px solid var(--pixel-pink);
+                    color: var(--pixel-yellow);
+                    font-size: 12px;
+                    z-index: 10;
+                ">
+                    <span id="pageIndicator">PAGE 1</span>
+                </div>
+                
+                <!-- 방명록 페이지 컨테이너 -->
+                <div class="guestbook-page-container" style="
+                    border: 4px solid var(--pixel-pink);
+                    padding: 20px;
+                    min-height: 450px;
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                    box-shadow: 
+                        inset -4px -4px 0 rgba(255, 0, 110, 0.3),
+                        inset 4px 4px 0 rgba(255, 0, 110, 0.3),
+                        0 0 20px rgba(255, 0, 110, 0.2);
+                ">
+                
+                    <div class="guestbook-list" id="guestbookList" style="flex: 1;">
+                        <div class="guestbook-item">
+                            No messages yet...<br>
+                            Be the first player to leave a message!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 페이지네이션 -->
+            <div id="guestbookPagination" style="text-align: center; margin-top: 20px;">
+                <button onclick="previousGuestbookPage()" id="prevPageBtn" class="slider-btn" style="margin: 5px; min-width: 100px;">
+                    ◀ 이전
+                </button>
+                <span id="pageInfo" style="margin: 0 20px; font-size: 14px; display: inline-block; min-width: 120px;">1 / 1</span>
+                <button onclick="nextGuestbookPage()" id="nextPageBtn" class="slider-btn" style="margin: 5px; min-width: 100px;">
+                    다음 ▶
+                </button>
+            </div>
+        </section>
+        
+        <!-- 레트로 방명록 -->
+        <section class="guestbook retro-section" style="display: none;">
+            <h3 style="text-align: center; font-size: 18px;">
+                <span class="pixel-icon pixel-icon-write"></span> GUEST BOOK <span class="pixel-icon pixel-icon-write"></span>
+            </h3>
+            <div style="text-align: center; margin: 30px 0;">
+                <button onclick="openGuestbookModal()" style="padding: 20px 40px; font-size: 16px;">
+                    ✏️ WRITE MESSAGE
+                </button>
+            </div>
+            <!-- 페이지네이션 -->
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="previousGuestbookPage()" class="slider-btn" style="margin: 5px; min-width: 100px;">
+                    ◀ PREV
+                </button>
+                <span style="margin: 0 20px; color: var(--pixel-yellow); font-size: 14px; display: inline-block; min-width: 120px;">1 / 1</span>
+                <button onclick="nextGuestbookPage()" class="slider-btn" style="margin: 5px; min-width: 100px;">
+                    NEXT ▶
+                </button>
+            </div>
+        </section>
+
+        <!-- 모던 참석 여부 -->
+        <section class="attendance modern-section" style="text-align: center; padding: 40px 0;">
+            <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px;">
+                💒 참석 여부 알려주기 💒
+            </button>
+        </section>
+        
+        <!-- 레트로 참석 여부 -->
+        <section class="attendance retro-section" style="display: none; text-align: center; padding: 40px 0;">
+            <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px;" class="special-border">
+                🎮 JOIN GAME 🎮
+            </button>
+        </section>
+
+        <!-- 모던 마음 전하는 곳 -->
+        <section class="account-info modern-section">
+            <h3 style="text-align: center; font-size: 18px;">
+                마음 전하실 곳
+            </h3>
+            <div style="font-size: 14px; text-align: center; margin: 20px 0; color: var(--pixel-yellow);">
+                축하의 마음을 전달해주신다면<br>
+                큰 힘이 되겠습니다.
+            </div>
+            
+            <div class="account-section">
+                <div class="account-group">
+                    <h4 style="text-align: center; margin: 20px 0; font-size: 16px;">신랑측</h4>
+                    <div class="account-list" id="groomAccounts">
+                        <!-- 계좌 정보가 여기에 로드됩니다 -->
+                    </div>
+                </div>
+                
+                <div class="account-group">
+                    <h4 style="text-align: center; margin: 20px 0; font-size: 16px;">신부측</h4>
+                    <div class="account-list" id="brideAccounts">
+                        <!-- 계좌 정보가 여기에 로드됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 레트로 마음 전하는 곳 -->
+        <section class="account-info special-border retro-section" style="display: none;">
+            <h3 style="text-align: center; font-size: 18px;">
+                <span class="pixel-icon pixel-icon-gift"></span> SUPPORT PLAYERS <span class="pixel-icon pixel-icon-gift"></span>
+            </h3>
+            
+            <div style="margin: 30px 0;">
+                <div style="text-align: center; margin-bottom: 20px; font-size: 16px; color: var(--pixel-yellow);">
+                    PLAYER 1 ACCOUNT
+                </div>
+                <div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">조영민: 농협 302-1008-6711-31</span>
+                        <button onclick="copyAccount('302-1008-6711-31')" style="font-size: 12px; padding: 8px 15px;">
+                            COPY
+                        </button>
+                    </div>
+                </div>
+                <div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">조국제(부): 농협 848-02-052946</span>
+                        <button onclick="copyAccount('848-02-052946')" style="font-size: 12px; padding: 8px 15px;">
+                            COPY
+                        </button>
+                    </div>
+                </div>
+		<div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">김명선(모): 농협 177784-56-065611</span>
+                        <button onclick="copyAccount('177784-56-065611')" style="font-size: 12px; padding: 8px 15px;">
+                            COPY
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="margin: 30px 0;">
+                <div style="text-align: center; margin-bottom: 20px; font-size: 16px; color: var(--pixel-yellow);">
+                    PLAYER 2 ACCOUNT
+                </div>
+                <div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">권채린: 토스뱅크 1000-1234-5678</span>
+                        <button onclick="copyAccount('1000-1234-5678')" style="font-size: 12px; padding: 8px 15px;">
+                            COPY
+                        </button>
+                    </div>
+                </div>
+                <div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">권순문(부): 신한은행 323-04-048686</span>
+                        <button onclick="copyAccount('323-04-048686')" style="font-size: 12px; padding: 8px 15px;">
+                            COPY
+                        </button>
+                    </div>
+                </div>
+		<div style="padding: 15px; border: 3px dashed var(--pixel-pink); margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12px;">이은숙(모): 하나은행 125-910052-94207 </span>
+                        <button onclick="copyAccount('125-910052-94207')" style="font-size: 12px; padding: 8px 15px;">
+                            COPY
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 모던 공유하기 -->
+        <section class="share-buttons modern-section" style="text-align: center; padding: 40px 20px;">
+            <button class="share-btn" onclick="shareKakao()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
+                💬 카카오톡 공유
+            </button>
+            <button class="share-btn" onclick="copyURL()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
+                🔗 링크 복사
+            </button>
+        </section>
+        
+        <!-- 레트로 공유하기 -->
+        <section class="share-buttons retro-section" style="display: none; text-align: center; padding: 40px 20px;">
+            <button class="share-btn" onclick="shareKakao()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
+                💬 SHARE KAKAO
+            </button>
+            <button class="share-btn" onclick="copyURL()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
+                🔗 COPY LINK
+            </button>
+        </section>
+
+        <!-- 모던 엔딩 크레딧 -->
+        <section class="ending-credits modern-section" style="text-align: center; padding: 60px 20px;">
+            <div class="celebrate-text" style="font-size: 20px; margin-bottom: 30px;">
+                소중한 날에 함께해 주셔서<br>
+                진심으로 감사드립니다
+            </div>
+            <div style="font-size: 24px; color: var(--pixel-pink);">
+                권채린 ❤️ 조영민
+            </div>
+            <div style="margin-top: 30px; font-size: 14px; color: var(--pixel-yellow);">
+                2025.09.27
+            </div>
+        </section>
+        
+        <!-- 레트로 엔딩 크레딧 -->
+        <section class="ending-credits retro-section" style="text-align: center; padding: 60px 20px; display: none;">
+            <div class="celebrate-text" style="font-size: 20px; margin-bottom: 30px;">
+                <span class="pixel-heart"></span> THANK YOU <span class="pixel-heart"></span>
+            </div>
+            <p style="font-size: 12px; line-height: 2;">
+                소중한 날에 함께해 주셔서<br>
+                진심으로 감사드립니다
+            </p>
+            <p style="font-size: 10px; margin-top: 20px; color: var(--pixel-yellow);">
+                ♪ GAME OVER ♪<br>
+                SEE YOU AT THE WEDDING!
+            </p>
+        </section>
+    </div>
+
+    <!-- 방명록 모달 -->
+    <div id="guestbookModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeGuestbookModal()" style="font-size: 30px;">×</span>
+            <h3 style="font-size: 18px;" id="guestbookModalTitle">💌 축하 메시지 작성 💌</h3>
+            <form id="guestbookForm">
+                <div class="form-group">
+                    <label id="guestNameLabel">성함</label>
+                    <input type="text" id="guestName" name="name" required maxlength="20" placeholder="성함을 입력해주세요">
+                </div>
+                <div class="form-group">
+                    <label id="guestMessageLabel">축하 메시지</label>
+                    <textarea id="guestMessage" name="message" rows="5" required maxlength="200" 
+                              placeholder="따뜻한 축하의 말씀을 남겨주세요"></textarea>
+                </div>
+                <button type="submit" style="width: 100%; font-size: 16px; padding: 20px;" id="guestbookSubmitBtn">
+                    작성 완료
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 참석 여부 모달 -->
+    <div id="attendanceModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAttendanceModal()" style="font-size: 30px;">×</span>
+            <h3 style="font-size: 18px;" id="attendanceModalTitle">💒 참석 여부 확인 💒</h3>
+            <form id="attendanceForm">
+                <div class="form-group">
+                    <label id="attendeeNameLabel">성함</label>
+                    <input type="text" id="attendeeName" name="name" required placeholder="성함을 입력해주세요">
+                </div>
+                <div class="form-group">
+                    <label id="attendeePhoneLabel">연락처</label>
+                    <input type="tel" id="attendeePhone" name="phone" required placeholder="010-0000-0000">
+                </div>
+                <div class="form-group">
+                    <label id="attendanceStatusLabel">참석 여부</label>
+                    <select id="attendanceStatus" name="status" required style="font-size: 14px;">
+                        <option value="">선택해주세요</option>
+                        <option value="attend">참석합니다</option>
+                        <option value="absent">참석이 어렵습니다</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="guestCountLabel">동행 인원 (본인 포함)</label>
+                    <input type="number" id="guestCount" name="count" min="1" max="10" value="1">
+                </div>
+                <div class="form-group">
+                    <label id="relationLabel">구분</label>
+                    <select id="relation" name="relation" required style="font-size: 14px;">
+                        <option value="">선택해주세요</option>
+                        <option value="groom">신랑측 하객</option>
+                        <option value="bride">신부측 하객</option>
+                    </select>
+                </div>
+                <button type="submit" style="width: 100%; font-size: 16px; padding: 20px;" id="attendanceSubmitBtn">
+                    확인
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 테마 관리
+        let currentTheme = 'modern';
+        
+        // 페이지 로드시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // 모던 테마로 시작
+            const modernStyles = document.getElementById('modern-styles');
+            const retroStyles = document.getElementById('retro-styles');
+            modernStyles.disabled = false;
+            retroStyles.disabled = true;
+            
+            // 달력 생성
+            setupCalendar();
+            // 갤러리 초기화
+            initGallery();
+            // 계좌 정보 로드
+            loadAccountInfo();
+            
+            // Portal trigger 이벤트
+            const portalTrigger = document.getElementById('portalTrigger');
+            const returnPortal = document.getElementById('returnPortal');
+            const transitionPanel = document.getElementById('transitionPanel');
+            
+            if (portalTrigger) {
+                portalTrigger.addEventListener('click', function() {
+                    // 경고 패널 표시
+                    transitionPanel.style.display = 'flex';
+                    transitionPanel.classList.add('active');
+                });
+            }
+            
+            // Return portal 이벤트 (게임에서 돌아오기)
+            if (returnPortal) {
+                returnPortal.addEventListener('click', function() {
+                    switchToModernTheme();
+                });
+            }
+            
+            // Transition panel 클릭 이벤트
+            if (transitionPanel) {
+                transitionPanel.addEventListener('click', function() {
+                    // 레트로 테마로 전환
+                    switchToRetroTheme();
+                    transitionPanel.style.display = 'none';
+                    transitionPanel.classList.remove('active');
+                });
+            }
+        });
+        
+        // 레트로 테마로 전환
+        function switchToRetroTheme() {
+            const modernStyles = document.getElementById('modern-styles');
+            const retroStyles = document.getElementById('retro-styles');
+            const portalTrigger = document.getElementById('portalTrigger');
+            const returnPortal = document.getElementById('returnPortal');
+            
+            // 스크롤을 최상단으로
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // 스타일시트 전환
+            modernStyles.disabled = true;
+            retroStyles.disabled = false;
+            
+            currentTheme = 'retro';
+            
+            // 섹션 전환
+            switchSections('retro');
+            
+            // 레트로 효과 시작
+            createFireworks();
+            createFloatingHearts();
+            
+            // Portal 전환 (핑크 숨기고 흰색 표시)
+            if (portalTrigger) {
+                portalTrigger.style.display = 'none';
+            }
+            if (returnPortal) {
+                returnPortal.style.display = 'block';
+            }
+        }
+        
+        // 모던 테마로 전환
+        function switchToModernTheme() {
+            const modernStyles = document.getElementById('modern-styles');
+            const retroStyles = document.getElementById('retro-styles');
+            const portalTrigger = document.getElementById('portalTrigger');
+            const returnPortal = document.getElementById('returnPortal');
+            
+            // 스크롤을 최상단으로
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // 스타일시트 전환
+            modernStyles.disabled = false;
+            retroStyles.disabled = true;
+            
+            currentTheme = 'modern';
+            
+            // 섹션 전환
+            switchSections('modern');
+            
+            // 레트로 효과 정지
+            stopRetroEffects();
+            
+            // Portal 전환 (흰색 숨기고 핑크 표시)
+            if (returnPortal) {
+                returnPortal.style.display = 'none';
+            }
+            if (portalTrigger) {
+                portalTrigger.style.display = 'block';
+            }
+        }
+        
+        // 섹션 전환 함수
+        function switchSections(theme) {
+            const modernSections = document.querySelectorAll('.modern-section');
+            const retroSections = document.querySelectorAll('.retro-section');
+            
+            if (theme === 'retro') {
+                modernSections.forEach(section => section.style.display = 'none');
+                retroSections.forEach(section => section.style.display = 'block');
+                
+                // 레트로 테마 모달 텍스트
+                updateModalTexts('retro');
+            } else {
+                modernSections.forEach(section => section.style.display = 'block');
+                retroSections.forEach(section => section.style.display = 'none');
+                
+                // 모던 테마 모달 텍스트
+                updateModalTexts('modern');
+            }
+        }
+        
+        // 모달 텍스트 업데이트
+        function updateModalTexts(theme) {
+            if (theme === 'retro') {
+                // 방명록 모달
+                const guestbookTitle = document.getElementById('guestbookModalTitle');
+                if (guestbookTitle) guestbookTitle.innerHTML = '💌 WRITE MESSAGE 💌';
+                
+                const guestNameLabel = document.getElementById('guestNameLabel');
+                if (guestNameLabel) guestNameLabel.textContent = 'NAME';
+                
+                const guestMessageLabel = document.getElementById('guestMessageLabel');
+                if (guestMessageLabel) guestMessageLabel.textContent = 'MESSAGE';
+                
+                const guestbookSubmit = document.getElementById('guestbookSubmitBtn');
+                if (guestbookSubmit) guestbookSubmit.textContent = 'SUBMIT';
+                
+                const guestNameInput = document.getElementById('guestName');
+                if (guestNameInput) guestNameInput.placeholder = 'Enter your name';
+                
+                const guestMessageInput = document.getElementById('guestMessage');
+                if (guestMessageInput) guestMessageInput.placeholder = 'Leave your message';
+                
+                // 참석 여부 모달
+                const attendanceTitle = document.getElementById('attendanceModalTitle');
+                if (attendanceTitle) attendanceTitle.innerHTML = '🎮 JOIN GAME 🎮';
+                
+                const attendeeNameLabel = document.getElementById('attendeeNameLabel');
+                if (attendeeNameLabel) attendeeNameLabel.textContent = 'NAME';
+                
+                const attendeePhoneLabel = document.getElementById('attendeePhoneLabel');
+                if (attendeePhoneLabel) attendeePhoneLabel.textContent = 'PHONE';
+                
+                const attendanceStatusLabel = document.getElementById('attendanceStatusLabel');
+                if (attendanceStatusLabel) attendanceStatusLabel.textContent = 'STATUS';
+                
+                const guestCountLabel = document.getElementById('guestCountLabel');
+                if (guestCountLabel) guestCountLabel.textContent = 'PARTY SIZE';
+                
+                const relationLabel = document.getElementById('relationLabel');
+                if (relationLabel) relationLabel.textContent = 'TEAM';
+                
+                const attendanceSubmit = document.getElementById('attendanceSubmitBtn');
+                if (attendanceSubmit) attendanceSubmit.textContent = 'CONFIRM';
+                
+            } else {
+                // 방명록 모달
+                const guestbookTitle = document.getElementById('guestbookModalTitle');
+                if (guestbookTitle) guestbookTitle.innerHTML = '💌 축하 메시지 작성 💌';
+                
+                const guestNameLabel = document.getElementById('guestNameLabel');
+                if (guestNameLabel) guestNameLabel.textContent = '성함';
+                
+                const guestMessageLabel = document.getElementById('guestMessageLabel');
+                if (guestMessageLabel) guestMessageLabel.textContent = '축하 메시지';
+                
+                const guestbookSubmit = document.getElementById('guestbookSubmitBtn');
+                if (guestbookSubmit) guestbookSubmit.textContent = '작성 완료';
+                
+                const guestNameInput = document.getElementById('guestName');
+                if (guestNameInput) guestNameInput.placeholder = '성함을 입력해주세요';
+                
+                const guestMessageInput = document.getElementById('guestMessage');
+                if (guestMessageInput) guestMessageInput.placeholder = '따뜻한 축하의 말씀을 남겨주세요';
+                
+                // 참석 여부 모달
+                const attendanceTitle = document.getElementById('attendanceModalTitle');
+                if (attendanceTitle) attendanceTitle.innerHTML = '💒 참석 여부 확인 💒';
+                
+                const attendeeNameLabel = document.getElementById('attendeeNameLabel');
+                if (attendeeNameLabel) attendeeNameLabel.textContent = '성함';
+                
+                const attendeePhoneLabel = document.getElementById('attendeePhoneLabel');
+                if (attendeePhoneLabel) attendeePhoneLabel.textContent = '연락처';
+                
+                const attendanceStatusLabel = document.getElementById('attendanceStatusLabel');
+                if (attendanceStatusLabel) attendanceStatusLabel.textContent = '참석 여부';
+                
+                const guestCountLabel = document.getElementById('guestCountLabel');
+                if (guestCountLabel) guestCountLabel.textContent = '동행 인원 (본인 포함)';
+                
+                const relationLabel = document.getElementById('relationLabel');
+                if (relationLabel) relationLabel.textContent = '구분';
+                
+                const attendanceSubmit = document.getElementById('attendanceSubmitBtn');
+                if (attendanceSubmit) attendanceSubmit.textContent = '확인';
+            }
+        }
+        
+        // 레트로 효과 정지
+        function stopRetroEffects() {
+            // 모든 인터벌 정리는 createFireworks와 createFloatingHearts 함수에서 관리
+            // 여기서는 단순히 테마 변경만 표시
+            currentTheme = 'modern';
+        }
+
+        // 폭죽 효과
+        function createFireworks() {
+            let container = document.getElementById('fireworks');
+            if (!container) {
+                // 컨테이너가 없으면 생성
+                container = document.createElement('div');
+                container.id = 'fireworks';
+                container.className = 'fireworks';
+                document.body.appendChild(container);
+            }
+            
+            setInterval(() => {
+                // 레트로 테마일 때만 작동
+                if (currentTheme !== 'retro') return;
+                
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = (Math.random() * 80 + 10) + '%'; // 10-90% 위치
+                
+                // 랜덤 크기 설정 (0.5 ~ 1.5배)
+                const scale = 0.5 + Math.random();
+                firework.style.setProperty('--scale', scale);
+                
+                // 랜덤 터지는 높이 설정 (화면의 20% ~ 60% 높이)
+                const explodeHeight = 20 + Math.random() * 40;
+                const riseTime = 1.2 + (explodeHeight / 100) * 0.8; // 높이에 따라 상승 시간 조정
+                
+                // 초기 위치 설정
+                firework.style.animation = `none`;
+                firework.style.bottom = '0';
+                
+                // cubic-bezier로 감속 효과 (처음엔 빠르게, 나중엔 느리게)
+                firework.style.transition = `transform ${riseTime}s cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
+                
+                // 폭죽 꼬리 효과 추가
+                const trail = document.createElement('div');
+                trail.style.position = 'absolute';
+                trail.style.left = firework.style.left;
+                trail.style.bottom = '0';
+                trail.style.width = '4px';           // 🔧 트레일 너비 (픽셀) - 더 굵게: '4px', 더 얇게: '1px'
+                trail.style.height = '60px';         // 🔧 트레일 초기 길이 (픽셀) - 더 길게: '60px', 더 짧게: '20px'
+                trail.style.background = `linear-gradient(to top, transparent, var(--pixel-pink))`;
+                trail.style.opacity = '0.8';         // 🔧 트레일 투명도 - 더 진하게: '0.8', 더 연하게: '0.3'
+                trail.style.transition = `transform ${riseTime}s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity ${riseTime}s`;
+                container.appendChild(trail);
+                
+                // 약간의 딜레이 후 올라가기 시작
+                setTimeout(() => {
+                    firework.style.transform = `translateY(-${100 - explodeHeight}vh)`;
+                    trail.style.transform = `translateY(-${100 - explodeHeight}vh) scaleY(2)`;  // 🔧 scaleY(2) = 올라가면서 트레일이 2배로 늘어남 - 더 길게: scaleY(3), 짧게: scaleY(1.5)
+                    trail.style.opacity = '0';       // 🔧 최종 투명도 - '0.2'로 하면 끝까지 약간 보임
+                }, 50);
+                
+                // 폭발 효과 (상승 시간에 맞춰 타이밍 조정)
+                setTimeout(() => {
+                    // 폭발 시각 효과
+                    const explosion = document.createElement('div');
+                    explosion.style.position = 'absolute';
+                    explosion.style.left = firework.style.left;
+                    explosion.style.bottom = `${100 - explodeHeight}%`;
+                    explosion.style.width = '4px';
+                    explosion.style.height = '4px';
+                    explosion.style.background = 'var(--pixel-yellow)';
+                    
+                    // 폭발 파티클 효과
+                    const colors = ['var(--pixel-pink)', 'var(--pixel-cyan)', 'var(--pixel-green)', 'var(--pixel-yellow)', 'var(--pixel-light-pink)'];
+                    const particles = 16; // 더 많은 파티클
+                    let shadowStr = '';
+                    
+                    for(let i = 0; i < particles; i++) {
+                        const angle = (Math.PI * 2 * i) / particles;
+                        const distance = 15 + Math.random() * 25;
+                        const x = Math.cos(angle) * distance * scale;
+                        const y = Math.sin(angle) * distance * scale;
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        shadowStr += `${x}px ${y}px 0 ${color}${i < particles - 1 ? ',' : ''}`;
+                    }
+                    
+                    explosion.style.boxShadow = shadowStr;
+                    explosion.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+                    explosion.style.transform = 'scale(0)';
+                    
+                    container.appendChild(explosion);
+                    
+                    // 폭발 소리 효과를 위한 시각적 플래시
+                    explosion.style.filter = 'brightness(2)';
+                    
+                    setTimeout(() => {
+                        explosion.style.transform = `scale(${scale * 2.5})`;
+                        explosion.style.opacity = '0';
+                        explosion.style.filter = 'brightness(1)';
+                    }, 50);
+                    
+                    setTimeout(() => {
+                        explosion.remove();
+                        trail.remove();
+                    }, 1100);
+                    
+                    firework.remove();
+                }, riseTime * 1000); // 상승 시간에 맞춰 폭발
+            }, 600); // 더 자주 발사
+        }
+
+        // 떠다니는 하트와 풍선
+        function createFloatingHearts() {
+            let container = document.getElementById('floatingHearts');
+            if (!container) {
+                // 컨테이너가 없으면 생성
+                container = document.createElement('div');
+                container.id = 'floatingHearts';
+                container.className = 'floating-hearts';
+                document.body.appendChild(container);
+            }
+            
+            // 하트 생성
+            setInterval(() => {
+                if (currentTheme !== 'retro') return;
+                const heart = document.createElement('div');
+                heart.className = 'float-heart';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 10000);
+            }, 3000);
+            
+            // 풍선 생성
+            setInterval(() => {
+              if (currentTheme !== 'retro') return;
+              const el = document.createElement('div');
+              el.className = 'pixel-balloon';
+              el.style.left = (Math.random() * 100) + '%';
+
+              // 색 랜덤
+              const colors = ['#e43a3a','#ffb02e','#35c9f6','#4caf50','#ff80ab'];
+              el.style.setProperty('--balloon', colors[(Math.random() * colors.length) | 0]);
+
+              // ✅ 정수 픽셀만 (흐릿함 방지)
+              const px = Math.random() < 0.25 ? 3 : 2;
+              el.style.setProperty('--px', px + 'px');
+
+              // 부유 속도/딜레이/드리프트
+              el.style.setProperty('--duration', (7.5 + Math.random() * 3) + 's');
+              el.style.setProperty('--delay', (Math.random() * 0.8) + 's');
+              el.style.setProperty('--drift', (Math.random() * 10 - 5) + 'px');
+
+              container.appendChild(el);
+              setTimeout(() => el.remove(), 12000);
+            }, 1200);
+
+
+        }
+
+        // 갤러리 초기화
+        let currentPhotoIndex = 0;
+        const albumPhotos = [
+            'assets/AlbumSlides/album1.jpg',
+            'assets/AlbumSlides/album2.jpg',
+            'assets/AlbumSlides/album3.jpg',
+            'assets/AlbumSlides/album4.jpg',
+            'assets/AlbumSlides/album5.jpg',
+            'assets/AlbumSlides/album6.jpg',
+            'assets/AlbumSlides/album7.jpg'
+        ];
+
+        function initGallery() {
+            // 모던 테마 갤러리
+            const photoTrack = document.getElementById('photoTrack');
+            albumPhotos.forEach((photo, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'photo-slide';
+                slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}">`;
+                photoTrack.appendChild(slide);
+            });
+            
+            // 레트로 테마 갤러리 (동일한 사진)
+            const photoTrack2 = document.getElementById('photoTrack2');
+            if (photoTrack2) {
+                albumPhotos.forEach((photo, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'photo-slide';
+                    slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}">`;
+                    photoTrack2.appendChild(slide);
+                });
+            }
+            
+            updatePhotoCounter();
+        }
+
+        function nextPhoto() {
+            const track = document.getElementById('photoTrack');
+            const track2 = document.getElementById('photoTrack2');
+            currentPhotoIndex = (currentPhotoIndex + 1) % albumPhotos.length;
+            
+            if (track) track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+            if (track2) track2.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+            
+            updatePhotoCounter();
+        }
+
+        function previousPhoto() {
+            const track = document.getElementById('photoTrack');
+            const track2 = document.getElementById('photoTrack2');
+            currentPhotoIndex = (currentPhotoIndex - 1 + albumPhotos.length) % albumPhotos.length;
+            
+            if (track) track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+            if (track2) track2.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+            
+            updatePhotoCounter();
+        }
+
+        function updatePhotoCounter() {
+            const counter1 = document.getElementById('photoCounter');
+            const counter2 = document.getElementById('photoCounter2');
+            const text = `${currentPhotoIndex + 1} / ${albumPhotos.length}`;
+            
+            if (counter1) counter1.textContent = text;
+            if (counter2) counter2.textContent = text;
+        }
+
+        function openCurrentPhoto() {
+            const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalPhoto');
+            modal.style.display = 'block';
+            modalImg.src = albumPhotos[currentPhotoIndex];
+        }
+
+        // 사진 확대 모달
+        function closePhotoModal() {
+            document.getElementById('photoModal').style.display = 'none';
+        }
+
+        // 모달 외부 클릭시 닫기
+        document.getElementById('photoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePhotoModal();
+            }
+        });
+
+        // 달력 생성
+        function setupCalendar() {
+            // 모던 테마 달력
+            const calendarModern = document.getElementById('calendar-modern');
+            if (calendarModern) {
+                setupCalendarGrid(calendarModern, false);
+            }
+            
+            // 레트로 테마 달력
+            const calendarRetro = document.getElementById('calendar-retro');
+            if (calendarRetro) {
+                setupCalendarGrid(calendarRetro, true);
+            }
+        }
+        
+        function setupCalendarGrid(calendar, isRetro) {
+            const days = isRetro ? ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'] : ['일', '월', '화', '수', '목', '금', '토'];
+            
+            // 요일 헤더
+            days.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-header';
+                header.textContent = day;
+                calendar.appendChild(header);
+            });
+            
+            // 2025년 9월 1일은 월요일
+            const emptyDays = 1;
+            for (let i = 0; i < emptyDays; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'calendar-day';
+                calendar.appendChild(empty);
+            }
+            
+            // 날짜
+            for (let day = 1; day <= 30; day++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                if (day === 27) {
+                    dayEl.className += ' wedding-day';
+                    if (isRetro) {
+                        dayEl.innerHTML = `<strong>${day}</strong><br><span style="font-size: 10px;">WEDDING!</span>`;
+                    } else {
+                        dayEl.innerHTML = `<strong>${day}</strong><br><span style="font-size: 10px;">💒</span>`;
+                    }
+                } else {
+                    dayEl.textContent = day;
+                }
+                calendar.appendChild(dayEl);
+            }
+        }
+
+        // 모달 함수들
+        function openGuestbookModal() {
+            document.getElementById('guestbookModal').style.display = 'flex';
+        }
+        
+        function closeGuestbookModal() {
+            document.getElementById('guestbookModal').style.display = 'none';
+        }
+        
+        function openAttendanceModal() {
+            document.getElementById('attendanceModal').style.display = 'flex';
+        }
+        
+        function closeAttendanceModal() {
+            document.getElementById('attendanceModal').style.display = 'none';
+        }
+
+        // 연락처 함수
+        function callParent(side, parent) {
+            const phones = {
+                groom: { father: '010-1234-5678', mother: '010-2345-6789' },
+                bride: { father: '010-3456-7890', mother: '010-4567-8901' }
+            };
+            window.location.href = `tel:${phones[side][parent]}`;
+        }
+        
+        function smsParent(side, parent) {
+            const phones = {
+                groom: { father: '010-1234-5678', mother: '010-2345-6789' },
+                bride: { father: '010-3456-7890', mother: '010-4567-8901' }
+            };
+            window.location.href = `sms:${phones[side][parent]}`;
+        }
+
+        // 지도 함수
+        function openNaverMap() {
+            window.open('https://map.naver.com/v5/search/켄싱턴호텔%20여의도', '_blank');
+        }
+        
+        function openKakaoMap() {
+            window.open('https://map.kakao.com/link/search/켄싱턴호텔 여의도', '_blank');
+        }
+
+        // 계좌 정보 로드
+        function loadAccountInfo() {
+            const groomAccounts = document.getElementById('groomAccounts');
+            const brideAccounts = document.getElementById('brideAccounts');
+            
+            // 신랑측 계좌
+            if (groomAccounts) {
+                groomAccounts.innerHTML = `
+                    <div class="account-item">
+                        <div>조영민</div>
+                        <div>○○은행 123-456-789012</div>
+                        <button onclick="copyAccount('123456789012')" style="padding: 8px 16px; margin-top: 10px;">
+                            복사하기
+                        </button>
+                    </div>
+                    <div class="account-item">
+                        <div>조국제 (아버지)</div>
+                        <div>○○은행 234-567-890123</div>
+                        <button onclick="copyAccount('234567890123')" style="padding: 8px 16px; margin-top: 10px;">
+                            복사하기
+                        </button>
+                    </div>
+                    <div class="account-item">
+                        <div>김명선 (어머니)</div>
+                        <div>○○은행 345-678-901234</div>
+                        <button onclick="copyAccount('345678901234')" style="padding: 8px 16px; margin-top: 10px;">
+                            복사하기
+                        </button>
+                    </div>
+                `;
+            }
+            
+            // 신부측 계좌
+            if (brideAccounts) {
+                brideAccounts.innerHTML = `
+                    <div class="account-item">
+                        <div>권채린</div>
+                        <div>○○은행 456-789-012345</div>
+                        <button onclick="copyAccount('456789012345')" style="padding: 8px 16px; margin-top: 10px;">
+                            복사하기
+                        </button>
+                    </div>
+                    <div class="account-item">
+                        <div>권순문 (아버지)</div>
+                        <div>○○은행 567-890-123456</div>
+                        <button onclick="copyAccount('567890123456')" style="padding: 8px 16px; margin-top: 10px;">
+                            복사하기
+                        </button>
+                    </div>
+                    <div class="account-item">
+                        <div>이은숙 (어머니)</div>
+                        <div>○○은행 678-901-234567</div>
+                        <button onclick="copyAccount('678901234567')" style="padding: 8px 16px; margin-top: 10px;">
+                            복사하기
+                        </button>
+                    </div>
+                `;
+            }
+            
+            // 레트로 테마 계좌 정보도 로드
+            const groomAccountsRetro = document.querySelector('.retro-section #groomAccounts');
+            const brideAccountsRetro = document.querySelector('.retro-section #brideAccounts');
+            
+            if (groomAccountsRetro) {
+                groomAccountsRetro.innerHTML = groomAccounts.innerHTML;
+            }
+            
+            if (brideAccountsRetro) {
+                brideAccountsRetro.innerHTML = brideAccounts.innerHTML;
+            }
+        }
+
+        // 복사 함수
+        function copyAccount(account) {
+            navigator.clipboard.writeText(account).then(() => {
+                const message = currentTheme === 'retro' ? 
+                    'ACCOUNT COPIED!' : 
+                    '계좌번호가 복사되었습니다.';
+                alert(message);
+            });
+        }
+        
+        function copyURL() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const message = currentTheme === 'retro' ? 
+                    'LINK COPIED!' : 
+                    '초대장 링크가 복사되었습니다.';
+                alert(message);
+            });
+        }
+        
+        function shareKakao() {
+            const message = currentTheme === 'retro' ? 
+                'KAKAO SHARE - COMING SOON!' : 
+                '카카오톡 공유 기능을 준비중입니다.';
+            alert(message);
+        }
+
+        // 방명록 페이지네이션 변수
+        let guestbookData = [];
+        let currentGuestbookPage = 1;
+        const itemsPerPage = 5; // 한 페이지당 5개 표시
+        
+        // 방명록 표시 함수
+        function displayGuestbook(entries) {
+            guestbookData = entries || [];
+            const guestbookList = document.getElementById('guestbookList');
+            const pagination = document.getElementById('guestbookPagination');
+            const pageIndicator = document.getElementById('pageIndicator');
+            
+            if (guestbookData.length === 0) {
+                guestbookList.innerHTML = `
+                    <div class="guestbook-item" style="text-align: center; padding: 40px 20px;">
+                        No messages yet...<br>
+                        Be the first player to leave a message!
+                    </div>
+                `;
+                // 빈 상태에서도 페이지 컨트롤 표시
+                document.getElementById('pageInfo').textContent = '0 / 0';
+                document.getElementById('prevPageBtn').disabled = true;
+                document.getElementById('nextPageBtn').disabled = true;
+                document.getElementById('prevPageBtn').style.opacity = '0.3';
+                document.getElementById('nextPageBtn').style.opacity = '0.3';
+                pageIndicator.textContent = 'PAGE 0';
+                return;
+            }
+            
+            // 페이지 계산
+            const totalPages = Math.ceil(guestbookData.length / itemsPerPage);
+            const startIndex = (currentGuestbookPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = guestbookData.slice(startIndex, endIndex);
+            
+            // 현재 페이지 메시지 표시 (빈 슬롯 없이)
+            guestbookList.innerHTML = pageData.map((entry, i) => `
+                <div class="guestbook-item" style="
+                    animation: fadeIn 0.5s ease-in-out ${i * 0.1}s both;
+                    padding: 15px;
+                    border-bottom: 2px dashed rgba(255, 0, 110, 0.2);
+                    margin-bottom: 10px;
+                ">
+                    <div class="guest-name" style="color: var(--pixel-yellow); margin-bottom: 10px;">
+                        <span style="color: var(--pixel-pink);">▶</span> ${entry.name || 'Anonymous'}
+                    </div>
+                    <div class="guest-message" style="padding-left: 20px;">
+                        ${entry.msg || entry.message || ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            // 페이지 정보 업데이트
+            document.getElementById('pageInfo').textContent = `${currentGuestbookPage} / ${totalPages}`;
+            pageIndicator.textContent = `PAGE ${currentGuestbookPage}`;
+            
+            // 버튼 상태 업데이트
+            document.getElementById('prevPageBtn').disabled = currentGuestbookPage === 1;
+            document.getElementById('nextPageBtn').disabled = currentGuestbookPage === totalPages;
+            document.getElementById('prevPageBtn').style.opacity = currentGuestbookPage === 1 ? '0.3' : '1';
+            document.getElementById('nextPageBtn').style.opacity = currentGuestbookPage === totalPages ? '0.3' : '1';
+        }
+        
+        // 페이지 네비게이션 함수
+        function previousGuestbookPage() {
+            if (currentGuestbookPage > 1) {
+                currentGuestbookPage--;
+                displayGuestbook(guestbookData);
+            }
+        }
+        
+        function nextGuestbookPage() {
+            const totalPages = Math.ceil(guestbookData.length / itemsPerPage);
+            if (currentGuestbookPage < totalPages) {
+                currentGuestbookPage++;
+                displayGuestbook(guestbookData);
+            }
+        }
+        
+        // 폼 제출
+        document.getElementById('guestbookForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('축하 메시지가 등록되었습니다! 감사합니다');
+            closeGuestbookModal();
+            this.reset();
+            currentGuestbookPage = 1; // 새 메시지 추가 후 첫 페이지로
+        });
+        
+        document.getElementById('attendanceForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('참석 여부가 등록되었습니다! 감사합니다');
+            closeAttendanceModal();
+            this.reset();
+        });
+    </script>
+    
+    <!-- Firebase Integration (Inline for CORS bypass) -->
+    <script type="module">
+        // Firebase SDK import
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+        import {
+          getFirestore, collection, addDoc, serverTimestamp,
+          query, orderBy, onSnapshot
+        } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+        
+        let db;
+        
+        // Firebase 초기화
+        function initFirebase() {
+          const firebaseConfig = {
+            apiKey: 'AIzaSyCfJ2xA0htQIlwvnFp5oTcKmEjXJLcj9Cs',
+            authDomain: 'wedding-invitation-46ad9.firebaseapp.com',
+            projectId: 'wedding-invitation-46ad9',
+            appId: '1:281364628692:web:c169a60fca936dca38a741'
+          };
+          db = getFirestore(initializeApp(firebaseConfig));
+        }
+        
+        // 방명록 추가
+        const addGuestbook = (name, msg) =>
+          addDoc(collection(db, 'guestbook'), {
+            name, msg,
+            ts: serverTimestamp()
+          });
+        
+        // RSVP 추가
+        const addRsvp = data =>
+          addDoc(collection(db, 'rsvp'), {
+            ...data,
+            ts: serverTimestamp()
+          });
+        
+        // 방명록 실시간 감시
+        const listenGuestbook = (cb) => {
+          const q = query(collection(db, 'guestbook'), orderBy('ts', 'desc'));
+          return onSnapshot(q, snap => cb(snap.docs.map(d => d.data())));
+        };
+        
+        // Firebase 초기화
+        try {
+            initFirebase();
+            console.log('Firebase initialized successfully');
+            
+            // 방명록 폼에 Firebase 연동
+            const guestbookForm = document.getElementById('guestbookForm');
+            if (guestbookForm) {
+                // 기존 이벤트 리스너 제거
+                const newForm = guestbookForm.cloneNode(true);
+                guestbookForm.parentNode.replaceChild(newForm, guestbookForm);
+                
+                // Firebase 연동 이벤트 리스너 추가
+                newForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('guestName').value;
+                    const message = document.getElementById('guestMessage').value;
+                    
+                    try {
+                        await addGuestbook(name, message);
+                        alert('축하 메시지가 등록되었습니다! 감사합니다');
+                        
+                        // 모달 닫기 (전역 함수 사용)
+                        document.getElementById('guestbookModal').style.display = 'none';
+                        this.reset();
+                    } catch (error) {
+                        console.error('Guestbook error:', error);
+                        alert('메시지 등록에 실패했습니다. 다시 시도해주세요.');
+                    }
+                });
+            }
+            
+            // 참석 폼에 Firebase 연동
+            const attendanceForm = document.getElementById('attendanceForm');
+            if (attendanceForm) {
+                // 기존 이벤트 리스너 제거
+                const newForm = attendanceForm.cloneNode(true);
+                attendanceForm.parentNode.replaceChild(newForm, attendanceForm);
+                
+                // Firebase 연동 이벤트 리스너 추가
+                newForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        name: document.getElementById('attendeeName').value,
+                        phone: document.getElementById('attendeePhone').value,
+                        status: document.getElementById('attendanceStatus').value,
+                        count: document.getElementById('guestCount').value,
+                        relation: document.getElementById('relation').value
+                    };
+                    
+                    try {
+                        await addRsvp(formData);
+                        alert('참석 여부가 등록되었습니다! 감사합니다');
+                        
+                        // 모달 닫기
+                        document.getElementById('attendanceModal').style.display = 'none';
+                        this.reset();
+                    } catch (error) {
+                        console.error('RSVP error:', error);
+                        alert('등록에 실패했습니다. 다시 시도해주세요.');
+                    }
+                });
+            }
+            
+            // 실시간 방명록 업데이트
+            listenGuestbook((entries) => {
+                if (entries && entries.length > 0) {
+                    // 페이지네이션 함수 호출
+                    displayGuestbook(entries);
+                }
+            });
+            
+        } catch (error) {
+            console.log('Firebase not configured or error:', error);
+            console.log('Running in offline mode - forms will work without database');
+        }
+    </script>
+    
+    <!-- CSS 애니메이션 추가 -->
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 비활성 버튼 스타일 */
+        .slider-btn:disabled {
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    </style>
+</body>
+</html>

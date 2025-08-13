@@ -17,7 +17,7 @@ const CONFIG = {
             year: 2025,
             month: 9,
             day: 27,
-            time: '오후 12시 30분'
+            time: '오전 11시'
         },
         venue: {
             name: '켄싱턴호텔 여의도 15층',
