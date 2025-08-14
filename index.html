@@ -276,9 +276,9 @@
                         <strong>아버지</strong> 조국제<br>
                         <strong>어머니</strong> 김명선
                     </div>
-                    <div style="margin-top: 15px; text-align: center;">
+                    <div class="game-master-buttons" style="margin-top: 15px; text-align: center;">
                         <div style="margin-bottom: 10px;">
-                            <span style="margin-right: 10px; color: var(--pixel-yellow);">FATHER</span>
+                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">FATHER</span>
                             <button onclick="callParent('groom', 'father')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -287,7 +287,7 @@
                             </button>
                         </div>
                         <div>
-                            <span style="margin-right: 10px; color: var(--pixel-yellow);">MOTHER</span>
+                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">MOTHER</span>
                             <button onclick="callParent('groom', 'mother')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -308,9 +308,9 @@
                         <strong>아버지</strong> 권순문<br>
                         <strong>어머니</strong> 이은숙
                     </div>
-                    <div style="margin-top: 15px; text-align: center;">
+                    <div class="game-master-buttons" style="margin-top: 15px; text-align: center;">
                         <div style="margin-bottom: 10px;">
-                            <span style="margin-right: 10px; color: var(--pixel-yellow);">FATHER</span>
+                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">FATHER</span>
                             <button onclick="callParent('bride', 'father')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -319,7 +319,7 @@
                             </button>
                         </div>
                         <div>
-                            <span style="margin-right: 10px; color: var(--pixel-yellow);">MOTHER</span>
+                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">MOTHER</span>
                             <button onclick="callParent('bride', 'mother')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -1680,6 +1680,189 @@
     
     <!-- CSS 애니메이션 추가 -->
     <style>
+        /* Mobile Responsive Fixes */
+        @media (max-width: 600px) {
+            /* Prevent horizontal overflow */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: 100vw !important;
+            }
+            
+            /* Fix container widths */
+            .container, section {
+                max-width: 100vw !important;
+                overflow-x: hidden !important;
+                box-sizing: border-box !important;
+            }
+            
+            /* Fix padding on sections */
+            section {
+                padding: 30px 15px !important;
+            }
+            
+            /* Fix inline-block elements for parent info */
+            .invitation-msg div[style*="display: inline-block"] {
+                display: block !important;
+                width: 100% !important;
+                margin: 10px 0 !important;
+            }
+            
+            /* Fix button layouts */
+            button {
+                max-width: 90% !important;
+                font-size: 11px !important;
+                padding: 12px 10px !important;
+                margin: 5px auto !important;
+                display: block !important;
+            }
+            
+            /* Parent contact buttons - side by side */
+            .parents-contact button {
+                display: inline-block !important;
+                width: 42% !important;
+                margin: 5px 2% !important;
+                font-size: 10px !important;
+                padding: 10px 5px !important;
+            }
+            
+            .parents-contact span {
+                display: inline-block !important;
+                width: 100% !important;
+                margin-bottom: 5px !important;
+                font-size: 12px !important;
+            }
+            
+            .parents-contact > div > div > div {
+                margin-bottom: 15px !important;
+            }
+            
+            /* Game Masters buttons fix */
+            .game-master-buttons button {
+                display: inline-block !important;
+                width: 44% !important;
+                margin: 3px 2% !important;
+                font-size: 9px !important;
+                padding: 10px 3px !important;
+            }
+            
+            .game-master-buttons span {
+                font-size: 11px !important;
+            }
+            
+            /* Fix text sizes */
+            h1 { font-size: 20px !important; }
+            h2 { font-size: 18px !important; }
+            h3 { font-size: 16px !important; }
+            
+            /* Guestbook pagination */
+            .guestbook-controls {
+                text-align: center !important;
+            }
+            
+            .guestbook-controls button {
+                display: inline-block !important;
+                width: auto !important;
+                min-width: 70px !important;
+                margin: 5px !important;
+                font-size: 10px !important;
+            }
+            
+            .guestbook-controls span {
+                display: block !important;
+                margin: 10px 0 !important;
+                font-size: 12px !important;
+            }
+            
+            /* Calendar grid */
+            .calendar-grid {
+                max-width: 100% !important;
+                grid-template-columns: repeat(7, 1fr) !important;
+                gap: 2px !important;
+                padding: 10px 5px !important;
+            }
+            
+            .calendar-day {
+                font-size: 10px !important;
+                padding: 5px 2px !important;
+            }
+            
+            /* Photo slider controls */
+            .slider-controls {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                gap: 10px !important;
+            }
+            
+            .slider-controls button {
+                display: inline-block !important;
+                width: auto !important;
+                min-width: 60px !important;
+                max-width: 100px !important;
+                margin: 0 !important;
+                padding: 10px 8px !important;
+            }
+            
+            .slider-controls span {
+                font-size: 11px !important;
+                white-space: nowrap !important;
+            }
+            
+            /* Modal fixes */
+            .modal-content {
+                width: 92% !important;
+                max-width: 92% !important;
+                padding: 20px 15px !important;
+                margin: 10px !important;
+                box-sizing: border-box !important;
+            }
+            
+            /* Account items */
+            .account-item {
+                padding: 15px 10px !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .account-item button {
+                width: auto !important;
+                max-width: 100% !important;
+                padding: 10px 20px !important;
+                display: inline-block !important;
+                margin: 10px auto !important;
+            }
+            
+            /* Direction buttons */
+            .directions button {
+                display: inline-block !important;
+                width: 45% !important;
+                margin: 5px 2% !important;
+            }
+            
+            /* Special border sections */
+            .special-border {
+                margin: 10px !important;
+                padding: 20px 10px !important;
+            }
+            
+            /* Title section */
+            .title-section {
+                padding: 40px 15px !important;
+            }
+            
+            .wedding-title {
+                font-size: 22px !important;
+                line-height: 1.4 !important;
+            }
+            
+            /* Main photo */
+            .main-photo {
+                margin: 20px 10px !important;
+            }
+        }
+        
         @keyframes fadeIn {
             from {
                 opacity: 0;
