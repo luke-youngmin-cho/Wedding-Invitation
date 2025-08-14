@@ -862,6 +862,9 @@ button:active {
   margin-top: 30px;
   padding: 15px;
   border: 4px solid var(--pixel-pink);
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .calendar-header,
@@ -1124,6 +1127,25 @@ button:active {
   .return-portal svg {
     width: 100% !important;
     height: 100% !important;
+  }
+  
+  /* Calendar mobile fix */
+  .calendar-grid {
+    gap: 1px !important;
+    padding: 8px !important;
+    border: 2px solid var(--pixel-pink) !important;
+    margin: 10px 5px !important;
+  }
+  
+  .calendar-header,
+  .calendar-day {
+    padding: 6px 2px !important;
+    font-size: 9px !important;
+    border: 1px solid var(--pixel-pink) !important;
+  }
+  
+  .calendar-day.wedding-day {
+    font-size: 8px !important;
   }
   
   .photo-slider {

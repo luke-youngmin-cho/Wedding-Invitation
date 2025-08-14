@@ -276,9 +276,9 @@
                         <strong>아버지</strong> 조국제<br>
                         <strong>어머니</strong> 김명선
                     </div>
-                    <div style="margin-top: 15px; text-align: center;">
+                    <div class="game-master-buttons" style="margin-top: 15px; text-align: center;">
                         <div style="margin-bottom: 10px;">
-                            <span style="margin-right: 10px; color: var(--pixel-yellow);">FATHER</span>
+                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">FATHER</span>
                             <button onclick="callParent('groom', 'father')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -287,7 +287,7 @@
                             </button>
                         </div>
                         <div>
-                            <span style="margin-right: 10px; color: var(--pixel-yellow);">MOTHER</span>
+                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">MOTHER</span>
                             <button onclick="callParent('groom', 'mother')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -308,9 +308,9 @@
                         <strong>아버지</strong> 권순문<br>
                         <strong>어머니</strong> 이은숙
                     </div>
-                    <div style="margin-top: 15px; text-align: center;">
+                    <div class="game-master-buttons" style="margin-top: 15px; text-align: center;">
                         <div style="margin-bottom: 10px;">
-                            <span style="margin-right: 10px; color: var(--pixel-yellow);">FATHER</span>
+                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">FATHER</span>
                             <button onclick="callParent('bride', 'father')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -319,7 +319,7 @@
                             </button>
                         </div>
                         <div>
-                            <span style="margin-right: 10px; color: var(--pixel-yellow);">MOTHER</span>
+                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">MOTHER</span>
                             <button onclick="callParent('bride', 'mother')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -1737,6 +1737,19 @@
             
             .parents-contact > div > div > div {
                 margin-bottom: 15px !important;
+            }
+            
+            /* Game Masters buttons fix */
+            .game-master-buttons button {
+                display: inline-block !important;
+                width: 44% !important;
+                margin: 3px 2% !important;
+                font-size: 9px !important;
+                padding: 10px 3px !important;
+            }
+            
+            .game-master-buttons span {
+                font-size: 11px !important;
             }
             
             /* Fix text sizes */
