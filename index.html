@@ -13,56 +13,19 @@
     
     <!-- Press Start 2P Font for transition panel -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Load Configuration -->
+    <script src="js/config.js"></script>
 </head>
 <body>
-    <!-- Portal Trigger (균열 이미지) -->
-    <div class="portal-trigger" id="portalTrigger" title="다른 차원으로...">
-        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <filter id="crack-glow">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                    <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
-            </defs>
-            <path d="M30 5 L35 20 L45 15 L40 30 L50 35 L35 35 L40 50 L30 40 L20 50 L25 35 L10 35 L20 30 L15 15 L25 20 Z" 
-                  fill="none" 
-                  stroke="#ff006e" 
-                  stroke-width="2" 
-                  filter="url(#crack-glow)"
-                  opacity="0.8"/>
-            <circle cx="30" cy="30" r="25" fill="none" stroke="#ff006e" stroke-width="1" opacity="0.3" stroke-dasharray="2 3"/>
-        </svg>
-    </div>
+    <!-- Game Mode Button -->
+    <button class="game-mode-btn" id="portalTrigger">
+        🎮 게임하러 가기
+    </button>
     
-    <!-- Return Portal (게임에서 돌아오기) -->
-    <div class="return-portal" id="returnPortal" title="원래 차원으로..." style="display: none;">
-        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <filter id="white-glow">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                    <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
-                <filter id="strong-shadow">
-                    <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="black" flood-opacity="0.9"/>
-                </filter>
-            </defs>
-            <!-- Dark background circle for visibility -->
-            <circle cx="30" cy="30" r="28" fill="rgba(0, 0, 0, 0.7)" filter="url(#strong-shadow)"/>
-            <!-- White star portal -->
-            <path d="M30 5 L25 20 L15 15 L20 30 L10 35 L25 35 L20 50 L30 40 L40 50 L35 35 L50 35 L40 30 L45 15 L35 20 Z" 
-                  fill="white" 
-                  stroke="#ffffff" 
-                  stroke-width="3" 
-                  filter="url(#white-glow)"
-                  opacity="1"/>
-            <circle cx="30" cy="30" r="25" fill="none" stroke="#ffffff" stroke-width="2" opacity="1" stroke-dasharray="2 3"/>
-        </svg>
+    <!-- Exit Button (게임에서 돌아오기) -->
+    <div class="exit-btn" id="returnPortal" style="display: none;">
+        EXIT
     </div>
 
     <!-- Transition Warning Panel -->
@@ -166,7 +129,7 @@
                 </div>
                 <div style="display: inline-block; margin: 20px 10px;">
                     <div style="font-weight: 700; margin-bottom: 10px;">신부측</div>
-                    <div>권순문 · 이은숙의 장녀 권채린</div>
+                    <div>권순문 · 이은숙의 차녀 권채린</div>
                 </div>
             </div>
         </section>
@@ -201,13 +164,10 @@
                     신랑측
                 </div>
                 <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
-                    <div style="font-size: 14px; line-height: 2;">
-                        <strong>아버지</strong> 조국제<br>
-                        <strong>어머니</strong> 김명선
-                    </div>
                     <div style="margin-top: 15px; text-align: center;">
                         <div style="margin-bottom: 10px;">
                             <span style="margin-right: 10px;">아버지</span>
+                            <strong>조국제</strong>
                             <button onclick="callParent('groom', 'father')" style="margin: 5px;">
                                 📞 전화
                             </button>
@@ -217,6 +177,7 @@
                         </div>
                         <div>
                             <span style="margin-right: 10px;">어머니</span>
+                            <strong>김명선</strong>
                             <button onclick="callParent('groom', 'mother')" style="margin: 5px;">
                                 📞 전화
                             </button>
@@ -233,13 +194,10 @@
                     신부측
                 </div>
                 <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
-                    <div style="font-size: 14px; line-height: 2;">
-                        <strong>아버지</strong> 권순문<br>
-                        <strong>어머니</strong> 이은숙
-                    </div>
                     <div style="margin-top: 15px; text-align: center;">
                         <div style="margin-bottom: 10px;">
                             <span style="margin-right: 10px;">아버지</span>
+                            <strong>권순문</strong>
                             <button onclick="callParent('bride', 'father')" style="margin: 5px;">
                                 📞 전화
                             </button>
@@ -249,6 +207,7 @@
                         </div>
                         <div>
                             <span style="margin-right: 10px;">어머니</span>
+                            <strong>이은숙</strong>
                             <button onclick="callParent('bride', 'mother')" style="margin: 5px;">
                                 📞 전화
                             </button>
@@ -543,12 +502,12 @@
             </div>
             
             <!-- 페이지네이션 -->
-            <div id="guestbookPagination" style="text-align: center; margin-top: 20px;">
-                <button onclick="previousGuestbookPage()" id="prevPageBtn" class="slider-btn" style="margin: 5px; min-width: 100px;">
+            <div id="guestbookPagination" class="guestbook-pagination" style="text-align: center; margin-top: 20px;">
+                <button onclick="previousGuestbookPage()" id="prevPageBtn" class="slider-btn" style="margin: 5px;">
                     ◀ 이전
                 </button>
-                <span id="pageInfo" style="margin: 0 20px; font-size: 14px; display: inline-block; min-width: 120px;">1 / 1</span>
-                <button onclick="nextGuestbookPage()" id="nextPageBtn" class="slider-btn" style="margin: 5px; min-width: 100px;">
+                <span id="pageInfo" style="margin: 0 10px; font-size: 14px;">1 / 1</span>
+                <button onclick="nextGuestbookPage()" id="nextPageBtn" class="slider-btn" style="margin: 5px;">
                     다음 ▶
                 </button>
             </div>
@@ -565,12 +524,12 @@
                 </button>
             </div>
             <!-- 페이지네이션 -->
-            <div style="text-align: center; margin-top: 20px;">
-                <button onclick="previousGuestbookPage()" class="slider-btn" style="margin: 5px; min-width: 100px;">
+            <div class="guestbook-pagination" style="text-align: center; margin-top: 20px;">
+                <button onclick="previousGuestbookPage()" class="slider-btn" style="margin: 5px;">
                     ◀ PREV
                 </button>
-                <span style="margin: 0 20px; color: var(--pixel-yellow); font-size: 14px; display: inline-block; min-width: 120px;">1 / 1</span>
-                <button onclick="nextGuestbookPage()" class="slider-btn" style="margin: 5px; min-width: 100px;">
+                <span style="margin: 0 10px; color: var(--pixel-yellow); font-size: 14px;">1 / 1</span>
+                <button onclick="nextGuestbookPage()" class="slider-btn" style="margin: 5px;">
                     NEXT ▶
                 </button>
             </div>
@@ -1364,72 +1323,58 @@
 
         // 계좌 정보 로드
         function loadAccountInfo() {
+            // CONFIG 객체가 없으면 기본값 사용
+            const accounts = typeof CONFIG !== 'undefined' ? CONFIG.accounts : {
+                groom: [
+                    { name: '조영민', bank: '농협', number: '302-1008-6711-31' },
+                    { name: '조국제 (아버지)', bank: '농협', number: '848-02-052946' },
+                    { name: '김명선 (어머니)', bank: '농협', number: '177784-56-065611' }
+                ],
+                bride: [
+                    { name: '권채린', bank: '기업은행', number: '010-4448-3268' },
+                    { name: '권순문 (아버지)', bank: '신한은행', number: '323-04-048686' },
+                    { name: '이은숙 (어머니)', bank: '하나은행', number: '125-910052-94207' }
+                ]
+            };
+            
             const groomAccounts = document.getElementById('groomAccounts');
             const brideAccounts = document.getElementById('brideAccounts');
             
             // 신랑측 계좌
-            if (groomAccounts) {
-                groomAccounts.innerHTML = `
+            if (groomAccounts && accounts.groom) {
+                groomAccounts.innerHTML = accounts.groom.map(account => `
                     <div class="account-item">
-                        <div>조영민</div>
-                        <div>○○은행 123-456-789012</div>
-                        <button onclick="copyAccount('123456789012')" style="padding: 8px 16px; margin-top: 10px;">
+                        <div>${account.name}</div>
+                        <div>${account.bank} ${account.number}</div>
+                        <button onclick="copyAccount('${account.number.replace(/[^0-9]/g, '')}')" style="padding: 8px 16px; margin-top: 10px;">
                             복사하기
                         </button>
                     </div>
-                    <div class="account-item">
-                        <div>조국제 (아버지)</div>
-                        <div>○○은행 234-567-890123</div>
-                        <button onclick="copyAccount('234567890123')" style="padding: 8px 16px; margin-top: 10px;">
-                            복사하기
-                        </button>
-                    </div>
-                    <div class="account-item">
-                        <div>김명선 (어머니)</div>
-                        <div>○○은행 345-678-901234</div>
-                        <button onclick="copyAccount('345678901234')" style="padding: 8px 16px; margin-top: 10px;">
-                            복사하기
-                        </button>
-                    </div>
-                `;
+                `).join('');
             }
             
             // 신부측 계좌
-            if (brideAccounts) {
-                brideAccounts.innerHTML = `
+            if (brideAccounts && accounts.bride) {
+                brideAccounts.innerHTML = accounts.bride.map(account => `
                     <div class="account-item">
-                        <div>권채린</div>
-                        <div>○○은행 456-789-012345</div>
-                        <button onclick="copyAccount('456789012345')" style="padding: 8px 16px; margin-top: 10px;">
+                        <div>${account.name}</div>
+                        <div>${account.bank} ${account.number}</div>
+                        <button onclick="copyAccount('${account.number.replace(/[^0-9]/g, '')}')" style="padding: 8px 16px; margin-top: 10px;">
                             복사하기
                         </button>
                     </div>
-                    <div class="account-item">
-                        <div>권순문 (아버지)</div>
-                        <div>○○은행 567-890-123456</div>
-                        <button onclick="copyAccount('567890123456')" style="padding: 8px 16px; margin-top: 10px;">
-                            복사하기
-                        </button>
-                    </div>
-                    <div class="account-item">
-                        <div>이은숙 (어머니)</div>
-                        <div>○○은행 678-901-234567</div>
-                        <button onclick="copyAccount('678901234567')" style="padding: 8px 16px; margin-top: 10px;">
-                            복사하기
-                        </button>
-                    </div>
-                `;
+                `).join('');
             }
             
             // 레트로 테마 계좌 정보도 로드
             const groomAccountsRetro = document.querySelector('.retro-section #groomAccounts');
             const brideAccountsRetro = document.querySelector('.retro-section #brideAccounts');
             
-            if (groomAccountsRetro) {
+            if (groomAccountsRetro && groomAccounts) {
                 groomAccountsRetro.innerHTML = groomAccounts.innerHTML;
             }
             
-            if (brideAccountsRetro) {
+            if (brideAccountsRetro && brideAccounts) {
                 brideAccountsRetro.innerHTML = brideAccounts.innerHTML;
             }
         }
@@ -1758,22 +1703,31 @@
             h3 { font-size: 16px !important; }
             
             /* Guestbook pagination */
-            .guestbook-controls {
-                text-align: center !important;
+            .guestbook-pagination {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                flex-wrap: nowrap !important;
+                padding: 10px 5px !important;
             }
             
-            .guestbook-controls button {
+            .guestbook-pagination button {
                 display: inline-block !important;
                 width: auto !important;
-                min-width: 70px !important;
-                margin: 5px !important;
+                min-width: 60px !important;
+                max-width: 80px !important;
+                margin: 0 5px !important;
                 font-size: 10px !important;
+                padding: 10px 8px !important;
+                flex-shrink: 0 !important;
             }
             
-            .guestbook-controls span {
-                display: block !important;
-                margin: 10px 0 !important;
-                font-size: 12px !important;
+            .guestbook-pagination span {
+                display: inline-block !important;
+                margin: 0 5px !important;
+                font-size: 11px !important;
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
             }
             
             /* Calendar grid */
