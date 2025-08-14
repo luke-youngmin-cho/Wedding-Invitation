@@ -1041,35 +1041,37 @@ button:active {
   scrollbar-color: var(--pixel-pink) var(--pixel-dark);
 }
 
-/* Return Portal for Retro Theme */
-.return-portal {
+/* Exit Button for Retro Theme */
+.exit-btn {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 60px;
-  height: 60px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: var(--pixel-yellow);
+  text-shadow: 2px 2px 0 var(--pixel-dark);
   z-index: 10000;
   cursor: pointer;
-  opacity: 0.7;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-  animation: return-pulse 3s ease-in-out infinite;
+  padding: 10px;
+  background: rgba(10, 10, 10, 0.8);
+  border: 2px solid var(--pixel-yellow);
+  transition: all 0.2s ease;
+  animation: blink-text 2s ease-in-out infinite;
 }
 
-.return-portal:hover {
-  opacity: 1;
-  transform: scale(1.1) rotate(-5deg);
-  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+.exit-btn:hover {
+  color: var(--pixel-pink);
+  border-color: var(--pixel-pink);
+  transform: scale(1.1);
+  text-shadow: 2px 2px 0 var(--pixel-dark), 0 0 10px var(--pixel-pink);
 }
 
-@keyframes return-pulse {
+@keyframes blink-text {
   0%, 100% { 
-    transform: scale(1);
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    opacity: 1;
   }
   50% { 
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7));
+    opacity: 0.7;
   }
 }
 
@@ -1110,23 +1112,12 @@ button:active {
     padding: 14px 20px;
   }
   
-  /* Return portal mobile visibility fix */
-  .return-portal {
-    width: 70px !important;
-    height: 70px !important;
+  /* Exit button mobile fix */
+  .exit-btn {
     top: 10px !important;
     right: 10px !important;
-    opacity: 0.9 !important;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-    animation: return-pulse 2s ease-in-out infinite;
-  }
-  
-  .return-portal svg {
-    width: 100% !important;
-    height: 100% !important;
+    font-size: 14px !important;
+    padding: 8px !important;
   }
   
   /* Calendar mobile fix */
