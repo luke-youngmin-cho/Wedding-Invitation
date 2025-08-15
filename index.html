@@ -75,7 +75,7 @@
 
         <!-- 메인 사진 -->
         <section class="main-photo special-border">
-            <img src="assets/main.png" alt="신랑 신부 사진" id="mainPhoto">
+            <img src="assets/main.jpg" alt="신랑 신부 사진" id="mainPhoto">
         </section>
 
         <!-- 모던 결혼식 정보 -->
@@ -109,17 +109,11 @@
             <div style="text-align: center; font-size: 16px; margin-bottom: 20px;">
                 <div class="pixel-icon" style="font-size: 40px; margin-bottom: 20px;">💌</div>
             </div>
-            <div style="font-size: 15px; line-height: 2; padding: 0 20px; text-align: center;">
-                두 사람이 사랑으로 만나<br>
-                진실과 이해로써 하나를 이루려 합니다.<br>
-                <br>
-                저희 두 사람이 하나의 길을 걸어가고자<br>
-                약속의 예식을 올리는 날,<br>
-                <br>
-                오로지 믿음과 사랑만을 약속하는<br>
-                이 날에 축복의 걸음을 하시어<br>
-                저희의 하나 되는 자리를<br>
-                빛내 주시면 감사하겠습니다.
+            <div style="font-size: 15px; line-height: 2.2; padding: 0 20px; text-align: center;">
+                서로에게 기댈 수 있는 나무가 되기로 했습니다.<br> 
+                바람이 불어도, 비가 내려도 그늘이 되어 주고,<br>
+                뿌리가 되어 줄 그 사랑으로 평생을 함께 걸어가려 합니다.<br>
+                그 첫 걸음을 축복해 주시면 감사하겠습니다.
             </div>
 
             <div style="text-align: center; margin-top: 40px; padding: 0 20px;">
@@ -140,16 +134,20 @@
                 <span class="pixel-icon pixel-icon-message"></span> INVITATION MESSAGE <span class="pixel-icon pixel-icon-message"></span>
             </div>
             <p style="text-align: center; line-height: 2.5;">
-                소중한 분들을 초대합니다<br>
-                저희 두 사람이 사랑의 결실을 맺어<br>
-                하나가 되는 뜻깊은 자리에<br>
-                오셔서 축복해 주시면<br>
-                더없는 기쁨이겠습니다
+                PLAYER 1과 PLAYER 2가<br>
+                LIFE GAME의 ‘평생 듀오’ 퀘스트를 시작합니다.<br>
+                바람이 불어도, 비가 내려도<br>
+                HP 풀로 채워주는 그늘,<br>
+                MP 무한 회복하는 뿌리처럼<br>
+                서로를 지키기로 했습니다.<br>
+                우리의 1 STAGE 🎮 를<br>
+                함께 클리어해 주시면 감사하겠습니다!<br>
             </p>
             <div style="text-align: center; margin-top: 20px;">
                 <span class="pixel-heart"></span>
                 <span class="pixel-heart"></span>
                 <span class="pixel-heart"></span>
+                <span>(Not the Life Point)</span>
             </div>
         </section>
 
@@ -231,13 +229,10 @@
                     PLAYER 1 TEAM
                 </div>
                 <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
-                    <div style="font-size: 14px; line-height: 2;">
-                        <strong>아버지</strong> 조국제<br>
-                        <strong>어머니</strong> 김명선
-                    </div>
                     <div class="game-master-buttons" style="margin-top: 15px; text-align: center;">
                         <div style="margin-bottom: 10px;">
                             <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">FATHER</span>
+                            <strong>조국제</strong> 
                             <button onclick="callParent('groom', 'father')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -247,6 +242,7 @@
                         </div>
                         <div>
                             <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">MOTHER</span>
+                            <strong>김명선</strong>
                             <button onclick="callParent('groom', 'mother')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -263,13 +259,10 @@
                     PLAYER 2 TEAM
                 </div>
                 <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
-                    <div style="font-size: 14px; line-height: 2;">
-                        <strong>아버지</strong> 권순문<br>
-                        <strong>어머니</strong> 이은숙
-                    </div>
                     <div class="game-master-buttons" style="margin-top: 15px; text-align: center;">
                         <div style="margin-bottom: 10px;">
                             <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">FATHER</span>
+                            <strong>권순문</strong>
                             <button onclick="callParent('bride', 'father')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -279,6 +272,7 @@
                         </div>
                         <div>
                             <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">MOTHER</span>
+                            <strong>이은숙</strong>
                             <button onclick="callParent('bride', 'mother')" style="margin: 5px;">
                                 📞 CALL
                             </button>
@@ -328,7 +322,7 @@
                 <button class="slider-btn" onclick="previousPhoto()">
                     ◀ 이전
                 </button>
-                <span id="photoCounter">1 / 7</span>
+                <span id="photoCounter">1 / 5</span>
                 <button class="slider-btn" onclick="nextPhoto()">
                     다음 ▶
                 </button>
@@ -352,7 +346,7 @@
                 <button class="slider-btn" onclick="previousPhoto()">
                     ◀ PREV
                 </button>
-                <span id="photoCounter2">1 / 7</span>
+                <span id="photoCounter2">1 / 5</span>
                 <button class="slider-btn" onclick="nextPhoto()">
                     NEXT ▶
                 </button>
@@ -1147,9 +1141,7 @@
             'assets/AlbumSlides/album2.jpg',
             'assets/AlbumSlides/album3.jpg',
             'assets/AlbumSlides/album4.jpg',
-            'assets/AlbumSlides/album5.jpg',
-            'assets/AlbumSlides/album6.jpg',
-            'assets/AlbumSlides/album7.jpg'
+            'assets/AlbumSlides/album5.jpg'
         ];
 
         function initGallery() {
@@ -1272,7 +1264,7 @@
                         dayEl.innerHTML = `<strong>${day}</strong><br><span style="font-size: 10px;">💒</span>`;
                     }
                 } else {
-                    dayEl.textContent = day;
+                    dayEl.innerHTML = `<span>${day}</span><br><span style="font-size: 10px;">　</span>`;
                 }
                 calendar.appendChild(dayEl);
             }
