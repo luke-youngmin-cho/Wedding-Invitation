@@ -1168,27 +1168,72 @@
         ];
 
         function initGallery() {
+            console.log('=== Gallery Initialization Start ===');
+            console.log('Album photos array:', albumPhotos);
+            
             // 모던 테마 갤러리
             const photoTrack = document.getElementById('photoTrack');
-            albumPhotos.forEach((photo, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'photo-slide';
-                slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}">`;
-                photoTrack.appendChild(slide);
-            });
+            console.log('PhotoTrack element found:', photoTrack);
             
-            // 레트로 테마 갤러리 (동일한 사진)
-            const photoTrack2 = document.getElementById('photoTrack2');
-            if (photoTrack2) {
+            if (photoTrack) {
+                // Clear any existing content
+                photoTrack.innerHTML = '';
+                console.log('Cleared photoTrack content');
+                
                 albumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
-                    slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}">`;
+                    const img = document.createElement('img');
+                    img.src = photo;
+                    img.alt = `웨딩 사진 ${index + 1}`;
+                    img.onerror = function() {
+                        console.error(`Failed to load image ${index + 1}:`, photo);
+                        this.style.display = 'none';
+                        // Try to show a placeholder
+                        const placeholder = document.createElement('div');
+                        placeholder.style.width = '100%';
+                        placeholder.style.height = '100%';
+                        placeholder.style.background = '#f0f0f0';
+                        placeholder.style.display = 'flex';
+                        placeholder.style.alignItems = 'center';
+                        placeholder.style.justifyContent = 'center';
+                        placeholder.textContent = `Image ${index + 1} failed to load`;
+                        slide.appendChild(placeholder);
+                    };
+                    img.onload = function() {
+                        console.log(`Image ${index + 1} loaded successfully:`, photo);
+                    };
+                    slide.appendChild(img);
+                    photoTrack.appendChild(slide);
+                    console.log(`Added slide ${index + 1} to photoTrack`);
+                });
+                console.log('All slides added to modern gallery');
+            } else {
+                console.error('PhotoTrack element not found!');
+            }
+            
+            // 레트로 테마 갤러리 (동일한 사진)
+            const photoTrack2 = document.getElementById('photoTrack2');
+            console.log('PhotoTrack2 element found:', photoTrack2);
+            
+            if (photoTrack2) {
+                // Clear any existing content
+                photoTrack2.innerHTML = '';
+                
+                albumPhotos.forEach((photo, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'photo-slide';
+                    const img = document.createElement('img');
+                    img.src = photo;
+                    img.alt = `웨딩 사진 ${index + 1}`;
+                    slide.appendChild(img);
                     photoTrack2.appendChild(slide);
                 });
+                console.log('All slides added to retro gallery');
             }
             
             updatePhotoCounter();
+            console.log('=== Gallery Initialization Complete ===');
         }
 
         function nextPhoto() {
