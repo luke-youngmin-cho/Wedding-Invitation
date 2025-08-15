@@ -837,11 +837,58 @@ button:hover {
   margin: 10px;
 }
 
-/* Fix buttons on all screen sizes */
-.parents-contact button {
-  display: inline-block;
+/* Parent Contact Responsive Layout */
+.parent-contact-wrapper {
+  margin-top: 15px;
+}
+
+.parent-contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+}
+
+.parent-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.parent-title {
+  color: var(--modern-gray);
+  font-size: 14px;
+  min-width: 50px;
+}
+
+.parent-name {
+  font-weight: 600;
+  color: var(--modern-dark);
+}
+
+.parent-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.contact-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--modern-pink);
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
   white-space: nowrap;
-  vertical-align: middle;
+  font-size: 13px;
+}
+
+.contact-btn:hover {
+  background: var(--modern-pink);
+  color: white;
 }
 
 /* Mobile Responsive */
@@ -958,7 +1005,39 @@ button:hover {
     font-size: 11px !important;
   }
   
-  /* Fix parent contact buttons */
+  /* Mobile Parent Contact Layout */
+  .parent-contact-row {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 10px !important;
+    padding: 15px 10px !important;
+  }
+  
+  .parent-info {
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+  }
+  
+  .parent-title {
+    min-width: auto !important;
+  }
+  
+  .parent-buttons {
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  
+  .contact-btn {
+    flex: 0 0 auto !important;
+    min-width: 80px !important;
+    max-width: 120px !important;
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Legacy button styles */
   .parents-contact button {
     display: inline-block !important;
     margin: 2px !important;
