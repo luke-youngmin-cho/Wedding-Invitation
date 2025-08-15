@@ -877,8 +877,8 @@ button:hover {
 
 .contact-btn {
   padding: 8px 12px;
-  border: 1px solid var(--modern-pink);
-  background: var(--modern-pink);
+  border: 1px solid var(--modern-rose);
+  background: var(--modern-rose);
   color: white;
   border-radius: 20px;
   cursor: pointer;
@@ -888,8 +888,8 @@ button:hover {
 }
 
 .contact-btn:hover {
-  background: var(--modern-rose);
-  border-color: var(--modern-rose);
+  background: var(--modern-pink);
+  border-color: var(--modern-pink);
   color: white;
 }
 
