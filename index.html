@@ -16,6 +16,9 @@
     
     <!-- Load Configuration -->
     <script src="js/config.js"></script>
+    <!-- Load Mini Game -->
+    <!-- Load Mini Game -->
+    <script src="js/minigame.js"></script>
 </head>
 <body>
     <!-- Game Mode Button -->
@@ -673,6 +676,14 @@
             </div>
         </section>
         
+        <!-- 미니게임 섹션 (레트로 테마) -->
+        <section class="minigame-section retro-section" style="display: none; padding: 40px 20px; background: var(--pixel-dark);">
+            <h3 style="text-align: center; font-size: 18px; margin-bottom: 30px; color: var(--pixel-yellow);">
+                <span class="pixel-icon">🎮</span> WEDDING RUNNER GAME <span class="pixel-icon">🎮</span>
+            </h3>
+            <div id="miniGameContainer"></div>
+        </section>
+
         <!-- 레트로 엔딩 크레딧 -->
         <section class="ending-credits retro-section" style="text-align: center; padding: 60px 20px; display: none;">
             <div class="celebrate-text" style="font-size: 20px; margin-bottom: 30px;">
@@ -771,6 +782,15 @@
             initGallery();
             // 계좌 정보 로드
             loadAccountInfo();
+            // 미니게임 초기화 - Firebase 함수가 정의된 후 약간의 지연
+            setTimeout(() => {
+                if (window.initMiniGame) {
+                    console.log('Initializing mini game with Firebase support...');
+                    window.initMiniGame('miniGameContainer');
+                } else {
+                    console.log('Mini game not loaded yet');
+                }
+            }, 500);
             
             // Portal trigger 이벤트
             const portalTrigger = document.getElementById('portalTrigger');
@@ -1499,7 +1519,7 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
         import {
           getFirestore, collection, addDoc, serverTimestamp,
-          query, orderBy, onSnapshot
+          query, orderBy, onSnapshot, getDocs, limit
         } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
         
         let db;
@@ -1528,6 +1548,45 @@
             ...data,
             ts: serverTimestamp()
           });
+        
+        // 미니게임 점수 제출
+        window.submitGameScore = async function(name, score) {
+            console.log('Submitting score:', name, score);
+            try {
+                const docRef = await addDoc(collection(db, 'gameScores'), {
+                    name: name,
+                    score: score,
+                    ts: serverTimestamp()
+                });
+                console.log('Score submitted successfully, doc ID:', docRef.id);
+                return true;
+            } catch (error) {
+                console.error('Error submitting score:', error);
+                alert('점수 등록에 실패했습니다: ' + error.message);
+                throw error;
+            }
+        };
+        
+        // 미니게임 리더보드 가져오기
+        window.getGameLeaderboard = async function() {
+            console.log('Fetching leaderboard...');
+            try {
+                const q = query(collection(db, 'gameScores'), orderBy('score', 'desc'), limit(10));
+                const snapshot = await getDocs(q);
+                
+                const scores = [];
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    scores.push(data);
+                });
+                
+                console.log('Leaderboard fetched:', scores.length, 'scores');
+                return scores;
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+                return [];
+            }
+        };
         
         // 방명록 실시간 감시
         const listenGuestbook = (cb) => {

@@ -29,6 +29,12 @@ service cloud.firestore {
       allow delete: if false;
     }
     
+    // 게임 점수 규칙 - 누구나 읽고 쓸 수 있음
+    match /gameScores/{document} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
     // 관리자 통계 데이터 (읽기 전용)
     match /statistics/{document} {
       allow read: if true;

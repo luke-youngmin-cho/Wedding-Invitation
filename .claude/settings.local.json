@@ -3,7 +3,8 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(cp:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(firebase deploy:*)"
     ],
     "deny": []
   }
