@@ -310,6 +310,7 @@ body {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: var(--modern-shadow);
+  background: var(--modern-light-gray);
 }
 
 .main-photo img {
@@ -317,6 +318,8 @@ body {
   height: auto;
   display: block;
   transition: transform 0.5s ease;
+  object-fit: contain; /* 원본 비율 유지 */
+  max-height: 600px; /* 최대 높이 제한 */
 }
 
 .main-photo:hover img {
@@ -474,9 +477,12 @@ body {
   overflow: hidden;
   border-radius: 10px;
   box-shadow: var(--modern-shadow);
-  height: 400px;
+  height: auto;
+  min-height: 300px;
+  max-height: 500px;
   margin-bottom: 20px;
   cursor: pointer;
+  background: var(--modern-light-gray);
 }
 
 .photo-track {
@@ -492,12 +498,16 @@ body {
   align-items: center;
   justify-content: center;
   background: var(--modern-light-gray);
+  padding: 10px;
 }
 
 .photo-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 480px;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* cover에서 contain으로 변경 - 전체 이미지 보이도록 */
+  border-radius: 5px;
 }
 
 .slider-controls {
@@ -967,5 +977,9 @@ button:hover {
   /* Main photo */
   .main-photo {
     margin: 20px 10px;
+  }
+  
+  .main-photo img {
+    max-height: 400px; /* 모바일에서는 높이 제한 */
   }
 }
