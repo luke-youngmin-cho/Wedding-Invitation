@@ -168,26 +168,34 @@
                     신랑측
                 </div>
                 <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
-                    <div style="margin-top: 15px; text-align: center;">
-                        <div style="margin-bottom: 10px;">
-                            <span style="margin-right: 10px;">아버지</span>
-                            <strong>조국제</strong>
-                            <button onclick="callParent('groom', 'father')" style="margin: 5px;">
-                                📞 전화
-                            </button>
-                            <button onclick="smsParent('groom', 'father')" style="margin: 5px;">
-                                💬 문자
-                            </button>
+                    <div class="parent-contact-wrapper">
+                        <div class="parent-contact-row">
+                            <div class="parent-info">
+                                <span class="parent-title">아버지</span>
+                                <strong class="parent-name">조국제</strong>
+                            </div>
+                            <div class="parent-buttons">
+                                <button onclick="callParent('groom', 'father')" class="contact-btn">
+                                    📞 전화
+                                </button>
+                                <button onclick="smsParent('groom', 'father')" class="contact-btn">
+                                    💬 문자
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <span style="margin-right: 10px;">어머니</span>
-                            <strong>김명선</strong>
-                            <button onclick="callParent('groom', 'mother')" style="margin: 5px;">
-                                📞 전화
-                            </button>
-                            <button onclick="smsParent('groom', 'mother')" style="margin: 5px;">
-                                💬 문자
-                            </button>
+                        <div class="parent-contact-row">
+                            <div class="parent-info">
+                                <span class="parent-title">어머니</span>
+                                <strong class="parent-name">김명선</strong>
+                            </div>
+                            <div class="parent-buttons">
+                                <button onclick="callParent('groom', 'mother')" class="contact-btn">
+                                    📞 전화
+                                </button>
+                                <button onclick="smsParent('groom', 'mother')" class="contact-btn">
+                                    💬 문자
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -198,26 +206,34 @@
                     신부측
                 </div>
                 <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
-                    <div style="margin-top: 15px; text-align: center;">
-                        <div style="margin-bottom: 10px;">
-                            <span style="margin-right: 10px;">아버지</span>
-                            <strong>권순문</strong>
-                            <button onclick="callParent('bride', 'father')" style="margin: 5px;">
-                                📞 전화
-                            </button>
-                            <button onclick="smsParent('bride', 'father')" style="margin: 5px;">
-                                💬 문자
-                            </button>
+                    <div class="parent-contact-wrapper">
+                        <div class="parent-contact-row">
+                            <div class="parent-info">
+                                <span class="parent-title">아버지</span>
+                                <strong class="parent-name">권순문</strong>
+                            </div>
+                            <div class="parent-buttons">
+                                <button onclick="callParent('bride', 'father')" class="contact-btn">
+                                    📞 전화
+                                </button>
+                                <button onclick="smsParent('bride', 'father')" class="contact-btn">
+                                    💬 문자
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <span style="margin-right: 10px;">어머니</span>
-                            <strong>이은숙</strong>
-                            <button onclick="callParent('bride', 'mother')" style="margin: 5px;">
-                                📞 전화
-                            </button>
-                            <button onclick="smsParent('bride', 'mother')" style="margin: 5px;">
-                                💬 문자
-                            </button>
+                        <div class="parent-contact-row">
+                            <div class="parent-info">
+                                <span class="parent-title">어머니</span>
+                                <strong class="parent-name">이은숙</strong>
+                            </div>
+                            <div class="parent-buttons">
+                                <button onclick="callParent('bride', 'mother')" class="contact-btn">
+                                    📞 전화
+                                </button>
+                                <button onclick="smsParent('bride', 'mother')" class="contact-btn">
+                                    💬 문자
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -235,26 +251,34 @@
                     PLAYER 1 TEAM
                 </div>
                 <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
-                    <div class="game-master-buttons" style="margin-top: 15px; text-align: center;">
-                        <div style="margin-bottom: 10px;">
-                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">FATHER</span>
-                            <strong>조국제</strong> 
-                            <button onclick="callParent('groom', 'father')" style="margin: 5px;">
-                                📞 CALL
-                            </button>
-                            <button onclick="smsParent('groom', 'father')" style="margin: 5px;">
-                                💬 MESSAGE
-                            </button>
+                    <div class="game-master-buttons">
+                        <div class="parent-contact-row">
+                            <div class="parent-info">
+                                <span class="retro-parent-title">FATHER</span>
+                                <strong class="parent-name">조국제</strong>
+                            </div>
+                            <div class="parent-buttons">
+                                <button onclick="callParent('groom', 'father')" class="retro-contact-btn">
+                                    📞 CALL
+                                </button>
+                                <button onclick="smsParent('groom', 'father')" class="retro-contact-btn">
+                                    💬 MESSAGE
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">MOTHER</span>
-                            <strong>김명선</strong>
-                            <button onclick="callParent('groom', 'mother')" style="margin: 5px;">
-                                📞 CALL
-                            </button>
-                            <button onclick="smsParent('groom', 'mother')" style="margin: 5px;">
-                                💬 MESSAGE
-                            </button>
+                        <div class="parent-contact-row">
+                            <div class="parent-info">
+                                <span class="retro-parent-title">MOTHER</span>
+                                <strong class="parent-name">김명선</strong>
+                            </div>
+                            <div class="parent-buttons">
+                                <button onclick="callParent('groom', 'mother')" class="retro-contact-btn">
+                                    📞 CALL
+                                </button>
+                                <button onclick="smsParent('groom', 'mother')" class="retro-contact-btn">
+                                    💬 MESSAGE
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -265,26 +289,34 @@
                     PLAYER 2 TEAM
                 </div>
                 <div style="padding: 20px; border: 3px dashed var(--pixel-pink);">
-                    <div class="game-master-buttons" style="margin-top: 15px; text-align: center;">
-                        <div style="margin-bottom: 10px;">
-                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">FATHER</span>
-                            <strong>권순문</strong>
-                            <button onclick="callParent('bride', 'father')" style="margin: 5px;">
-                                📞 CALL
-                            </button>
-                            <button onclick="smsParent('bride', 'father')" style="margin: 5px;">
-                                💬 MESSAGE
-                            </button>
+                    <div class="game-master-buttons">
+                        <div class="parent-contact-row">
+                            <div class="parent-info">
+                                <span class="retro-parent-title">FATHER</span>
+                                <strong class="parent-name">권순문</strong>
+                            </div>
+                            <div class="parent-buttons">
+                                <button onclick="callParent('bride', 'father')" class="retro-contact-btn">
+                                    📞 CALL
+                                </button>
+                                <button onclick="smsParent('bride', 'father')" class="retro-contact-btn">
+                                    💬 MESSAGE
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <span style="display: block; margin-bottom: 8px; color: var(--pixel-yellow);">MOTHER</span>
-                            <strong>이은숙</strong>
-                            <button onclick="callParent('bride', 'mother')" style="margin: 5px;">
-                                📞 CALL
-                            </button>
-                            <button onclick="smsParent('bride', 'mother')" style="margin: 5px;">
-                                💬 MESSAGE
-                            </button>
+                        <div class="parent-contact-row">
+                            <div class="parent-info">
+                                <span class="retro-parent-title">MOTHER</span>
+                                <strong class="parent-name">이은숙</strong>
+                            </div>
+                            <div class="parent-buttons">
+                                <button onclick="callParent('bride', 'mother')" class="retro-contact-btn">
+                                    📞 CALL
+                                </button>
+                                <button onclick="smsParent('bride', 'mother')" class="retro-contact-btn">
+                                    💬 MESSAGE
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
