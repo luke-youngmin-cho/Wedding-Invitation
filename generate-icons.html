@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PWA Icon Generator</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>PWA 아이콘 생성 가이드</h1>
+    
+    <h2>방법 1: 온라인 도구 사용</h2>
+    <ol>
+        <li><a href="https://realfavicongenerator.net/" target="_blank">Real Favicon Generator</a> 접속</li>
+        <li>assets/main.jpg 업로드</li>
+        <li>Generate 클릭</li>
+        <li>android-chrome-192x192.png를 pwa-192x192.png로 저장</li>
+        <li>android-chrome-512x512.png를 pwa-512x512.png로 저장</li>
+    </ol>
+    
+    <h2>방법 2: 간단한 색상 아이콘</h2>
+    <p>아래 캔버스를 우클릭 → "이미지로 저장"</p>
+    
+    <canvas id="canvas192" width="192" height="192" style="border:1px solid #000;"></canvas>
+    <p>↑ pwa-192x192.png로 저장</p>
+    
+    <canvas id="canvas512" width="512" height="512" style="border:1px solid #000;"></canvas>
+    <p>↑ pwa-512x512.png로 저장</p>
+    
+    <script>
+        function drawIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // 배경 그라데이션
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#ff006e');
+            gradient.addColorStop(1, '#ff4590');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // 하트
+            ctx.fillStyle = 'white';
+            ctx.font = `${size/3}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('❤', size/2, size/2 - size/10);
+            
+            // 텍스트
+            ctx.font = `bold ${size/10}px Arial`;
+            ctx.fillText('채린 & 영민', size/2, size/2 + size/6);
+            
+            // 날짜
+            ctx.font = `${size/12}px Arial`;
+            ctx.fillText('2025.09.27', size/2, size/2 + size/3.5);
+        }
+        
+        drawIcon('canvas192', 192);
+        drawIcon('canvas512', 512);
+    </script>
+</body>
+</html>
