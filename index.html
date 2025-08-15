@@ -1441,10 +1441,16 @@
                 `;
                 // 빈 상태에서도 페이지 컨트롤 표시
                 document.getElementById('pageInfo').textContent = '0 / 0';
-                document.getElementById('prevPageBtn').disabled = true;
-                document.getElementById('nextPageBtn').disabled = true;
-                document.getElementById('prevPageBtn').style.opacity = '0.3';
-                document.getElementById('nextPageBtn').style.opacity = '0.3';
+                const prevBtn = document.getElementById('prevPageBtn');
+                const nextBtn = document.getElementById('nextPageBtn');
+                if (prevBtn) {
+                    prevBtn.disabled = true;
+                    prevBtn.style.opacity = '0.3';
+                }
+                if (nextBtn) {
+                    nextBtn.disabled = true;
+                    nextBtn.style.opacity = '0.3';
+                }
                 pageIndicator.textContent = 'PAGE 0';
                 return;
             }
@@ -1477,10 +1483,16 @@
             pageIndicator.textContent = `PAGE ${currentGuestbookPage}`;
             
             // 버튼 상태 업데이트
-            document.getElementById('prevPageBtn').disabled = currentGuestbookPage === 1;
-            document.getElementById('nextPageBtn').disabled = currentGuestbookPage === totalPages;
-            document.getElementById('prevPageBtn').style.opacity = currentGuestbookPage === 1 ? '0.3' : '1';
-            document.getElementById('nextPageBtn').style.opacity = currentGuestbookPage === totalPages ? '0.3' : '1';
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            if (prevBtn) {
+                prevBtn.disabled = currentGuestbookPage === 1;
+                prevBtn.style.opacity = currentGuestbookPage === 1 ? '0.3' : '1';
+            }
+            if (nextBtn) {
+                nextBtn.disabled = currentGuestbookPage === totalPages;
+                nextBtn.style.opacity = currentGuestbookPage === totalPages ? '0.3' : '1';
+            }
         }
         
         // 페이지 네비게이션 함수
