@@ -22,35 +22,6 @@
     <!-- Load Mini Game -->
     <!-- Load Mini Game -->
     <script src="js/minigame.js"></script>
-    
-    <!-- Debug script for resource loading -->
-    <script>
-        window.addEventListener('load', function() {
-            console.log('=== Resource Loading Check ===');
-            // Check CSS files
-            const modernCSS = document.getElementById('modern-styles');
-            const retroCSS = document.getElementById('retro-styles');
-            console.log('Modern CSS loaded:', modernCSS ? modernCSS.href : 'NOT FOUND');
-            console.log('Retro CSS loaded:', retroCSS ? retroCSS.href : 'NOT FOUND');
-            
-            // Check if styles are applied
-            const testEl = document.createElement('div');
-            testEl.className = 'calendar-grid';
-            document.body.appendChild(testEl);
-            const styles = window.getComputedStyle(testEl);
-            console.log('Calendar grid display style:', styles.display);
-            document.body.removeChild(testEl);
-            
-            // Check album images
-            const images = document.querySelectorAll('img');
-            console.log('Total images found:', images.length);
-            images.forEach(img => {
-                if (img.src.includes('album')) {
-                    console.log('Album image:', img.src, 'Complete:', img.complete, 'Natural Width:', img.naturalWidth);
-                }
-            });
-        });
-    </script>
 </head>
 <body>
     <!-- Game Mode Button -->
@@ -802,21 +773,15 @@
         
         // 페이지 로드시 초기화
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM fully loaded and parsed');
-            console.log('Current location:', window.location.href);
-            console.log('Document readyState:', document.readyState);
-            
             // 모던 테마로 시작
             const modernStyles = document.getElementById('modern-styles');
             const retroStyles = document.getElementById('retro-styles');
-            if (modernStyles) modernStyles.disabled = false;
-            if (retroStyles) retroStyles.disabled = true;
+            modernStyles.disabled = false;
+            retroStyles.disabled = true;
             
             // 달력 생성
-            console.log('Calling setupCalendar...');
             setupCalendar();
             // 갤러리 초기화
-            console.log('Calling initGallery...');
             initGallery();
             // 계좌 정보 로드
             loadAccountInfo();
@@ -872,8 +837,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
             // 스타일시트 전환
-            if (modernStyles) modernStyles.disabled = true;
-            if (retroStyles) retroStyles.disabled = false;
+            modernStyles.disabled = true;
+            retroStyles.disabled = false;
             
             currentTheme = 'retro';
             
@@ -904,8 +869,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
             // 스타일시트 전환
-            if (modernStyles) modernStyles.disabled = false;
-            if (retroStyles) retroStyles.disabled = true;
+            modernStyles.disabled = false;
+            retroStyles.disabled = true;
             
             currentTheme = 'modern';
             
@@ -1203,47 +1168,27 @@
         ];
 
         function initGallery() {
-            try {
-                console.log('Initializing gallery...');
-                console.log('Album photos:', albumPhotos);
-                
-                // 모던 테마 갤러리
-                const photoTrack = document.getElementById('photoTrack');
-                console.log('Photo track element:', photoTrack);
-                if (photoTrack) {
-                    // Clear existing content
-                    photoTrack.innerHTML = '';
-                    albumPhotos.forEach((photo, index) => {
-                        const slide = document.createElement('div');
-                        slide.className = 'photo-slide';
-                        slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}" onerror="console.error('Failed to load image:', '${photo}')">`;
-                        photoTrack.appendChild(slide);
-                        console.log(`Added photo ${index + 1}: ${photo}`);
-                    });
-                    console.log('Modern gallery photos added');
-                } else {
-                    console.error('photoTrack element not found');
-                }
-                
-                // 레트로 테마 갤러리 (동일한 사진)
-                const photoTrack2 = document.getElementById('photoTrack2');
-                console.log('Photo track2 element:', photoTrack2);
-                if (photoTrack2) {
-                    // Clear existing content
-                    photoTrack2.innerHTML = '';
-                    albumPhotos.forEach((photo, index) => {
-                        const slide = document.createElement('div');
-                        slide.className = 'photo-slide';
-                        slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}" onerror="console.error('Failed to load image:', '${photo}')">`;
-                        photoTrack2.appendChild(slide);
-                    });
-                    console.log('Retro gallery photos added');
-                }
-                
-                updatePhotoCounter();
-            } catch (error) {
-                console.error('Error initializing gallery:', error);
+            // 모던 테마 갤러리
+            const photoTrack = document.getElementById('photoTrack');
+            albumPhotos.forEach((photo, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'photo-slide';
+                slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}">`;
+                photoTrack.appendChild(slide);
+            });
+            
+            // 레트로 테마 갤러리 (동일한 사진)
+            const photoTrack2 = document.getElementById('photoTrack2');
+            if (photoTrack2) {
+                albumPhotos.forEach((photo, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'photo-slide';
+                    slide.innerHTML = `<img src="${photo}" alt="웨딩 사진 ${index + 1}">`;
+                    photoTrack2.appendChild(slide);
+                });
             }
+            
+            updatePhotoCounter();
         }
 
         function nextPhoto() {
@@ -1298,25 +1243,16 @@
 
         // 달력 생성
         function setupCalendar() {
-            try {
-                console.log('Setting up calendar...');
-                // 모던 테마 달력
-                const calendarModern = document.getElementById('calendar-modern');
-                console.log('Modern calendar element:', calendarModern);
-                if (calendarModern) {
-                    setupCalendarGrid(calendarModern, false);
-                    console.log('Modern calendar setup complete');
-                }
-                
-                // 레트로 테마 달력
-                const calendarRetro = document.getElementById('calendar-retro');
-                console.log('Retro calendar element:', calendarRetro);
-                if (calendarRetro) {
-                    setupCalendarGrid(calendarRetro, true);
-                    console.log('Retro calendar setup complete');
-                }
-            } catch (error) {
-                console.error('Error setting up calendar:', error);
+            // 모던 테마 달력
+            const calendarModern = document.getElementById('calendar-modern');
+            if (calendarModern) {
+                setupCalendarGrid(calendarModern, false);
+            }
+            
+            // 레트로 테마 달력
+            const calendarRetro = document.getElementById('calendar-retro');
+            if (calendarRetro) {
+                setupCalendarGrid(calendarRetro, true);
             }
         }
         
