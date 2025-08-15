@@ -837,6 +837,13 @@ button:hover {
   margin: 10px;
 }
 
+/* Fix buttons on all screen sizes */
+.parents-contact button {
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
 /* Mobile Responsive */
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
@@ -949,6 +956,44 @@ button:hover {
   .copy-btn {
     padding: 6px 10px !important;
     font-size: 11px !important;
+  }
+  
+  /* Fix parent contact buttons */
+  .parents-contact button {
+    display: inline-block !important;
+    margin: 2px !important;
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+  
+  .game-master-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 5px !important;
+  }
+  
+  .game-master-buttons button {
+    flex: 0 0 auto !important;
+    min-width: 60px !important;
+  }
+  
+  /* Account section buttons */
+  .account-info button {
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+  
+  .account-item {
+    margin-bottom: 15px !important;
+  }
+  
+  .account-item button {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 8px !important;
   }
   
   /* Main photo */

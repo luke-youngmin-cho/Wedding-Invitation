@@ -81,7 +81,7 @@
 
         <!-- 메인 사진 -->
         <section class="main-photo special-border">
-            <img src="assets/main.jpg" alt="신랑 신부 사진" id="mainPhoto">
+            <img src="./assets/main.jpg" alt="신랑 신부 사진" id="mainPhoto" onerror="console.error('Failed to load main photo'); this.src='./assets/main.JPG';">
         </section>
 
         <!-- 모던 결혼식 정보 -->
@@ -1159,12 +1159,16 @@
 
         // 갤러리 초기화
         let currentPhotoIndex = 0;
+        // GitHub Pages 배포 시 경로 처리
+        const baseUrl = window.location.hostname === 'luke-youngmin-cho.github.io' 
+            ? '/Wedding-Invitation' 
+            : '';
         const albumPhotos = [
-            'assets/AlbumSlides/album1.JPG',
-            'assets/AlbumSlides/album2.JPG',
-            'assets/AlbumSlides/album3.JPG',
-            'assets/AlbumSlides/album4.JPG',
-            'assets/AlbumSlides/album5.JPG'
+            `${baseUrl}/assets/AlbumSlides/album1.JPG`,
+            `${baseUrl}/assets/AlbumSlides/album2.JPG`,
+            `${baseUrl}/assets/AlbumSlides/album3.JPG`,
+            `${baseUrl}/assets/AlbumSlides/album4.JPG`,
+            `${baseUrl}/assets/AlbumSlides/album5.JPG`
         ];
 
         function initGallery() {
