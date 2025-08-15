@@ -4,7 +4,11 @@
       "Bash(mkdir:*)",
       "Bash(cp:*)",
       "Bash(dir:*)",
-      "Bash(firebase deploy:*)"
+      "Bash(firebase deploy:*)",
+      "Bash(rm:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": []
   }
