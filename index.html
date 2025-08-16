@@ -360,11 +360,11 @@
                 </div>
             </div>
             <div class="slider-controls">
-                <button class="slider-btn" onclick="previousPhoto(); event.stopPropagation();">
+                <button class="slider-btn" onclick="previousPhoto()">
                     ◀ 이전
                 </button>
                 <span id="photoCounter">1 / 5</span>
-                <button class="slider-btn" onclick="nextPhoto(); event.stopPropagation();">
+                <button class="slider-btn" onclick="nextPhoto()">
                     다음 ▶
                 </button>
             </div>
@@ -384,11 +384,11 @@
                 </div>
             </div>
             <div class="slider-controls">
-                <button class="slider-btn" onclick="previousPhoto(); event.stopPropagation();">
+                <button class="slider-btn" onclick="previousPhoto()">
                     ◀ PREV
                 </button>
                 <span id="photoCounter2">1 / 5</span>
-                <button class="slider-btn" onclick="nextPhoto(); event.stopPropagation();">
+                <button class="slider-btn" onclick="nextPhoto()">
                     NEXT ▶
                 </button>
             </div>
@@ -1363,7 +1363,6 @@
         }
 
         function nextPhoto() {
-            console.log('Next button clicked!');
             const photosLength = currentTheme === 'retro' ? retroAlbumPhotos.length : albumPhotos.length;
             currentPhotoIndex = (currentPhotoIndex + 1) % photosLength;
             
@@ -1372,7 +1371,6 @@
         }
 
         function previousPhoto() {
-            console.log('Previous button clicked!');
             const photosLength = currentTheme === 'retro' ? retroAlbumPhotos.length : albumPhotos.length;
             currentPhotoIndex = (currentPhotoIndex - 1 + photosLength) % photosLength;
             
