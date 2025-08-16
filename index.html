@@ -1191,32 +1191,47 @@
 
         // 갤러리 초기화
         let currentPhotoIndex = 0;
-        // GitHub Pages 배포 시 경로 처리
-        const baseUrl = window.location.hostname === 'luke-youngmin-cho.github.io' 
-            ? '/Wedding-Invitation' 
-            : '';
-        const albumPhotos = [
-            `${baseUrl}/assets/AlbumSlides/album1.jpg`,
-            `${baseUrl}/assets/AlbumSlides/album2.jpg`,
-            `${baseUrl}/assets/AlbumSlides/album3.jpg`,
-            `${baseUrl}/assets/AlbumSlides/album4.jpg`,
-            `${baseUrl}/assets/AlbumSlides/album5.jpg`
-        ];
+        
+        // GitHub Pages 배포 시 경로 처리 - 더 정확한 방법
+        function getAlbumPhotos() {
+            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
+            const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
+            
+            console.log('Building album paths - GitHub Pages:', isGitHubPages, 'Base URL:', baseUrl);
+            
+            return [
+                `${baseUrl}/assets/AlbumSlides/album1.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album2.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album3.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album4.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album5.jpg`
+            ];
+        }
+        
+        // 동적으로 경로 생성
+        const albumPhotos = getAlbumPhotos();
 
         function initGallery() {
             console.log('=== Gallery Initialization Start ===');
-            console.log('Album photos array:', albumPhotos);
+            console.log('Current hostname:', window.location.hostname);
+            
+            // 갤러리 초기화 시점에 경로 재확인
+            const currentAlbumPhotos = getAlbumPhotos();
+            console.log('Album photos array at init:', currentAlbumPhotos);
             
             // 모던 테마 갤러리
             const photoTrack = document.getElementById('photoTrack');
             console.log('PhotoTrack element found:', photoTrack);
             
+            // 강제로 모든 기존 내용 제거
+            while (photoTrack && photoTrack.firstChild) {
+                photoTrack.removeChild(photoTrack.firstChild);
+            }
+            
             if (photoTrack) {
-                // Clear any existing content
-                photoTrack.innerHTML = '';
                 console.log('Cleared photoTrack content');
                 
-                albumPhotos.forEach((photo, index) => {
+                currentAlbumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
                     const img = document.createElement('img');
@@ -1256,7 +1271,7 @@
                 // Clear any existing content
                 photoTrack2.innerHTML = '';
                 
-                albumPhotos.forEach((photo, index) => {
+                currentAlbumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
                     const img = document.createElement('img');
