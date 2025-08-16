@@ -84,7 +84,7 @@
 
         <!-- 메인 사진 -->
         <section class="main-photo special-border">
-            <img src="./assets/main_retro.png" alt="신랑 신부 사진" id="mainPhoto" onerror="console.error('Failed to load main photo'); this.src='./assets/main_retro.png';">
+            <img src="./assets/main_retro.jpg" alt="신랑 신부 사진" id="mainPhoto" onerror="console.error('Failed to load main photo'); this.src='./assets/main_retro.jpg';">
         </section>
 
         <!-- 모던 결혼식 정보 -->
@@ -943,6 +943,10 @@
                         slide.appendChild(img);
                         photoTrack2.appendChild(slide);
                     });
+                    // 인덱스 리셋
+                    currentPhotoIndex = 0;
+                    photoTrack2.style.transform = 'translateX(0)';
+                    updatePhotoCounter();
                 }
             }, 100);
             
@@ -1361,7 +1365,8 @@
         function nextPhoto() {
             const track = document.getElementById('photoTrack');
             const track2 = document.getElementById('photoTrack2');
-            currentPhotoIndex = (currentPhotoIndex + 1) % albumPhotos.length;
+            const photosLength = currentTheme === 'retro' ? retroAlbumPhotos.length : albumPhotos.length;
+            currentPhotoIndex = (currentPhotoIndex + 1) % photosLength;
             
             if (track) track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
             if (track2) track2.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
@@ -1372,7 +1377,8 @@
         function previousPhoto() {
             const track = document.getElementById('photoTrack');
             const track2 = document.getElementById('photoTrack2');
-            currentPhotoIndex = (currentPhotoIndex - 1 + albumPhotos.length) % albumPhotos.length;
+            const photosLength = currentTheme === 'retro' ? retroAlbumPhotos.length : albumPhotos.length;
+            currentPhotoIndex = (currentPhotoIndex - 1 + photosLength) % photosLength;
             
             if (track) track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
             if (track2) track2.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
@@ -1383,7 +1389,8 @@
         function updatePhotoCounter() {
             const counter1 = document.getElementById('photoCounter');
             const counter2 = document.getElementById('photoCounter2');
-            const text = `${currentPhotoIndex + 1} / ${albumPhotos.length}`;
+            const photosLength = currentTheme === 'retro' ? retroAlbumPhotos.length : albumPhotos.length;
+            const text = `${currentPhotoIndex + 1} / ${photosLength}`;
             
             if (counter1) counter1.textContent = text;
             if (counter2) counter2.textContent = text;
