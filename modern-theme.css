@@ -548,6 +548,8 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  position: relative;
+  z-index: 10;
 }
 
 .slider-btn {
@@ -559,6 +561,9 @@ body {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 100;
+  pointer-events: auto;
 }
 
 .slider-btn:hover {
