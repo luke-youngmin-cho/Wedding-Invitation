@@ -26,13 +26,26 @@
   box-sizing: border-box;
 }
 
+/* Responsive Font Scaling */
+html {
+  font-size: calc(12px + 0.5vw); /* Base size + viewport width scaling */
+}
+
+@media (min-width: 1200px) {
+  html { font-size: 18px; } /* Max font size */
+}
+
+@media (max-width: 576px) {
+  html { font-size: calc(10px + 1vw); } /* Smaller base for mobile */
+}
+
 body {
   font-family: 'Noto Sans KR', sans-serif;
   background: linear-gradient(to bottom, var(--modern-white), var(--modern-cream));
   color: var(--modern-dark);
   line-height: 1.8;
   overflow-x: hidden;
-  font-size: 16px;
+  font-size: 1rem; /* Use rem for scalable units */
 }
 
 /* Game Mode Button */
