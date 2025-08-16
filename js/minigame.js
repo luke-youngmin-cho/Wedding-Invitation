@@ -20,28 +20,22 @@
     // Check if mobile or small screen
     const showButtons = isMobile || window.innerWidth <= 768;
     
-    // 16:9 aspect ratio container
+    // Simple 16:9 game container as a section
     gameContainer.innerHTML = `
-      <div class="retro-game-console" style="
+      <div class="game-section-wrapper" style="
         width: 100%;
-        max-width: 900px;
+        max-width: 100%;
         margin: 0 auto;
-        background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
-        border: 4px solid #ff006e;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 10px 40px rgba(255,0,110,0.3);
       ">
         <!-- Game Screen with 16:9 ratio -->
         <div class="game-screen-container" style="
           position: relative;
           width: 100%;
           padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-          background: #000;
-          border: 3px solid #333;
-          border-radius: 10px;
+          background: #0b1020;
+          border: 3px solid #ff006e;
           overflow: hidden;
-          box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+          box-shadow: 0 0 30px rgba(255,0,110,0.5);
         ">
           <div class="game-wrapper" style="
             position: absolute;
@@ -49,7 +43,6 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: #0b1020;
           ">
             <canvas id="miniGameCanvas" width="1280" height="720" style="
               display: block;
@@ -78,91 +71,65 @@
           </div>
         </div>
         
-        <!-- Control Panel Below Game Screen -->
+        <!-- Control Panel for Mobile/Touch -->
         <div class="control-panel" style="
-          margin-top: 20px;
-          padding: 15px;
-          background: linear-gradient(180deg, #2a2a3e 0%, #1a1a2e 100%);
-          border: 3px solid #444;
-          border-radius: 10px;
-          display: flex;
+          margin-top: 10px;
+          padding: 10px;
+          background: rgba(15,15,35,0.9);
+          border: 2px solid #ff006e;
+          display: ${showButtons ? 'flex' : 'none'};
           justify-content: space-around;
           align-items: center;
           gap: 10px;
         ">
-          <!-- Character Buttons Group -->
-          <div class="button-group" style="display: flex; gap: 10px;">
-            <button class="retro-game-btn" id="btnTag" style="
-              width: 60px;
-              height: 60px;
-              background: linear-gradient(135deg, #ff66ff 0%, #cc44cc 100%);
-              border: 3px solid #ff99ff;
-              border-radius: 8px;
-              color: #fff;
-              font-family: 'Press Start 2P', monospace;
-              font-size: 9px;
-              cursor: pointer;
-              box-shadow: 0 4px 0 #aa33aa, 0 6px 10px rgba(0,0,0,0.3);
-              transition: all 0.1s;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            ">TAG</button>
-            
-            <button class="retro-game-btn" id="btnJump" style="
-              width: 80px;
-              height: 80px;
-              background: linear-gradient(135deg, #ff006e 0%, #cc0055 100%);
-              border: 3px solid #ff3388;
-              border-radius: 10px;
-              color: #fff;
-              font-family: 'Press Start 2P', monospace;
-              font-size: 11px;
-              cursor: pointer;
-              box-shadow: 0 4px 0 #aa0044, 0 6px 10px rgba(0,0,0,0.3);
-              transition: all 0.1s;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            ">JUMP</button>
-          </div>
+          <!-- Mobile Control Buttons -->
+          <button class="game-btn" id="btnTag" style="
+            width: 50px;
+            height: 50px;
+            background: #ff66ff;
+            border: 2px solid #ff99ff;
+            color: #fff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            cursor: pointer;
+            border-radius: 5px;
+          ">TAG</button>
           
-          <!-- Attack Buttons Group -->
-          <div class="button-group" style="display: flex; gap: 10px;">
-            <button class="retro-game-btn" id="btnAttack" style="
-              width: 60px;
-              height: 60px;
-              background: linear-gradient(135deg, #ffde00 0%, #ccb200 100%);
-              border: 3px solid #ffee44;
-              border-radius: 8px;
-              color: #000;
-              font-family: 'Press Start 2P', monospace;
-              font-size: 9px;
-              cursor: pointer;
-              box-shadow: 0 4px 0 #aa9900, 0 6px 10px rgba(0,0,0,0.3);
-              transition: all 0.1s;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            ">ATK</button>
-            
-            <button class="retro-game-btn" id="btnSlam" style="
-              width: 80px;
-              height: 80px;
-              background: linear-gradient(135deg, #00ffff 0%, #00cccc 100%);
-              border: 3px solid #44ffff;
-              border-radius: 10px;
-              color: #000;
-              font-family: 'Press Start 2P', monospace;
-              font-size: 11px;
-              cursor: pointer;
-              box-shadow: 0 4px 0 #00aaaa, 0 6px 10px rgba(0,0,0,0.3);
-              transition: all 0.1s;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            ">SLAM</button>
-          </div>
+          <button class="game-btn" id="btnJump" style="
+            width: 60px;
+            height: 60px;
+            background: #ff006e;
+            border: 2px solid #ff3388;
+            color: #fff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+          ">JUMP</button>
+          
+          <button class="game-btn" id="btnAttack" style="
+            width: 50px;
+            height: 50px;
+            background: #ffde00;
+            border: 2px solid #ffee44;
+            color: #000;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            cursor: pointer;
+            border-radius: 5px;
+          ">ATK</button>
+          
+          <button class="game-btn" id="btnSlam" style="
+            width: 60px;
+            height: 60px;
+            background: #00ffff;
+            border: 2px solid #44ffff;
+            color: #000;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+          ">SLAM</button>
         </div>
         
         <!-- Game Over Screen -->

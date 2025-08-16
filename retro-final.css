@@ -1216,6 +1216,19 @@ button:active {
   border-color: var(--pixel-yellow);
 }
 
+/* Mini Game Section */
+.minigame-section {
+  padding: 40px 20px;
+  background: var(--pixel-dark);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+#miniGameContainer {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
 /* Mobile */
 @media (max-width: 600px) {
   body {
