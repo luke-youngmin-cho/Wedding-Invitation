@@ -113,35 +113,6 @@
           </div>
         </div>
         
-        <!-- Full Leaderboard Section Below Game -->
-        <div id="fullLeaderboard" style="
-          margin-top: 20px;
-          padding: 20px;
-          background: rgba(15,15,35,0.95);
-          border: 2px solid #ffde00;
-          display: none;
-        ">
-          <h3 style="
-            color: #ffde00;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 15px;
-          ">FULL LEADERBOARD</h3>
-          <div id="leaderboardPages" style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-bottom: 15px;
-          "></div>
-          <div id="leaderboardPagination" style="
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-          "></div>
-        </div>
-        
         <!-- Control Panel for Mobile/Touch -->
         <div class="control-panel" style="
           margin-top: 10px;
@@ -222,6 +193,35 @@
               text-align: center;
             ">SLAM</button>
           </div>
+        </div>
+        
+        <!-- Full Leaderboard Section Below Control Panel -->
+        <div id="fullLeaderboard" style="
+          margin-top: 20px;
+          padding: 20px;
+          background: rgba(15,15,35,0.95);
+          border: 2px solid #ffde00;
+          display: none;
+        ">
+          <h3 style="
+            color: #ffde00;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 15px;
+          ">FULL LEADERBOARD</h3>
+          <div id="leaderboardPages" style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+          "></div>
+          <div id="leaderboardPagination" style="
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+          "></div>
         </div>
       </div>
     `;
@@ -1268,31 +1268,36 @@
           listEl.innerHTML = 'No scores yet';
         }
         
-        // Show full leaderboard with pagination if there are more than 3 scores
-        if (scores.length > 3 && fullLeaderboardEl && leaderboardPagesEl && paginationEl) {
+        // Show full leaderboard with pagination for all scores
+        if (scores.length > 0 && fullLeaderboardEl && leaderboardPagesEl && paginationEl) {
           fullLeaderboardEl.style.display = 'block';
           
-          // Calculate pagination
-          const remainingScores = scores.slice(3);
-          const totalPages = Math.ceil(remainingScores.length / ITEMS_PER_PAGE);
+          // Calculate pagination for ALL scores
+          const totalPages = Math.ceil(scores.length / ITEMS_PER_PAGE);
           const startIdx = currentLeaderboardPage * ITEMS_PER_PAGE;
-          const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, remainingScores.length);
-          const pageScores = remainingScores.slice(startIdx, endIdx);
+          const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, scores.length);
+          const pageScores = scores.slice(startIdx, endIdx);
           
           // Display current page scores
           leaderboardPagesEl.innerHTML = pageScores.map((s, i) => {
-            const rank = startIdx + i + 4; // +4 because top 3 are shown above
+            const rank = startIdx + i + 1;
+            let rankDisplay = '';
+            if (rank === 1) rankDisplay = '🥇 #1';
+            else if (rank === 2) rankDisplay = '🥈 #2';
+            else if (rank === 3) rankDisplay = '🥉 #3';
+            else rankDisplay = `#${rank}`;
+            
             return `
               <div style="
                 padding: 8px;
-                background: rgba(10,10,20,0.8);
-                border: 1px solid #ff006e;
+                background: ${rank <= 3 ? 'rgba(255,0,110,0.2)' : 'rgba(10,10,20,0.8)'};
+                border: 2px solid ${rank <= 3 ? '#ffde00' : '#ff006e'};
                 color: #ffde00;
                 font-family: 'Press Start 2P', monospace;
                 font-size: 10px;
                 line-height: 1.5;
               ">
-                #${rank} ${s.name}: ${s.score}m
+                ${rankDisplay} ${s.name}: ${s.score}m
               </div>
             `;
           }).join('');
