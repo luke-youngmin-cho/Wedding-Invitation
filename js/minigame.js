@@ -64,9 +64,51 @@
           </div>
         </div>
         
-            <!-- Game Over Screen -->
-            <div id="gameOverScreen" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:100;">
-              <!-- Content here -->
+            
+            <!-- Leaderboard (Inside game wrapper) -->
+            <div id="leaderboardPanel" style="position:absolute;top:50px;right:10px;padding:8px;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:8px;width:150px;z-index:10;">
+              <div style="margin-bottom:5px;color:#ffde00;font-size:9px;">TOP SCORES</div>
+              <div id="leaderboardList" style="line-height:1.4;font-size:7px;">
+                Loading...
+              </div>
+            </div>
+            
+            <!-- Start Screen (Inside game wrapper) -->
+            <div id="startScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;">
+              <div style="text-align:center;padding:20px;max-width:90%;">
+                <h2 style="color:#ff006e;font-family:'Press Start 2P';font-size:18px;margin-bottom:15px;">WEDDING RUNNER</h2>
+                <p style="color:#ffde00;font-family:'Press Start 2P';font-size:8px;line-height:1.8;margin-bottom:20px;">
+                  신랑과 신부가 함께하는<br>
+                  무한 러닝 게임!<br><br>
+                  [조작법]<br>
+                  점프 : SPACE/↑ <br>
+                  공격 : J<br>
+                  캐릭터 전환 : Q<br>
+                  슬램 : K/↓<br>
+                  모바일: 화면 버튼 사용
+                </p>
+                <button id="startGameBtn" style="padding:12px 24px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:10px;cursor:pointer;animation:blink 1s infinite;">
+                  START GAME
+                </button>
+              </div>
+            </div>
+            
+            <!-- Game Over Screen (Inside game wrapper) -->
+            <div id="gameOverScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;">
+              <div style="background:#0b1020;border:3px solid #ff006e;padding:20px;text-align:center;color:#ffde00;font-family:'Press Start 2P';min-width:250px;max-width:80%;font-size:10px;">
+                <h2 style="margin:0 0 20px;font-size:20px;">GAME OVER</h2>
+                <div id="finalScore" style="margin:10px 0;font-size:12px;line-height:1.8;"></div>
+                <div id="recordSubmit" style="display:none;">
+                  <input type="text" id="playerName" placeholder="이름 입력" maxlength="10" style="margin:15px 0;padding:8px;background:#1a1a2e;border:2px solid #ff006e;color:white;font-family:'Press Start 2P';font-size:10px;width:150px;">
+                  <div style="display:flex;gap:10px;justify-content:center;margin-top:15px;">
+                    <button id="submitScore" style="padding:10px 20px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:10px;cursor:pointer;">SUBMIT</button>
+                    <button id="restartGame" style="padding:10px 20px;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:10px;cursor:pointer;">RETRY</button>
+                  </div>
+                </div>
+                <div id="normalRestart" style="display:none;">
+                  <button id="restartGameOnly" style="padding:15px 30px;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:12px;cursor:pointer;margin-top:20px;">RETRY</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -130,52 +172,6 @@
             cursor: pointer;
             border-radius: 5px;
           ">SLAM</button>
-        </div>
-        
-        <!-- Game Over Screen -->
-        <div id="gameOverScreen" style="position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);">
-          <div style="background:#0b1020;border:3px solid #ff006e;padding:30px;text-align:center;color:#ffde00;font-family:'Press Start 2P';min-width:300px;">
-            <h2 style="margin:0 0 20px;font-size:20px;">GAME OVER</h2>
-            <div id="finalScore" style="margin:10px 0;font-size:12px;line-height:1.8;"></div>
-            <div id="recordSubmit" style="display:none;">
-              <input type="text" id="playerName" placeholder="이름 입력" maxlength="10" style="margin:15px 0;padding:8px;background:#1a1a2e;border:2px solid #ff006e;color:white;font-family:'Press Start 2P';font-size:10px;width:150px;">
-              <div style="display:flex;gap:10px;justify-content:center;margin-top:15px;">
-                <button id="submitScore" style="padding:10px 20px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:10px;cursor:pointer;">SUBMIT</button>
-                <button id="restartGame" style="padding:10px 20px;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:10px;cursor:pointer;">RETRY</button>
-              </div>
-            </div>
-            <div id="normalRestart" style="display:none;">
-              <button id="restartGameOnly" style="padding:15px 30px;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:12px;cursor:pointer;margin-top:20px;">RETRY</button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Leaderboard -->
-        <div id="leaderboardPanel" style="position:absolute;top:10px;right:10px;padding:10px;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:9px;max-width:200px;z-index:10;">
-          <div style="margin-bottom:8px;color:var(--pixel-yellow);">TOP SCORES</div>
-          <div id="leaderboardList" style="line-height:1.6;">
-            Loading...
-          </div>
-        </div>
-        
-        <!-- Start Screen -->
-        <div id="startScreen" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);">
-          <div style="text-align:center;">
-            <h2 style="color:#ff006e;font-family:'Press Start 2P';font-size:24px;margin-bottom:20px;">WEDDING RUNNER</h2>
-            <p style="color:#ffde00;font-family:'Press Start 2P';font-size:10px;line-height:2;margin-bottom:30px;">
-              신랑과 신부가 함께하는<br>
-              무한 러닝 게임!<br><br>
-              [조작법]<br>
-              점프 : SPACE/↑ <br>
-              공격 : J<br>
-              캐릭터 전환 : Q<br>
-              슬램 : K/↓<br>
-              모바일: 화면 버튼 사용
-            </p>
-            <button id="startGameBtn" style="padding:15px 30px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:12px;cursor:pointer;animation:blink 1s infinite;">
-              START GAME
-            </button>
-          </div>
         </div>
       </div>
     `;
