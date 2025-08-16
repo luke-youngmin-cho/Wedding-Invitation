@@ -201,15 +201,31 @@ section {
   padding: clamp(15px, 3vw, 30px) !important;
 }
 
-/* Fix Photo Gallery Responsive */
+/* Fix Photo Gallery - Vertical Layout */
 .photo-slider {
-  min-height: clamp(250px, 50vw, 400px) !important;
-  max-height: clamp(300px, 60vw, 70vh) !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
 }
 
 .photo-slide {
-  min-height: clamp(250px, 50vw, 400px) !important;
-  max-height: clamp(300px, 60vw, 70vh) !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  display: block !important;
+}
+
+.photo-slide img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Hide slider controls since we're using vertical layout */
+.slider-controls {
+  display: none !important;
 }
 
 /* Ensure Retro Theme Elements Scale */
