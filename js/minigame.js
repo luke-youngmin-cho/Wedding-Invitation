@@ -27,11 +27,11 @@
         max-width: 100%;
         margin: 0 auto;
       ">
-        <!-- Game Screen with 16:9 ratio -->
+        <!-- Game Screen with 4:3 ratio -->
         <div class="game-screen-container" style="
           position: relative;
           width: 100%;
-          padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+          padding-bottom: 75%; /* 4:3 Aspect Ratio */
           background: #0b1020;
           border: 3px solid #ff006e;
           overflow: hidden;
@@ -44,7 +44,7 @@
             right: 0;
             bottom: 0;
           ">
-            <canvas id="miniGameCanvas" width="1280" height="720" style="
+            <canvas id="miniGameCanvas" width="1024" height="768" style="
               display: block;
               width: 100%;
               height: 100%;
@@ -235,9 +235,9 @@
     }
     ctx = canvas.getContext('2d');
     
-    // 16:9 aspect ratio dimensions
-    canvas.width = 1280;
-    canvas.height = 720;
+    // 4:3 aspect ratio dimensions
+    canvas.width = 1024;
+    canvas.height = 768;
     
     // Update world dimensions
     world.w = canvas.width;
@@ -249,7 +249,7 @@
   // ===== Game Variables =====
   let DPR = 1;
   const world = {
-    w: 1280, h: 720,
+    w: 1024, h: 768,
     gravity: 1600,
     baseSpeed: 250,
     speed: 250,
