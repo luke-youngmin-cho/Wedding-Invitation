@@ -67,7 +67,7 @@
             
             <!-- Leaderboard (Inside game wrapper) -->
             <div id="leaderboardPanel" style="position:absolute;top:8%;right:1%;padding:0.8%;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:calc(6px + 0.3vw);width:15%;min-width:120px;z-index:10;">
-              <div style="margin-bottom:0.5vw;color:#ffde00;font-size:calc(7px + 0.3vw);">TOP SCORES</div>
+              <div style="margin-bottom:0.5vw;color:#ffde00;font-size:calc(7px + 0.3vw);">TOP 3</div>
               <div id="leaderboardList" style="line-height:1.4;font-size:calc(5px + 0.2vw);">
                 Loading...
               </div>
@@ -111,6 +111,35 @@
               </div>
             </div>
           </div>
+        </div>
+        
+        <!-- Full Leaderboard Section Below Game -->
+        <div id="fullLeaderboard" style="
+          margin-top: 20px;
+          padding: 20px;
+          background: rgba(15,15,35,0.95);
+          border: 2px solid #ffde00;
+          display: none;
+        ">
+          <h3 style="
+            color: #ffde00;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 15px;
+          ">FULL LEADERBOARD</h3>
+          <div id="leaderboardPages" style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+          "></div>
+          <div id="leaderboardPagination" style="
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+          "></div>
         </div>
         
         <!-- Control Panel for Mobile/Touch -->
@@ -164,9 +193,9 @@
             <button class="game-btn" id="btnAttack" style="
               width: 55px;
               height: 55px;
-              background: #ffde00;
-              border: 2px solid #ffee44;
-              color: #000;
+              background: #0099ff;
+              border: 2px solid #44bbff;
+              color: #fff;
               font-family: 'Press Start 2P', monospace;
               font-size: 9px;
               cursor: pointer;
@@ -180,9 +209,9 @@
             <button class="game-btn" id="btnSlam" style="
               width: 65px;
               height: 65px;
-              background: #00ffff;
-              border: 2px solid #44ffff;
-              color: #000;
+              background: #ff0033;
+              border: 2px solid #ff4466;
+              color: #fff;
               font-family: 'Press Start 2P', monospace;
               font-size: 11px;
               cursor: pointer;
@@ -1217,18 +1246,79 @@
     }
   }
 
+  let currentLeaderboardPage = 0;
+  const ITEMS_PER_PAGE = 10;
+  
   async function loadLeaderboard() {
     try {
       if (window.getGameLeaderboard) {
         const scores = await window.getGameLeaderboard();
         const listEl = document.getElementById('leaderboardList');
+        const fullLeaderboardEl = document.getElementById('fullLeaderboard');
+        const leaderboardPagesEl = document.getElementById('leaderboardPages');
+        const paginationEl = document.getElementById('leaderboardPagination');
         
+        // Show top 3 in game panel
         if (listEl && scores.length > 0) {
-          listEl.innerHTML = scores.slice(0, 5).map((s, i) => 
-            `<div>${i+1}. ${s.name}: ${s.score}m</div>`
-          ).join('');
+          listEl.innerHTML = scores.slice(0, 3).map((s, i) => {
+            const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉';
+            return `<div style="margin-bottom:0.3vw;">${medal} ${s.name}: ${s.score}m</div>`;
+          }).join('');
         } else if (listEl) {
           listEl.innerHTML = 'No scores yet';
+        }
+        
+        // Show full leaderboard with pagination if there are more than 3 scores
+        if (scores.length > 3 && fullLeaderboardEl && leaderboardPagesEl && paginationEl) {
+          fullLeaderboardEl.style.display = 'block';
+          
+          // Calculate pagination
+          const remainingScores = scores.slice(3);
+          const totalPages = Math.ceil(remainingScores.length / ITEMS_PER_PAGE);
+          const startIdx = currentLeaderboardPage * ITEMS_PER_PAGE;
+          const endIdx = Math.min(startIdx + ITEMS_PER_PAGE, remainingScores.length);
+          const pageScores = remainingScores.slice(startIdx, endIdx);
+          
+          // Display current page scores
+          leaderboardPagesEl.innerHTML = pageScores.map((s, i) => {
+            const rank = startIdx + i + 4; // +4 because top 3 are shown above
+            return `
+              <div style="
+                padding: 8px;
+                background: rgba(10,10,20,0.8);
+                border: 1px solid #ff006e;
+                color: #ffde00;
+                font-family: 'Press Start 2P', monospace;
+                font-size: 10px;
+                line-height: 1.5;
+              ">
+                #${rank} ${s.name}: ${s.score}m
+              </div>
+            `;
+          }).join('');
+          
+          // Create pagination buttons
+          paginationEl.innerHTML = '';
+          for (let i = 0; i < totalPages; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.textContent = `${i + 1}`;
+            pageBtn.style.cssText = `
+              padding: 8px 12px;
+              background: ${i === currentLeaderboardPage ? '#ff006e' : '#333'};
+              border: 2px solid #ff006e;
+              color: white;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 10px;
+              cursor: pointer;
+            `;
+            pageBtn.onclick = () => {
+              currentLeaderboardPage = i;
+              loadLeaderboard();
+            };
+            paginationEl.appendChild(pageBtn);
+          }
+        } else if (fullLeaderboardEl) {
+          fullLeaderboardEl.style.display = 'none';
         }
       }
     } catch (error) {
