@@ -113,6 +113,35 @@
           </div>
         </div>
         
+        <!-- Full Leaderboard Section Below Game -->
+        <div id="fullLeaderboard" style="
+          margin-top: 20px;
+          padding: 20px;
+          background: rgba(15,15,35,0.95);
+          border: 2px solid #ffde00;
+          display: none;
+        ">
+          <h3 style="
+            color: #ffde00;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 15px;
+          ">FULL LEADERBOARD</h3>
+          <div id="leaderboardPages" style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+          "></div>
+          <div id="leaderboardPagination" style="
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+          "></div>
+        </div>
+        
         <!-- Control Panel for Mobile/Touch -->
         <div class="control-panel" style="
           margin-top: 10px;
@@ -193,35 +222,6 @@
               text-align: center;
             ">SLAM</button>
           </div>
-        </div>
-        
-        <!-- Full Leaderboard Section Below Control Panel -->
-        <div id="fullLeaderboard" style="
-          margin-top: 20px;
-          padding: 20px;
-          background: rgba(15,15,35,0.95);
-          border: 2px solid #ffde00;
-          display: none;
-        ">
-          <h3 style="
-            color: #ffde00;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 15px;
-          ">FULL LEADERBOARD</h3>
-          <div id="leaderboardPages" style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-bottom: 15px;
-          "></div>
-          <div id="leaderboardPagination" style="
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-          "></div>
         </div>
       </div>
     `;
