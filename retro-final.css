@@ -694,12 +694,12 @@ body::before {
 
 .photo-slider {
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* 스크롤 대신 전체 보기 */
   border: 6px solid var(--pixel-pink);
   background: var(--pixel-dark);
   height: auto;
-  min-height: 400px;
-  max-height: 70vh;
+  min-height: auto;
+  max-height: none; /* 높이 제한 제거 */
   cursor: pointer;
   box-shadow: 
     inset 0 0 0 2px var(--pixel-dark),
@@ -707,32 +707,41 @@ body::before {
 }
 
 .photo-track {
-  display: flex;
-  height: 100%;
-  transition: transform 0.5s steps(8); /* Retro step animation */
+  display: block; /* 세로 레이아웃 */
+  height: auto;
+  transform: none !important; /* 슬라이드 비활성화 */
 }
 
 .photo-slide {
-  min-width: 100%;
+  width: 100%;
   height: auto;
-  min-height: 400px;
-  max-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: auto;
+  max-height: none;
+  display: block;
   position: relative;
   padding: 20px;
+  margin-bottom: 20px; /* 사진 간 간격 */
+  border-bottom: 2px dashed var(--pixel-pink);
+}
+
+.photo-slide:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .photo-slide img {
-  width: auto;
+  width: 100%;
   height: auto;
-  max-width: calc(100% - 40px);
-  max-height: calc(70vh - 40px);
+  max-width: 100%;
+  max-height: none;
   object-fit: contain;
   background: var(--pixel-dark);
   filter: contrast(1.2) brightness(1.1);
   display: block;
+  border: 4px solid var(--pixel-pink);
+  box-shadow:
+    4px 4px 0 var(--pixel-dark),
+    8px 8px 0 var(--pixel-pink);
 }
 
 /* Retro Slider Controls */
