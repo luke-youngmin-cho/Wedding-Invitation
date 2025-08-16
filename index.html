@@ -835,7 +835,10 @@
         let albumPhotos = getAlbumPhotos();
         
         // 페이지 로드시 초기화
-        document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('load', function() {
+            console.log('=== Window Load Event Fired ===');
+            console.log('albumPhotos at load:', albumPhotos);
+            
             // 모던 테마로 시작
             const modernStyles = document.getElementById('modern-styles');
             const retroStyles = document.getElementById('retro-styles');
@@ -843,21 +846,42 @@
             retroStyles.disabled = true;
             
             // 달력 생성
-            setupCalendar();
+            try {
+                if (typeof setupCalendar === 'function') {
+                    setupCalendar();
+                } else {
+                    console.warn('setupCalendar function not yet defined');
+                }
+            } catch (error) {
+                console.error('Error in setupCalendar:', error);
+            }
             
             // 갤러리 초기화 - 완전히 초기화되도록 지연 실행
             setTimeout(() => {
-                // 기존 내용 완전히 제거
-                const photoTrack = document.getElementById('photoTrack');
-                const photoTrack2 = document.getElementById('photoTrack2');
-                if (photoTrack) photoTrack.innerHTML = '';
-                if (photoTrack2) photoTrack2.innerHTML = '';
-                
-                console.log('=== Delayed Gallery Init ===');
-                initGallery();
+                try {
+                    // 기존 내용 완전히 제거
+                    const photoTrack = document.getElementById('photoTrack');
+                    const photoTrack2 = document.getElementById('photoTrack2');
+                    if (photoTrack) photoTrack.innerHTML = '';
+                    if (photoTrack2) photoTrack2.innerHTML = '';
+                    
+                    console.log('=== Delayed Gallery Init ===');
+                    console.log('albumPhotos before initGallery:', albumPhotos);
+                    initGallery();
+                } catch (error) {
+                    console.error('Error in gallery initialization:', error);
+                }
             }, 500);
             // 계좌 정보 로드
-            loadAccountInfo();
+            try {
+                if (typeof loadAccountInfo === 'function') {
+                    loadAccountInfo();
+                } else {
+                    console.warn('loadAccountInfo function not yet defined');
+                }
+            } catch (error) {
+                console.error('Error in loadAccountInfo:', error);
+            }
             // 미니게임 초기화 - Firebase 함수가 정의된 후 약간의 지연
             setTimeout(() => {
                 if (window.initMiniGame) {
