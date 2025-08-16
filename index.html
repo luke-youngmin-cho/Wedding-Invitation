@@ -1204,9 +1204,9 @@
         
         // GitHub Pages 배포 시 경로 처리 - 더 정확한 방법
         function getAlbumPhotos() {
-            // GitHub Pages 체크 - pathname도 확인
-            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io' || 
-                                  window.location.pathname.includes('/Wedding-Invitation');
+            // GitHub Pages 체크 - hostname으로만 판단
+            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
+            // 로컬에서는 빈 문자열, GitHub Pages에서만 /Wedding-Invitation 추가
             const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
             
             console.log('=== Album Path Builder ===');
