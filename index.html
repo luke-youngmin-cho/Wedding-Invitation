@@ -84,7 +84,7 @@
 
         <!-- 메인 사진 -->
         <section class="main-photo special-border">
-            <img src="./assets/main.jpg" alt="신랑 신부 사진" id="mainPhoto" onerror="console.error('Failed to load main photo'); this.src='./assets/main.JPG';">
+            <img src="./assets/main_retro.png" alt="신랑 신부 사진" id="mainPhoto" onerror="console.error('Failed to load main photo'); this.src='./assets/main_retro.png';">
         </section>
 
         <!-- 모던 결혼식 정보 -->
@@ -807,7 +807,7 @@
         let currentTheme = 'modern';
         
         // 앨범 사진 경로 함수를 먼저 정의
-        function getAlbumPhotos() {
+        function getAlbumPhotos(isRetro = false) {
             // GitHub Pages 체크 - hostname으로만 판단
             const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
             // 로컬에서는 빈 문자열, GitHub Pages에서만 /Wedding-Invitation 추가
@@ -818,21 +818,27 @@
             console.log('Pathname:', window.location.pathname);
             console.log('Is GitHub Pages:', isGitHubPages);
             console.log('Base URL:', baseUrl);
+            console.log('Is Retro Theme:', isRetro);
+            
+            // 레트로 테마용 사진과 모던 테마용 사진 구분
+            const folder = isRetro ? 'AlbumSlidesRetro' : 'AlbumSlides';
+            const extension = isRetro ? 'png' : 'jpg';
             
             const paths = [
-                `${baseUrl}/assets/AlbumSlides/album1.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album2.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album3.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album4.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album5.jpg`
+                `${baseUrl}/assets/${folder}/album1.${extension}`,
+                `${baseUrl}/assets/${folder}/album2.${extension}`,
+                `${baseUrl}/assets/${folder}/album3.${extension}`,
+                `${baseUrl}/assets/${folder}/album4.${extension}`,
+                `${baseUrl}/assets/${folder}/album5.${extension}`
             ];
             
             console.log('Generated paths:', paths);
             return paths;
         }
         
-        // 동적으로 경로 생성
-        let albumPhotos = getAlbumPhotos();
+        // 동적으로 경로 생성 (기본은 모던 테마)
+        let albumPhotos = getAlbumPhotos(false);
+        let retroAlbumPhotos = getAlbumPhotos(true);
         
         // 페이지 로드시 초기화
         document.addEventListener('DOMContentLoaded', function() {
@@ -925,10 +931,10 @@
             // 레트로 갤러리 재초기화
             setTimeout(() => {
                 const photoTrack2 = document.getElementById('photoTrack2');
-                if (photoTrack2 && albumPhotos) {
+                if (photoTrack2 && retroAlbumPhotos) {
                     console.log('Reinitializing retro gallery after theme switch');
                     photoTrack2.innerHTML = '';
-                    albumPhotos.forEach((photo, index) => {
+                    retroAlbumPhotos.forEach((photo, index) => {
                         const slide = document.createElement('div');
                         slide.className = 'photo-slide';
                         const img = document.createElement('img');
@@ -1258,8 +1264,10 @@
             console.log('Current hostname:', window.location.hostname);
             
             // 갤러리 초기화 시점에 경로 재확인
-            albumPhotos = getAlbumPhotos();
-            console.log('Album photos array at init:', albumPhotos);
+            albumPhotos = getAlbumPhotos(false);  // 모던 테마용
+            retroAlbumPhotos = getAlbumPhotos(true);  // 레트로 테마용
+            console.log('Modern album photos:', albumPhotos);
+            console.log('Retro album photos:', retroAlbumPhotos);
             
             // 모던 테마 갤러리
             const photoTrack = document.getElementById('photoTrack');
@@ -1323,7 +1331,7 @@
                 // Clear any existing content
                 photoTrack2.innerHTML = '';
                 
-                albumPhotos.forEach((photo, index) => {
+                retroAlbumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
                     const img = document.createElement('img');
