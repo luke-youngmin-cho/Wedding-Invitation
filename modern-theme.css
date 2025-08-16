@@ -853,6 +853,33 @@ button:hover {
   margin: 10px;
 }
 
+/* Button Responsive Font Sizes - based on container width */
+button {
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
+}
+
+.game-mode-btn {
+  font-size: clamp(0.7rem, 2.5vw, 0.95rem) !important;
+}
+
+.contact-btn, .retro-contact-btn {
+  font-size: clamp(0.65rem, 2vw, 0.85rem) !important;
+}
+
+.slider-btn {
+  font-size: clamp(0.7rem, 2.5vw, 0.95rem) !important;
+}
+
+.share-btn {
+  font-size: clamp(0.75rem, 3vw, 1rem) !important;
+}
+
+/* Small buttons get smaller text */
+button[style*="padding: 8px"],
+button[style*="padding: 6px"] {
+  font-size: clamp(0.6rem, 2vw, 0.8rem) !important;
+}
+
 /* Parent Contact Responsive Layout */
 .parent-contact-wrapper {
   margin-top: 15px;
