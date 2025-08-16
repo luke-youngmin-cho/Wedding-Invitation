@@ -697,7 +697,9 @@ body::before {
   overflow: hidden;
   border: 6px solid var(--pixel-pink);
   background: var(--pixel-dark);
-  height: 500px;
+  height: auto;
+  min-height: 400px;
+  max-height: 70vh;
   cursor: pointer;
   box-shadow: 
     inset 0 0 0 2px var(--pixel-dark),
@@ -712,21 +714,25 @@ body::before {
 
 .photo-slide {
   min-width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 400px;
+  max-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 20px;
 }
 
 .photo-slide img {
   width: auto;
   height: auto;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: calc(100% - 40px);
+  max-height: calc(70vh - 40px);
   object-fit: contain;
   background: var(--pixel-dark);
   filter: contrast(1.2) brightness(1.1);
+  display: block;
 }
 
 /* Retro Slider Controls */
