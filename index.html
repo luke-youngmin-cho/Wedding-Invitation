@@ -17,9 +17,6 @@
     <!-- Press Start 2P Font for transition panel -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
-    <!-- Kakao SDK for sharing (Optional - will fallback if not loaded) -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js" defer></script>
-    
     <!-- Load Configuration -->
     <script src="js/config.js"></script>
     <!-- Load Mini Game -->
@@ -579,7 +576,7 @@
         
         <!-- 레트로 참석 여부 -->
         <section class="attendance retro-section" style="display: none; text-align: center; padding: 40px 0;">
-            <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px; white-space: nowrap; min-width: 200px;" class="special-border">
+            <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px;" class="special-border">
                 🎮 JOIN GAME 🎮
             </button>
         </section>
@@ -806,34 +803,6 @@
         // 테마 관리
         let currentTheme = 'modern';
         
-        // 앨범 사진 경로 함수를 먼저 정의
-        function getAlbumPhotos() {
-            // GitHub Pages 체크 - hostname으로만 판단
-            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
-            // 로컬에서는 빈 문자열, GitHub Pages에서만 /Wedding-Invitation 추가
-            const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
-            
-            console.log('=== Album Path Builder ===');
-            console.log('Hostname:', window.location.hostname);
-            console.log('Pathname:', window.location.pathname);
-            console.log('Is GitHub Pages:', isGitHubPages);
-            console.log('Base URL:', baseUrl);
-            
-            const paths = [
-                `${baseUrl}/assets/AlbumSlides/album1.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album2.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album3.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album4.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album5.jpg`
-            ];
-            
-            console.log('Generated paths:', paths);
-            return paths;
-        }
-        
-        // 동적으로 경로 생성
-        let albumPhotos = getAlbumPhotos();
-        
         // 페이지 로드시 초기화
         document.addEventListener('DOMContentLoaded', function() {
             // 모던 테마로 시작
@@ -915,9 +884,6 @@
             
             currentTheme = 'retro';
             
-            // Add body class for retro theme
-            document.body.classList.add('retro-active');
-            
             // 섹션 전환
             switchSections('retro');
             
@@ -949,9 +915,6 @@
             retroStyles.disabled = true;
             
             currentTheme = 'modern';
-            
-            // Remove body class for retro theme
-            document.body.classList.remove('retro-active');
             
             // 섹션 전환
             switchSections('modern');
@@ -1240,14 +1203,40 @@
         let currentPhotoIndex = 0;
         
         // GitHub Pages 배포 시 경로 처리 - 더 정확한 방법
+        function getAlbumPhotos() {
+            // GitHub Pages 체크 - hostname으로만 판단
+            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
+            // 로컬에서는 빈 문자열, GitHub Pages에서만 /Wedding-Invitation 추가
+            const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
+            
+            console.log('=== Album Path Builder ===');
+            console.log('Hostname:', window.location.hostname);
+            console.log('Pathname:', window.location.pathname);
+            console.log('Is GitHub Pages:', isGitHubPages);
+            console.log('Base URL:', baseUrl);
+            
+            const paths = [
+                `${baseUrl}/assets/AlbumSlides/album1.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album2.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album3.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album4.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album5.jpg`
+            ];
+            
+            console.log('Generated paths:', paths);
+            return paths;
+        }
+        
+        // 동적으로 경로 생성
+        const albumPhotos = getAlbumPhotos();
 
         function initGallery() {
             console.log('=== Gallery Initialization Start ===');
             console.log('Current hostname:', window.location.hostname);
             
             // 갤러리 초기화 시점에 경로 재확인
-            albumPhotos = getAlbumPhotos(); // 전역 변수 업데이트
-            console.log('Album photos array at init:', albumPhotos);
+            const currentAlbumPhotos = getAlbumPhotos();
+            console.log('Album photos array at init:', currentAlbumPhotos);
             
             // 모던 테마 갤러리
             const photoTrack = document.getElementById('photoTrack');
@@ -1261,7 +1250,7 @@
             if (photoTrack) {
                 console.log('Cleared photoTrack content');
                 
-                albumPhotos.forEach((photo, index) => {
+                currentAlbumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
                     const img = document.createElement('img');
@@ -1311,7 +1300,7 @@
                 // Clear any existing content
                 photoTrack2.innerHTML = '';
                 
-                albumPhotos.forEach((photo, index) => {
+                currentAlbumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
                     const img = document.createElement('img');
@@ -1550,86 +1539,10 @@
         }
         
         function shareKakao() {
-            // Check if Kakao SDK is loaded
-            if (typeof Kakao === 'undefined') {
-                // Fallback to copy text if Kakao SDK is not loaded
-                console.log('Kakao SDK not loaded, using fallback');
-                copyShareText();
-                return;
-            }
-            
-            try {
-                // Initialize Kakao SDK if not already initialized
-                if (!Kakao.isInitialized()) {
-                    // You need to register your app at https://developers.kakao.com
-                    // and get a JavaScript key
-                    const kakaoKey = 'YOUR_KAKAO_JAVASCRIPT_KEY'; // Replace with your actual key
-                    
-                    if (kakaoKey === 'YOUR_KAKAO_JAVASCRIPT_KEY') {
-                        // If key is not set, show URL copy as fallback
-                        copyShareText();
-                        return;
-                    }
-                    
-                    Kakao.init(kakaoKey);
-                }
-                
-                const isRetro = currentTheme === 'retro';
-                
-                // Share via KakaoTalk
-                Kakao.Share.sendDefault({
-                    objectType: 'feed',
-                    content: {
-                        title: isRetro ? 
-                            '👾 WEDDING QUEST: CHAERIN & YOUNGMIN 👾' : 
-                            '권채린 ❤️ 조영민 결혼합니다',
-                        description: isRetro ? 
-                            '2025.09.27 SAT 11:00 AM\n켄싱턴호텔 여의도\n\n🎮 JOIN OUR ADVENTURE! 🎮' : 
-                            '2025년 9월 27일 토요일 오전 11시\n켄싱턴호텔 여의도\n\n소중한 분들을 초대합니다 💐',
-                        imageUrl: window.location.origin + '/Wedding-Invitation/assets/mainphoto.jpg',
-                        link: {
-                            mobileWebUrl: window.location.href,
-                            webUrl: window.location.href
-                        }
-                    },
-                    buttons: [
-                        {
-                            title: isRetro ? 'ENTER GAME' : '초대장 보기',
-                            link: {
-                                mobileWebUrl: window.location.href,
-                                webUrl: window.location.href
-                            }
-                        }
-                    ]
-                });
-            } catch (error) {
-                console.error('Kakao share error:', error);
-                const message = currentTheme === 'retro' ? 
-                    'SHARE ERROR - CHECK CONSOLE!' : 
-                    '공유 중 오류가 발생했습니다.';
-                alert(message);
-            }
-        }
-        
-        // Fallback function to copy share text
-        function copyShareText() {
-            const url = window.location.href;
-            const text = currentTheme === 'retro' ? 
-                `👾 WEDDING QUEST: CHAERIN & YOUNGMIN 👾\n2025.09.27 SAT 11:00 AM\n켄싱턴호텔 여의도\n\n🎮 JOIN THE ADVENTURE: ${url}` : 
-                `권채린 ❤️ 조영민 결혼합니다\n2025년 9월 27일 토요일 오전 11시\n켄싱턴호텔 여의도\n\n초대장 보기: ${url}`;
-            
-            // Copy to clipboard
-            navigator.clipboard.writeText(text).then(() => {
-                const message = currentTheme === 'retro' ? 
-                    'INVITATION TEXT COPIED!\nPASTE IN KAKAOTALK!' : 
-                    '초대 메시지가 복사되었습니다!\n카카오톡에 붙여넣기 해주세요!';
-                alert(message);
-            }).catch(() => {
-                const message = currentTheme === 'retro' ? 
-                    'FAILED TO COPY - PLEASE TRY AGAIN!' : 
-                    '복사에 실패했습니다. 다시 시도해주세요.';
-                alert(message);
-            });
+            const message = currentTheme === 'retro' ? 
+                'KAKAO SHARE - COMING SOON!' : 
+                '카카오톡 공유 기능을 준비중입니다.';
+            alert(message);
         }
 
         // 방명록 페이지네이션 변수
