@@ -1,0 +1,248 @@
+/* ====================================
+   RESPONSIVE OVERRIDE STYLES
+   Horizontal Layout Based Scaling
+   ==================================== */
+
+/* Base HTML Font Size - All rem units scale from this */
+html {
+  font-size: clamp(10px, 2.5vw, 18px);
+}
+
+/* Modern Theme Responsive Overrides */
+.modern-section h1,
+.modern-section .wedding-title {
+  font-size: clamp(20px, 5vw, 36px) !important;
+  letter-spacing: clamp(1px, 0.3vw, 3px) !important;
+}
+
+.modern-section h2 {
+  font-size: clamp(16px, 3.5vw, 28px) !important;
+}
+
+.modern-section h3 {
+  font-size: clamp(14px, 3vw, 24px) !important;
+}
+
+.modern-section p,
+.modern-section div {
+  font-size: clamp(11px, 2.3vw, 16px) !important;
+}
+
+/* Button Responsive Scaling */
+button {
+  font-size: clamp(10px, 2.5vw, 16px) !important;
+  padding: clamp(8px, 1.5vw, 15px) clamp(15px, 3vw, 40px) !important;
+  white-space: nowrap !important;
+}
+
+.game-mode-btn {
+  font-size: clamp(10px, 2.3vw, 14px) !important;
+  padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2.5vw, 20px) !important;
+}
+
+.contact-btn {
+  font-size: clamp(9px, 2vw, 13px) !important;
+  padding: clamp(6px, 1.2vw, 8px) clamp(10px, 2vw, 12px) !important;
+}
+
+.slider-btn {
+  font-size: clamp(10px, 2.3vw, 14px) !important;
+  padding: clamp(8px, 1.8vw, 12px) clamp(15px, 2.8vw, 24px) !important;
+}
+
+.share-btn {
+  font-size: clamp(11px, 2.8vw, 16px) !important;
+  padding: clamp(12px, 2.5vw, 20px) clamp(20px, 4vw, 40px) !important;
+}
+
+/* Calendar Responsive */
+.calendar-header {
+  font-size: clamp(9px, 1.8vw, 12px) !important;
+  padding: clamp(4px, 0.8vw, 10px) !important;
+}
+
+.calendar-day {
+  font-size: clamp(10px, 2vw, 14px) !important;
+  padding: clamp(4px, 0.8vw, 10px) !important;
+}
+
+/* Photo Counter */
+#photoCounter,
+#photoCounter2 {
+  font-size: clamp(11px, 2.3vw, 16px) !important;
+}
+
+/* Guestbook */
+.guest-name {
+  font-size: clamp(11px, 2.3vw, 16px) !important;
+}
+
+.guest-message {
+  font-size: clamp(10px, 2vw, 14px) !important;
+}
+
+/* Modal Content */
+.modal-content h3 {
+  font-size: clamp(14px, 3vw, 24px) !important;
+}
+
+.modal-content label {
+  font-size: clamp(10px, 2vw, 14px) !important;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  font-size: clamp(10px, 2vw, 14px) !important;
+  padding: clamp(8px, 1.5vw, 12px) !important;
+}
+
+/* Account Info */
+.account-group h4 {
+  font-size: clamp(12px, 2.5vw, 18px) !important;
+}
+
+.account-item div {
+  font-size: clamp(10px, 2vw, 14px) !important;
+}
+
+/* Retro Theme Responsive Overrides */
+.retro-section {
+  font-size: clamp(10px, 2.3vw, 14px) !important;
+}
+
+.retro-section h1 {
+  font-size: clamp(16px, 4vw, 32px) !important;
+}
+
+.retro-section h2 {
+  font-size: clamp(14px, 3.5vw, 24px) !important;
+}
+
+.retro-section h3 {
+  font-size: clamp(12px, 3vw, 20px) !important;
+}
+
+.retro-section button {
+  font-size: clamp(9px, 2.2vw, 14px) !important;
+  padding: clamp(10px, 2vw, 16px) clamp(15px, 3vw, 24px) !important;
+}
+
+.retro-contact-btn {
+  font-size: clamp(8px, 1.8vw, 12px) !important;
+  padding: clamp(6px, 1.2vw, 10px) clamp(8px, 1.8vw, 15px) !important;
+}
+
+/* Title Section Special */
+.title-section .wedding-title {
+  font-size: clamp(18px, 4.5vw, 36px) !important;
+}
+
+.title-section .subtitle {
+  font-size: clamp(11px, 2.5vw, 18px) !important;
+}
+
+.celebrate-text {
+  font-size: clamp(16px, 4vw, 32px) !important;
+}
+
+/* Wedding Info Section */
+.wedding-info .date {
+  font-size: clamp(14px, 3.5vw, 24px) !important;
+}
+
+.wedding-info .time,
+.wedding-info .venue {
+  font-size: clamp(12px, 2.5vw, 18px) !important;
+}
+
+/* Invitation Message */
+.invitation-msg p {
+  font-size: clamp(11px, 2.3vw, 16px) !important;
+  line-height: 1.8 !important;
+}
+
+/* Container Width Control */
+.container {
+  width: 100%;
+  max-width: min(480px, 100vw);
+  margin: 0 auto;
+}
+
+/* Prevent Text Wrapping on Small Screens */
+@media (max-width: 480px) {
+  .wedding-title,
+  .celebrate-text {
+    white-space: normal !important;
+    word-break: keep-all !important;
+  }
+  
+  button {
+    font-size: clamp(9px, 3vw, 14px) !important;
+  }
+}
+
+/* Ensure Minimum Readable Sizes */
+* {
+  min-font-size: 9px;
+}
+
+/* Panel and Section Padding Responsive */
+section {
+  padding: clamp(20px, 4vw, 60px) clamp(15px, 3vw, 30px) !important;
+}
+
+.modal-content {
+  padding: clamp(20px, 4vw, 40px) !important;
+}
+
+.account-group,
+.guestbook-page-container {
+  padding: clamp(15px, 3vw, 30px) !important;
+}
+
+/* Fix Photo Gallery Responsive */
+.photo-slider {
+  min-height: clamp(250px, 50vw, 400px) !important;
+  max-height: clamp(300px, 60vw, 70vh) !important;
+}
+
+.photo-slide {
+  min-height: clamp(250px, 50vw, 400px) !important;
+  max-height: clamp(300px, 60vw, 70vh) !important;
+}
+
+/* Ensure Retro Theme Elements Scale */
+.pixel-heart {
+  width: clamp(16px, 3vw, 24px) !important;
+  height: clamp(16px, 3vw, 24px) !important;
+  margin: 0 clamp(6px, 1.5vw, 10px) !important;
+}
+
+.pixel-icon {
+  width: clamp(20px, 4vw, 32px) !important;
+  height: clamp(20px, 4vw, 32px) !important;
+}
+
+/* Force Horizontal Layout Priority */
+@media (orientation: landscape) {
+  html {
+    font-size: clamp(8px, 2vh, 16px);
+  }
+  
+  button {
+    font-size: clamp(8px, 2vh, 14px) !important;
+    padding: clamp(6px, 1.2vh, 12px) clamp(12px, 2.5vh, 30px) !important;
+  }
+}
+
+/* Ultra-wide Screen Support */
+@media (min-width: 1920px) {
+  html {
+    font-size: 16px;
+  }
+  
+  .container {
+    max-width: 600px;
+  }
+}

@@ -14,6 +14,9 @@
     <!-- Retro Game Style (Disabled by default) -->
     <link rel="stylesheet" href="retro-final.css" id="retro-styles" disabled>
     
+    <!-- Responsive Override Styles -->
+    <link rel="stylesheet" href="responsive-override.css">
+    
     <!-- Press Start 2P Font for transition panel -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
@@ -919,6 +922,24 @@
             createFireworks();
             createFloatingHearts();
             
+            // 레트로 갤러리 재초기화
+            setTimeout(() => {
+                const photoTrack2 = document.getElementById('photoTrack2');
+                if (photoTrack2 && albumPhotos) {
+                    console.log('Reinitializing retro gallery after theme switch');
+                    photoTrack2.innerHTML = '';
+                    albumPhotos.forEach((photo, index) => {
+                        const slide = document.createElement('div');
+                        slide.className = 'photo-slide';
+                        const img = document.createElement('img');
+                        img.src = photo;
+                        img.alt = `웨딩 사진 ${index + 1}`;
+                        slide.appendChild(img);
+                        photoTrack2.appendChild(slide);
+                    });
+                }
+            }, 100);
+            
             // Portal 전환 (핑크 숨기고 흰색 표시)
             if (portalTrigger) {
                 portalTrigger.style.display = 'none';
@@ -1308,10 +1329,21 @@
                     const img = document.createElement('img');
                     img.src = photo;
                     img.alt = `웨딩 사진 ${index + 1}`;
+                    
+                    // Add error handling for retro gallery
+                    img.onerror = function() {
+                        console.error(`Retro gallery - Failed to load image ${index + 1}:`, this.src);
+                    };
+                    img.onload = function() {
+                        console.log(`Retro gallery - Image ${index + 1} loaded successfully`);
+                    };
+                    
                     slide.appendChild(img);
                     photoTrack2.appendChild(slide);
                 });
                 console.log('All slides added to retro gallery');
+            } else {
+                console.warn('PhotoTrack2 element not found - retro gallery section might be hidden')
             }
             
             updatePhotoCounter();
