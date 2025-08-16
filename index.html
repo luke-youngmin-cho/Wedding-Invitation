@@ -84,7 +84,7 @@
 
         <!-- 메인 사진 -->
         <section class="main-photo special-border">
-            <img src="./assets/main_retro.jpg" alt="신랑 신부 사진" id="mainPhoto" onerror="console.error('Failed to load main photo'); this.src='./assets/main_retro.jpg';">
+            <img src="./assets/main.jpg" alt="신랑 신부 사진" id="mainPhoto" onerror="console.error('Failed to load main photo'); this.src='./assets/main.jpg';">
         </section>
 
         <!-- 모던 결혼식 정보 -->
@@ -354,7 +354,7 @@
             <div style="text-align: center; margin-bottom: 15px; font-size: 12px;">
                 ※ 사진을 클릭하시면 크게 보실 수 있습니다 ※
             </div>
-            <div class="photo-slider" id="photoSlider" onclick="openCurrentPhoto()">
+            <div class="photo-slider" id="photoSlider">
                 <div class="photo-track" id="photoTrack">
                     <!-- 사진들이 여기에 로드됩니다 -->
                 </div>
@@ -378,8 +378,8 @@
             <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: var(--pixel-yellow);">
                 ※ CLICK TO ZOOM ※
             </div>
-            <div class="photo-slider" id="photoSlider2" onclick="openCurrentPhoto()">
-                <div class="photo-track" id="photoTrack2">
+            <div class="photo-slider retro-photo-slider" id="photoSlider2">
+                <div class="photo-track retro-photo-track" id="photoTrack2">
                     <!-- 사진들이 여기에 로드됩니다 -->
                 </div>
             </div>
@@ -824,12 +824,14 @@
             const folder = isRetro ? 'AlbumSlidesRetro' : 'AlbumSlides';
             const extension = isRetro ? 'png' : 'jpg';
             
+            // baseUrl이 있으면 /를 포함, 없으면 상대 경로로
+            const pathPrefix = baseUrl ? `${baseUrl}/` : '';
             const paths = [
-                `${baseUrl}/assets/${folder}/album1.${extension}`,
-                `${baseUrl}/assets/${folder}/album2.${extension}`,
-                `${baseUrl}/assets/${folder}/album3.${extension}`,
-                `${baseUrl}/assets/${folder}/album4.${extension}`,
-                `${baseUrl}/assets/${folder}/album5.${extension}`
+                `${pathPrefix}assets/${folder}/album1.${extension}`,
+                `${pathPrefix}assets/${folder}/album2.${extension}`,
+                `${pathPrefix}assets/${folder}/album3.${extension}`,
+                `${pathPrefix}assets/${folder}/album4.${extension}`,
+                `${pathPrefix}assets/${folder}/album5.${extension}`
             ];
             
             console.log('Generated paths:', paths);
@@ -921,6 +923,17 @@
             
             currentTheme = 'retro';
             
+            // body 클래스 추가
+            document.body.classList.add('retro-active');
+            
+            // 메인 사진 변경
+            const mainPhoto = document.getElementById('mainPhoto');
+            if (mainPhoto) {
+                const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
+                const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
+                mainPhoto.src = `${baseUrl ? baseUrl + '/' : ''}assets/main_retro.jpg`;
+            }
+            
             // 섹션 전환
             switchSections('retro');
             
@@ -937,6 +950,7 @@
                     retroAlbumPhotos.forEach((photo, index) => {
                         const slide = document.createElement('div');
                         slide.className = 'photo-slide';
+                        if (index === 0) slide.classList.add('active');
                         const img = document.createElement('img');
                         img.src = photo;
                         img.alt = `웨딩 사진 ${index + 1}`;
@@ -945,7 +959,6 @@
                     });
                     // 인덱스 리셋
                     currentPhotoIndex = 0;
-                    photoTrack2.style.transform = 'translateX(0)';
                     updatePhotoCounter();
                 }
             }, 100);
@@ -974,6 +987,17 @@
             retroStyles.disabled = true;
             
             currentTheme = 'modern';
+            
+            // body 클래스 제거
+            document.body.classList.remove('retro-active');
+            
+            // 메인 사진 변경
+            const mainPhoto = document.getElementById('mainPhoto');
+            if (mainPhoto) {
+                const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
+                const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
+                mainPhoto.src = `${baseUrl ? baseUrl + '/' : ''}assets/main.jpg`;
+            }
             
             // 섹션 전환
             switchSections('modern');
@@ -1265,124 +1289,92 @@
 
         function initGallery() {
             console.log('=== Gallery Initialization Start ===');
-            console.log('Current hostname:', window.location.hostname);
             
             // 갤러리 초기화 시점에 경로 재확인
             albumPhotos = getAlbumPhotos(false);  // 모던 테마용
             retroAlbumPhotos = getAlbumPhotos(true);  // 레트로 테마용
-            console.log('Modern album photos:', albumPhotos);
-            console.log('Retro album photos:', retroAlbumPhotos);
             
             // 모던 테마 갤러리
             const photoTrack = document.getElementById('photoTrack');
-            console.log('PhotoTrack element found:', photoTrack);
-            
-            // 강제로 모든 기존 내용 제거
-            while (photoTrack && photoTrack.firstChild) {
-                photoTrack.removeChild(photoTrack.firstChild);
-            }
-            
             if (photoTrack) {
-                console.log('Cleared photoTrack content');
+                photoTrack.innerHTML = '';
                 
                 albumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
+                    if (index === 0) slide.classList.add('active'); // 첫 번째 슬라이드 활성화
+                    
                     const img = document.createElement('img');
-                    
-                    // 명시적으로 경로 설정 및 로깅
-                    const imagePath = photo;
-                    console.log(`Setting image ${index + 1} src to:`, imagePath);
-                    img.src = imagePath;
+                    img.src = photo;
                     img.alt = `웨딩 사진 ${index + 1}`;
+                    img.style.cursor = 'pointer';
+                    img.onclick = openCurrentPhoto;
                     
-                    // 이미지 속성 확인
-                    img.setAttribute('data-original-src', imagePath);
-                    
-                    img.onerror = function() {
-                        console.error(`Failed to load image ${index + 1}:`, this.src);
-                        console.error(`Original path was:`, imagePath);
-                        this.style.display = 'none';
-                        // Try to show a placeholder
-                        const placeholder = document.createElement('div');
-                        placeholder.style.width = '100%';
-                        placeholder.style.height = '100%';
-                        placeholder.style.background = '#f0f0f0';
-                        placeholder.style.display = 'flex';
-                        placeholder.style.alignItems = 'center';
-                        placeholder.style.justifyContent = 'center';
-                        placeholder.textContent = `Image ${index + 1} failed to load: ${imagePath}`;
-                        slide.appendChild(placeholder);
-                    };
-                    img.onload = function() {
-                        console.log(`Image ${index + 1} loaded successfully:`, this.src);
-                        console.log(`Actual src attribute:`, this.getAttribute('src'));
-                    };
                     slide.appendChild(img);
                     photoTrack.appendChild(slide);
-                    console.log(`Added slide ${index + 1} to photoTrack with src:`, img.src);
                 });
-                console.log('All slides added to modern gallery');
-            } else {
-                console.error('PhotoTrack element not found!');
             }
             
-            // 레트로 테마 갤러리 (동일한 사진)
+            // 레트로 테마 갤러리
             const photoTrack2 = document.getElementById('photoTrack2');
-            console.log('PhotoTrack2 element found:', photoTrack2);
-            
             if (photoTrack2) {
-                // Clear any existing content
                 photoTrack2.innerHTML = '';
                 
                 retroAlbumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
+                    if (index === 0) slide.classList.add('active'); // 첫 번째 슬라이드 활성화
+                    
                     const img = document.createElement('img');
                     img.src = photo;
                     img.alt = `웨딩 사진 ${index + 1}`;
-                    
-                    // Add error handling for retro gallery
-                    img.onerror = function() {
-                        console.error(`Retro gallery - Failed to load image ${index + 1}:`, this.src);
-                    };
-                    img.onload = function() {
-                        console.log(`Retro gallery - Image ${index + 1} loaded successfully`);
-                    };
+                    img.style.cursor = 'pointer';
+                    img.onclick = openCurrentPhoto;
                     
                     slide.appendChild(img);
                     photoTrack2.appendChild(slide);
                 });
-                console.log('All slides added to retro gallery');
-            } else {
-                console.warn('PhotoTrack2 element not found - retro gallery section might be hidden')
             }
             
             updatePhotoCounter();
             console.log('=== Gallery Initialization Complete ===');
         }
 
-        function nextPhoto() {
+        // 새로운 슬라이드 전환 함수
+        function showSlide(index) {
             const track = document.getElementById('photoTrack');
             const track2 = document.getElementById('photoTrack2');
+            
+            // 모던 갤러리 업데이트
+            if (track) {
+                const slides = track.querySelectorAll('.photo-slide');
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+            
+            // 레트로 갤러리 업데이트
+            if (track2) {
+                const slides = track2.querySelectorAll('.photo-slide');
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+        }
+
+        function nextPhoto() {
             const photosLength = currentTheme === 'retro' ? retroAlbumPhotos.length : albumPhotos.length;
             currentPhotoIndex = (currentPhotoIndex + 1) % photosLength;
             
-            if (track) track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
-            if (track2) track2.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
-            
+            showSlide(currentPhotoIndex);
             updatePhotoCounter();
         }
 
         function previousPhoto() {
-            const track = document.getElementById('photoTrack');
-            const track2 = document.getElementById('photoTrack2');
             const photosLength = currentTheme === 'retro' ? retroAlbumPhotos.length : albumPhotos.length;
             currentPhotoIndex = (currentPhotoIndex - 1 + photosLength) % photosLength;
             
-            if (track) track.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
-            if (track2) track2.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
-            
+            showSlide(currentPhotoIndex);
             updatePhotoCounter();
         }
 
@@ -1400,7 +1392,9 @@
             const modal = document.getElementById('photoModal');
             const modalImg = document.getElementById('modalPhoto');
             modal.style.display = 'block';
-            modalImg.src = albumPhotos[currentPhotoIndex];
+            // 현재 테마에 따라 올바른 사진 배열 사용
+            const photos = currentTheme === 'retro' ? retroAlbumPhotos : albumPhotos;
+            modalImg.src = photos[currentPhotoIndex];
         }
 
         // 사진 확대 모달
