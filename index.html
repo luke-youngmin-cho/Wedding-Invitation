@@ -346,12 +346,12 @@
             </div>
         </section>
 
-        <!-- 모던 사진 갤러리 -->
-        <section class="photo-album modern-section">
-            <h3 style="font-size: 18px; text-align: center;">
+        <!-- 통합 사진 갤러리 -->
+        <section class="photo-album" id="photoAlbumSection">
+            <h3 id="galleryTitle" style="font-size: 18px; text-align: center;">
                 사진 갤러리
             </h3>
-            <div style="text-align: center; margin-bottom: 15px; font-size: 12px;">
+            <div id="galleryDescription" style="text-align: center; margin-bottom: 15px; font-size: 12px;">
                 ※ 사진을 클릭하시면 크게 보실 수 있습니다 ※
             </div>
             <div class="photo-slider" id="photoSlider">
@@ -360,36 +360,12 @@
                 </div>
             </div>
             <div class="slider-controls">
-                <button class="slider-btn" onclick="previousPhoto(); event.stopPropagation();">
+                <button class="slider-btn" id="prevBtn" onclick="previousPhoto(); event.stopPropagation();">
                     ◀ 이전
                 </button>
                 <span id="photoCounter">1 / 5</span>
-                <button class="slider-btn" onclick="nextPhoto(); event.stopPropagation();">
+                <button class="slider-btn" id="nextBtn" onclick="nextPhoto(); event.stopPropagation();">
                     다음 ▶
-                </button>
-            </div>
-        </section>
-        
-        <!-- 레트로 사진 갤러리 -->
-        <section class="photo-album retro-section" style="display: none;">
-            <h3 style="font-size: 18px;">
-                <span class="pixel-icon pixel-icon-photo"></span> PHOTO GALLERY <span class="pixel-icon pixel-icon-photo"></span>
-            </h3>
-            <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: var(--pixel-yellow);">
-                ※ CLICK TO ZOOM ※
-            </div>
-            <div class="photo-slider retro-photo-slider" id="photoSlider2">
-                <div class="photo-track retro-photo-track" id="photoTrack2">
-                    <!-- 사진들이 여기에 로드됩니다 -->
-                </div>
-            </div>
-            <div class="slider-controls">
-                <button class="slider-btn" onclick="previousPhoto(); event.stopPropagation();">
-                    ◀ PREV
-                </button>
-                <span id="photoCounter2">1 / 5</span>
-                <button class="slider-btn" onclick="nextPhoto(); event.stopPropagation();">
-                    NEXT ▶
                 </button>
             </div>
         </section>
@@ -941,27 +917,21 @@
             createFireworks();
             createFloatingHearts();
             
-            // 레트로 갤러리 재초기화
-            setTimeout(() => {
-                const photoTrack2 = document.getElementById('photoTrack2');
-                if (photoTrack2 && retroAlbumPhotos) {
-                    console.log('Reinitializing retro gallery after theme switch');
-                    photoTrack2.innerHTML = '';
-                    retroAlbumPhotos.forEach((photo, index) => {
-                        const slide = document.createElement('div');
-                        slide.className = 'photo-slide';
-                        if (index === 0) slide.classList.add('active');
-                        const img = document.createElement('img');
-                        img.src = photo;
-                        img.alt = `웨딩 사진 ${index + 1}`;
-                        slide.appendChild(img);
-                        photoTrack2.appendChild(slide);
-                    });
-                    // 인덱스 리셋
-                    currentPhotoIndex = 0;
-                    updatePhotoCounter();
-                }
-            }, 100);
+            // 갤러리 UI 텍스트 변경
+            document.getElementById('galleryTitle').innerHTML = '<span class="pixel-icon pixel-icon-photo"></span> PHOTO GALLERY <span class="pixel-icon pixel-icon-photo"></span>';
+            document.getElementById('galleryDescription').innerHTML = '※ CLICK TO ZOOM ※';
+            document.getElementById('galleryDescription').style.color = 'var(--pixel-yellow)';
+            document.getElementById('prevBtn').innerHTML = '◀ PREV';
+            document.getElementById('nextBtn').innerHTML = 'NEXT ▶';
+            
+            // 레트로 갤러리로 변경
+            const photoSlider = document.getElementById('photoSlider');
+            photoSlider.classList.add('retro-photo-slider');
+            const photoTrack = document.getElementById('photoTrack');
+            photoTrack.classList.add('retro-photo-track');
+            
+            // 레트로 이미지로 재초기화
+            updateGalleryImages('retro');
             
             // Portal 전환 (핑크 숨기고 흰색 표시)
             if (portalTrigger) {
@@ -1004,6 +974,22 @@
             
             // 레트로 효과 정지
             stopRetroEffects();
+            
+            // 갤러리 UI 텍스트 변경
+            document.getElementById('galleryTitle').innerHTML = '사진 갤러리';
+            document.getElementById('galleryDescription').innerHTML = '※ 사진을 클릭하시면 크게 보실 수 있습니다 ※';
+            document.getElementById('galleryDescription').style.color = '';
+            document.getElementById('prevBtn').innerHTML = '◀ 이전';
+            document.getElementById('nextBtn').innerHTML = '다음 ▶';
+            
+            // 모던 갤러리로 변경
+            const photoSlider = document.getElementById('photoSlider');
+            photoSlider.classList.remove('retro-photo-slider');
+            const photoTrack = document.getElementById('photoTrack');
+            photoTrack.classList.remove('retro-photo-track');
+            
+            // 모던 이미지로 재초기화
+            updateGalleryImages('modern');
             
             // Portal 전환 (흰색 숨기고 핑크 표시)
             if (returnPortal) {
@@ -1294,68 +1280,47 @@
             albumPhotos = getAlbumPhotos(false);  // 모던 테마용
             retroAlbumPhotos = getAlbumPhotos(true);  // 레트로 테마용
             
-            // 모던 테마 갤러리
-            const photoTrack = document.getElementById('photoTrack');
-            if (photoTrack) {
-                photoTrack.innerHTML = '';
-                
-                albumPhotos.forEach((photo, index) => {
-                    const slide = document.createElement('div');
-                    slide.className = 'photo-slide';
-                    if (index === 0) slide.classList.add('active'); // 첫 번째 슬라이드 활성화
-                    
-                    const img = document.createElement('img');
-                    img.src = photo;
-                    img.alt = `웨딩 사진 ${index + 1}`;
-                    img.style.cursor = 'pointer';
-                    img.onclick = openCurrentPhoto;
-                    
-                    slide.appendChild(img);
-                    photoTrack.appendChild(slide);
-                });
-            }
-            
-            // 레트로 테마 갤러리
-            const photoTrack2 = document.getElementById('photoTrack2');
-            if (photoTrack2) {
-                photoTrack2.innerHTML = '';
-                
-                retroAlbumPhotos.forEach((photo, index) => {
-                    const slide = document.createElement('div');
-                    slide.className = 'photo-slide';
-                    if (index === 0) slide.classList.add('active'); // 첫 번째 슬라이드 활성화
-                    
-                    const img = document.createElement('img');
-                    img.src = photo;
-                    img.alt = `웨딩 사진 ${index + 1}`;
-                    img.style.cursor = 'pointer';
-                    img.onclick = openCurrentPhoto;
-                    
-                    slide.appendChild(img);
-                    photoTrack2.appendChild(slide);
-                });
-            }
+            // 초기 테마(모던)로 갤러리 초기화
+            updateGalleryImages('modern');
             
             updatePhotoCounter();
             console.log('=== Gallery Initialization Complete ===');
+        }
+        
+        // 테마에 따라 갤러리 이미지 업데이트
+        function updateGalleryImages(theme) {
+            const photoTrack = document.getElementById('photoTrack');
+            if (!photoTrack) return;
+            
+            photoTrack.innerHTML = '';
+            currentPhotoIndex = 0; // 인덱스 리셋
+            
+            const photos = theme === 'retro' ? retroAlbumPhotos : albumPhotos;
+            
+            photos.forEach((photo, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'photo-slide';
+                if (index === 0) slide.classList.add('active'); // 첫 번째 슬라이드 활성화
+                
+                const img = document.createElement('img');
+                img.src = photo;
+                img.alt = `웨딩 사진 ${index + 1}`;
+                img.style.cursor = 'pointer';
+                img.onclick = openCurrentPhoto;
+                
+                slide.appendChild(img);
+                photoTrack.appendChild(slide);
+            });
+            
+            updatePhotoCounter();
         }
 
         // 새로운 슬라이드 전환 함수
         function showSlide(index) {
             const track = document.getElementById('photoTrack');
-            const track2 = document.getElementById('photoTrack2');
             
-            // 모던 갤러리 업데이트
             if (track) {
                 const slides = track.querySelectorAll('.photo-slide');
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-            }
-            
-            // 레트로 갤러리 업데이트
-            if (track2) {
-                const slides = track2.querySelectorAll('.photo-slide');
                 slides.forEach((slide, i) => {
                     slide.classList.toggle('active', i === index);
                 });
@@ -1381,13 +1346,11 @@
         }
 
         function updatePhotoCounter() {
-            const counter1 = document.getElementById('photoCounter');
-            const counter2 = document.getElementById('photoCounter2');
+            const counter = document.getElementById('photoCounter');
             const photosLength = currentTheme === 'retro' ? retroAlbumPhotos.length : albumPhotos.length;
             const text = `${currentPhotoIndex + 1} / ${photosLength}`;
             
-            if (counter1) counter1.textContent = text;
-            if (counter2) counter2.textContent = text;
+            if (counter) counter.textContent = text;
         }
 
         function openCurrentPhoto() {
