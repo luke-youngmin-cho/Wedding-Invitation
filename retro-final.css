@@ -694,12 +694,12 @@ body::before {
 
 .photo-slider {
   position: relative;
-  overflow: visible; /* 스크롤 대신 전체 보기 */
+  overflow: hidden; /* 슬라이더를 위한 overflow hidden */
   border: 6px solid var(--pixel-pink);
   background: var(--pixel-dark);
-  height: auto;
-  min-height: auto;
-  max-height: none; /* 높이 제한 제거 */
+  height: 500px; /* 고정 높이로 설정 */
+  min-height: 400px;
+  max-height: 80vh; /* 화면 크기에 따라 조정 */
   cursor: pointer;
   box-shadow: 
     inset 0 0 0 2px var(--pixel-dark),
@@ -707,34 +707,27 @@ body::before {
 }
 
 .photo-track {
-  display: block; /* 세로 레이아웃 */
-  height: auto;
-  transform: none !important; /* 슬라이드 비활성화 */
+  display: flex; /* 가로 슬라이드 */
+  height: 100%;
+  transition: transform 0.5s steps(8); /* Retro step animation */
 }
 
 .photo-slide {
-  width: 100%;
-  height: auto;
-  min-height: auto;
-  max-height: none;
-  display: block;
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   padding: 20px;
-  margin-bottom: 20px; /* 사진 간 간격 */
-  border-bottom: 2px dashed var(--pixel-pink);
-}
-
-.photo-slide:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
 }
 
 .photo-slide img {
-  width: 100%;
+  width: auto;
   height: auto;
-  max-width: 100%;
-  max-height: none;
-  object-fit: contain;
+  max-width: calc(100% - 40px);
+  max-height: calc(100% - 40px);
+  object-fit: contain; /* 이미지 전체가 보이도록 */
   background: var(--pixel-dark);
   filter: contrast(1.2) brightness(1.1);
   display: block;
