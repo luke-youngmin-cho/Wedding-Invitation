@@ -216,7 +216,7 @@ section {
 
 /* Fix Photo Gallery - 9:16 Ratio Responsive */
 .photo-album {
-  overflow: visible !important; /* 앨범 섹션 스크롤 방지 */
+  overflow: visible !important;
   max-height: none !important;
   display: flex !important;
   flex-direction: column !important;
@@ -225,18 +225,16 @@ section {
 
 .photo-slider {
   position: relative !important;
-  overflow: hidden !important; /* 슬라이더 기능을 위해 hidden */
   width: 100% !important;
-  max-width: min(450px, 90vw) !important; /* 반응형 최대 너비 */
-  margin: 0 auto !important;
-  height: auto !important; /* 높이는 비율로 결정 */
+  max-width: min(450px, 90vw) !important;
+  margin: 0 auto 20px !important;
 }
 
 /* 9:16 비율 유지 */
 .photo-slider::before {
   content: '' !important;
   display: block !important;
-  padding-top: 177.78% !important; /* 16/9 * 100% */
+  padding-top: 177.78% !important;
 }
 
 .photo-track {
@@ -245,24 +243,32 @@ section {
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  display: flex !important;
+  overflow: hidden !important;
 }
 
 .photo-slide {
-  min-width: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
   height: 100% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 20px !important;
+  opacity: 0 !important;
+}
+
+.photo-slide.active {
+  opacity: 1 !important;
 }
 
 .photo-slide img {
-  width: auto !important;
-  height: auto !important;
   max-width: calc(100% - 40px) !important;
   max-height: calc(100% - 40px) !important;
-  object-fit: contain !important; /* 이미지 전체가 보이도록 */
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
 
 /* Show slider controls */
@@ -279,6 +285,20 @@ section {
   width: clamp(16px, 3vw, 24px) !important;
   height: clamp(16px, 3vw, 24px) !important;
   margin: 0 clamp(6px, 1.5vw, 10px) !important;
+}
+
+/* Retro Theme Photo Album Fix */
+.retro-section .photo-album {
+  padding: 40px 10px !important;
+}
+
+.retro-photo-slider {
+  max-width: min(450px, 95vw) !important;
+  margin: 0 auto 20px !important;
+}
+
+.retro-photo-track .photo-slide {
+  background: var(--pixel-dark, #0a0a0a) !important;
 }
 
 .pixel-icon {

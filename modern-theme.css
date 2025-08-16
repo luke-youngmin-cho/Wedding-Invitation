@@ -485,53 +485,61 @@ body {
   color: var(--modern-dark);
 }
 
+/* 새로운 슬라이더 구조 */
 .photo-slider {
   position: relative;
-  overflow: hidden; /* 슬라이더를 위한 overflow hidden */
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto 20px;
+  background: var(--modern-light-gray);
   border-radius: 10px;
   box-shadow: var(--modern-shadow);
-  width: 100%;
-  max-width: 450px; /* 최대 너비 제한 */
-  margin: 0 auto 20px; /* 중앙 정렬 */
-  cursor: pointer;
-  background: var(--modern-light-gray);
 }
 
-/* 9:16 비율 유지를 위한 래퍼 */
+/* 9:16 비율 컨테이너 */
 .photo-slider::before {
   content: '';
   display: block;
-  padding-top: 177.78%; /* 16/9 * 100% = 177.78% */
+  padding-top: 177.78%; /* 16:9 비율 */
 }
 
+/* 슬라이드 컨테이너 */
 .photo-track {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex; /* 가로 슬라이드 */
-  transition: transform 0.5s ease;
+  overflow: hidden;
 }
 
+/* 개별 슬라이드 */
 .photo-slide {
-  min-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--modern-light-gray);
   padding: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* 활성화된 슬라이드만 보이기 */
+.photo-slide.active {
+  opacity: 1;
 }
 
 .photo-slide img {
-  width: auto;
-  height: auto;
   max-width: calc(100% - 40px);
   max-height: calc(100% - 40px);
-  object-fit: contain; /* 이미지 전체가 보이도록 */
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: 5px;
-  display: block;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
