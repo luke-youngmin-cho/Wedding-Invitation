@@ -803,6 +803,34 @@
         // 테마 관리
         let currentTheme = 'modern';
         
+        // 앨범 사진 경로 함수를 먼저 정의
+        function getAlbumPhotos() {
+            // GitHub Pages 체크 - hostname으로만 판단
+            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
+            // 로컬에서는 빈 문자열, GitHub Pages에서만 /Wedding-Invitation 추가
+            const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
+            
+            console.log('=== Album Path Builder ===');
+            console.log('Hostname:', window.location.hostname);
+            console.log('Pathname:', window.location.pathname);
+            console.log('Is GitHub Pages:', isGitHubPages);
+            console.log('Base URL:', baseUrl);
+            
+            const paths = [
+                `${baseUrl}/assets/AlbumSlides/album1.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album2.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album3.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album4.jpg`,
+                `${baseUrl}/assets/AlbumSlides/album5.jpg`
+            ];
+            
+            console.log('Generated paths:', paths);
+            return paths;
+        }
+        
+        // 동적으로 경로 생성
+        let albumPhotos = getAlbumPhotos();
+        
         // 페이지 로드시 초기화
         document.addEventListener('DOMContentLoaded', function() {
             // 모던 테마로 시작
@@ -1202,41 +1230,15 @@
         // 갤러리 초기화
         let currentPhotoIndex = 0;
         
-        // GitHub Pages 배포 시 경로 처리 - 더 정확한 방법
-        function getAlbumPhotos() {
-            // GitHub Pages 체크 - hostname으로만 판단
-            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
-            // 로컬에서는 빈 문자열, GitHub Pages에서만 /Wedding-Invitation 추가
-            const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
-            
-            console.log('=== Album Path Builder ===');
-            console.log('Hostname:', window.location.hostname);
-            console.log('Pathname:', window.location.pathname);
-            console.log('Is GitHub Pages:', isGitHubPages);
-            console.log('Base URL:', baseUrl);
-            
-            const paths = [
-                `${baseUrl}/assets/AlbumSlides/album1.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album2.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album3.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album4.jpg`,
-                `${baseUrl}/assets/AlbumSlides/album5.jpg`
-            ];
-            
-            console.log('Generated paths:', paths);
-            return paths;
-        }
-        
-        // 동적으로 경로 생성
-        const albumPhotos = getAlbumPhotos();
+        // GitHub Pages 배포 시 경로 처리는 이미 상단에 정의됨
 
         function initGallery() {
             console.log('=== Gallery Initialization Start ===');
             console.log('Current hostname:', window.location.hostname);
             
             // 갤러리 초기화 시점에 경로 재확인
-            const currentAlbumPhotos = getAlbumPhotos();
-            console.log('Album photos array at init:', currentAlbumPhotos);
+            albumPhotos = getAlbumPhotos();
+            console.log('Album photos array at init:', albumPhotos);
             
             // 모던 테마 갤러리
             const photoTrack = document.getElementById('photoTrack');
@@ -1250,7 +1252,7 @@
             if (photoTrack) {
                 console.log('Cleared photoTrack content');
                 
-                currentAlbumPhotos.forEach((photo, index) => {
+                albumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
                     const img = document.createElement('img');
@@ -1300,7 +1302,7 @@
                 // Clear any existing content
                 photoTrack2.innerHTML = '';
                 
-                currentAlbumPhotos.forEach((photo, index) => {
+                albumPhotos.forEach((photo, index) => {
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
                     const img = document.createElement('img');
