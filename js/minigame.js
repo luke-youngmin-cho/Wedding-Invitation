@@ -53,31 +53,31 @@
             "></canvas>
         
         <!-- UI Overlay -->
-        <div class="game-ui" style="position:absolute;left:10px;top:10px;padding:8px 12px;background:rgba(7,10,20,.8);border:2px solid #ff006e;color:#ffde00;font-family:'Press Start 2P',monospace;font-size:10px;z-index:10;">
-          <div style="margin-bottom:5px;">WEDDING RUNNER</div>
-          <div style="display:flex;gap:15px;">
+        <div class="game-ui" style="position:absolute;left:1%;top:1%;padding:0.8% 1.2%;background:rgba(7,10,20,.8);border:2px solid #ff006e;color:#ffde00;font-family:'Press Start 2P',monospace;font-size:calc(8px + 0.3vw);z-index:10;">
+          <div style="margin-bottom:0.3vw;">WEDDING RUNNER</div>
+          <div style="display:flex;gap:1vw;">
             <span>DIST: <span id="gameDistance">0m</span></span>
             <span>SPD: <span id="gameSpeed">0</span></span>
           </div>
-          <div style="margin-top:5px;">
+          <div style="margin-top:0.3vw;">
             <span>CHAR: <span id="gameChar">GROOM</span></span>
           </div>
         </div>
         
             
             <!-- Leaderboard (Inside game wrapper) -->
-            <div id="leaderboardPanel" style="position:absolute;top:50px;right:10px;padding:8px;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:8px;width:150px;z-index:10;">
-              <div style="margin-bottom:5px;color:#ffde00;font-size:9px;">TOP SCORES</div>
-              <div id="leaderboardList" style="line-height:1.4;font-size:7px;">
+            <div id="leaderboardPanel" style="position:absolute;top:8%;right:1%;padding:0.8%;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:calc(6px + 0.3vw);width:15%;min-width:120px;z-index:10;">
+              <div style="margin-bottom:0.5vw;color:#ffde00;font-size:calc(7px + 0.3vw);">TOP SCORES</div>
+              <div id="leaderboardList" style="line-height:1.4;font-size:calc(5px + 0.2vw);">
                 Loading...
               </div>
             </div>
             
             <!-- Start Screen (Inside game wrapper) -->
             <div id="startScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;">
-              <div style="text-align:center;padding:20px;max-width:90%;">
-                <h2 style="color:#ff006e;font-family:'Press Start 2P';font-size:18px;margin-bottom:15px;">WEDDING RUNNER</h2>
-                <p style="color:#ffde00;font-family:'Press Start 2P';font-size:8px;line-height:1.8;margin-bottom:20px;">
+              <div style="text-align:center;padding:2%;max-width:90%;">
+                <h2 style="color:#ff006e;font-family:'Press Start 2P';font-size:calc(14px + 1vw);margin-bottom:2vw;">WEDDING RUNNER</h2>
+                <p style="color:#ffde00;font-family:'Press Start 2P';font-size:calc(6px + 0.4vw);line-height:1.8;margin-bottom:2vw;">
                   신랑과 신부가 함께하는<br>
                   무한 러닝 게임!<br><br>
                   [조작법]<br>
@@ -87,7 +87,7 @@
                   슬램 : K/↓<br>
                   모바일: 화면 버튼 사용
                 </p>
-                <button id="startGameBtn" style="padding:12px 24px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:10px;cursor:pointer;animation:blink 1s infinite;">
+                <button id="startGameBtn" style="padding:1.5% 3%;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:calc(8px + 0.5vw);cursor:pointer;animation:blink 1s infinite;">
                   START GAME
                 </button>
               </div>
@@ -95,18 +95,18 @@
             
             <!-- Game Over Screen (Inside game wrapper) -->
             <div id="gameOverScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;">
-              <div style="background:#0b1020;border:3px solid #ff006e;padding:20px;text-align:center;color:#ffde00;font-family:'Press Start 2P';min-width:250px;max-width:80%;font-size:10px;">
-                <h2 style="margin:0 0 20px;font-size:20px;">GAME OVER</h2>
-                <div id="finalScore" style="margin:10px 0;font-size:12px;line-height:1.8;"></div>
+              <div style="background:#0b1020;border:3px solid #ff006e;padding:2%;text-align:center;color:#ffde00;font-family:'Press Start 2P';min-width:40%;max-width:80%;">
+                <h2 style="margin:0 0 2vw;font-size:calc(14px + 1vw);">GAME OVER</h2>
+                <div id="finalScore" style="margin:1vw 0;font-size:calc(8px + 0.5vw);line-height:1.8;"></div>
                 <div id="recordSubmit" style="display:none;">
-                  <input type="text" id="playerName" placeholder="이름 입력" maxlength="10" style="margin:15px 0;padding:8px;background:#1a1a2e;border:2px solid #ff006e;color:white;font-family:'Press Start 2P';font-size:10px;width:150px;">
-                  <div style="display:flex;gap:10px;justify-content:center;margin-top:15px;">
-                    <button id="submitScore" style="padding:10px 20px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:10px;cursor:pointer;">SUBMIT</button>
-                    <button id="restartGame" style="padding:10px 20px;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:10px;cursor:pointer;">RETRY</button>
+                  <input type="text" id="playerName" placeholder="이름 입력" maxlength="10" style="margin:1.5vw 0;padding:0.8vw;background:#1a1a2e;border:2px solid #ff006e;color:white;font-family:'Press Start 2P';font-size:calc(7px + 0.3vw);width:60%;">
+                  <div style="display:flex;gap:1vw;justify-content:center;margin-top:1.5vw;">
+                    <button id="submitScore" style="padding:1vw 2vw;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:calc(7px + 0.3vw);cursor:pointer;">SUBMIT</button>
+                    <button id="restartGame" style="padding:1vw 2vw;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:calc(7px + 0.3vw);cursor:pointer;">RETRY</button>
                   </div>
                 </div>
                 <div id="normalRestart" style="display:none;">
-                  <button id="restartGameOnly" style="padding:15px 30px;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:12px;cursor:pointer;margin-top:20px;">RETRY</button>
+                  <button id="restartGameOnly" style="padding:1.5vw 3vw;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:calc(8px + 0.4vw);cursor:pointer;margin-top:2vw;">RETRY</button>
                 </div>
               </div>
             </div>
@@ -116,62 +116,83 @@
         <!-- Control Panel for Mobile/Touch -->
         <div class="control-panel" style="
           margin-top: 10px;
-          padding: 10px;
+          padding: 15px;
           background: rgba(15,15,35,0.9);
           border: 2px solid #ff006e;
           display: ${showButtons ? 'flex' : 'none'};
           justify-content: space-around;
           align-items: center;
-          gap: 10px;
+          gap: 20px;
         ">
-          <!-- Mobile Control Buttons -->
-          <button class="game-btn" id="btnTag" style="
-            width: 50px;
-            height: 50px;
-            background: #ff66ff;
-            border: 2px solid #ff99ff;
-            color: #fff;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 8px;
-            cursor: pointer;
-            border-radius: 5px;
-          ">TAG</button>
+          <!-- Left Controls -->
+          <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+            <button class="game-btn" id="btnTag" style="
+              width: 55px;
+              height: 55px;
+              background: #ff66ff;
+              border: 2px solid #ff99ff;
+              color: #fff;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 9px;
+              cursor: pointer;
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+            ">TAG</button>
+            
+            <button class="game-btn" id="btnJump" style="
+              width: 65px;
+              height: 65px;
+              background: #ff006e;
+              border: 2px solid #ff3388;
+              color: #fff;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+            ">JUMP</button>
+          </div>
           
-          <button class="game-btn" id="btnJump" style="
-            width: 60px;
-            height: 60px;
-            background: #ff006e;
-            border: 2px solid #ff3388;
-            color: #fff;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-          ">JUMP</button>
-          
-          <button class="game-btn" id="btnAttack" style="
-            width: 50px;
-            height: 50px;
-            background: #ffde00;
-            border: 2px solid #ffee44;
-            color: #000;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 8px;
-            cursor: pointer;
-            border-radius: 5px;
-          ">ATK</button>
-          
-          <button class="game-btn" id="btnSlam" style="
-            width: 60px;
-            height: 60px;
-            background: #00ffff;
-            border: 2px solid #44ffff;
-            color: #000;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-          ">SLAM</button>
+          <!-- Right Controls -->
+          <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+            <button class="game-btn" id="btnAttack" style="
+              width: 55px;
+              height: 55px;
+              background: #ffde00;
+              border: 2px solid #ffee44;
+              color: #000;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 9px;
+              cursor: pointer;
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+            ">ATK</button>
+            
+            <button class="game-btn" id="btnSlam" style="
+              width: 65px;
+              height: 65px;
+              background: #00ffff;
+              border: 2px solid #44ffff;
+              color: #000;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+            ">SLAM</button>
+          </div>
         </div>
       </div>
     `;
