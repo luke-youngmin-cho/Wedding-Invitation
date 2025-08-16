@@ -20,9 +20,44 @@
     // Check if mobile or small screen
     const showButtons = isMobile || window.innerWidth <= 768;
     
+    // 16:9 aspect ratio container
     gameContainer.innerHTML = `
-      <div class="game-wrapper" style="position: relative; width: 100%; height: 500px; background: #0b1020; border: 3px solid #ff006e; overflow: hidden;">
-        <canvas id="miniGameCanvas" width="800" height="500" style="display:block; width:100%; height:100%; image-rendering: pixelated; image-rendering: crisp-edges;"></canvas>
+      <div class="retro-game-console" style="
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+        border: 4px solid #ff006e;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 40px rgba(255,0,110,0.3);
+      ">
+        <!-- Game Screen with 16:9 ratio -->
+        <div class="game-screen-container" style="
+          position: relative;
+          width: 100%;
+          padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+          background: #000;
+          border: 3px solid #333;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        ">
+          <div class="game-wrapper" style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0b1020;
+          ">
+            <canvas id="miniGameCanvas" width="1280" height="720" style="
+              display: block;
+              width: 100%;
+              height: 100%;
+              image-rendering: pixelated;
+              image-rendering: crisp-edges;
+            "></canvas>
         
         <!-- UI Overlay -->
         <div class="game-ui" style="position:absolute;left:10px;top:10px;padding:8px 12px;background:rgba(7,10,20,.8);border:2px solid #ff006e;color:#ffde00;font-family:'Press Start 2P',monospace;font-size:10px;z-index:10;">
@@ -36,15 +71,98 @@
           </div>
         </div>
         
-        <!-- Mobile Controls -->
-        <div class="mobile-controls" id="mobileControls" style="position:absolute;bottom:0;left:0;right:0;height:200px;pointer-events:none;display:${showButtons ? 'block' : 'block'};">
-          <!-- Left side - Jump and Tag -->
-          <button class="game-btn" id="btnJump" style="position:absolute;left:20px;bottom:20px;width:80px;height:80px;background:rgba(255,0,110,0.3);border:3px solid rgba(255,0,110,0.5);border-radius:50%;color:rgba(255,255,255,0.9);font-family:'Press Start 2P';font-size:11px;pointer-events:auto;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;">JUMP</button>
-          <button class="game-btn" id="btnTag" style="position:absolute;left:20px;bottom:110px;width:70px;height:70px;background:rgba(255,100,255,0.3);border:3px solid rgba(255,102,255,0.5);border-radius:50%;color:rgba(255,255,255,0.9);font-family:'Press Start 2P';font-size:10px;pointer-events:auto;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;">TAG</button>
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:100;">
+              <!-- Content here -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Control Panel Below Game Screen -->
+        <div class="control-panel" style="
+          margin-top: 20px;
+          padding: 15px;
+          background: linear-gradient(180deg, #2a2a3e 0%, #1a1a2e 100%);
+          border: 3px solid #444;
+          border-radius: 10px;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          gap: 10px;
+        ">
+          <!-- Character Buttons Group -->
+          <div class="button-group" style="display: flex; gap: 10px;">
+            <button class="retro-game-btn" id="btnTag" style="
+              width: 60px;
+              height: 60px;
+              background: linear-gradient(135deg, #ff66ff 0%, #cc44cc 100%);
+              border: 3px solid #ff99ff;
+              border-radius: 8px;
+              color: #fff;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 9px;
+              cursor: pointer;
+              box-shadow: 0 4px 0 #aa33aa, 0 6px 10px rgba(0,0,0,0.3);
+              transition: all 0.1s;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">TAG</button>
+            
+            <button class="retro-game-btn" id="btnJump" style="
+              width: 80px;
+              height: 80px;
+              background: linear-gradient(135deg, #ff006e 0%, #cc0055 100%);
+              border: 3px solid #ff3388;
+              border-radius: 10px;
+              color: #fff;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              box-shadow: 0 4px 0 #aa0044, 0 6px 10px rgba(0,0,0,0.3);
+              transition: all 0.1s;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">JUMP</button>
+          </div>
           
-          <!-- Right side - Attack and Slam -->
-          <button class="game-btn" id="btnAttack" style="position:absolute;right:20px;bottom:110px;width:70px;height:70px;background:rgba(255,222,0,0.3);border:3px solid rgba(255,222,0,0.5);border-radius:50%;color:rgba(0,0,0,0.9);font-family:'Press Start 2P';font-size:10px;pointer-events:auto;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;">ATK</button>
-          <button class="game-btn" id="btnSlam" style="position:absolute;right:20px;bottom:20px;width:80px;height:80px;background:rgba(0,255,255,0.3);border:3px solid rgba(0,255,255,0.5);border-radius:50%;color:rgba(0,0,0,0.9);font-family:'Press Start 2P';font-size:11px;pointer-events:auto;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;">SLAM</button>
+          <!-- Attack Buttons Group -->
+          <div class="button-group" style="display: flex; gap: 10px;">
+            <button class="retro-game-btn" id="btnAttack" style="
+              width: 60px;
+              height: 60px;
+              background: linear-gradient(135deg, #ffde00 0%, #ccb200 100%);
+              border: 3px solid #ffee44;
+              border-radius: 8px;
+              color: #000;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 9px;
+              cursor: pointer;
+              box-shadow: 0 4px 0 #aa9900, 0 6px 10px rgba(0,0,0,0.3);
+              transition: all 0.1s;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">ATK</button>
+            
+            <button class="retro-game-btn" id="btnSlam" style="
+              width: 80px;
+              height: 80px;
+              background: linear-gradient(135deg, #00ffff 0%, #00cccc 100%);
+              border: 3px solid #44ffff;
+              border-radius: 10px;
+              color: #000;
+              font-family: 'Press Start 2P', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              box-shadow: 0 4px 0 #00aaaa, 0 6px 10px rgba(0,0,0,0.3);
+              transition: all 0.1s;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">SLAM</button>
+          </div>
         </div>
         
         <!-- Game Over Screen -->
@@ -104,9 +222,9 @@
     }
     ctx = canvas.getContext('2d');
     
-    // Fixed dimensions for consistency
-    canvas.width = 800;
-    canvas.height = 500;
+    // 16:9 aspect ratio dimensions
+    canvas.width = 1280;
+    canvas.height = 720;
     
     // Update world dimensions
     world.w = canvas.width;
@@ -118,12 +236,12 @@
   // ===== Game Variables =====
   let DPR = 1;
   const world = {
-    w: 800, h: 500,
-    gravity: 1200,
-    baseSpeed: 200,
-    speed: 200,
-    maxSpeed: 600,
-    accelPerSec: 15,
+    w: 1280, h: 720,
+    gravity: 1600,
+    baseSpeed: 250,
+    speed: 250,
+    maxSpeed: 750,
+    accelPerSec: 20,
     distance: 0,
     time: 0,
     shake: 0,
@@ -131,7 +249,7 @@
 
   const CHAR = { MALE: 0, FEMALE: 1 };
   const player = {
-    x: 100, y: 0, w: 50, h: 60,
+    x: 150, y: 0, w: 65, h: 80,
     vx: 0, vy: 0,
     onGround: false,
     jumpsLeft: 2,
