@@ -813,8 +813,18 @@
             
             // 달력 생성
             setupCalendar();
-            // 갤러리 초기화
-            initGallery();
+            
+            // 갤러리 초기화 - 완전히 초기화되도록 지연 실행
+            setTimeout(() => {
+                // 기존 내용 완전히 제거
+                const photoTrack = document.getElementById('photoTrack');
+                const photoTrack2 = document.getElementById('photoTrack2');
+                if (photoTrack) photoTrack.innerHTML = '';
+                if (photoTrack2) photoTrack2.innerHTML = '';
+                
+                console.log('=== Delayed Gallery Init ===');
+                initGallery();
+            }, 500);
             // 계좌 정보 로드
             loadAccountInfo();
             // 미니게임 초기화 - Firebase 함수가 정의된 후 약간의 지연
@@ -1194,18 +1204,27 @@
         
         // GitHub Pages 배포 시 경로 처리 - 더 정확한 방법
         function getAlbumPhotos() {
-            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io';
+            // GitHub Pages 체크 - pathname도 확인
+            const isGitHubPages = window.location.hostname === 'luke-youngmin-cho.github.io' || 
+                                  window.location.pathname.includes('/Wedding-Invitation');
             const baseUrl = isGitHubPages ? '/Wedding-Invitation' : '';
             
-            console.log('Building album paths - GitHub Pages:', isGitHubPages, 'Base URL:', baseUrl);
+            console.log('=== Album Path Builder ===');
+            console.log('Hostname:', window.location.hostname);
+            console.log('Pathname:', window.location.pathname);
+            console.log('Is GitHub Pages:', isGitHubPages);
+            console.log('Base URL:', baseUrl);
             
-            return [
+            const paths = [
                 `${baseUrl}/assets/AlbumSlides/album1.jpg`,
                 `${baseUrl}/assets/AlbumSlides/album2.jpg`,
                 `${baseUrl}/assets/AlbumSlides/album3.jpg`,
                 `${baseUrl}/assets/AlbumSlides/album4.jpg`,
                 `${baseUrl}/assets/AlbumSlides/album5.jpg`
             ];
+            
+            console.log('Generated paths:', paths);
+            return paths;
         }
         
         // 동적으로 경로 생성
@@ -1235,10 +1254,19 @@
                     const slide = document.createElement('div');
                     slide.className = 'photo-slide';
                     const img = document.createElement('img');
-                    img.src = photo;
+                    
+                    // 명시적으로 경로 설정 및 로깅
+                    const imagePath = photo;
+                    console.log(`Setting image ${index + 1} src to:`, imagePath);
+                    img.src = imagePath;
                     img.alt = `웨딩 사진 ${index + 1}`;
+                    
+                    // 이미지 속성 확인
+                    img.setAttribute('data-original-src', imagePath);
+                    
                     img.onerror = function() {
-                        console.error(`Failed to load image ${index + 1}:`, photo);
+                        console.error(`Failed to load image ${index + 1}:`, this.src);
+                        console.error(`Original path was:`, imagePath);
                         this.style.display = 'none';
                         // Try to show a placeholder
                         const placeholder = document.createElement('div');
@@ -1248,15 +1276,16 @@
                         placeholder.style.display = 'flex';
                         placeholder.style.alignItems = 'center';
                         placeholder.style.justifyContent = 'center';
-                        placeholder.textContent = `Image ${index + 1} failed to load`;
+                        placeholder.textContent = `Image ${index + 1} failed to load: ${imagePath}`;
                         slide.appendChild(placeholder);
                     };
                     img.onload = function() {
-                        console.log(`Image ${index + 1} loaded successfully:`, photo);
+                        console.log(`Image ${index + 1} loaded successfully:`, this.src);
+                        console.log(`Actual src attribute:`, this.getAttribute('src'));
                     };
                     slide.appendChild(img);
                     photoTrack.appendChild(slide);
-                    console.log(`Added slide ${index + 1} to photoTrack`);
+                    console.log(`Added slide ${index + 1} to photoTrack with src:`, img.src);
                 });
                 console.log('All slides added to modern gallery');
             } else {
