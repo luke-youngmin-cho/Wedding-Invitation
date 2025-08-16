@@ -920,17 +920,20 @@
           거리: ${currentScore}m<br>
           최고 속도: ${Math.floor(world.speed)}
         `;
-        // Show submit panel for new records
-        if (recordSubmit) recordSubmit.style.display = 'block';
-        if (normalRestart) normalRestart.style.display = 'none';
       } else {
-        // Not a new record, just show score and restart button
         finalScoreEl.innerHTML = `
           거리: ${currentScore}m<br>
           최고 속도: ${Math.floor(world.speed)}<br>
           <span style="color:#888;">최고 기록: ${highScore}m</span>
         `;
-        // Show only restart button
+      }
+      
+      // 항상 기록 입력 패널 표시 (점수가 0보다 클 때만)
+      if (currentScore > 0) {
+        if (recordSubmit) recordSubmit.style.display = 'block';
+        if (normalRestart) normalRestart.style.display = 'none';
+      } else {
+        // 점수가 0이면 재시작 버튼만 표시
         if (recordSubmit) recordSubmit.style.display = 'none';
         if (normalRestart) normalRestart.style.display = 'block';
       }
@@ -1194,7 +1197,16 @@
       // Firebase 연동 (전역 함수로 정의됨)
       if (window.submitGameScore) {
         await window.submitGameScore(name, score);
+        
+        // 점수 등록 성공 메시지
+        alert(`${name}님의 기록(${score}m)이 등록되었습니다!`);
+        
+        // 이름 입력란 초기화
+        nameInput.value = '';
+        
+        // 리더보드 새로고침
         loadLeaderboard();
+        
         // Close the submit panel after successful submission
         document.getElementById('gameOverScreen').style.display = 'none';
         document.getElementById('startScreen').style.display = 'flex';
