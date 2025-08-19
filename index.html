@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/fit-text.js"></script>
+    
     <title>권채린 ❤️ 조영민 결혼합니다</title>
     
     <!-- PWA Support -->
@@ -12,7 +14,7 @@
     <link rel="stylesheet" href="modern-theme.css" id="modern-styles">
     
     <!-- Retro Game Style (Disabled by default) -->
-    <link rel="stylesheet" href="retro-final.css" id="retro-styles" disabled>
+    <link rel="stylesheet" href="retro-theme.css" id="retro-styles" disabled>
     
     <!-- Responsive Override Styles -->
     <link rel="stylesheet" href="responsive-override.css">
@@ -245,8 +247,8 @@
         
         <!-- 레트로 혼주 연락처 -->
         <section class="parents-contact retro-section" style="display: none;">
-            <h3 style="text-align: center; margin-bottom: 30px; margin-top: 50px; font-size: 22px;">
-                <span class="pixel-icon pixel-icon-phone"></span> GAME MASTERS <span class="pixel-icon pixel-icon-phone"></span>
+            <h3 style="text-align: center; margin-bottom: 30px; margin-top: 50px; font-size: 22px; overflow: visible;">
+                <span class="pixel-icon pixel-icon-phone"></span>GAME MASTERS<span class="pixel-icon pixel-icon-phone"></span>
             </h3>
             
             <div style="margin-bottom: 30px;">
@@ -394,12 +396,14 @@
             </div>
 
             <div style="text-align: center; margin: 30px 0;">
-                <button onclick="openNaverMap()" style="margin: 10px; padding: 20px 30px;">
-                    🗺️ 네이버 지도
-                </button>
-                <button onclick="openKakaoMap()" style="margin: 10px; padding: 20px 30px;">
-                    🗺️ 카카오맵
-                </button>
+                <div style="white-space: nowrap;">
+                    <button onclick="openNaverMap()" style="margin: 5px; padding: 20px 30px; white-space: nowrap; display: inline-block;">
+                        🗺️ 네이버 지도
+                    </button>
+                    <button onclick="openKakaoMap()" style="margin: 5px; padding: 20px 30px; white-space: nowrap; display: inline-block;">
+                        🗺️ 카카오맵
+                    </button>
+                </div>
             </div>
 
             <div style="padding: 20px; border: 3px dashed var(--pixel-pink); margin: 15px 0;">
@@ -422,7 +426,7 @@
         <!-- 레트로 오시는 길 -->
         <section class="directions special-border retro-section" style="display: none;">
             <h3 style="text-align: center; font-size: 18px;">
-                <span class="pixel-icon pixel-icon-map"></span> GAME LOCATION <span class="pixel-icon pixel-icon-map"></span>
+                <span class="pixel-icon pixel-icon-map"></span> GAME LOCATION<span class="pixel-icon pixel-icon-map"></span>
             </h3>
             
             <div style="padding: 20px; margin: 20px 0; border: 3px solid var(--pixel-pink); text-align: center;">
@@ -462,102 +466,92 @@
             </div>
         </section>
 
+        
+        <!-- 방명록 로드 -->
+        <script src="js/guestbook.js" defer></script>
+
         <!-- 모던 방명록 -->
         <section class="guestbook modern-section">
-            <h3 style="text-align: center; font-size: 18px;">
-                방명록
-            </h3>
-            <div style="text-align: center; margin: 30px 0;">
-                <button onclick="openGuestbookModal()" style="padding: 20px 40px; font-size: 16px;">
-                    ✏️ 축하 메시지 작성하기
-                </button>
+          <h3 style="text-align:center;font-size:18px;">방명록</h3>
+
+          <div style="text-align:center;margin:30px 0;">
+            <button onclick="openGuestbookModal()" style="padding:20px 40px;font-size:16px;">
+              ✏️ 축하 메시지 작성하기
+            </button>
+          </div>
+      
+          <!-- 페이지 번호 -->
+          <div style="position:relative;margin:20px 0;">
+            <div id="pageIndicatorModern"
+                 style="position:absolute;top:-25px;right:10px;background:var(--pixel-dark);
+                        padding:5px 15px;border:2px solid var(--pixel-pink);color:var(--pixel-yellow);font-size:12px;z-index:10;">
+              PAGE 1
             </div>
-            <!-- 방명록 컨테이너 (페이지 표시 포함) -->
-            <div style="position: relative; margin: 20px 0;">
-                <!-- 페이지 번호 표시 (테두리 밖 상단) -->
-                <div style="
-                    position: absolute;
-                    top: -25px;
-                    right: 10px;
-                    background: var(--pixel-dark);
-                    padding: 5px 15px;
-                    border: 2px solid var(--pixel-pink);
-                    color: var(--pixel-yellow);
-                    font-size: 12px;
-                    z-index: 10;
-                ">
-                    <span id="pageIndicator">PAGE 1</span>
-                </div>
-                
-                <!-- 방명록 페이지 컨테이너 -->
-                <div class="guestbook-page-container" style="
-                    border: 4px solid var(--pixel-pink);
-                    padding: 20px;
-                    min-height: 450px;
-                    display: flex;
-                    flex-direction: column;
-                    position: relative;
-                    box-shadow: 
-                        inset -4px -4px 0 rgba(255, 0, 110, 0.3),
-                        inset 4px 4px 0 rgba(255, 0, 110, 0.3),
-                        0 0 20px rgba(255, 0, 110, 0.2);
-                ">
-                
-                    <div class="guestbook-list" id="guestbookList" style="flex: 1;">
-                        <div class="guestbook-item">
-                            No messages yet...<br>
-                            Be the first player to leave a message!
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 페이지네이션 -->
-            <div id="guestbookPagination" class="guestbook-pagination" style="text-align: center; margin-top: 20px;">
-                <button onclick="previousGuestbookPage()" id="prevPageBtn" class="slider-btn" style="margin: 5px;">
-                    ◀
-                </button>
-                <span id="pageInfo" style="margin: 0 10px; font-size: 14px;">1 / 1</span>
-                <button onclick="nextGuestbookPage()" id="nextPageBtn" class="slider-btn" style="margin: 5px;">
-                    ▶
-                </button>
-            </div>
-        </section>
         
-        <!-- 레트로 방명록 -->
-        <section class="guestbook retro-section" style="display: none;">
-            <h3 style="text-align: center; font-size: 18px;">
-                <span class="pixel-icon pixel-icon-write"></span> GUEST BOOK <span class="pixel-icon pixel-icon-write"></span>
-            </h3>
-            <div style="text-align: center; margin: 30px 0;">
-                <button onclick="openGuestbookModal()" style="padding: 20px 40px; font-size: 16px;">
-                    ✏️ WRITE MESSAGE
-                </button>
+            <!-- 모던 방명록 리스트 -->
+            <div class="guestbook-page-container" style="border:4px solid var(--pixel-pink);padding:20px;min-height:450px;">
+              <div class="guestbook-list" id="guestbookListModern"></div>
             </div>
-            <!-- 페이지네이션 -->
-            <div class="guestbook-pagination" style="text-align: center; margin-top: 20px;">
-                <button onclick="previousGuestbookPage()" class="slider-btn" style="margin: 5px;">
-                    ◀
-                </button>
-                <span style="margin: 0 10px; color: var(--pixel-yellow); font-size: 14px;">1 / 1</span>
-                <button onclick="nextGuestbookPage()" class="slider-btn" style="margin: 5px;">
-                    ▶
-                </button>
-            </div>
+          </div>
+      
+          <!-- 페이지네이션 -->
+          <div class="guestbook-pagination" style="text-align:center;margin-top:20px;">
+            <button id="prevPageBtnModern" class="slider-btn" onclick="previousGuestbookPage()">◀</button>
+            <span id="pageInfoModern" style="margin:0 10px;font-size:14px;">1 / 1</span>
+            <button id="nextPageBtnModern" class="slider-btn" onclick="nextGuestbookPage()">▶</button>
+          </div>
         </section>
+
+        <!-- 레트로 방명록 -->
+        <section class="guestbook retro-section" style="display:none;">
+          <h3 style="text-align:center;font-size:18px;">
+            <span class="pixel-icon pixel-icon-write"></span> GUEST BOOK
+            <span class="pixel-icon pixel-icon-write"></span>
+          </h3>
+      
+          <div style="text-align:center;margin:30px 0;">
+            <button onclick="openGuestbookModal()" style="padding:20px 40px;font-size:16px;">
+              ✏️ WRITE MESSAGE
+            </button>
+          </div>
+      
+          <div style="position:relative;margin:20px 0;">
+            <div id="pageIndicatorRetro"
+                 style="position:absolute;top:-25px;right:10px;background:var(--pixel-dark);
+                        padding:5px 15px;border:2px solid var(--pixel-pink);color:var(--pixel-yellow);font-size:12px;z-index:10;">
+              PAGE 1
+            </div>
+        
+            <div class="guestbook-page-container special-border"
+                 style="border:4px solid var(--pixel-pink);padding:20px;min-height:450px;">
+              <div class="guestbook-list" id="guestbookListRetro"></div>
+            </div>
+          </div>
+      
+          <div class="guestbook-pagination" style="text-align:center;margin-top:20px;">
+            <button id="prevPageBtnRetro" class="slider-btn" onclick="previousGuestbookPage()">◀</button>
+            <span id="pageInfoRetro" style="margin:0 10px;color:var(--pixel-yellow);font-size:14px;">1 / 1</span>
+            <button id="nextPageBtnRetro" class="slider-btn" onclick="nextGuestbookPage()">▶</button>
+          </div>
+        </section>
+
 
         <!-- 모던 참석 여부 -->
         <section class="attendance modern-section" style="text-align: center; padding: 40px 0;">
-            <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px;">
-                💒 참석 여부 알려주기 💒
-            </button>
+            <div style="white-space: nowrap;">
+                <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px; white-space: nowrap; display: inline-block;">
+                    💒 참석 여부 알려주기 💒
+                </button>
+            </div>
         </section>
         
         <!-- 레트로 참석 여부 -->
         <section class="attendance retro-section" style="display: none; text-align: center; padding: 40px 0;">
-            <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px;" class="special-border">
-                🎮 JOIN GAME 🎮
-            </button>
+            <div style="white-space: nowrap;">
+                <button onclick="openAttendanceModal()" style="padding: 25px 50px; font-size: 18px; white-space: nowrap; display: inline-block;" class="special-border">
+                    🎮 JOIN GAME 🎮
+                </button>
+            </div>
         </section>
 
         <!-- 모던 마음 전하는 곳 -->
@@ -658,22 +652,26 @@
 
         <!-- 모던 공유하기 -->
         <section class="share-buttons modern-section" style="text-align: center; padding: 40px 20px;">
-            <button class="share-btn" onclick="shareKakao()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
-                💬
-            </button>
-            <button class="share-btn" onclick="copyURL()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
-                🔗
-            </button>
+            <div style="white-space: nowrap;">
+                <button class="share-btn" onclick="shareKakao()" style="margin: 5px; padding: 20px 40px; font-size: 16px; white-space: nowrap; display: inline-block;">
+                    💬 카카오톡 공유
+                </button>
+                <button class="share-btn" onclick="copyURL()" style="margin: 5px; padding: 20px 40px; font-size: 16px; white-space: nowrap; display: inline-block;">
+                    🔗 링크 복사
+                </button>
+            </div>
         </section>
         
         <!-- 레트로 공유하기 -->
         <section class="share-buttons retro-section" style="display: none; text-align: center; padding: 40px 20px;">
-            <button class="share-btn" onclick="shareKakao()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
-                💬
-            </button>
-            <button class="share-btn" onclick="copyURL()" style="margin: 10px; padding: 20px 40px; font-size: 16px;">
-                🔗
-            </button>
+            <div style="white-space: nowrap;">
+                <button class="share-btn" onclick="shareKakao()" style="margin: 5px; padding: 20px 40px; font-size: 16px; white-space: nowrap; display: inline-block;">
+                    💬 KAKAO SHARE
+                </button>
+                <button class="share-btn" onclick="copyURL()" style="margin: 5px; padding: 20px 40px; font-size: 16px; white-space: nowrap; display: inline-block;">
+                    🔗 COPY LINK
+                </button>
+            </div>
         </section>
 
         <!-- 모던 엔딩 크레딧 -->
@@ -1061,6 +1059,13 @@
                 const relationLabel = document.getElementById('relationLabel');
                 if (relationLabel) relationLabel.textContent = 'TEAM';
                 
+                // 방명록 업데이트
+                if (window.GuestbookManager) {
+                    window.GuestbookManager.updateList();
+                } else if (guestbookData) {
+                    displayGuestbook(guestbookData);
+                }
+                
                 const attendanceSubmit = document.getElementById('attendanceSubmitBtn');
                 if (attendanceSubmit) attendanceSubmit.textContent = 'CONFIRM';
                 
@@ -1105,6 +1110,13 @@
                 
                 const attendanceSubmit = document.getElementById('attendanceSubmitBtn');
                 if (attendanceSubmit) attendanceSubmit.textContent = '확인';
+                
+                // 방명록 업데이트
+                if (window.GuestbookManager) {
+                    window.GuestbookManager.updateList();
+                } else if (guestbookData) {
+                    displayGuestbook(guestbookData);
+                }
             }
         }
         
@@ -1561,21 +1573,25 @@
         // 방명록 표시 함수
         function displayGuestbook(entries) {
             guestbookData = entries || [];
-            const guestbookList = document.getElementById('guestbookList');
-            const pagination = document.getElementById('guestbookPagination');
-            const pageIndicator = document.getElementById('pageIndicator');
+            // 현재 테마에 따라 올바른 방명록 리스트 선택
+            const suffix = currentTheme === 'retro' ? 'Retro' : 'Modern';
+            const guestbookList = document.getElementById('guestbookList' + suffix);
+            const pageIndicator = document.getElementById('pageIndicator' + suffix);
+            const pageInfo = document.getElementById('pageInfo' + suffix);
+            const prevBtn = document.getElementById('prevPageBtn' + suffix);
+            const nextBtn = document.getElementById('nextPageBtn' + suffix);
             
             if (guestbookData.length === 0) {
-                guestbookList.innerHTML = `
-                    <div class="guestbook-item" style="text-align: center; padding: 40px 20px;">
-                        No messages yet...<br>
-                        Be the first player to leave a message!
-                    </div>
-                `;
+                if (guestbookList) {
+                    guestbookList.innerHTML = `
+                        <div class="guestbook-item" style="text-align: center; padding: 40px 20px;">
+                            No messages yet...<br>
+                            Be the first player to leave a message!
+                        </div>
+                    `;
+                }
                 // 빈 상태에서도 페이지 컨트롤 표시
-                document.getElementById('pageInfo').textContent = '0 / 0';
-                const prevBtn = document.getElementById('prevPageBtn');
-                const nextBtn = document.getElementById('nextPageBtn');
+                if (pageInfo) pageInfo.textContent = '0 / 0';
                 if (prevBtn) {
                     prevBtn.disabled = true;
                     prevBtn.style.opacity = '0.3';
@@ -1584,7 +1600,7 @@
                     nextBtn.disabled = true;
                     nextBtn.style.opacity = '0.3';
                 }
-                pageIndicator.textContent = 'PAGE 0';
+                if (pageIndicator) pageIndicator.textContent = 'PAGE 0';
                 return;
             }
             
@@ -1595,7 +1611,8 @@
             const pageData = guestbookData.slice(startIndex, endIndex);
             
             // 현재 페이지 메시지 표시 (빈 슬롯 없이)
-            guestbookList.innerHTML = pageData.map((entry, i) => `
+            if (guestbookList) {
+                guestbookList.innerHTML = pageData.map((entry, i) => `
                 <div class="guestbook-item" style="
                     animation: fadeIn 0.5s ease-in-out ${i * 0.1}s both;
                     padding: 15px;
@@ -1610,14 +1627,11 @@
                     </div>
                 </div>
             `).join('');
+            }
             
             // 페이지 정보 업데이트
-            document.getElementById('pageInfo').textContent = `${currentGuestbookPage} / ${totalPages}`;
-            pageIndicator.textContent = `PAGE ${currentGuestbookPage}`;
-            
-            // 버튼 상태 업데이트
-            const prevBtn = document.getElementById('prevPageBtn');
-            const nextBtn = document.getElementById('nextPageBtn');
+            if (pageInfo) pageInfo.textContent = `${currentGuestbookPage} / ${totalPages}`;
+            if (pageIndicator) pageIndicator.textContent = `PAGE ${currentGuestbookPage}`;
             if (prevBtn) {
                 prevBtn.disabled = currentGuestbookPage === 1;
                 prevBtn.style.opacity = currentGuestbookPage === 1 ? '0.3' : '1';
@@ -1808,13 +1822,45 @@
                 });
             }
             
-            // 실시간 방명록 업데이트
-            listenGuestbook((entries) => {
-                if (entries && entries.length > 0) {
-                    // 페이지네이션 함수 호출
-                    displayGuestbook(entries);
-                }
-            });
+            // Firestore에서 방명록 데이터 가져오기
+            if (typeof listenGuestbook === 'function') {
+                console.log('listenGuestbook 함수 존재, Firestore에서 데이터 가져오기 시도...');
+                listenGuestbook((entries) => {
+                    console.log('Firestore에서 받은 방명록 데이터:', entries);
+                    if (entries && entries.length > 0) {
+                        // Firestore 데이터를 DataManager에 저장
+                        if (window.DataManager) {
+                            window.DataManager.data.guestbook = entries.map(entry => ({
+                                id: entry.id || (window.Utils ? window.Utils.generateId() : Math.random().toString(36).substr(2, 9)),
+                                name: entry.name,
+                                message: entry.msg || entry.message,
+                                date: entry.date || new Date().toLocaleDateString('ko-KR'),
+                                timestamp: entry.ts || entry.timestamp || new Date().toISOString()
+                            }));
+                            console.log('DataManager에 저장된 방명록 데이터:', window.DataManager.data.guestbook);
+                        }
+                        // 방명록 표시
+                        displayGuestbook(entries);
+                        
+                        // GuestbookManager도 업데이트
+                        if (window.GuestbookManager && window.GuestbookManager.updateList) {
+                            setTimeout(() => {
+                                window.GuestbookManager.updateList();
+                            }, 100);
+                        }
+                    } else {
+                        console.log('Firestore에 방명록 데이터가 없습니다');
+                        displayGuestbook([]);
+                    }
+                });
+            } else {
+                console.log('listenGuestbook 함수를 찾을 수 없습니다');
+            }
+            
+            // GuestbookManager 초기화 (있으면)
+            if (window.GuestbookManager) {
+                window.GuestbookManager.init();
+            }
             
         } catch (error) {
             console.log('Firebase not configured or error:', error);
@@ -1871,12 +1917,19 @@
                 font-size: 10px !important;
                 padding: 10px 5px !important;
             }
-            
-            .parents-contact span {
-                display: inline-block !important;
-                width: 100% !important;
-                margin-bottom: 5px !important;
-                font-size: 12px !important;
+
+            .parents-contact .parent-info span { /* 실제 정보용 span만 */
+              display:inline-block !important;
+              width:100% !important;
+              margin-bottom:5px !important;
+              font-size:12px !important;
+            }
+        
+            /* 제목의 픽셀 아이콘은 인라인 유지 */
+            .parents-contact h3 .pixel-icon {
+              display:inline-block !important;
+              width:auto !important;
+              vertical-align:middle !important;
             }
             
             .parents-contact > div > div > div {
