@@ -162,6 +162,9 @@ const DataManager = {
             // 실패시 기본 샘플 데이터 사용
             this.data.guestbook = this.guestbook.getSample();
         }
+
+        this._ready = true;
+        window.dispatchEvent(new Event('DataManagerReady'));
     },
 
     // 데이터 초기화
@@ -216,3 +219,5 @@ const DataManager = {
         });
     }
 };
+DataManager.loadFromStorage();
+window.DataManager = DataManager;
