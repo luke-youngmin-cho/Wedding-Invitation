@@ -1,12 +1,18 @@
 # GitHub Pages Configuration
 theme: null
 plugins: []
+include:
+  - assets/
+  - js/
+  - css/
+  - _*
 exclude:
   - node_modules/
   - src/
   - package.json
   - package-lock.json
   - vite.config.js
+  - vite.config.js.bak
   - firebase.json
   - firestore.rules
   - storage.rules
@@ -15,3 +21,7 @@ exclude:
   - .firebaserc
   - README.md
   - .gitignore
+  - public/
+  - public-backup/
+  - dist/
+  - dist-unused/

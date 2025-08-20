@@ -9,7 +9,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(del \"C:\\Users\\USER\\Documents\\GitHub\\Wedding-Invitation\\pwa-192x192.png\")",
+      "Bash(mv:*)"
     ],
     "deny": []
   }
