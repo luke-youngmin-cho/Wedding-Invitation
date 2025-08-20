@@ -5,6 +5,7 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
 /* Color Palette */
 :root {
@@ -37,6 +38,11 @@ body {
   position: relative;
   width: 100%;
   max-width: 100vw;
+}
+
+/* Hide game button in retro theme */
+body.retro-active .game-mode-btn {
+  display: none !important;
 }
 
 /* Scanline Effect (subtle) */
@@ -251,6 +257,11 @@ body::before {
 }
 
 /* Write Icon */
+.pixel-icon-write {
+  animation: none !important;
+  transform: none !important;
+}
+
 .pixel-icon-write::before {
   content: '';
   position: absolute;
@@ -583,12 +594,49 @@ body::before {
 }
 
 .celebrate-text {
-  animation: celebrate 2s ease-in-out infinite;
+  font-family: 'DotGothic16', 'Press Start 2P', monospace !important;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  margin-top: 50px;
+  text-transform: uppercase;
+  overflow: visible;
 }
 
-@keyframes celebrate {
-  0%, 100% { transform: scale(1) rotate(-1deg); }
-  50% { transform: scale(1.05) rotate(1deg); }
+.celebrate-text .bride-name,
+.celebrate-text .groom-name {
+  color: var(--pixel-yellow);
+  text-shadow: 
+    2px 2px 0 var(--pixel-pink),
+    4px 4px 0 var(--pixel-cyan);
+  display: inline-block;
+  animation: glow 2s ease-in-out infinite alternate;
+  font-family: 'DotGothic16', monospace !important;
+}
+
+.celebrate-text .pixel-heart {
+  color: var(--pixel-pink);
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+  from { 
+    text-shadow: 
+      2px 2px 0 var(--pixel-pink),
+      4px 4px 0 var(--pixel-cyan);
+  }
+  to { 
+    text-shadow: 
+      2px 2px 0 var(--pixel-cyan),
+      4px 4px 10px var(--pixel-pink);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
 /* Main Photo */
@@ -659,10 +707,16 @@ body::before {
   margin: 50px 0;
 }
 
+body.retro-active .photo-album h3,
 .retro-section .photo-album h3 {
   text-align: center;
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 18px !important;
+  color: var(--pixel-yellow) !important;
+  text-shadow: 2px 2px 0 var(--pixel-pink) !important;
   margin-bottom: 30px;
-  font-size: 18px;
+  overflow: visible;
+  text-transform: uppercase;
 }
 
 /* 레트로 슬라이더 - 모던과 동일한 구조 */
@@ -899,7 +953,8 @@ button:active {
   margin-bottom: 15px;
   border: 3px dashed var(--pixel-pink);
   position: relative;
-  font-size: 12px;
+  font-size: 16px;
+  font-family: 'DotGothic16', monospace;
 }
 
 .guestbook-item::before {
@@ -923,9 +978,10 @@ button:active {
 }
 
 .guest-message {
-  font-size: 12px;
+  font-size: 18px;
   line-height: 1.8;
   margin-top: 10px;
+  font-family: 'DotGothic16', monospace;
 }
 
 /* Modal */
@@ -1337,16 +1393,17 @@ h3 {
   padding: 8px 15px;
   font-size: 11px;
   white-space: nowrap;
-  background: var(--pixel-black);
+  background: var(--pixel-pink);
   color: var(--pixel-white);
-  border: 2px solid var(--pixel-white);
+  border: 2px solid var(--pixel-pink);
   cursor: pointer;
   font-family: 'Press Start 2P', monospace;
 }
 
 .retro-contact-btn:hover {
-  background: var(--pixel-pink);
-  border-color: var(--pixel-yellow);
+  background: var(--pixel-light-pink);
+  color: var(--pixel-dark);
+  border-color: var(--pixel-light-pink);
 }
 
 /* Mini Game Section */

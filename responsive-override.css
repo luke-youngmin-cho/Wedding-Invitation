@@ -35,14 +35,20 @@ button {
   white-space: nowrap !important;
 }
 
-.game-mode-btn {
+.modern-section .game-mode-btn {
   font-size: clamp(10px, 2.3vw, 14px) !important;
   padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2.5vw, 20px) !important;
+}
+
+.retro-section .game-mode-btn {
+  display: none !important;
 }
 
 .contact-btn {
   font-size: clamp(9px, 2vw, 13px) !important;
   padding: clamp(6px, 1.2vw, 8px) clamp(10px, 2vw, 12px) !important;
+  max-width: 55px !important;
+  height: 36px !important;
 }
 
 .slider-btn {
@@ -162,11 +168,13 @@ button {
   line-height: 1.8 !important;
 }
 
-/* Container Width Control */
+/* Container Width Control - PC overflow 방지 */
 .container {
   width: 100%;
   max-width: min(480px, 100vw);
   margin: 0 auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* Prevent Text Wrapping on Small Screens */
@@ -230,18 +238,36 @@ section {
   align-items: center !important;
 }
 
-.photo-slider {
+/* Modern Theme Photo Slider */
+.modern-section .photo-slider {
   position: relative !important;
   width: 100% !important;
   max-width: min(450px, 90vw) !important;
   margin: 0 auto 20px !important;
+  height: auto !important;
+  min-height: unset !important;
+  max-height: unset !important;
 }
 
-/* 9:16 비율 유지 */
-.photo-slider::before {
+/* 9:16 비율 유지 - Modern Theme */
+.modern-section .photo-slider::before {
   content: '' !important;
   display: block !important;
   padding-top: 177.78% !important;
+}
+
+/* 모바일에서도 비율 유지 */
+@media (max-width: 768px) {
+  .modern-section .photo-slider {
+    height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
+  }
+  
+  .modern-section .photo-slide {
+    min-height: unset !important;
+    max-height: unset !important;
+  }
 }
 
 .photo-track {
@@ -433,14 +459,51 @@ button,
   }
 }
 
-/* Ultra-wide Screen Support */
+/* Desktop & Ultra-wide Screen Support */
+@media (min-width: 768px) {
+  /* PC에서 패널 경계 넘어가는 문제 방지 */
+  .container {
+    max-width: 480px;
+    padding: 0;
+  }
+  
+  .calendar-grid {
+    width: calc(100% - 60px) !important;
+    max-width: 420px !important;
+    padding: 30px !important;
+    margin: 20px auto !important;
+  }
+  
+  .parent-contact-wrapper {
+    padding: 0 20px !important;
+    max-width: calc(100% - 40px) !important;
+  }
+  
+  .parent-contact-row {
+    padding: 15px !important;
+  }
+  
+  section {
+    overflow-x: hidden !important;
+  }
+  
+  /* 사진 갤러리 PC 최적화 */
+  .photo-slider {
+    max-width: 420px !important;
+  }
+}
+
 @media (min-width: 1920px) {
   html {
     font-size: 16px;
   }
   
   .container {
-    max-width: 600px;
+    max-width: 480px;
+  }
+  
+  .calendar-grid {
+    max-width: 420px !important;
   }
 }
 
@@ -514,6 +577,71 @@ button,
    각 버튼 글자 자체는 절대 쪼개지지 않게 */
 .share-buttons .share-btn {
   flex: 0 1 auto;              /* 버튼 자체는 줄에서 빠질 수 있지만 */
+}
+
+/* Modern Theme - 부모 연락처 행 최적화 */
+.modern-section .parent-contact-row {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.modern-section .parent-info {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.modern-section .parent-title {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  font-size: clamp(11px, 2.5vw, 14px) !important;
+}
+
+.modern-section .parent-name {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: clamp(13px, 3vw, 16px) !important;
+}
+
+.modern-section .parent-buttons {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  gap: 4px !important;
+}
+
+.modern-section .contact-btn {
+  padding: 8px 10px !important;
+  font-size: clamp(10px, 2.2vw, 12px) !important;
+  white-space: nowrap !important;
+  min-width: fit-content !important;
+}
+
+/* 모바일에서 세로 정렬로 변경 */
+@media (max-width: 420px) {
+  .modern-section .parent-contact-row {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .modern-section .parent-info {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 3px !important;
+  }
+  
+  .modern-section .parent-buttons {
+    justify-content: center !important;
+  }
+  
+  .modern-section .contact-btn {
+    min-width: 80px !important;
+  }
 }
 
 /* 부모 연락처 행은 좌/우 버튼 아이콘이 눌려 찌그러지지 않게 */
