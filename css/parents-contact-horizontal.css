@@ -167,49 +167,102 @@
   transform: scale(1.1) !important;
 }
 
-/* 작은 화면에서 세로 배치로 전환 */
+/* 작은 화면에서도 가로 배치 유지 - 스케일 조정 */
 @media (max-width: 480px) {
   .modern-section .parent-contact-wrapper,
   .retro-section .parent-contact-wrapper,
   .retro-section .game-master-buttons {
-    flex-direction: column !important;
-    gap: 10px !important;
+    flex-direction: row !important;  /* 가로 유지 */
+    gap: 8px !important;
+    padding: 5px !important;
   }
   
   .modern-section .parent-contact-row,
   .retro-section .parent-contact-row {
-    width: 100% !important;
-    max-width: 280px !important;
-    margin: 0 auto !important;
-    padding: 12px !important;
-    border: 1px solid rgba(255, 105, 180, 0.3) !important;
-    border-radius: 8px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    padding: 10px 5px !important;
   }
   
-  .retro-section .parent-contact-row {
-    border: 2px solid var(--pixel-pink, #ff006e) !important;
-    border-radius: 0 !important;
+  /* 폰트 크기 더 축소 */
+  .modern-section .parent-title {
+    font-size: clamp(8px, 2vw, 10px) !important;
   }
-}
-
-/* 아주 작은 화면 */
-@media (max-width: 360px) {
+  
   .modern-section .parent-name {
-    font-size: clamp(11px, 3vw, 14px) !important;
+    font-size: clamp(11px, 2.5vw, 14px) !important;
   }
   
   .modern-section .contact-btn {
     padding: 5px 8px !important;
-    font-size: clamp(8px, 2vw, 10px) !important;
+    font-size: clamp(8px, 1.8vw, 10px) !important;
+  }
+  
+  .retro-section .retro-parent-title {
+    font-size: clamp(5px, 1.3vw, 7px) !important;
   }
   
   .retro-section .parent-name {
-    font-size: clamp(8px, 2.8vw, 12px) !important;
+    font-size: clamp(8px, 2.2vw, 11px) !important;
   }
   
   .retro-section .retro-contact-btn {
     padding: 5px 6px !important;
-    font-size: clamp(5px, 1.5vw, 7px) !important;
+    font-size: clamp(5px, 1.3vw, 7px) !important;
+  }
+}
+
+/* 아주 작은 화면에서도 가로 유지 */
+@media (max-width: 360px) {
+  .modern-section .parent-contact-wrapper,
+  .retro-section .parent-contact-wrapper,
+  .retro-section .game-master-buttons {
+    flex-direction: row !important;
+    gap: 5px !important;
+  }
+  
+  .modern-section .parent-contact-row,
+  .retro-section .parent-contact-row {
+    padding: 8px 3px !important;
+  }
+  
+  /* 더 작은 폰트 */
+  .modern-section .parent-title {
+    font-size: 7px !important;
+    margin-bottom: 3px !important;
+  }
+  
+  .modern-section .parent-name {
+    font-size: clamp(9px, 3vw, 12px) !important;
+    margin-bottom: 5px !important;
+  }
+  
+  .modern-section .contact-btn {
+    padding: 4px 6px !important;
+    font-size: 7px !important;
+  }
+  
+  .modern-section .parent-buttons {
+    gap: 3px !important;
+  }
+  
+  .retro-section .retro-parent-title {
+    font-size: 5px !important;
+    margin-bottom: 3px !important;
+  }
+  
+  .retro-section .parent-name {
+    font-size: clamp(7px, 2.5vw, 10px) !important;
+    margin-bottom: 5px !important;
+  }
+  
+  .retro-section .retro-contact-btn {
+    padding: 4px 5px !important;
+    font-size: 5px !important;
+  }
+  
+  .retro-section .parent-buttons {
+    gap: 3px !important;
   }
 }
 
