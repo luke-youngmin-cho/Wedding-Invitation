@@ -4,7 +4,7 @@ const urlsToCache = [
   '/Wedding-Invitation/',
   '/Wedding-Invitation/index.html',
   '/Wedding-Invitation/modern-theme.css',
-  '/Wedding-Invitation/retro-final.css',
+  '/Wedding-Invitation/retro-theme.css',
   '/Wedding-Invitation/js/config.js',
   '/Wedding-Invitation/js/minigame.js'
 ];
