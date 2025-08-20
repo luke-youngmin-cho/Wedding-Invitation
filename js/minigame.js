@@ -24,16 +24,16 @@
     gameContainer.innerHTML = `
       <div class="game-section-wrapper" style="
         width: 100%;
-        max-width: 440px;
+        max-width: 380px;
         margin: 0 auto;
         padding: 0 10px;
         box-sizing: border-box;
       ">
-        <!-- Game Screen with 4:3 ratio -->
+        <!-- Game Screen with 3:4 ratio -->
         <div class="game-screen-container" style="
           position: relative;
           width: 100%;
-          padding-bottom: 75%;
+          padding-bottom: 133.33%;
           margin: 0 auto;
           background: #0b1020;
           border: 3px solid #ff006e;
@@ -48,7 +48,7 @@
             right: 0;
             bottom: 0;
           ">
-            <canvas id="miniGameCanvas" width="768" height="1024" style="
+            <canvas id="miniGameCanvas" width="600" height="800" style="
               display: block;
               width: 100%;
               height: 100%;
@@ -70,7 +70,7 @@
         
             
             <!-- Leaderboard (Inside game wrapper) -->
-            <div id="leaderboardPanel" style="position:absolute;top:8%;right:1%;padding:6px;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 9px);width:clamp(100px, 20%, 140px);z-index:10;">
+            <div id="leaderboardPanel" style="position:absolute;top:1%;right:1%;padding:6px;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 9px);width:clamp(100px, 20%, 140px);z-index:10;">
               <div style="margin-bottom:4px;color:#ffde00;font-size:clamp(7px, 1.8vw, 10px);">TOP 3</div>
               <div id="leaderboardList" style="line-height:1.4;font-size:clamp(5px, 1.2vw, 7px);">
                 Loading...
@@ -125,7 +125,7 @@
           border: 2px solid #ff006e;
           display: ${showButtons ? 'flex' : 'none'};
           justify-content: space-around;
-          max-width: 420px;
+          max-width: 360px;
           margin-left: auto;
           margin-right: auto;
           box-sizing: border-box;
@@ -244,8 +244,8 @@
     ctx = canvas.getContext('2d');
     
     // 3:4 aspect ratio dimensions
-    canvas.width = 768;
-    canvas.height = 1024;
+    canvas.width = 600;
+    canvas.height = 800;
     
     // Update world dimensions
     world.w = canvas.width;
