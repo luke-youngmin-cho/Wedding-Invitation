@@ -66,15 +66,20 @@
 }
 
 .modern-section .contact-btn {
-  padding: 6px 10px !important;
-  font-size: clamp(9px, 2vw, 11px) !important;
+  padding: 4px 8px !important;
+  font-size: 14px !important;  /* 이모지 크기 고정 */
+  line-height: 1 !important;
   white-space: nowrap !important;
-  border-radius: 15px !important;
+  border-radius: 12px !important;
   background: white !important;
   color: var(--modern-pink, #ff69b4) !important;
-  border: 2px solid var(--modern-pink, #ff69b4) !important;
+  border: 1.5px solid var(--modern-pink, #ff69b4) !important;
   cursor: pointer !important;
   transition: all 0.3s !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+  flex-shrink: 1 !important;
 }
 
 .modern-section .contact-btn:hover {
@@ -194,8 +199,8 @@
   }
   
   .modern-section .contact-btn {
-    padding: 5px 8px !important;
-    font-size: clamp(8px, 1.8vw, 10px) !important;
+    padding: 3px 5px !important;
+    font-size: 12px !important;  /* 이모지 크기 고정 */
   }
   
   .retro-section .retro-parent-title {
@@ -238,8 +243,8 @@
   }
   
   .modern-section .contact-btn {
-    padding: 4px 6px !important;
-    font-size: 7px !important;
+    padding: 3px 4px !important;
+    font-size: 10px !important;  /* 이모지 최소 크기 */
   }
   
   .modern-section .parent-buttons {
@@ -280,8 +285,8 @@
   }
   
   .modern-section .contact-btn {
-    padding: 8px 12px !important;
-    font-size: 11px !important;
+    padding: 5px 10px !important;
+    font-size: 14px !important;  /* 큰 화면에서 이모지 크기 */
   }
   
   .retro-section .parent-name {
