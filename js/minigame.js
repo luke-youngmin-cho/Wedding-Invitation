@@ -24,18 +24,22 @@
     gameContainer.innerHTML = `
       <div class="game-section-wrapper" style="
         width: 100%;
-        max-width: 100%;
+        max-width: 440px;
         margin: 0 auto;
+        padding: 0 10px;
+        box-sizing: border-box;
       ">
         <!-- Game Screen with 4:3 ratio -->
         <div class="game-screen-container" style="
           position: relative;
           width: 100%;
-          padding-bottom: 75%; /* 4:3 Aspect Ratio */
+          padding-bottom: 75%;
+          margin: 0 auto;
           background: #0b1020;
           border: 3px solid #ff006e;
           overflow: hidden;
           box-shadow: 0 0 30px rgba(255,0,110,0.5);
+          box-sizing: border-box;
         ">
           <div class="game-wrapper" style="
             position: absolute;
@@ -53,31 +57,31 @@
             "></canvas>
         
         <!-- UI Overlay -->
-        <div class="game-ui" style="position:absolute;left:1%;top:1%;padding:0.8% 1.2%;background:rgba(7,10,20,.8);border:2px solid #ff006e;color:#ffde00;font-family:'Press Start 2P',monospace;font-size:calc(8px + 0.3vw);z-index:10;">
-          <div style="margin-bottom:0.3vw;">WEDDING RUNNER</div>
-          <div style="display:flex;gap:1vw;">
+        <div class="game-ui" style="position:absolute;left:1%;top:1%;padding:6px 8px;background:rgba(7,10,20,.8);border:2px solid #ff006e;color:#ffde00;font-family:'Press Start 2P',monospace;font-size:clamp(6px, 1.5vw, 9px);z-index:10;">
+          <div style="margin-bottom:3px;font-size:clamp(6px, 1.5vw, 9px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">WEDDING RUNNER</div>
+          <div style="display:flex;gap:8px;font-size:clamp(5px, 1.3vw, 8px);">
             <span>DIST: <span id="gameDistance">0m</span></span>
             <span>SPD: <span id="gameSpeed">0</span></span>
           </div>
-          <div style="margin-top:0.3vw;">
+          <div style="margin-top:3px;font-size:clamp(5px, 1.3vw, 8px);">
             <span>CHAR: <span id="gameChar">GROOM</span></span>
           </div>
         </div>
         
             
             <!-- Leaderboard (Inside game wrapper) -->
-            <div id="leaderboardPanel" style="position:absolute;top:8%;right:1%;padding:0.8%;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:calc(6px + 0.3vw);width:15%;min-width:120px;z-index:10;">
-              <div style="margin-bottom:0.5vw;color:#ffde00;font-size:calc(7px + 0.3vw);">TOP 3</div>
-              <div id="leaderboardList" style="line-height:1.4;font-size:calc(5px + 0.2vw);">
+            <div id="leaderboardPanel" style="position:absolute;top:8%;right:1%;padding:6px;background:rgba(7,10,20,.9);border:2px solid #ffde00;color:white;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 9px);width:clamp(100px, 20%, 140px);z-index:10;">
+              <div style="margin-bottom:4px;color:#ffde00;font-size:clamp(7px, 1.8vw, 10px);">TOP 3</div>
+              <div id="leaderboardList" style="line-height:1.4;font-size:clamp(5px, 1.2vw, 7px);">
                 Loading...
               </div>
             </div>
             
             <!-- Start Screen (Inside game wrapper) -->
-            <div id="startScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;">
-              <div style="text-align:center;padding:2%;max-width:90%;">
-                <h2 style="color:#ff006e;font-family:'Press Start 2P';font-size:calc(14px + 1vw);margin-bottom:2vw;">WEDDING RUNNER</h2>
-                <p style="color:#ffde00;font-family:'Press Start 2P';font-size:calc(6px + 0.4vw);line-height:1.8;margin-bottom:2vw;">
+            <div id="startScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;overflow:auto;">
+              <div style="text-align:center;padding:10px;max-width:90%;width:100%;">
+                <h2 style="color:#ff006e;font-family:'Press Start 2P';font-size:clamp(10px, 2.5vw, 16px);margin-bottom:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px;">WEDDING RUNNER</h2>
+                <p style="color:#ffde00;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 10px);line-height:1.6;margin-bottom:15px;">
                   신랑과 신부가 함께하는<br>
                   무한 러닝 게임!<br><br>
                   [조작법]<br>
@@ -87,26 +91,26 @@
                   슬램 : K/↓<br>
                   모바일: 화면 버튼 사용
                 </p>
-                <button id="startGameBtn" style="padding:1.5% 3%;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:calc(8px + 0.5vw);cursor:pointer;animation:blink 1s infinite;">
+                <button id="startGameBtn" style="padding:10px 20px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:clamp(8px, 2vw, 11px);cursor:pointer;animation:blink 1s infinite;white-space:nowrap;">
                   START GAME
                 </button>
               </div>
             </div>
             
             <!-- Game Over Screen (Inside game wrapper) -->
-            <div id="gameOverScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;">
-              <div style="background:#0b1020;border:3px solid #ff006e;padding:2%;text-align:center;color:#ffde00;font-family:'Press Start 2P';min-width:40%;max-width:80%;">
-                <h2 style="margin:0 0 2vw;font-size:calc(14px + 1vw);">GAME OVER</h2>
-                <div id="finalScore" style="margin:1vw 0;font-size:calc(8px + 0.5vw);line-height:1.8;"></div>
+            <div id="gameOverScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;overflow:auto;">
+              <div style="background:#0b1020;border:3px solid #ff006e;padding:15px;text-align:center;color:#ffde00;font-family:'Press Start 2P';width:90%;max-width:350px;box-sizing:border-box;margin:auto;">
+                <h2 style="margin:0 0 10px;font-size:clamp(10px, 2.5vw, 14px);white-space:nowrap;">GAME OVER</h2>
+                <div id="finalScore" style="margin:10px 0;font-size:clamp(7px, 1.8vw, 10px);line-height:1.6;"></div>
                 <div id="recordSubmit" style="display:none;">
-                  <input type="text" id="playerName" placeholder="이름 입력" maxlength="10" style="margin:1.5vw 0;padding:0.8vw;background:#1a1a2e;border:2px solid #ff006e;color:white;font-family:'Press Start 2P';font-size:calc(7px + 0.3vw);width:60%;">
-                  <div style="display:flex;gap:1vw;justify-content:center;margin-top:1.5vw;">
-                    <button id="submitScore" style="padding:1vw 2vw;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:calc(7px + 0.3vw);cursor:pointer;">SUBMIT</button>
-                    <button id="restartGame" style="padding:1vw 2vw;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:calc(7px + 0.3vw);cursor:pointer;">RETRY</button>
+                  <input type="text" id="playerName" placeholder="이름 입력" maxlength="10" style="margin:10px 0;padding:6px 8px;background:#1a1a2e;border:2px solid #ff006e;color:white;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 9px);width:80%;box-sizing:border-box;">
+                  <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+                    <button id="submitScore" style="padding:8px 12px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 9px);cursor:pointer;white-space:nowrap;">SUBMIT</button>
+                    <button id="restartGame" style="padding:8px 12px;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 9px);cursor:pointer;white-space:nowrap;">RETRY</button>
                   </div>
                 </div>
                 <div id="normalRestart" style="display:none;">
-                  <button id="restartGameOnly" style="padding:1.5vw 3vw;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:calc(8px + 0.4vw);cursor:pointer;margin-top:2vw;">RETRY</button>
+                  <button id="restartGameOnly" style="padding:10px 15px;background:#ffde00;border:none;color:black;font-family:'Press Start 2P';font-size:clamp(7px, 1.8vw, 10px);cursor:pointer;margin-top:15px;white-space:nowrap;">RETRY</button>
                 </div>
               </div>
             </div>
@@ -116,11 +120,15 @@
         <!-- Control Panel for Mobile/Touch -->
         <div class="control-panel" style="
           margin-top: 10px;
-          padding: 15px;
+          padding: 10px;
           background: rgba(15,15,35,0.9);
           border: 2px solid #ff006e;
           display: ${showButtons ? 'flex' : 'none'};
           justify-content: space-around;
+          max-width: 420px;
+          margin-left: auto;
+          margin-right: auto;
+          box-sizing: border-box;
           align-items: center;
           gap: 20px;
         ">

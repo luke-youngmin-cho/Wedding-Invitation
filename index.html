@@ -48,6 +48,16 @@
     
     <!-- Responsive Override Styles -->
     <link rel="stylesheet" href="responsive-override.css">
+    <link rel="stylesheet" href="css/mobile-width-constraint.css">
+    <link rel="stylesheet" href="css/calendar-grid-fix.css">
+    <link rel="stylesheet" href="css/account-section-fix.css">
+    <link rel="stylesheet" href="css/rsvp-form-improvement.css">
+    <link rel="stylesheet" href="css/boundary-fix.css">
+    <link rel="stylesheet" href="css/retro-share-fix.css">
+    <link rel="stylesheet" href="css/retro-titles-fix.css">
+    <link rel="stylesheet" href="css/game-world-ui-fix.css">
+    <link rel="stylesheet" href="css/parents-contact-horizontal.css">
+    <link rel="stylesheet" href="css/parents-group-border.css">
     
     <!-- Press Start 2P Font for transition panel -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -57,6 +67,8 @@
     <!-- Load Mini Game -->
     <!-- Load Mini Game -->
     <script src="js/minigame.js"></script>
+    <!-- Load Account Copy Function -->
+    <script src="js/account-copy.js"></script>
 </head>
 <body>
     <!-- Game Mode Button -->
@@ -681,24 +693,24 @@
         </section>
 
         <!-- 모던 공유하기 -->
-        <section class="share-buttons modern-section" style="text-align: center; padding: 40px 20px;">
-            <div style="white-space: nowrap;">
-                <button class="share-btn" onclick="shareKakao()" style="margin: 5px; padding: 20px 40px; font-size: 16px; white-space: nowrap; display: inline-block;">
+        <section class="share-buttons modern-section">
+            <div>
+                <button class="share-btn" onclick="shareKakao()">
                     💬 카카오톡 공유
                 </button>
-                <button class="share-btn" onclick="copyURL()" style="margin: 5px; padding: 20px 40px; font-size: 16px; white-space: nowrap; display: inline-block;">
+                <button class="share-btn" onclick="copyURL()">
                     🔗 링크 복사
                 </button>
             </div>
         </section>
         
         <!-- 레트로 공유하기 -->
-        <section class="share-buttons retro-section" style="display: none; text-align: center; padding: 40px 20px;">
-            <div style="white-space: nowrap;">
-                <button class="share-btn" onclick="shareKakao()" style="margin: 5px; padding: 20px 40px; font-size: 16px; white-space: nowrap; display: inline-block;">
+        <section class="share-buttons retro-section" style="display: none;">
+            <div>
+                <button class="share-btn" onclick="shareKakao()">
                     💬 KAKAO SHARE
                 </button>
-                <button class="share-btn" onclick="copyURL()" style="margin: 5px; padding: 20px 40px; font-size: 16px; white-space: nowrap; display: inline-block;">
+                <button class="share-btn" onclick="copyURL()">
                     🔗 COPY LINK
                 </button>
             </div>
@@ -1502,7 +1514,7 @@
                 if (day === 27) {
                     dayEl.className += ' wedding-day';
                     if (isRetro) {
-                        dayEl.innerHTML = `<strong>${day}</strong><br><span style="font-size: 10px;">WEDDING!</span>`;
+                        dayEl.innerHTML = `<strong>${day}</strong><br><span style="font-size: 16px; color: #00ffff;">💙</span>`;
                     } else {
                         dayEl.innerHTML = `<strong>${day}</strong><br><span style="font-size: 10px;">💒</span>`;
                     }

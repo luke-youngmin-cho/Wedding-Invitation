@@ -9,9 +9,13 @@ export default defineConfig({
     open: true
   },
   build: {
-    // Build is disabled for production
-    // Site is deployed as static files
-    outDir: 'dist-unused',
-    emptyOutDir: false
+    // Build output for GitHub Pages deployment
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: './index.html'
+      }
+    }
   }
 });
