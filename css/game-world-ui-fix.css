@@ -22,10 +22,10 @@
   position: relative !important;
 }
 
-/* Game Screen Container - 게임 화면 영역 */
+/* Game Screen Container - 게임 화면 영역 (3:4 비율) */
 .game-screen-container {
   width: 100% !important;
-  max-width: 420px !important;
+  max-width: 360px !important;  /* 3:4 비율로 조정 */
   height: auto !important;
   margin: 0 auto !important;
   position: relative !important;
