@@ -1,5 +1,5 @@
 // Service Worker for Wedding Invitation PWA
-const CACHE_NAME = 'wedding-v2'; // 버전 업데이트로 캐시 초기화
+const CACHE_NAME = 'wedding-v3'; // 버전 업데이트로 캐시 초기화 및 Vite 잔재 제거
 const urlsToCache = [
   '/Wedding-Invitation/',
   '/Wedding-Invitation/index.html',
@@ -42,10 +42,20 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  // Vite 빌드 파일 요청은 무시
-  if (event.request.url.includes('manifest-') || 
-      event.request.url.includes('main-') ||
-      event.request.url.includes('assets/manifest')) {
+  const url = event.request.url;
+  
+  // Vite 빌드 파일 요청은 404 반환
+  if (url.includes('manifest-') || 
+      url.includes('-Ccl1kXq-') ||
+      url.includes('-DubD6iG7') ||
+      url.includes('images/main-') ||
+      url.includes('assets/manifest-')) {
+    event.respondWith(
+      new Response('Not Found - Vite build file not needed', {
+        status: 404,
+        statusText: 'Not Found'
+      })
+    );
     return;
   }
   
