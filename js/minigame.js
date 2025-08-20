@@ -44,7 +44,7 @@
             right: 0;
             bottom: 0;
           ">
-            <canvas id="miniGameCanvas" width="1024" height="768" style="
+            <canvas id="miniGameCanvas" width="768" height="1024" style="
               display: block;
               width: 100%;
               height: 100%;
@@ -235,9 +235,9 @@
     }
     ctx = canvas.getContext('2d');
     
-    // 4:3 aspect ratio dimensions
-    canvas.width = 1024;
-    canvas.height = 768;
+    // 3:4 aspect ratio dimensions
+    canvas.width = 768;
+    canvas.height = 1024;
     
     // Update world dimensions
     world.w = canvas.width;
@@ -249,7 +249,7 @@
   // ===== Game Variables =====
   let DPR = 1;
   const world = {
-    w: 1024, h: 768,
+    w: 768, h: 1024,
     gravity: 1600,
     baseSpeed: 250,
     speed: 250,
@@ -456,7 +456,7 @@
     burstQueue.length = 0;
     
     // Initial platform at bottom of screen
-    const groundY = 400; // Fixed position
+    const groundY = 700; // Adjusted for 3:4 aspect ratio
     platforms.push({x: -200, y: groundY, w: 1200, h: 100});
     
     // Place player on the first platform
@@ -480,8 +480,8 @@
     const minW = 150, maxW = 300;
     const t = Math.pow(Math.random(), 0.35);
     const width = minW + (maxW - minW) * t;
-    const baseY = world.h - 100;
-    const y = clamp(baseY - randRange(0, 120), world.h * 0.3, world.h - 60);
+    const baseY = world.h - 150;
+    const y = clamp(baseY - randRange(0, 200), world.h * 0.4, world.h - 80);
     const h = 40;
     const x = cursorX + gap;
     

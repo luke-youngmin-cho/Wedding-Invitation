@@ -10,11 +10,15 @@
     <!-- PWA Support -->
     <link rel="manifest" href="manifest.json">
     
-    <!-- Modern Theme CSS (Default) -->
-    <link rel="stylesheet" href="modern-theme.css" id="modern-styles">
+    <!-- Modern Theme CSS (New Structure) -->
+    <link rel="stylesheet" href="css/modern/index.css" id="modern-styles">
     
-    <!-- Retro Game Style (Disabled by default) -->
-    <link rel="stylesheet" href="retro-theme.css" id="retro-styles" disabled>
+    <!-- Retro Theme CSS (New Structure, Disabled by default) -->
+    <link rel="stylesheet" href="css/retro/index.css" id="retro-styles" disabled>
+    
+    <!-- Legacy CSS Files (for backward compatibility) -->
+    <link rel="stylesheet" href="modern-theme.css" id="modern-legacy-styles">
+    <link rel="stylesheet" href="retro-theme.css" id="retro-legacy-styles" disabled>
     
     <!-- Responsive Override Styles -->
     <link rel="stylesheet" href="responsive-override.css">
@@ -118,7 +122,7 @@
         <!-- 모던 초대 메시지 -->
         <section class="invitation-msg modern-section">
             <div style="text-align: center; font-size: 16px; margin-bottom: 20px;">
-                <div class="pixel-icon" style="font-size: 40px; margin-bottom: 20px;">💌</div>
+                <div class="pixel-icon" style="font-size: 40px; margin-bottom: 20px; display: block; text-align: center;">💌</div>
             </div>
             <div style="font-size: 15px; line-height: 2.2; padding: 0 20px; text-align: center;">
                 서로에게 기댈 수 있는 나무가 되기로 했습니다.<br> 
@@ -475,7 +479,7 @@
           <h3 style="text-align:center;font-size:18px;">방명록</h3>
 
           <div style="text-align:center;margin:30px 0;">
-            <button onclick="openGuestbookModal()" style="padding:20px 40px;font-size:16px;">
+            <button onclick="document.getElementById('guestbookModal').style.display='flex'" style="padding:20px 40px;font-size:16px;">
               ✏️ 축하 메시지 작성하기
             </button>
           </div>
@@ -510,7 +514,7 @@
           </h3>
       
           <div style="text-align:center;margin:30px 0;">
-            <button onclick="openGuestbookModal()" style="padding:20px 40px;font-size:16px;">
+            <button class="guestbook-write-btn" onclick="document.getElementById('guestbookModal').style.display='flex'" style="padding:20px 40px;font-size:16px;">
               ✏️ WRITE MESSAGE
             </button>
           </div>
@@ -522,7 +526,7 @@
               PAGE 1
             </div>
         
-            <div class="guestbook-page-container special-border"
+            <div class="guestbook-page-container"
                  style="border:4px solid var(--pixel-pink);padding:20px;min-height:450px;">
               <div class="guestbook-list" id="guestbookListRetro"></div>
             </div>
@@ -715,7 +719,7 @@
     <!-- 방명록 모달 -->
     <div id="guestbookModal" class="modal" style="display: none;">
         <div class="modal-content">
-            <span class="close" onclick="closeGuestbookModal()" style="font-size: 30px;">×</span>
+            <span class="close" onclick="document.getElementById('guestbookModal').style.display='none'" style="font-size: 30px; cursor: pointer;">×</span>
             <h3 style="font-size: 18px;" id="guestbookModalTitle">💌 축하 메시지 작성 💌</h3>
             <form id="guestbookForm">
                 <div class="form-group">
@@ -777,6 +781,38 @@
 
     <!-- JavaScript -->
     <script>
+        // 모달 함수들 - 최상단에 정의
+        window.openGuestbookModal = function() {
+            const modal = document.getElementById('guestbookModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                console.log('Guestbook modal opened');
+            } else {
+                console.error('Guestbook modal not found');
+            }
+        }
+        
+        window.closeGuestbookModal = function() {
+            const modal = document.getElementById('guestbookModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        window.openAttendanceModal = function() {
+            const modal = document.getElementById('attendanceModal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }
+        
+        window.closeAttendanceModal = function() {
+            const modal = document.getElementById('attendanceModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
         // 테마 관리
         let currentTheme = 'modern';
         
@@ -821,8 +857,13 @@
             // 모던 테마로 시작
             const modernStyles = document.getElementById('modern-styles');
             const retroStyles = document.getElementById('retro-styles');
+            const modernLegacyStyles = document.getElementById('modern-legacy-styles');
+            const retroLegacyStyles = document.getElementById('retro-legacy-styles');
+            
             modernStyles.disabled = false;
             retroStyles.disabled = true;
+            if (modernLegacyStyles) modernLegacyStyles.disabled = false;
+            if (retroLegacyStyles) retroLegacyStyles.disabled = true;
             
             // 달력 생성
             setupCalendar();
@@ -885,6 +926,8 @@
         function switchToRetroTheme() {
             const modernStyles = document.getElementById('modern-styles');
             const retroStyles = document.getElementById('retro-styles');
+            const modernLegacyStyles = document.getElementById('modern-legacy-styles');
+            const retroLegacyStyles = document.getElementById('retro-legacy-styles');
             const portalTrigger = document.getElementById('portalTrigger');
             const returnPortal = document.getElementById('returnPortal');
             
@@ -894,6 +937,8 @@
             // 스타일시트 전환
             modernStyles.disabled = true;
             retroStyles.disabled = false;
+            if (modernLegacyStyles) modernLegacyStyles.disabled = true;
+            if (retroLegacyStyles) retroLegacyStyles.disabled = false;
             
             currentTheme = 'retro';
             
@@ -944,6 +989,8 @@
         function switchToModernTheme() {
             const modernStyles = document.getElementById('modern-styles');
             const retroStyles = document.getElementById('retro-styles');
+            const modernLegacyStyles = document.getElementById('modern-legacy-styles');
+            const retroLegacyStyles = document.getElementById('retro-legacy-styles');
             const portalTrigger = document.getElementById('portalTrigger');
             const returnPortal = document.getElementById('returnPortal');
             
@@ -953,6 +1000,8 @@
             // 스타일시트 전환
             modernStyles.disabled = false;
             retroStyles.disabled = true;
+            if (modernLegacyStyles) modernLegacyStyles.disabled = false;
+            if (retroLegacyStyles) retroLegacyStyles.disabled = true;
             
             currentTheme = 'modern';
             
@@ -1438,22 +1487,7 @@
             }
         }
 
-        // 모달 함수들
-        function openGuestbookModal() {
-            document.getElementById('guestbookModal').style.display = 'flex';
-        }
-        
-        function closeGuestbookModal() {
-            document.getElementById('guestbookModal').style.display = 'none';
-        }
-        
-        function openAttendanceModal() {
-            document.getElementById('attendanceModal').style.display = 'flex';
-        }
-        
-        function closeAttendanceModal() {
-            document.getElementById('attendanceModal').style.display = 'none';
-        }
+        // 모달 함수들은 이미 상단에 정의됨
 
         // 연락처 함수
         function callParent(side, parent) {
@@ -1612,9 +1646,10 @@
             
             // 현재 페이지 메시지 표시 (빈 슬롯 없이)
             if (guestbookList) {
+                const isRetro = guestbookList.id === 'guestbookListRetro';
                 guestbookList.innerHTML = pageData.map((entry, i) => `
                 <div class="guestbook-item" style="
-                    animation: fadeIn 0.5s ease-in-out ${i * 0.1}s both;
+                    ${!isRetro ? `animation: fadeIn 0.5s ease-in-out ${i * 0.1}s both;` : ''}
                     padding: 15px;
                     border-bottom: 2px dashed rgba(255, 0, 110, 0.2);
                     margin-bottom: 10px;

@@ -869,13 +869,17 @@ button:hover {
   padding: 60px 20px;
   text-align: center;
   background: var(--modern-white);
+  position: relative;
+  z-index: 1;
 }
 
 .share-btn {
   margin: 10px;
+  position: relative;
+  z-index: 2;
 }
 
-/* Parent Contact Responsive Layout */
+/* Parent Contact Responsive Layout - Optimized */
 .parent-contact-wrapper {
   margin-top: 15px;
 }
@@ -888,29 +892,36 @@ button:hover {
   padding: 10px;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
+  gap: 10px;
 }
 
 .parent-info {
-  flex: 1;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  min-width: 0;
 }
 
 .parent-title {
   color: var(--modern-gray);
   font-size: 14px;
-  min-width: 50px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .parent-name {
   font-weight: 600;
   color: var(--modern-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .parent-buttons {
   display: flex;
   gap: 5px;
+  flex-shrink: 0;
 }
 
 .contact-btn {
@@ -922,7 +933,15 @@ button:hover {
   cursor: pointer;
   transition: all 0.3s;
   white-space: nowrap;
+  white-space: nowrap;
   font-size: 13px;
+  flex-shrink: 0;
+  min-width: 40px;
+  max-width: 55px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-btn:hover {
@@ -1012,21 +1031,24 @@ button:hover {
   }
   
   .photo-slider {
-    margin: 0 !important;
+    margin: 0 auto 20px !important;
     width: 100% !important;
-    min-height: 300px !important;
-    max-height: 60vh !important;
+    max-width: min(450px, 95vw) !important;
+    height: auto !important;
+  }
+  
+  /* 9:16 비율 유지 */
+  .photo-slider::before {
+    padding-top: 177.78% !important;
   }
   
   .photo-slide {
-    min-height: 300px !important;
-    max-height: 60vh !important;
-    padding: 10px !important;
+    padding: 15px !important;
   }
   
   .photo-slide img {
-    max-width: calc(100% - 20px) !important;
-    max-height: calc(60vh - 20px) !important;
+    max-width: calc(100% - 30px) !important;
+    max-height: calc(100% - 30px) !important;
   }
   
   .photo-controls button {
@@ -1058,36 +1080,50 @@ button:hover {
     font-size: 11px !important;
   }
   
-  /* Mobile Parent Contact Layout */
+  /* Mobile Parent Contact Layout - Fixed */
   .parent-contact-row {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 10px !important;
-    padding: 15px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 8px !important;
   }
   
   .parent-info {
-    justify-content: center !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
     flex-direction: column !important;
-    gap: 5px !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    min-width: 0 !important;
   }
   
   .parent-title {
-    min-width: auto !important;
+    font-size: 11px !important;
+    color: var(--modern-gray) !important;
+    opacity: 0.8 !important;
+  }
+  
+  .parent-name {
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
   }
   
   .parent-buttons {
-    width: 100% !important;
-    justify-content: center !important;
-    gap: 8px !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    gap: 4px !important;
   }
   
   .contact-btn {
-    flex: 0 0 auto !important;
-    min-width: 80px !important;
-    max-width: 120px !important;
-    padding: 10px 8px !important;
-    font-size: 12px !important;
+    padding: 8px 10px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    min-width: fit-content !important;
   }
   
   /* Legacy button styles */
@@ -1217,9 +1253,13 @@ button:hover {
     padding: 8px 2px;
   }
   
-  /* Photo gallery */
+  /* Photo gallery - 비율 유지 */
   .photo-slider {
-    height: 300px;
+    height: auto !important;
+  }
+  
+  .photo-slider::before {
+    padding-top: 177.78% !important;
   }
   
   .slider-controls {
