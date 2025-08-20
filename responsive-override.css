@@ -168,11 +168,13 @@ button {
   line-height: 1.8 !important;
 }
 
-/* Container Width Control */
+/* Container Width Control - PC overflow 방지 */
 .container {
   width: 100%;
   max-width: min(480px, 100vw);
   margin: 0 auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* Prevent Text Wrapping on Small Screens */
@@ -457,14 +459,51 @@ button,
   }
 }
 
-/* Ultra-wide Screen Support */
+/* Desktop & Ultra-wide Screen Support */
+@media (min-width: 768px) {
+  /* PC에서 패널 경계 넘어가는 문제 방지 */
+  .container {
+    max-width: 480px;
+    padding: 0;
+  }
+  
+  .calendar-grid {
+    width: calc(100% - 60px) !important;
+    max-width: 420px !important;
+    padding: 30px !important;
+    margin: 20px auto !important;
+  }
+  
+  .parent-contact-wrapper {
+    padding: 0 20px !important;
+    max-width: calc(100% - 40px) !important;
+  }
+  
+  .parent-contact-row {
+    padding: 15px !important;
+  }
+  
+  section {
+    overflow-x: hidden !important;
+  }
+  
+  /* 사진 갤러리 PC 최적화 */
+  .photo-slider {
+    max-width: 420px !important;
+  }
+}
+
 @media (min-width: 1920px) {
   html {
     font-size: 16px;
   }
   
   .container {
-    max-width: 600px;
+    max-width: 480px;
+  }
+  
+  .calendar-grid {
+    max-width: 420px !important;
   }
 }
 

@@ -230,13 +230,15 @@ body {
   50% { opacity: 0.5; }
 }
 
-/* Container */
+/* Container - PC에서 overflow 방지 */
 .container {
   max-width: 480px;
   margin: 0 auto;
   padding: 0;
   background: var(--modern-white);
   box-shadow: var(--modern-shadow);
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* Title Section */
@@ -427,12 +429,14 @@ body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
-  max-width: 400px;
+  width: calc(100% - 40px);
+  max-width: 440px;
   margin: 0 auto;
   background: var(--modern-white);
   padding: 20px;
   border-radius: 10px;
   box-shadow: var(--modern-shadow);
+  box-sizing: border-box;
 }
 
 .calendar-header {
@@ -882,6 +886,11 @@ button:hover {
 /* Parent Contact Responsive Layout - Optimized */
 .parent-contact-wrapper {
   margin-top: 15px;
+  max-width: calc(100% - 30px);
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .parent-contact-row {
@@ -893,6 +902,9 @@ button:hover {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   gap: 10px;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .parent-info {
