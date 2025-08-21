@@ -594,19 +594,27 @@
   }
 
   function doJump() {
+    // 게임 속도에 비례한 점프력 조정
+    const speedRatio = world.speed / world.baseSpeed;
+    const adjustedJumpV = player.jumpV * Math.sqrt(speedRatio); // 제곱근으로 완만하게 증가
+    
     if (player.onGround || player.coyote > 0) {
-      player.vy = -player.jumpV;
+      player.vy = -adjustedJumpV;
       player.onGround = false;
       player.jumpsLeft = 1;
       player.coyote = 0;
     } else if (player.jumpsLeft > 0) {
-      player.vy = -player.jumpV * 0.95;
+      player.vy = -adjustedJumpV * 0.95;
       player.jumpsLeft = 0;
     }
   }
 
   function tryAttack() {
     if (player.attackCooldown > 0) return;
+    
+    // 게임 속도에 비례한 공격 속도 조정
+    const speedRatio = world.speed / world.baseSpeed;
+    const cooldownScale = 1 / Math.sqrt(speedRatio); // 속도가 빨라지면 쿨다운 감소
     
     if (player.who === CHAR.MALE) {
       // Katana attack with animation
@@ -615,13 +623,13 @@
       meleeRects.push(box);
       slashes.push({ x: player.x + player.w + 10, y: player.y + player.h*0.25, life: 0.12, angle: -0.15, scaleX: 4, scaleY: 3 });
       slashes.push({ x: player.x + player.w + 20, y: player.y + player.h*0.70, life: 0.12, angle: 0.1, scaleX: 5, scaleY: 3 });
-      player.attackCooldown = 0.3;
+      player.attackCooldown = 0.3 * cooldownScale;
     } else {
       // Machine gun burst
       const shots = 6;
-      const cadence = 0.06;
+      const cadence = 0.06 * cooldownScale;
       burstQueue.push({ shotsLeft: shots, timer: 0, cadence });
-      player.attackCooldown = shots * cadence + 0.12;
+      player.attackCooldown = (shots * cadence + 0.12) * cooldownScale;
     }
   }
 
@@ -634,7 +642,10 @@
 
   function trySlam() {
     if (player.onGround || player.slamCooldown > 0) return;
-    player.vy = Math.max(player.vy, 2000);
+    // 게임 속도에 비례한 슬램 속도 조정
+    const speedRatio = world.speed / world.baseSpeed;
+    const adjustedSlamSpeed = 2000 * Math.sqrt(speedRatio);
+    player.vy = Math.max(player.vy, adjustedSlamSpeed);
     player.slamming = true;
     player.slamCooldown = 0.7;
     player.invulnerable = 0.5; // 슬램 중 0.5초 무적
@@ -693,12 +704,16 @@
       b.timer -= dt;
       
       if (b.timer <= 0 && b.shotsLeft > 0) {
+        // 게임 속도에 비례하여 총알 속도 조정
+        const speedRatio = world.speed / world.baseSpeed;
+        const bulletVelocity = 900 * Math.sqrt(speedRatio); // 속도가 빨라지면 총알도 빨라짐
+        
         bullets.push({
           x: player.x + player.w * 0.9,
           y: player.y + player.h * 0.28,
           w: 12,
           h: 6,
-          vx: 900,
+          vx: bulletVelocity,
           ttl: 1.6
         });
         b.shotsLeft--;
@@ -787,9 +802,12 @@
     const animScale = world.speed / world.baseSpeed;
     player.animTime += dt * player.baseAnimRate * animScale;
 
-    // Physics
+    // Physics - 게임 속도에 비례한 중력 조정
+    const speedRatio = world.speed / world.baseSpeed;
+    const adjustedGravity = world.gravity * Math.sqrt(speedRatio); // 제곱근으로 완만하게 증가
+    
     const prevY = player.y;
-    player.vy += world.gravity * dt;
+    player.vy += adjustedGravity * dt;
     player.y += player.vy * dt;
 
     // Coyote time
