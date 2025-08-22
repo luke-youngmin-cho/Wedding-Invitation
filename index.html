@@ -64,6 +64,9 @@
     <!-- Press Start 2P Font for transition panel -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
+    <!-- Kakao SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    
     <!-- Load Configuration -->
     <script src="js/config.js"></script>
     <!-- Load Mini Game -->
@@ -1633,10 +1636,50 @@
         }
         
         function shareKakao() {
-            const message = currentTheme === 'retro' ? 
-                'KAKAO SHARE - COMING SOON!' : 
-                '카카오톡 공유 기능을 준비중입니다.';
-            alert(message);
+            // 카카오 SDK 초기화 (한 번만 호출되도록)
+            if (!Kakao.isInitialized()) {
+                Kakao.init('47fcce58c06e9f4a0f82c3723af6931e');
+            }
+            
+            // 현재 페이지의 기본 URL
+            const currentUrl = window.location.href;
+            
+            // 테마에 따른 이미지 선택
+            const imageUrl = currentTheme === 'retro' ? 
+                window.location.origin + '/Wedding-Invitation/assets/main_retro.jpg' :
+                window.location.origin + '/Wedding-Invitation/assets/main.jpg';
+            
+            // 테마에 따른 메시지 스타일
+            const title = currentTheme === 'retro' ? 
+                '💾 SAVE THE DATE! 권채린 ♥ 조영민' :
+                '권채린 ❤️ 조영민 결혼합니다';
+                
+            const description = currentTheme === 'retro' ?
+                '🎮 2025.09.27 SAT PM 1:00\n📍 켄싱턴호텔 여의도\n\n픽셀 속 사랑이 현실이 되는 날!' :
+                '2025년 9월 27일 토요일 오후 1시\n켄싱턴호텔 여의도 웨딩홀\n\n소중한 날에 함께해 주세요 💐';
+            
+            // 카카오톡 공유하기
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: title,
+                    description: description,
+                    imageUrl: imageUrl,
+                    link: {
+                        mobileWebUrl: currentUrl,
+                        webUrl: currentUrl
+                    }
+                },
+                buttons: [
+                    {
+                        title: currentTheme === 'retro' ? '🎮 초대장 보기' : '💌 초대장 보기',
+                        link: {
+                            mobileWebUrl: currentUrl,
+                            webUrl: currentUrl
+                        }
+                    }
+                ]
+            });
         }
 
         // 방명록 페이지네이션 변수
