@@ -875,7 +875,7 @@
             
             // 레트로 테마용 사진과 모던 테마용 사진 구분
             const folder = isRetro ? 'AlbumSlidesRetro' : 'AlbumSlides';
-            const extension = isRetro ? 'png' : 'jpg';
+            const extension = 'jpg'; // 모두 jpg로 통일
             
             // baseUrl이 있으면 /를 포함, 없으면 상대 경로로
             const pathPrefix = baseUrl ? `${baseUrl}/` : '';
