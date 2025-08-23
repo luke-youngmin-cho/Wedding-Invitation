@@ -759,7 +759,7 @@ body.retro-active .photo-album h3,
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 0;
   opacity: 0;
   transition: opacity 0.5s steps(8); /* 레트로 스텝 애니메이션 */
 }
