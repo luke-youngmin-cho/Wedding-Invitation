@@ -1851,7 +1851,7 @@
         window.getGameLeaderboard = async function() {
             console.log('Fetching leaderboard...');
             try {
-                const q = query(collection(db, 'gameScores'), orderBy('score', 'desc'), limit(10));
+                const q = query(collection(db, 'gameScores'), orderBy('score', 'desc'), limit(100));
                 const snapshot = await getDocs(q);
                 
                 const scores = [];

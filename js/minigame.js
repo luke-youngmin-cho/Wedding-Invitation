@@ -1328,25 +1328,72 @@
             `;
           }).join('');
           
-          // Create pagination buttons
-          paginationEl.innerHTML = '';
-          for (let i = 0; i < totalPages; i++) {
-            const pageBtn = document.createElement('button');
-            pageBtn.textContent = `${i + 1}`;
-            pageBtn.style.cssText = `
-              padding: 8px 12px;
-              background: ${i === currentLeaderboardPage ? '#ff006e' : '#333'};
-              border: 2px solid #ff006e;
-              color: white;
-              font-family: 'Press Start 2P', monospace;
-              font-size: 10px;
-              cursor: pointer;
-            `;
-            pageBtn.onclick = () => {
-              currentLeaderboardPage = i;
-              loadLeaderboard();
+          // Create prev/next pagination controls
+          paginationEl.innerHTML = `
+            <div style="display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: nowrap;">
+              <button id="prevPageBtn" style="
+                padding: 6px 10px;
+                background: #ff006e;
+                border: 2px solid #ffde00;
+                color: white;
+                font-family: 'Press Start 2P', monospace;
+                font-size: 8px;
+                cursor: pointer;
+                white-space: nowrap;
+                min-width: 60px;
+                ${currentLeaderboardPage === 0 ? 'opacity: 0.3; cursor: not-allowed;' : ''}
+              " ${currentLeaderboardPage === 0 ? 'disabled' : ''}>
+                ◀
+              </button>
+              
+              <span style="
+                color: #ffde00;
+                font-family: 'Press Start 2P', monospace;
+                font-size: 8px;
+                white-space: nowrap;
+                text-align: center;
+                min-width: 80px;
+              ">
+                ${currentLeaderboardPage + 1}/${totalPages}
+              </span>
+              
+              <button id="nextPageBtn" style="
+                padding: 6px 10px;
+                background: #ff006e;
+                border: 2px solid #ffde00;
+                color: white;
+                font-family: 'Press Start 2P', monospace;
+                font-size: 8px;
+                cursor: pointer;
+                white-space: nowrap;
+                min-width: 60px;
+                ${currentLeaderboardPage === totalPages - 1 ? 'opacity: 0.3; cursor: not-allowed;' : ''}
+              " ${currentLeaderboardPage === totalPages - 1 ? 'disabled' : ''}>
+                ▶
+              </button>
+            </div>
+          `;
+          
+          // Add event listeners
+          const prevBtn = paginationEl.querySelector('#prevPageBtn');
+          const nextBtn = paginationEl.querySelector('#nextPageBtn');
+          
+          if (prevBtn && !prevBtn.disabled) {
+            prevBtn.onclick = () => {
+              if (currentLeaderboardPage > 0) {
+                currentLeaderboardPage--;
+                loadLeaderboard();
+              }
             };
-            paginationEl.appendChild(pageBtn);
+          }
+          
+          if (nextBtn && !nextBtn.disabled) {
+            nextBtn.onclick = () => {
+              if (currentLeaderboardPage < totalPages - 1) {
+                currentLeaderboardPage++;
+                loadLeaderboard();
+              }
+            };
           }
         } else if (fullLeaderboardEl) {
           fullLeaderboardEl.style.display = 'none';
