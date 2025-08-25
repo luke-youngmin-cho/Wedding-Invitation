@@ -81,15 +81,9 @@
             <div id="startScreen" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.95);z-index:100;overflow:auto;">
               <div style="text-align:center;padding:10px;max-width:90%;width:100%;">
                 <h2 style="color:#ff006e;font-family:'Press Start 2P';font-size:clamp(10px, 2.5vw, 16px);margin-bottom:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px;">WEDDING RUNNER</h2>
-                <p style="color:#ffde00;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 10px);line-height:1.6;margin-bottom:15px;">
+                <p style="color:#ffde00;font-family:'Press Start 2P';font-size:clamp(6px, 1.5vw, 10px);line-height:1.6;margin-bottom:20px;">
                   신랑과 신부가 함께하는<br>
-                  무한 러닝 게임!<br><br>
-                  [조작법]<br>
-                  점프 : SPACE/↑ <br>
-                  공격 : J<br>
-                  캐릭터 전환 : Q<br>
-                  슬램 : K/↓<br>
-                  모바일: 화면 버튼 사용
+                  무한 러닝 게임!
                 </p>
                 <button id="startGameBtn" style="padding:10px 20px;background:#ff006e;border:none;color:white;font-family:'Press Start 2P';font-size:clamp(8px, 2vw, 11px);cursor:pointer;animation:blink 1s infinite;white-space:nowrap;">
                   START GAME

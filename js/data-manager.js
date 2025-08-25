@@ -154,13 +154,19 @@ const DataManager = {
             //     this.data = { ...this.data, ...JSON.parse(saved) };
             // }
             
-            // 샘플 데이터로 초기화
-            this.data.guestbook = this.guestbook.getSample();
-            console.log('데이터 로드됨 (샘플):', this.data);
+            // Firebase 데이터가 없을 때만 샘플 데이터 사용
+            if (!this.data.guestbook || this.data.guestbook.length === 0) {
+                this.data.guestbook = this.guestbook.getSample();
+                console.log('샘플 데이터로 초기화됨:', this.data);
+            } else {
+                console.log('기존 데이터 유지:', this.data.guestbook.length, '개');
+            }
         } catch (e) {
             console.warn('데이터 로드 실패:', e);
             // 실패시 기본 샘플 데이터 사용
-            this.data.guestbook = this.guestbook.getSample();
+            if (!this.data.guestbook || this.data.guestbook.length === 0) {
+                this.data.guestbook = this.guestbook.getSample();
+            }
         }
 
         this._ready = true;
@@ -219,5 +225,13 @@ const DataManager = {
         });
     }
 };
-DataManager.loadFromStorage();
+
+// 초기화 - Firebase가 없을 경우를 위한 샘플 데이터
+// Firebase가 있으면 Firebase 데이터로 덮어씌워짐
+if (!DataManager.data.guestbook || DataManager.data.guestbook.length === 0) {
+    DataManager.data.guestbook = DataManager.guestbook.getSample();
+}
+
+DataManager._ready = true;
 window.DataManager = DataManager;
+window.dispatchEvent(new Event('DataManagerReady'));
