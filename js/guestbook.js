@@ -45,24 +45,28 @@ function getAllGuestbookDoms() {
 
 /* ---------- GuestbookManager ---------- */
 const GuestbookManager = {
-  _state: { itemsPerPage: 6, currentPage: 1, searchKeyword: '' },
+  _state: { itemsPerPage: 5, currentPage: 1, searchKeyword: '' },
 
   async init() {
     // DataManager 준비될 때까지 '무기한' 대기
     onDMReady(() => {
       this.updateList(); // 최초 렌더
 
-      // 테마 토글/DOM 변화/폰트 로드에 따라 다시 렌더
-      const reRender = () => this.updateList();
-      const mo = new MutationObserver(reRender);
-      mo.observe(document.body, { childList: true, subtree: true, attributes: true });
-      document.fonts?.ready?.then(reRender).catch(()=>{});
+      // 폰트 로드 완료시 한번만 재렌더
+      document.fonts?.ready?.then(() => this.updateList()).catch(()=>{});
 
       // 검색 인풋 연결(있으면)
       const searchInput = document.getElementById('guestbookSearch');
       if (searchInput) {
         const debounce = (fn, ms=200) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms);} };
         searchInput.addEventListener('input', debounce(e => this.search(e.target.value), 200));
+      }
+    });
+    
+    // Firebase 데이터 업데이트 감지 (DataManagerReady 이벤트를 계속 청취)
+    window.addEventListener('DataManagerReady', () => {
+      if (dmReady()) {
+        this.updateList();
       }
     });
   },

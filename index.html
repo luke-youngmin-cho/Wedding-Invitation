@@ -69,7 +69,15 @@
     
     <!-- Load Configuration -->
     <script src="js/config.js"></script>
-    <!-- Load Mini Game -->
+    <!-- Core Utilities -->
+    <script src="js/utils.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/form-manager.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/notification.js"></script>
+    <script src="js/analytics.js"></script>
+    <!-- Load Data Manager -->
+    <script src="js/data-manager.js"></script>
     <!-- Load Mini Game -->
     <script src="js/minigame.js"></script>
     <!-- Load Account Copy Function -->
@@ -737,6 +745,35 @@
         
         <!-- 미니게임 섹션 (레트로 테마) -->
         <section class="minigame-section retro-section" style="display: none; padding: 40px 20px; background: var(--pixel-dark);">
+            <!-- 조작법 설명 -->
+            <div style="background: #1a1a2e; border: 2px solid var(--pixel-yellow); padding: 20px; margin-bottom: 30px; border-radius: 8px;">
+                <h4 style="text-align: center; font-size: 14px; margin-bottom: 15px; color: var(--pixel-yellow); font-family: 'Press Start 2P', monospace;">
+                    [ 조작법 ]
+                </h4>
+                <div style="color: #fff; font-size: 12px; line-height: 1.8; font-family: monospace;">
+                    <div style="margin-bottom: 12px;">
+                        <strong style="color: var(--pixel-pink);">Tag (Q)</strong> : 캐릭터를 교체합니다.
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <strong style="color: var(--pixel-pink);">Jump (SPACE/↑)</strong> : 점프합니다. 2단 점프도 가능합니다.
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <strong style="color: var(--pixel-pink);">Slam (K/↓)</strong> : 공중에 뜬 상태에서 아래로 강하게 내려찍습니다.<br>
+                        <span style="margin-left: 20px; color: #aaa;">잠시동안 무적상태가 되며, 근처에 있는 지뢰를 파괴합니다.</span>
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <strong style="color: var(--pixel-pink);">Atk (J)</strong> : 공격합니다.
+                        <div style="margin-left: 20px; margin-top: 5px; color: #aaa;">
+                            <div style="margin-bottom: 3px;">└ 신랑 : 칼을 휘둘러 바닥에 붙은 지뢰 및 공중의 드론을 파괴할 수 있습니다.</div>
+                            <div>└ 신부 : 머신건을 사용하여 멀리있는 공중의 드론을 파괴할 수 있습니다. (지뢰파괴불가)</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; text-align: center; color: var(--pixel-yellow); font-size: 11px;">
+                        ※ 모바일: 화면 버튼 사용
+                    </div>
+                </div>
+            </div>
+            
             <h3 style="text-align: center; font-size: 18px; margin-bottom: 30px; color: var(--pixel-yellow);">
                 <span class="pixel-icon">🎮</span> WEDDING RUNNER GAME <span class="pixel-icon">🎮</span>
             </h3>
@@ -1154,8 +1191,6 @@
                 // 방명록 업데이트
                 if (window.GuestbookManager) {
                     window.GuestbookManager.updateList();
-                } else if (guestbookData) {
-                    displayGuestbook(guestbookData);
                 }
                 
                 const attendanceSubmit = document.getElementById('attendanceSubmitBtn');
@@ -1206,8 +1241,6 @@
                 // 방명록 업데이트
                 if (window.GuestbookManager) {
                     window.GuestbookManager.updateList();
-                } else if (guestbookData) {
-                    displayGuestbook(guestbookData);
                 }
             }
         }
@@ -1682,107 +1715,12 @@
             });
         }
 
-        // 방명록 페이지네이션 변수
-        let guestbookData = [];
-        let currentGuestbookPage = 1;
-        const itemsPerPage = 5; // 한 페이지당 5개 표시
-        
-        // 방명록 표시 함수
-        function displayGuestbook(entries) {
-            guestbookData = entries || [];
-            // 현재 테마에 따라 올바른 방명록 리스트 선택
-            const suffix = currentTheme === 'retro' ? 'Retro' : 'Modern';
-            const guestbookList = document.getElementById('guestbookList' + suffix);
-            const pageIndicator = document.getElementById('pageIndicator' + suffix);
-            const pageInfo = document.getElementById('pageInfo' + suffix);
-            const prevBtn = document.getElementById('prevPageBtn' + suffix);
-            const nextBtn = document.getElementById('nextPageBtn' + suffix);
-            
-            if (guestbookData.length === 0) {
-                if (guestbookList) {
-                    guestbookList.innerHTML = `
-                        <div class="guestbook-item" style="text-align: center; padding: 40px 20px;">
-                            No messages yet...<br>
-                            Be the first player to leave a message!
-                        </div>
-                    `;
-                }
-                // 빈 상태에서도 페이지 컨트롤 표시
-                if (pageInfo) pageInfo.textContent = '0 / 0';
-                if (prevBtn) {
-                    prevBtn.disabled = true;
-                    prevBtn.style.opacity = '0.3';
-                }
-                if (nextBtn) {
-                    nextBtn.disabled = true;
-                    nextBtn.style.opacity = '0.3';
-                }
-                if (pageIndicator) pageIndicator.textContent = 'PAGE 0';
-                return;
-            }
-            
-            // 페이지 계산
-            const totalPages = Math.ceil(guestbookData.length / itemsPerPage);
-            const startIndex = (currentGuestbookPage - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-            const pageData = guestbookData.slice(startIndex, endIndex);
-            
-            // 현재 페이지 메시지 표시 (빈 슬롯 없이)
-            if (guestbookList) {
-                const isRetro = guestbookList.id === 'guestbookListRetro';
-                guestbookList.innerHTML = pageData.map((entry, i) => `
-                <div class="guestbook-item" style="
-                    ${!isRetro ? `animation: fadeIn 0.5s ease-in-out ${i * 0.1}s both;` : ''}
-                    padding: 15px;
-                    border-bottom: 2px dashed rgba(255, 0, 110, 0.2);
-                    margin-bottom: 10px;
-                ">
-                    <div class="guest-name" style="color: var(--pixel-yellow); margin-bottom: 10px;">
-                        <span style="color: var(--pixel-pink);">▶</span> ${entry.name || 'Anonymous'}
-                    </div>
-                    <div class="guest-message" style="padding-left: 20px;">
-                        ${entry.msg || entry.message || ''}
-                    </div>
-                </div>
-            `).join('');
-            }
-            
-            // 페이지 정보 업데이트
-            if (pageInfo) pageInfo.textContent = `${currentGuestbookPage} / ${totalPages}`;
-            if (pageIndicator) pageIndicator.textContent = `PAGE ${currentGuestbookPage}`;
-            if (prevBtn) {
-                prevBtn.disabled = currentGuestbookPage === 1;
-                prevBtn.style.opacity = currentGuestbookPage === 1 ? '0.3' : '1';
-            }
-            if (nextBtn) {
-                nextBtn.disabled = currentGuestbookPage === totalPages;
-                nextBtn.style.opacity = currentGuestbookPage === totalPages ? '0.3' : '1';
-            }
-        }
-        
-        // 페이지 네비게이션 함수
-        function previousGuestbookPage() {
-            if (currentGuestbookPage > 1) {
-                currentGuestbookPage--;
-                displayGuestbook(guestbookData);
-            }
-        }
-        
-        function nextGuestbookPage() {
-            const totalPages = Math.ceil(guestbookData.length / itemsPerPage);
-            if (currentGuestbookPage < totalPages) {
-                currentGuestbookPage++;
-                displayGuestbook(guestbookData);
-            }
-        }
-        
         // 폼 제출
         document.getElementById('guestbookForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
             alert('축하 메시지가 등록되었습니다! 감사합니다');
             closeGuestbookModal();
             this.reset();
-            currentGuestbookPage = 1; // 새 메시지 추가 후 첫 페이지로
         });
         
         document.getElementById('attendanceForm')?.addEventListener('submit', function(e) {
@@ -1956,19 +1894,27 @@
                                 timestamp: entry.ts || entry.timestamp || new Date().toISOString()
                             }));
                             console.log('DataManager에 저장된 방명록 데이터:', window.DataManager.data.guestbook);
+                            
+                            // DataManagerReady 이벤트 다시 발생시켜 GuestbookManager가 업데이트되도록 함
+                            window.dispatchEvent(new Event('DataManagerReady'));
                         }
-                        // 방명록 표시
-                        displayGuestbook(entries);
-                        
-                        // GuestbookManager도 업데이트
+                        // DataManager에 데이터 설정 후 GuestbookManager 업데이트
+                        if (window.DataManager && window.DataManager.guestbook) {
+                            // DataManager는 이미 Firebase에서 데이터를 받았을 것
+                            if (window.GuestbookManager && window.GuestbookManager.updateList) {
+                                setTimeout(() => {
+                                    window.GuestbookManager.updateList();
+                                }, 100);
+                            }
+                        }
+                    } else {
+                        console.log('Firestore에 방명록 데이터가 없습니다');
+                        // 빈 데이터도 GuestbookManager가 처리하도록
                         if (window.GuestbookManager && window.GuestbookManager.updateList) {
                             setTimeout(() => {
                                 window.GuestbookManager.updateList();
                             }, 100);
                         }
-                    } else {
-                        console.log('Firestore에 방명록 데이터가 없습니다');
-                        displayGuestbook([]);
                     }
                 });
             } else {
