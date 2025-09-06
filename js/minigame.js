@@ -129,8 +129,8 @@
           <!-- Left Controls -->
           <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
             <button class="game-btn" id="btnTag" style="
-              width: 55px;
-              height: 55px;
+              width: 75px;
+              height: 50px;
               background: #ff66ff;
               border: 2px solid #ff99ff;
               color: #fff;
@@ -145,8 +145,8 @@
             ">TAG</button>
             
             <button class="game-btn" id="btnJump" style="
-              width: 65px;
-              height: 65px;
+              width: 90px;
+              height: 60px;
               background: #ff006e;
               border: 2px solid #ff3388;
               color: #fff;
@@ -164,8 +164,8 @@
           <!-- Right Controls -->
           <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
             <button class="game-btn" id="btnAttack" style="
-              width: 55px;
-              height: 55px;
+              width: 75px;
+              height: 50px;
               background: #0099ff;
               border: 2px solid #44bbff;
               color: #fff;
@@ -180,8 +180,8 @@
             ">ATK</button>
             
             <button class="game-btn" id="btnSlam" style="
-              width: 65px;
-              height: 65px;
+              width: 90px;
+              height: 60px;
               background: #ff0033;
               border: 2px solid #ff4466;
               color: #fff;
@@ -420,12 +420,80 @@
     if (submitBtn) submitBtn.addEventListener('click', submitScore);
   }
 
+  // ===== Game Session Tracking =====
+  let gameSession = null;
+  
+  class GameSession {
+    constructor() {
+      this.sessionId = this.generateId();
+      this.startTime = Date.now();
+      this.actions = [];
+      this.checkpoints = [];
+      this.lastCheckpoint = 0;
+    }
+    
+    generateId() {
+      return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+    
+    recordAction(type) {
+      this.actions.push({
+        type,
+        time: Date.now() - this.startTime,
+        distance: Math.floor(world.distance)
+      });
+    }
+    
+    recordCheckpoint() {
+      const currentDistance = Math.floor(world.distance);
+      if (currentDistance - this.lastCheckpoint >= 1000) {
+        this.checkpoints.push({
+          distance: currentDistance,
+          time: Date.now() - this.startTime
+        });
+        this.lastCheckpoint = currentDistance;
+      }
+    }
+    
+    validate(finalScore) {
+      const duration = Date.now() - this.startTime;
+      
+      // 최소 5초 플레이
+      if (duration < 5000) {
+        console.warn('Session too short');
+        return false;
+      }
+      
+      // 시간당 최대 점수 (분당 최대 15,000m)
+      const maxScorePerMinute = 15000;
+      const maxPossible = Math.floor((duration / 60000) * maxScorePerMinute);
+      
+      if (finalScore > maxPossible) {
+        console.warn('Score exceeds time limit');
+        return false;
+      }
+      
+      // 최소 액션 수 (5초당 최소 1개)
+      const minActions = Math.floor(duration / 5000);
+      if (this.actions.length < minActions) {
+        console.warn('Too few actions');
+        return false;
+      }
+      
+      return true;
+    }
+  }
+  
   // ===== Game Functions =====
   function resetWorld() {
     // Ensure canvas is set up
     if (!canvas) {
       setupCanvas();
     }
+    
+    // 새 게임 세션 시작
+    gameSession = new GameSession();
+    console.log('New game session:', gameSession.sessionId);
     
     world.speed = world.baseSpeed;
     world.distance = 0;
@@ -597,14 +665,29 @@
       player.onGround = false;
       player.jumpsLeft = 1;
       player.coyote = 0;
+      
+      // 세션 기록
+      if (gameSession) {
+        gameSession.recordAction('jump');
+      }
     } else if (player.jumpsLeft > 0) {
       player.vy = -adjustedJumpV * 0.95;
       player.jumpsLeft = 0;
+      
+      // 세션 기록
+      if (gameSession) {
+        gameSession.recordAction('double_jump');
+      }
     }
   }
 
   function tryAttack() {
     if (player.attackCooldown > 0) return;
+    
+    // 세션 기록
+    if (gameSession) {
+      gameSession.recordAction('attack');
+    }
     
     // 게임 속도에 비례한 공격 속도 조정
     const speedRatio = world.speed / world.baseSpeed;
@@ -629,6 +712,12 @@
 
   function tryTag() {
     if (player.tagCooldown > 0) return;
+    
+    // 세션 기록
+    if (gameSession) {
+      gameSession.recordAction('tag');
+    }
+    
     player.who = (player.who === CHAR.MALE) ? CHAR.FEMALE : CHAR.MALE;
     player.tagCooldown = 0.18;
     updateUI();
@@ -636,6 +725,12 @@
 
   function trySlam() {
     if (player.onGround || player.slamCooldown > 0) return;
+    
+    // 세션 기록
+    if (gameSession) {
+      gameSession.recordAction('slam');
+    }
+    
     // 게임 속도에 비례한 슬램 속도 조정
     const speedRatio = world.speed / world.baseSpeed;
     const adjustedSlamSpeed = 2000 * Math.sqrt(speedRatio);
@@ -920,8 +1015,22 @@
       return;
     }
 
-    // Update distance
-    world.distance += dx / 50;
+    // Update distance with overflow prevention
+    const MAX_SAFE_DISTANCE = 100000000; // 100 million meters max
+    const distanceIncrement = dx / 50;
+    
+    // Prevent integer overflow and unrealistic values
+    if (world.distance + distanceIncrement < MAX_SAFE_DISTANCE) {
+      world.distance += distanceIncrement;
+      
+      // Record checkpoint every 1000m
+      if (gameSession) {
+        gameSession.recordCheckpoint();
+      }
+    } else {
+      world.distance = MAX_SAFE_DISTANCE;
+      console.warn('Maximum distance reached:', MAX_SAFE_DISTANCE);
+    }
 
     // Render
     render(animScale);
@@ -939,7 +1048,25 @@
   async function endGame() {
     running = false;
     
-    const currentScore = Math.floor(world.distance);
+    // Validate and sanitize score
+    let currentScore = Math.floor(world.distance);
+    const MAX_VALID_SCORE = 100000000; // 100 million max
+    const MIN_VALID_SCORE = 0;
+    
+    // Prevent negative or overflow values
+    if (currentScore < MIN_VALID_SCORE || isNaN(currentScore) || !isFinite(currentScore)) {
+      currentScore = 0;
+      console.error('Invalid score detected:', world.distance);
+    } else if (currentScore > MAX_VALID_SCORE) {
+      currentScore = MAX_VALID_SCORE;
+      console.warn('Score exceeded maximum:', currentScore);
+    }
+    
+    // Validate game session
+    if (gameSession && !gameSession.validate(currentScore)) {
+      console.warn('Invalid game session detected');
+      currentScore = 0;
+    }
     
     // Check if it's a new high score
     try {
@@ -1242,10 +1369,24 @@
     
     const score = Math.floor(world.distance);
     
+    // 세션 검증
+    if (gameSession && !gameSession.validate(score)) {
+      alert('비정상적인 게임 플레이가 감지되었습니다.');
+      return;
+    }
+    
     try {
       // Firebase 연동 (전역 함수로 정의됨)
       if (window.submitGameScore) {
-        await window.submitGameScore(name, score);
+        // 세션 데이터와 함께 전송
+        const sessionData = gameSession ? {
+          sessionId: gameSession.sessionId,
+          duration: Date.now() - gameSession.startTime,
+          actionCount: gameSession.actions.length,
+          checkpointCount: gameSession.checkpoints.length
+        } : null;
+        
+        await window.submitGameScore(name, score, sessionData);
         
         // 점수 등록 성공 메시지
         alert(`${name}님의 기록(${score}m)이 등록되었습니다!`);

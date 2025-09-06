@@ -29,10 +29,13 @@ service cloud.firestore {
       allow delete: if false;
     }
     
-    // 게임 점수 규칙 - 누구나 읽고 쓸 수 있음
+    // 게임 점수 규칙 - 검증된 점수만 허용
     match /gameScores/{document} {
       allow read: if true;
-      allow write: if true;
+      
+      // 생성만 허용 (수정/삭제 금지)
+      allow create: if isValidGameScore(request.resource.data);
+      allow update, delete: if false;
     }
     
     // 관리자 통계 데이터 (읽기 전용)
@@ -61,6 +64,22 @@ service cloud.firestore {
              data.phone.size() >= 0 &&
              data.phone.size() <= 20;
              // phone 필드는 빈 문자열도 허용, 다른 필드는 선택사항으로 처리
+    }
+    
+    function isValidGameScore(data) {
+      return data.keys().hasAll(['name', 'score', 'ts']) &&
+             data.keys().size() == 3 && // 정확히 3개 필드만 허용
+             data.name is string &&
+             data.name.size() > 0 &&
+             data.name.size() <= 50 &&
+             data.score is int &&
+             data.score >= 0 &&
+             data.score <= 100000000 && // 최대 1억점
+             data.score != 2147483647 && // 32-bit 정수 최대값 차단
+             data.ts == request.time && // serverTimestamp() 사용 강제
+             // 비현실적인 점수 패턴 차단
+             !(data.score % 1000000 == 0 && data.score > 10000000) && // 천만 이상의 백만 단위 정확한 값 차단
+             !(data.score == 99999999); // 의심스러운 패턴
     }
   }
 }
