@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('submitRsvp').onclick = async () => {
     const data = {
       name  : document.getElementById('rsvpName').value.trim(),
-      phone : document.getElementById('rsvpPhone').value.trim(),
+      phone : '',
       side  : document.getElementById('rsvpSide').value,
       meal  : document.getElementById('rsvpMeal').value,
       totalGuests: +document.getElementById('rsvpTotal').value || 1,

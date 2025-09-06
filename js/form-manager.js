@@ -54,7 +54,7 @@ const FormManager = {
         },
         
         attendance: function(formData) {
-            const required = ['name', 'phone', 'status', 'meal', 'count', 'relation'];
+            const required = ['name', 'status', 'meal', 'count', 'relation'];
             
             for (let field of required) {
                 const value = formData.get(field)?.trim();
@@ -74,13 +74,6 @@ const FormManager = {
                 return false;
             }
             
-            // 전화번호 검증
-            const phone = formData.get('phone').trim();
-            if (!FormManager.validatePhone(phone)) {
-                NotificationManager.error('올바른 전화번호 형식을 입력해주세요. (예: 010-1234-5678)');
-                FormManager.focusField('attendeePhone');
-                return false;
-            }
             
             // 참석 인원 검증
             const count = parseInt(formData.get('count'));
@@ -195,10 +188,6 @@ const FormManager = {
             // 연속된 공백 제거
             cleanValue = cleanValue.replace(/\s+/g, ' ');
             
-            // 전화번호 정규화
-            if (key === 'phone') {
-                cleanValue = this.normalizePhone(cleanValue);
-            }
             
             sanitized.append(key, cleanValue);
         }
@@ -252,18 +241,6 @@ const FormManager = {
             }
         });
 
-        // 전화번호 필드 실시간 검사
-        const phoneField = document.getElementById('attendeePhone');
-        if (phoneField) {
-            phoneField.addEventListener('blur', () => {
-                const value = phoneField.value.trim();
-                if (value && !this.validatePhone(value)) {
-                    this.showFieldError(phoneField, '올바른 전화번호 형식을 입력해주세요.');
-                } else {
-                    this.clearFieldError(phoneField);
-                }
-            });
-        }
 
         // 메시지 필드 실시간 글자 수 확인
         const messageField = document.getElementById('guestMessage');
