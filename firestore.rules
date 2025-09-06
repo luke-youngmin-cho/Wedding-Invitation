@@ -76,10 +76,7 @@ service cloud.firestore {
              data.score >= 0 &&
              data.score <= 100000000 && // 최대 1억점
              data.score != 2147483647 && // 32-bit 정수 최대값 차단
-             data.ts == request.time && // serverTimestamp() 사용 강제
-             // 비현실적인 점수 패턴 차단
-             !(data.score % 1000000 == 0 && data.score > 10000000) && // 천만 이상의 백만 단위 정확한 값 차단
-             !(data.score == 99999999); // 의심스러운 패턴
+             data.ts == request.time; // serverTimestamp() 사용 강제
     }
   }
 }

@@ -39,7 +39,6 @@ function isValidGameScore(data) {
          data.score >= 0 &&
          data.score <= 100000000 &&
          data.score != 2147483647 &&
-         !(data.score % 1000000 == 0 && data.score > 10000000) &&
          data.ts == request.time;
 }
 ```
