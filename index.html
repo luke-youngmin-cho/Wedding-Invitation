@@ -84,10 +84,44 @@
     <script src="js/account-copy.js"></script>
 </head>
 <body>
-    <!-- Game Mode Button -->
-    <button class="game-mode-btn" id="portalTrigger">
-        🎮 게임하러 가기
-    </button>
+    <!-- Sticky Navigation Bar -->
+    <nav class="sticky-nav visible" id="stickyNav">
+        <div class="nav-container">
+            <button class="nav-item" data-section="title-section">TOP</button>
+            <button class="nav-item" data-section="wedding-info">일정</button>
+            <button class="nav-item" data-section="directions">오시는길</button>
+            <button class="nav-item" data-section="account-info">마음전하기</button>
+            <button class="nav-item nav-game" id="navGameButton">🎮게임</button>
+            <button class="nav-item nav-rsvp" data-section="attendance">참석여부</button>
+        </div>
+    </nav>
+    
+    <!-- Floating Quick Actions -->
+    <div class="floating-actions" id="floatingActions">
+        <button class="fab fab-main" id="fabMain">
+            <span class="fab-icon">💌</span>
+        </button>
+        <div class="fab-menu" id="fabMenu" style="display: none;">
+            <button class="fab fab-secondary" onclick="openAttendanceModal()" title="참석여부">
+                <span>📝</span>
+            </button>
+            <button class="fab fab-secondary" onclick="document.querySelector('.directions').scrollIntoView({behavior: 'smooth'})" title="오시는길">
+                <span>📍</span>
+            </button>
+            <button class="fab fab-secondary" onclick="document.querySelector('.account-info').scrollIntoView({behavior: 'smooth'})" title="계좌번호">
+                <span>💰</span>
+            </button>
+            <button class="fab fab-secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="맨위로">
+                <span>⬆️</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress">
+        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </div>
+    
     
     <!-- Exit Button (게임에서 돌아오기) -->
     <div class="exit-btn" id="returnPortal" style="display: none;">
@@ -346,7 +380,7 @@
         <!-- 레트로 혼주 연락처 -->
         <section class="parents-contact retro-section" style="display: none;">
             <h3 style="text-align: center; margin-bottom: 30px; margin-top: 50px; font-size: 22px; overflow: visible;">
-                <span class="pixel-icon pixel-icon-phone"></span>GAME MASTERS<span class="pixel-icon pixel-icon-phone"></span>
+                <span class="pixel-icon pixel-icon-phone"></span>&nbsp;&nbsp;&nbsp;GAME MASTERS&nbsp;&nbsp;&nbsp;<span class="pixel-icon pixel-icon-phone"></span>
             </h3>
             
             <div style="margin-bottom: 30px;">
@@ -439,7 +473,7 @@
         <!-- 레트로 달력 -->
         <section class="calendar retro-section" style="display: none;">
             <h3 style="text-align: center; font-size: 18px;">
-                <span class="pixel-icon pixel-icon-calendar"></span> 2025년 9월 <span class="pixel-icon pixel-icon-calendar"></span>
+                <span class="pixel-icon pixel-icon-calendar"></span>&nbsp;&nbsp;&nbsp;2025년 9월&nbsp;&nbsp;&nbsp;<span class="pixel-icon pixel-icon-calendar"></span>
             </h3>
             <div class="calendar-grid" id="calendar-retro">
                 <!-- 달력 생성 -->
@@ -524,7 +558,7 @@
         <!-- 레트로 오시는 길 -->
         <section class="directions special-border retro-section" style="display: none;">
             <h3 style="text-align: center; font-size: 18px;">
-                <span class="pixel-icon pixel-icon-map"></span> GAME LOCATION<span class="pixel-icon pixel-icon-map"></span>
+                <span class="pixel-icon pixel-icon-map"></span>&nbsp;&nbsp;&nbsp;GAME LOCATION&nbsp;&nbsp;&nbsp;<span class="pixel-icon pixel-icon-map"></span>
             </h3>
             
             <div style="padding: 20px; margin: 20px 0; border: 3px solid var(--pixel-pink); text-align: center;">
@@ -603,8 +637,7 @@
         <!-- 레트로 방명록 -->
         <section class="guestbook retro-section" style="display:none;">
           <h3 style="text-align:center;font-size:18px;">
-            <span class="pixel-icon pixel-icon-write"></span> GUEST BOOK
-            <span class="pixel-icon pixel-icon-write"></span>
+            <span class="pixel-icon pixel-icon-write"></span>&nbsp;&nbsp;&nbsp;GUEST BOOK&nbsp;&nbsp;&nbsp;<span class="pixel-icon pixel-icon-write"></span>
           </h3>
       
           <div style="text-align:center;margin:30px 0;">
@@ -1010,18 +1043,9 @@
                 }
             }, 500);
             
-            // Portal trigger 이벤트
-            const portalTrigger = document.getElementById('portalTrigger');
+            // Portal 관련 요소들
             const returnPortal = document.getElementById('returnPortal');
             const transitionPanel = document.getElementById('transitionPanel');
-            
-            if (portalTrigger) {
-                portalTrigger.addEventListener('click', function() {
-                    // 경고 패널 표시
-                    transitionPanel.style.display = 'flex';
-                    transitionPanel.classList.add('active');
-                });
-            }
             
             // Return portal 이벤트 (게임에서 돌아오기)
             if (returnPortal) {
@@ -1047,7 +1071,6 @@
             const retroStyles = document.getElementById('retro-styles');
             const modernLegacyStyles = document.getElementById('modern-legacy-styles');
             const retroLegacyStyles = document.getElementById('retro-legacy-styles');
-            const portalTrigger = document.getElementById('portalTrigger');
             const returnPortal = document.getElementById('returnPortal');
             
             // 스크롤을 최상단으로
@@ -1095,10 +1118,7 @@
             // 레트로 이미지로 재초기화
             updateGalleryImages('retro');
             
-            // Portal 전환 (핑크 숨기고 흰색 표시)
-            if (portalTrigger) {
-                portalTrigger.style.display = 'none';
-            }
+            // Portal 전환 - EXIT 버튼만 표시
             if (returnPortal) {
                 returnPortal.style.display = 'block';
             }
@@ -1110,7 +1130,6 @@
             const retroStyles = document.getElementById('retro-styles');
             const modernLegacyStyles = document.getElementById('modern-legacy-styles');
             const retroLegacyStyles = document.getElementById('retro-legacy-styles');
-            const portalTrigger = document.getElementById('portalTrigger');
             const returnPortal = document.getElementById('returnPortal');
             
             // 스크롤을 최상단으로
@@ -1157,12 +1176,9 @@
             // 모던 이미지로 재초기화
             updateGalleryImages('modern');
             
-            // Portal 전환 (흰색 숨기고 핑크 표시)
+            // Portal 전환 - EXIT 버튼 숨김
             if (returnPortal) {
                 returnPortal.style.display = 'none';
-            }
-            if (portalTrigger) {
-                portalTrigger.style.display = 'block';
             }
         }
         
@@ -1802,13 +1818,61 @@
             ts: serverTimestamp()
           });
         
-        // 미니게임 점수 제출
-        window.submitGameScore = async function(name, score) {
+        // 미니게임 점수 제출 with validation
+        window.submitGameScore = async function(name, score, sessionData = null) {
             console.log('Submitting score:', name, score);
+            
+            // Client-side validation
+            const MAX_VALID_SCORE = 100000000; // 100 million max
+            const MIN_VALID_SCORE = 0;
+            
+            // Validate score
+            if (typeof score !== 'number' || isNaN(score) || !isFinite(score)) {
+                console.error('Invalid score type:', typeof score, score);
+                alert('잘못된 점수입니다.');
+                return false;
+            }
+            
+            if (score < MIN_VALID_SCORE) {
+                console.error('Score too low:', score);
+                alert('점수가 너무 낮습니다.');
+                return false;
+            }
+            
+            if (score > MAX_VALID_SCORE || score === 2147483647) {
+                console.warn('Suspicious score detected:', score);
+                alert('점수가 비정상적으로 높습니다. 최대 100,000,000점까지만 등록 가능합니다.');
+                return false;
+            }
+            
+            // Validate name
+            if (!name || typeof name !== 'string' || name.trim().length === 0) {
+                alert('이름을 입력해주세요.');
+                return false;
+            }
+            
+            if (name.length > 50) {
+                alert('이름이 너무 깁니다.');
+                return false;
+            }
+            
+            // Rate limiting check (prevent rapid submissions)
+            const lastSubmitTime = window.lastScoreSubmitTime || 0;
+            const now = Date.now();
+            if (now - lastSubmitTime < 3000) { // 3 seconds minimum between submissions
+                console.warn('Too many submissions');
+                alert('너무 빠른 제출입니다. 잠시 후 다시 시도해주세요.');
+                return false;
+            }
+            window.lastScoreSubmitTime = now;
+            
             try {
+                // Sanitize score to integer
+                const sanitizedScore = Math.floor(Math.min(MAX_VALID_SCORE, Math.max(MIN_VALID_SCORE, score)));
+                
                 const docRef = await addDoc(collection(db, 'gameScores'), {
-                    name: name,
-                    score: score,
+                    name: name.trim(),
+                    score: sanitizedScore,
                     ts: serverTimestamp()
                 });
                 console.log('Score submitted successfully, doc ID:', docRef.id);
@@ -1965,10 +2029,513 @@
             console.log('Firebase not configured or error:', error);
             console.log('Running in offline mode - forms will work without database');
         }
+        
+        // Enhanced Navigation and UX Features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Game button functionality
+            const navGameButton = document.getElementById('navGameButton');
+            if (navGameButton) {
+                navGameButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Check current theme
+                    if (currentTheme === 'modern') {
+                        // Modern theme: trigger portal to Retro
+                        // Directly call the portal transition function
+                        const transitionPanel = document.getElementById('transitionPanel');
+                        if (transitionPanel) {
+                            transitionPanel.style.display = 'flex';
+                            transitionPanel.onclick = function() {
+                                switchToRetroTheme();
+                                this.style.display = 'none';
+                            };
+                        }
+                    } else {
+                        // Retro theme: scroll to minigame section
+                        const minigameSection = document.querySelector('.minigame-section');
+                        if (minigameSection && minigameSection.style.display !== 'none') {
+                            minigameSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            }
+            
+            // Sticky Navigation Bar
+            const stickyNav = document.getElementById('stickyNav');
+            const navItems = document.querySelectorAll('.nav-item:not(.nav-game)'); // Exclude game button from general nav items
+            let lastScrollTop = 0;
+            const scrollThreshold = 200;
+            
+            // Progress Bar
+            const progressBar = document.getElementById('scrollProgressBar');
+            
+            // Floating Action Button
+            const fabMain = document.getElementById('fabMain');
+            const fabMenu = document.getElementById('fabMenu');
+            
+            // Update scroll progress and show/hide navigation
+            function updateScrollFeatures() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                
+                // Update progress bar
+                if (progressBar) {
+                    progressBar.style.width = scrollPercent + '%';
+                }
+                
+                // Navigation is always visible now
+                // Only update progress bar
+            }
+            
+            // Throttle scroll events
+            let scrollTimer;
+            window.addEventListener('scroll', function() {
+                if (scrollTimer) return;
+                scrollTimer = setTimeout(function() {
+                    updateScrollFeatures();
+                    scrollTimer = null;
+                }, 50);
+            });
+            
+            // Navigation item click handlers
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const targetClass = this.getAttribute('data-section');
+                    
+                    // Find visible section (for theme switching)
+                    let targetElement = document.querySelector('.' + targetClass + '.modern-section');
+                    if (!targetElement || targetElement.style.display === 'none') {
+                        targetElement = document.querySelector('.' + targetClass + '.retro-section');
+                    }
+                    
+                    // If still not found, try without theme suffix
+                    if (!targetElement || targetElement.style.display === 'none') {
+                        targetElement = document.querySelector('.' + targetClass);
+                    }
+                    
+                    if (targetElement && targetElement.style.display !== 'none') {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    
+                    // Special handling for attendance button
+                    if (targetClass === 'attendance') {
+                        setTimeout(() => openAttendanceModal(), 500);
+                    }
+                });
+            });
+            
+            // Floating Action Button Toggle
+            if (fabMain && fabMenu) {
+                fabMain.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    fabMenu.style.display = fabMenu.style.display === 'none' ? 'block' : 'none';
+                    setTimeout(() => {
+                        fabMenu.classList.toggle('show');
+                    }, 10);
+                });
+                
+                // Close FAB menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!fabMain.contains(e.target) && !fabMenu.contains(e.target)) {
+                        fabMain.classList.remove('active');
+                        fabMenu.classList.remove('show');
+                        setTimeout(() => {
+                            fabMenu.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+            
+            // Make sections collapsible (only parents-contact)
+            const collapsibleSections = ['parents-contact'];
+            
+            collapsibleSections.forEach(sectionClass => {
+                const sections = document.querySelectorAll('.' + sectionClass);
+                sections.forEach(section => {
+                    // Create toggle button
+                    const toggle = document.createElement('div');
+                    toggle.className = 'section-toggle';
+                    toggle.innerHTML = `
+                        <span>자세히 보기</span>
+                        <span class="toggle-icon">▼</span>
+                    `;
+                    
+                    // Wrap content in collapsible div
+                    const content = document.createElement('div');
+                    content.className = 'collapsible-content collapsed';
+                    
+                    // Move all children except h3 to content div
+                    const title = section.querySelector('h3');
+                    const children = Array.from(section.children);
+                    children.forEach(child => {
+                        if (child !== title && child !== toggle) {
+                            content.appendChild(child);
+                        }
+                    });
+                    
+                    // Add toggle and content back
+                    if (title) {
+                        section.insertBefore(toggle, title.nextSibling);
+                    } else {
+                        section.insertBefore(toggle, section.firstChild);
+                    }
+                    section.appendChild(content);
+                    
+                    // Toggle functionality
+                    toggle.addEventListener('click', function() {
+                        this.classList.toggle('collapsed');
+                        content.classList.toggle('collapsed');
+                        const span = this.querySelector('span');
+                        span.textContent = content.classList.contains('collapsed') ? '자세히 보기' : '접기';
+                    });
+                });
+            });
+            
+            // Smooth scroll for all internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+            
+            // Auto-hide/show elements based on viewport
+            const observerOptions = {
+                root: null,
+                rootMargin: '50px',
+                threshold: 0.1
+            };
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Apply fade-in effect to sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                fadeInObserver.observe(section);
+            });
+        });
     </script>
     
     <!-- CSS 애니메이션 추가 -->
     <style>
+        /* Sticky Navigation Bar */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .sticky-nav.visible {
+            transform: translateY(0);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            background: none;
+            border: none;
+            color: #333;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 105, 180, 0.1);
+            color: #ff69b4;
+        }
+        
+        .nav-item.nav-rsvp {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .nav-item.nav-rsvp:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+        
+        .nav-item.nav-game {
+            background: linear-gradient(135deg, #9333ea, #7c3aed);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .nav-item.nav-game:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+        }
+        
+        /* Floating Action Buttons */
+        .floating-actions {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+        
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 10px;
+        }
+        
+        .fab-main {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            font-size: 24px;
+            animation: fab-pulse 2s infinite;
+        }
+        
+        .fab-main.active {
+            transform: rotate(45deg);
+            background: #666;
+        }
+        
+        .fab-secondary {
+            width: 48px;
+            height: 48px;
+            background: white;
+            font-size: 20px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+        
+        .fab-menu.show .fab-secondary {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .fab-menu.show .fab-secondary:nth-child(1) {
+            transition-delay: 0s;
+        }
+        
+        .fab-menu.show .fab-secondary:nth-child(2) {
+            transition-delay: 0.05s;
+        }
+        
+        .fab-menu.show .fab-secondary:nth-child(3) {
+            transition-delay: 0.1s;
+        }
+        
+        .fab-menu.show .fab-secondary:nth-child(4) {
+            transition-delay: 0.15s;
+        }
+        
+        @keyframes fab-pulse {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(255, 105, 180, 0.6);
+            }
+        }
+        
+        /* Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(0, 0, 0, 0.05);
+            z-index: 1001;
+        }
+        
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff69b4, #ff1493);
+            width: 0;
+            transition: width 0.1s ease;
+        }
+        
+        /* Collapsible Sections */
+        .section-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin: 20px auto;
+            max-width: 200px;
+            background: rgba(255, 105, 180, 0.1);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .section-toggle:hover {
+            background: rgba(255, 105, 180, 0.2);
+        }
+        
+        .section-toggle .toggle-icon {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .section-toggle.collapsed .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .collapsible-content {
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            max-height: 2000px;
+            opacity: 1;
+        }
+        
+        .collapsible-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+        
+        /* Retro theme adjustments */
+        body.retro-active .sticky-nav {
+            background: linear-gradient(to bottom, #1a1a2e, #0b0b1a);
+            border-bottom: 3px solid var(--pixel-pink);
+            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.3);
+        }
+        
+        body.retro-active .nav-item {
+            color: var(--pixel-yellow);
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            background: rgba(255, 0, 110, 0.1);
+            border: 2px solid transparent;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+            image-rendering: pixelated;
+        }
+        
+        body.retro-active .nav-item:hover {
+            background: rgba(255, 0, 110, 0.3);
+            border: 2px solid var(--pixel-pink);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+        }
+        
+        body.retro-active .nav-item.nav-rsvp {
+            background: var(--pixel-pink);
+            color: white;
+            border: 2px solid var(--pixel-light-pink);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        body.retro-active .nav-item.nav-rsvp:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+        }
+        
+        body.retro-active .nav-item.nav-game {
+            background: linear-gradient(135deg, #6b46c1, #553c9a);
+            color: white;
+            border: 2px solid #9333ea;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+            animation: retro-pulse 2s infinite;
+        }
+        
+        body.retro-active .nav-item.nav-game:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+        }
+        
+        @keyframes retro-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        body.retro-active .scroll-progress-bar {
+            background: linear-gradient(90deg, var(--pixel-pink), var(--pixel-yellow));
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .sticky-nav {
+                font-size: 12px;
+            }
+            
+            .nav-container {
+                padding: 8px 15px;
+                gap: 5px;
+            }
+            
+            .nav-item {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            
+            body.retro-active .nav-item {
+                font-size: 7px;
+                padding: 6px 8px;
+            }
+            
+            body.retro-active .nav-item.nav-rsvp,
+            body.retro-active .nav-item.nav-game {
+                font-size: 8px;
+            }
+            
+            .floating-actions {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .fab {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .fab-secondary {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+        
         /* Mobile Responsive Fixes */
         @media (max-width: 600px) {
             /* Prevent horizontal overflow */
