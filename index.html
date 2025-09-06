@@ -829,10 +829,6 @@
                     <input type="text" id="attendeeName" name="name" required placeholder="성함을 입력해주세요">
                 </div>
                 <div class="form-group">
-                    <label id="attendeePhoneLabel">연락처</label>
-                    <input type="tel" id="attendeePhone" name="phone" required placeholder="010-0000-0000">
-                </div>
-                <div class="form-group">
                     <label id="attendanceStatusLabel">참석 여부</label>
                     <select id="attendanceStatus" name="status" required style="font-size: 14px;">
                         <option value="">선택해주세요</option>
@@ -1176,8 +1172,6 @@
                 const attendeeNameLabel = document.getElementById('attendeeNameLabel');
                 if (attendeeNameLabel) attendeeNameLabel.textContent = 'NAME';
                 
-                const attendeePhoneLabel = document.getElementById('attendeePhoneLabel');
-                if (attendeePhoneLabel) attendeePhoneLabel.textContent = 'PHONE';
                 
                 const attendanceStatusLabel = document.getElementById('attendanceStatusLabel');
                 if (attendanceStatusLabel) attendanceStatusLabel.textContent = 'STATUS';
@@ -1223,8 +1217,6 @@
                 const attendeeNameLabel = document.getElementById('attendeeNameLabel');
                 if (attendeeNameLabel) attendeeNameLabel.textContent = '성함';
                 
-                const attendeePhoneLabel = document.getElementById('attendeePhoneLabel');
-                if (attendeePhoneLabel) attendeePhoneLabel.textContent = '연락처';
                 
                 const attendanceStatusLabel = document.getElementById('attendanceStatusLabel');
                 if (attendanceStatusLabel) attendanceStatusLabel.textContent = '참석 여부';
@@ -1858,7 +1850,7 @@
                     
                     const formData = {
                         name: document.getElementById('attendeeName').value,
-                        phone: document.getElementById('attendeePhone').value,
+                        phone: '',
                         status: document.getElementById('attendanceStatus').value,
                         count: document.getElementById('guestCount').value,
                         relation: document.getElementById('relation').value

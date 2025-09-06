@@ -32,7 +32,7 @@ const AttendanceManager = {
             
             const entry = {
                 name: sanitizedData.get('name'),
-                phone: sanitizedData.get('phone'),
+                phone: '',
                 status: sanitizedData.get('status'),
                 meal: sanitizedData.get('meal'),
                 count: parseInt(sanitizedData.get('count')) || 1,
@@ -43,7 +43,7 @@ const AttendanceManager = {
             if (this.isDuplicate(entry)) {
                 ModalManager.hideLoading();
                 ModalManager.confirm(
-                    '같은 이름과 전화번호로 이미 등록된 정보가 있습니다.\n기존 정보를 업데이트하시겠습니까?',
+                    '같은 이름으로 이미 등록된 정보가 있습니다.\n기존 정보를 업데이트하시겠습니까?',
                     () => {
                         this.updateExisting(entry);
                     }
@@ -80,7 +80,7 @@ const AttendanceManager = {
     isDuplicate: function(newEntry) {
         const existing = DataManager.attendance.getAll();
         return existing.some(entry => 
-            entry.name === newEntry.name && entry.phone === newEntry.phone
+            entry.name === newEntry.name
         );
     },
 
@@ -90,7 +90,7 @@ const AttendanceManager = {
             
             const existing = DataManager.attendance.getAll();
             const index = existing.findIndex(entry => 
-                entry.name === newEntry.name && entry.phone === newEntry.phone
+                entry.name === newEntry.name
             );
             
             if (index !== -1) {
@@ -203,12 +203,11 @@ const AttendanceManager = {
         }
         
         // CSV 형식으로 내보내기
-        let csvContent = '이름,전화번호,참석여부,식사여부,참석인원,관계,등록일\n';
+        let csvContent = '이름,참석여부,식사여부,참석인원,관계,등록일\n';
         
         attendees.forEach(entry => {
             const row = [
                 `"${entry.name}"`,
-                `"${entry.phone}"`,
                 entry.status === 'attend' ? '참석' : '불참',
                 entry.meal === 'yes' ? '식사함' : '식사안함',
                 entry.count,
@@ -251,32 +250,12 @@ const AttendanceManager = {
     sendReminder: function(attendee) {
         const message = `안녕하세요, ${attendee.name}님!\n\n${CONFIG.wedding.bride.name} ❤️ ${CONFIG.wedding.groom.name} 결혼식 참석 여부를 아직 확인받지 못했습니다.\n\n결혼식 정보:\n날짜: ${CONFIG.wedding.date.year}년 ${CONFIG.wedding.date.month}월 ${CONFIG.wedding.date.day}일 ${CONFIG.wedding.date.time}\n장소: ${CONFIG.wedding.venue.name}\n\n참석 여부를 알려주시면 감사하겠습니다.`;
         
-        // SMS 발송 (실제 구현시 SMS API 사용)
-        if (Utils.isMobile()) {
-            window.location.href = `sms:${attendee.phone}?body=${encodeURIComponent(message)}`;
-        } else {
-            Utils.copyToClipboard(`${message}\n\n${attendee.phone}`, '알림 메시지와 전화번호가 복사되었습니다.');
-        }
+        // 메시지 복사
+        Utils.copyToClipboard(message, '알림 메시지가 복사되었습니다.')
     },
 
     // 폼 입력 도우미 설정
     setupFormHelpers: function() {
-        // 전화번호 자동 포맷팅
-        const phoneInput = document.getElementById('attendeePhone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', (e) => {
-                let value = e.target.value.replace(/[^0-9]/g, '');
-                if (value.length >= 3) {
-                    if (value.length <= 7) {
-                        value = value.replace(/(\d{3})(\d+)/, '$1-$2');
-                    } else {
-                        value = value.replace(/(\d{3})(\d{4})(\d+)/, '$1-$2-$3');
-                    }
-                }
-                e.target.value = value;
-            });
-        }
-        
         // 참석 상태 변경시 식사 옵션 활성화/비활성화
         const statusSelect = document.getElementById('attendanceStatus');
         const mealSelect = document.getElementById('mealOption');
