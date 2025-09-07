@@ -66,7 +66,7 @@ service cloud.firestore {
              // 새로운 필드들 (선택사항으로 처리)
              (!('adultCount' in data) || (data.adultCount is int && data.adultCount >= 0 && data.adultCount <= 10)) &&
              (!('babyCount' in data) || (data.babyCount is int && data.babyCount >= 0 && data.babyCount <= 5)) &&
-             (!('mealAttendance' in data) || (data.mealAttendance is string && data.mealAttendance in ['full', 'ceremony', 'meal', ''])) &&
+             (!('mealAttendance' in data) || (data.mealAttendance is string && data.mealAttendance in ['course', 'buffet', 'greeting_only', 'meal_only', ''])) &&
              (!('status' in data) || (data.status is string && data.status in ['attend', 'absent', ''])) &&
              (!('relation' in data) || (data.relation is string && data.relation in ['groom', 'bride', '']));
              // count 필드는 호환성 위해 유지

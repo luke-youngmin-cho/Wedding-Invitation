@@ -10,6 +10,29 @@
     
     <title>권채린 ❤️ 조영민 결혼합니다</title>
     
+    <!-- Inline styles for sold out option -->
+    <style>
+        /* 만석 옵션 스타일 */
+        #mealAttendance option[value="course"] {
+            color: #999 !important;
+            background-color: #f5f5f5 !important;
+            font-style: italic;
+            text-decoration: line-through;
+        }
+        
+        /* 드롭다운에서 만석 옵션 호버 시 커서 변경 */
+        #mealAttendance option[value="course"]:hover {
+            cursor: not-allowed !important;
+        }
+        
+        /* 레트로 테마일 때 만석 옵션 스타일 */
+        .retro-section #mealAttendance option[value="course"] {
+            color: #666 !important;
+            background-color: var(--pixel-dark) !important;
+            opacity: 0.5;
+        }
+    </style>
+    
     <!-- 서비스 워커 등록 -->
     <!-- Version Check and Auto-refresh -->
     <script>
@@ -118,6 +141,7 @@
         <div class="nav-container">
             <button class="nav-item" data-section="title-section">TOP</button>
             <button class="nav-item" data-section="wedding-info">일정</button>
+            <button class="nav-item" data-section="photo-album">갤러리</button>
             <button class="nav-item" data-section="directions">오시는길</button>
             <button class="nav-item" data-section="account-info">마음전하기</button>
             <button class="nav-item nav-game" id="navGameButton">🎮게임</button>
@@ -134,10 +158,10 @@
             <button class="fab fab-secondary" onclick="openAttendanceModal()" title="참석여부">
                 <span>📝</span>
             </button>
-            <button class="fab fab-secondary" onclick="document.querySelector('.directions').scrollIntoView({behavior: 'smooth'})" title="오시는길">
+            <button class="fab fab-secondary" onclick="scrollToWithOffset(document.querySelector('.directions'), 100)" title="오시는길">
                 <span>📍</span>
             </button>
-            <button class="fab fab-secondary" onclick="document.querySelector('.account-info').scrollIntoView({behavior: 'smooth'})" title="계좌번호">
+            <button class="fab fab-secondary" onclick="scrollToWithOffset(document.querySelector('.account-info'), 100)" title="계좌번호">
                 <span>💰</span>
             </button>
             <button class="fab fab-secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="맨위로">
@@ -942,12 +966,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label id="mealAttendanceLabel">식사 참석</label>
-                    <select id="mealAttendance" name="mealAttendance" required style="font-size: 14px;">
+                    <label id="mealAttendanceLabel">식사 유형</label>
+                    <select id="mealAttendance" name="mealAttendance" required style="font-size: 14px;" onchange="checkSoldOut(this)">
                         <option value="">선택해주세요</option>
-                        <option value="full">전 일정 참석하겠습니다</option>
-                        <option value="ceremony">예식만 참석하고 식사는 어려울 것 같습니다</option>
-                        <option value="meal">식사만 하고 인사드리고 가겠습니다</option>
+                        <option value="course" disabled style="color: #999; background-color: #f5f5f5;">전체 일정 : 코스 (만석)</option>
+                        <option value="buffet">전체 일정 : 뷔페</option>
+                        <option value="greeting_only">일부 일정 : 인사만</option>
+                        <option value="meal_only">일부 일정 : 식사만 (뷔페)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -958,7 +983,7 @@
                             <input type="number" id="adultCount" name="adultCount" min="1" max="10" value="1" style="width: 100%;">
                         </div>
                         <div style="flex: 1;">
-                            <label style="font-size: 12px; margin-bottom: 5px; display: block;">유아</label>
+                            <label style="font-size: 12px; margin-bottom: 5px; display: block;">유아 (36개월 미만)</label>
                             <input type="number" id="babyCount" name="babyCount" min="0" max="5" value="0" style="width: 100%;">
                         </div>
                     </div>
@@ -975,11 +1000,34 @@
                     확인
                 </button>
             </form>
+            <div style="margin-top: 20px; padding: 15px; background-color: #f9f9f9; border-radius: 5px; font-size: 12px; line-height: 1.6; color: #666;">
+                ※ 한화불꽃놀이와 날짜가 겹쳐 자차이용시 많이 혼잡할 수 있습니다.<br>
+                ※ 뷔페(14층)에서 식사하실 경우, 화면으로 식을 보시면서 식사할 수 있습니다.<br>
+                ※ 아기 의자는 준비되어 있습니다.<br>
+                ※ 이유식을 데워드릴 수 있습니다.
+            </div>
         </div>
     </div>
 
     <!-- JavaScript -->
     <script>
+        // 만석 옵션 체크 함수
+        window.checkSoldOut = function(selectElement) {
+            // 이전 선택값 저장
+            if (!selectElement.dataset.previousValue) {
+                selectElement.dataset.previousValue = '';
+            }
+            
+            if (selectElement.value === 'course') {
+                alert('코스 요리는 만석되었습니다.\n뷔페를 선택해 주세요.');
+                // 이전 선택값으로 되돌리기
+                selectElement.value = selectElement.dataset.previousValue || '';
+            } else {
+                // 현재 선택값을 이전 값으로 저장
+                selectElement.dataset.previousValue = selectElement.value;
+            }
+        }
+        
         // 모달 함수들 - 최상단에 정의
         window.openGuestbookModal = function() {
             const modal = document.getElementById('guestbookModal');
@@ -1300,12 +1348,12 @@
                     const babyDiv = document.getElementById('babyCount')?.parentElement;
                     if (babyDiv) {
                         const label = babyDiv.querySelector('label');
-                        if (label) label.textContent = 'KIDS';
+                        if (label) label.textContent = 'KIDS (Under 36 months)';
                     }
                 }
                 
                 const mealAttendanceLabel = document.getElementById('mealAttendanceLabel');
-                if (mealAttendanceLabel) mealAttendanceLabel.textContent = 'MEAL OPTION';
+                if (mealAttendanceLabel) mealAttendanceLabel.textContent = '식사 유형';
                 
                 const relationLabel = document.getElementById('relationLabel');
                 if (relationLabel) relationLabel.textContent = 'TEAM';
@@ -2129,7 +2177,7 @@
                         // Retro theme: scroll to minigame section
                         const minigameSection = document.querySelector('.minigame-section');
                         if (minigameSection && minigameSection.style.display !== 'none') {
-                            minigameSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            scrollToWithOffset(minigameSection, 100);
                         }
                     }
                 });
@@ -2173,6 +2221,17 @@
                 }, 50);
             });
             
+            // Helper function to scroll with offset
+            function scrollToWithOffset(element, offset = 100) {
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+            
             // Navigation item click handlers
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
@@ -2190,7 +2249,7 @@
                     }
                     
                     if (targetElement && targetElement.style.display !== 'none') {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        scrollToWithOffset(targetElement, 100);
                     }
                     
                     // Special handling for attendance button
@@ -2273,7 +2332,7 @@
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        scrollToWithOffset(target, 100);
                     }
                 });
             });
@@ -2328,9 +2387,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px 20px;
-            gap: 10px;
-            max-width: 600px;
+            padding: 10px 15px;
+            gap: 8px;
+            max-width: 700px;
             margin: 0 auto;
         }
         
@@ -2338,8 +2397,8 @@
             background: none;
             border: none;
             color: #333;
-            padding: 8px 15px;
-            font-size: 14px;
+            padding: 8px 12px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.3s ease;
             border-radius: 20px;
@@ -2574,18 +2633,18 @@
             }
             
             .nav-container {
-                padding: 8px 15px;
-                gap: 5px;
+                padding: 8px 10px;
+                gap: 4px;
             }
             
             .nav-item {
-                padding: 6px 10px;
-                font-size: 11px;
+                padding: 6px 8px;
+                font-size: 10px;
             }
             
             body.retro-active .nav-item {
-                font-size: 7px;
-                padding: 6px 8px;
+                font-size: 6px;
+                padding: 5px 6px;
             }
             
             body.retro-active .nav-item.nav-rsvp,
