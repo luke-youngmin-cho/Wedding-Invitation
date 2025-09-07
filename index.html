@@ -913,8 +913,26 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label id="guestCountLabel">동행 인원 (본인 포함)</label>
-                    <input type="number" id="guestCount" name="count" min="1" max="10" value="1">
+                    <label id="mealAttendanceLabel">식사 참석</label>
+                    <select id="mealAttendance" name="mealAttendance" required style="font-size: 14px;">
+                        <option value="">선택해주세요</option>
+                        <option value="full">전 일정 참석하겠습니다</option>
+                        <option value="ceremony">예식만 참석하고 식사는 어려울 것 같습니다</option>
+                        <option value="meal">식사만 하고 인사드리고 가겠습니다</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="guestCountLabel">동행 인원</label>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div style="flex: 1;">
+                            <label style="font-size: 12px; margin-bottom: 5px; display: block;">성인</label>
+                            <input type="number" id="adultCount" name="adultCount" min="1" max="10" value="1" style="width: 100%;">
+                        </div>
+                        <div style="flex: 1;">
+                            <label style="font-size: 12px; margin-bottom: 5px; display: block;">유아</label>
+                            <input type="number" id="babyCount" name="babyCount" min="0" max="5" value="0" style="width: 100%;">
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label id="relationLabel">구분</label>
@@ -1237,6 +1255,28 @@
                 
                 const guestCountLabel = document.getElementById('guestCountLabel');
                 if (guestCountLabel) guestCountLabel.textContent = 'PARTY SIZE';
+                
+                // 성인/유아 라벨 변경
+                const adultLabel = document.querySelector('label[for="adultCount"]');
+                if (!adultLabel) {
+                    const adultDiv = document.getElementById('adultCount')?.parentElement;
+                    if (adultDiv) {
+                        const label = adultDiv.querySelector('label');
+                        if (label) label.textContent = 'ADULTS';
+                    }
+                }
+                
+                const babyLabel = document.querySelector('label[for="babyCount"]');
+                if (!babyLabel) {
+                    const babyDiv = document.getElementById('babyCount')?.parentElement;
+                    if (babyDiv) {
+                        const label = babyDiv.querySelector('label');
+                        if (label) label.textContent = 'KIDS';
+                    }
+                }
+                
+                const mealAttendanceLabel = document.getElementById('mealAttendanceLabel');
+                if (mealAttendanceLabel) mealAttendanceLabel.textContent = 'MEAL OPTION';
                 
                 const relationLabel = document.getElementById('relationLabel');
                 if (relationLabel) relationLabel.textContent = 'TEAM';
@@ -1957,10 +1997,15 @@
                     
                     const formData = {
                         name: document.getElementById('attendeeName').value,
-                        phone: '',
+                        count: (parseInt(document.getElementById('adultCount').value) || 1) + 
+                               (parseInt(document.getElementById('babyCount').value) || 0),
+                        adultCount: parseInt(document.getElementById('adultCount').value) || 1,
+                        babyCount: parseInt(document.getElementById('babyCount').value) || 0,
+                        relation: document.getElementById('relation').value,
                         status: document.getElementById('attendanceStatus').value,
-                        count: document.getElementById('guestCount').value,
-                        relation: document.getElementById('relation').value
+                        mealAttendance: document.getElementById('mealAttendance').value,
+                        phone: ''
+                        // ts는 Firebase에서 serverTimestamp()로 자동 추가됨
                     };
                     
                     try {
