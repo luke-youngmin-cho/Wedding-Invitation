@@ -6,23 +6,52 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <script src="js/fit-text.js"></script>
+    <script src="js/fit-text.js?v=2024-12-19-1"></script>
     
     <title>권채린 ❤️ 조영민 결혼합니다</title>
     
     <!-- 서비스 워커 등록 -->
+    <!-- Version Check and Auto-refresh -->
     <script>
+        // Define current version for cache busting
+        const SITE_VERSION = '2024-12-19-1';
+        
+        // Auto-refresh on version change
+        (async () => {
+            try {
+                const res = await fetch('/Wedding-Invitation/version.json', { cache: 'no-store' });
+                const { version } = await res.json();
+                const localVersion = localStorage.getItem('site_version');
+                
+                if (localVersion && localVersion !== version) {
+                    console.log('New version detected:', version, 'Current:', localVersion);
+                    localStorage.setItem('site_version', version);
+                    // Clear all caches before reload
+                    if ('caches' in window) {
+                        const cacheNames = await caches.keys();
+                        await Promise.all(cacheNames.map(name => caches.delete(name)));
+                    }
+                    location.reload(true); // Force reload from server
+                } else if (!localVersion) {
+                    localStorage.setItem('site_version', version);
+                }
+            } catch (e) {
+                console.log('Version check failed:', e);
+            }
+        })();
+        
+        // Service Worker with version-aware caching
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                // 기존 서비스 워커 모두 제거
+                // Unregister old service workers
                 navigator.serviceWorker.getRegistrations().then(function(registrations) {
                     for(let registration of registrations) {
                         registration.unregister();
                     }
                 });
                 
-                // 새 서비스 워커 등록
-                navigator.serviceWorker.register('/Wedding-Invitation/sw.js')
+                // Register new service worker with version
+                navigator.serviceWorker.register('/Wedding-Invitation/sw.js?v=' + SITE_VERSION)
                     .then(function(registration) {
                         console.log('ServiceWorker registration successful');
                     })
@@ -37,29 +66,29 @@
     <link rel="manifest" href="manifest.json">
     
     <!-- Modern Theme CSS (New Structure) -->
-    <link rel="stylesheet" href="css/modern/index.css" id="modern-styles">
+    <link rel="stylesheet" href="css/modern/index.css?v=2024-12-19-1" id="modern-styles">
     
     <!-- Retro Theme CSS (New Structure, Disabled by default) -->
-    <link rel="stylesheet" href="css/retro/index.css" id="retro-styles" disabled>
+    <link rel="stylesheet" href="css/retro/index.css?v=2024-12-19-1" id="retro-styles" disabled>
     
     <!-- Legacy CSS Files (for backward compatibility) -->
-    <link rel="stylesheet" href="modern-theme.css" id="modern-legacy-styles">
-    <link rel="stylesheet" href="retro-theme.css" id="retro-legacy-styles" disabled>
+    <link rel="stylesheet" href="modern-theme.css?v=2024-12-19-1" id="modern-legacy-styles">
+    <link rel="stylesheet" href="retro-theme.css?v=2024-12-19-1" id="retro-legacy-styles" disabled>
     
     <!-- Responsive Override Styles -->
-    <link rel="stylesheet" href="responsive-override.css">
-    <link rel="stylesheet" href="css/mobile-width-constraint.css">
-    <link rel="stylesheet" href="css/calendar-grid-fix.css">
-    <link rel="stylesheet" href="css/account-section-fix.css">
-    <link rel="stylesheet" href="css/rsvp-form-improvement.css">
-    <link rel="stylesheet" href="css/boundary-fix.css">
-    <link rel="stylesheet" href="css/retro-share-fix.css">
-    <link rel="stylesheet" href="css/retro-titles-fix.css">
-    <link rel="stylesheet" href="css/game-world-ui-fix.css">
-    <link rel="stylesheet" href="css/parents-contact-horizontal.css">
-    <link rel="stylesheet" href="css/parents-group-border.css">
-    <link rel="stylesheet" href="css/pixel-heart-fix.css">
-    <link rel="stylesheet" href="css/game-button-position-fix.css">
+    <link rel="stylesheet" href="responsive-override.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/mobile-width-constraint.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/calendar-grid-fix.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/account-section-fix.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/rsvp-form-improvement.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/boundary-fix.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/retro-share-fix.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/retro-titles-fix.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/game-world-ui-fix.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/parents-contact-horizontal.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/parents-group-border.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/pixel-heart-fix.css?v=2024-12-19-1">
+    <link rel="stylesheet" href="css/game-button-position-fix.css?v=2024-12-19-1">
     
     <!-- Press Start 2P Font for transition panel -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -68,20 +97,20 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     
     <!-- Load Configuration -->
-    <script src="js/config.js"></script>
+    <script src="js/config.js?v=2024-12-19-1"></script>
     <!-- Core Utilities -->
-    <script src="js/utils.js"></script>
-    <script src="js/modal.js"></script>
-    <script src="js/form-manager.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/notification.js"></script>
-    <script src="js/analytics.js"></script>
+    <script src="js/utils.js?v=2024-12-19-1"></script>
+    <script src="js/modal.js?v=2024-12-19-1"></script>
+    <script src="js/form-manager.js?v=2024-12-19-1"></script>
+    <script src="js/api.js?v=2024-12-19-1"></script>
+    <script src="js/notification.js?v=2024-12-19-1"></script>
+    <script src="js/analytics.js?v=2024-12-19-1"></script>
     <!-- Load Data Manager -->
-    <script src="js/data-manager.js"></script>
+    <script src="js/data-manager.js?v=2024-12-19-1"></script>
     <!-- Load Mini Game -->
-    <script src="js/minigame.js"></script>
+    <script src="js/minigame.js?v=2024-12-19-1"></script>
     <!-- Load Account Copy Function -->
-    <script src="js/account-copy.js"></script>
+    <script src="js/account-copy.js?v=2024-12-19-1"></script>
 </head>
 <body>
     <!-- Sticky Navigation Bar -->
@@ -600,7 +629,7 @@
 
         
         <!-- 방명록 로드 -->
-        <script src="js/guestbook.js" defer></script>
+        <script src="js/guestbook.js?v=2024-12-19-1" defer></script>
 
         <!-- 모던 방명록 -->
         <section class="guestbook modern-section">
