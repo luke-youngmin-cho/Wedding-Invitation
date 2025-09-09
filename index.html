@@ -26,7 +26,7 @@
     <!-- Version Check and Auto-refresh -->
     <script>
         // Define current version for cache busting
-        const SITE_VERSION = '2025-01-09-2';
+        const SITE_VERSION = '2025-01-09-3';
         
         // Auto-refresh on version change
         (async () => {
@@ -1034,6 +1034,9 @@
         
         // 테마 관리
         let currentTheme = 'modern';
+        let fireworksInterval = null;
+        let heartsInterval = null;
+        let balloonsInterval = null;
         
         // 앨범 사진 경로 함수를 먼저 정의
         function getAlbumPhotos(isRetro = false) {
@@ -1387,13 +1390,38 @@
         
         // 레트로 효과 정지
         function stopRetroEffects() {
-            // 모든 인터벌 정리는 createFireworks와 createFloatingHearts 함수에서 관리
-            // 여기서는 단순히 테마 변경만 표시
+            // 모든 인터벌 정리
+            if (fireworksInterval) {
+                clearInterval(fireworksInterval);
+                fireworksInterval = null;
+            }
+            if (heartsInterval) {
+                clearInterval(heartsInterval);
+                heartsInterval = null;
+            }
+            if (balloonsInterval) {
+                clearInterval(balloonsInterval);
+                balloonsInterval = null;
+            }
+            
+            // 기존 효과 요소들 제거
+            const fireworks = document.getElementById('fireworks');
+            if (fireworks) fireworks.innerHTML = '';
+            
+            const hearts = document.getElementById('floatingHearts');
+            if (hearts) hearts.innerHTML = '';
+            
             currentTheme = 'modern';
         }
 
         // 폭죽 효과
         function createFireworks() {
+            // 기존 interval이 있으면 먼저 정리
+            if (fireworksInterval) {
+                clearInterval(fireworksInterval);
+                fireworksInterval = null;
+            }
+            
             let container = document.getElementById('fireworks');
             if (!container) {
                 // 컨테이너가 없으면 생성
@@ -1401,9 +1429,12 @@
                 container.id = 'fireworks';
                 container.className = 'fireworks';
                 document.body.appendChild(container);
+            } else {
+                // 기존 컨테이너가 있으면 내용 비우기
+                container.innerHTML = '';
             }
             
-            setInterval(() => {
+            fireworksInterval = setInterval(() => {
                 // 레트로 테마일 때만 작동
                 if (currentTheme !== 'retro') return;
                 
@@ -1497,6 +1528,12 @@
 
         // 떠다니는 하트와 풍선
         function createFloatingHearts() {
+            // 기존 interval이 있으면 먼저 정리
+            if (heartsInterval) {
+                clearInterval(heartsInterval);
+                heartsInterval = null;
+            }
+            
             let container = document.getElementById('floatingHearts');
             if (!container) {
                 // 컨테이너가 없으면 생성
@@ -1504,10 +1541,13 @@
                 container.id = 'floatingHearts';
                 container.className = 'floating-hearts';
                 document.body.appendChild(container);
+            } else {
+                // 기존 컨테이너가 있으면 내용 비우기
+                container.innerHTML = '';
             }
             
             // 하트 생성
-            setInterval(() => {
+            heartsInterval = setInterval(() => {
                 if (currentTheme !== 'retro') return;
                 const heart = document.createElement('div');
                 heart.className = 'float-heart';
@@ -1519,7 +1559,12 @@
             }, 3000);
             
             // 풍선 생성
-            setInterval(() => {
+            if (balloonsInterval) {
+                clearInterval(balloonsInterval);
+                balloonsInterval = null;
+            }
+            
+            balloonsInterval = setInterval(() => {
               if (currentTheme !== 'retro') return;
               const el = document.createElement('div');
               el.className = 'pixel-balloon';
