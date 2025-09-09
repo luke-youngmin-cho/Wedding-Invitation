@@ -20,24 +20,13 @@
             text-decoration: line-through;
         }
         
-        /* 드롭다운에서 만석 옵션 호버 시 커서 변경 */
-        #mealAttendance option[value="course"]:hover {
-            cursor: not-allowed !important;
-        }
-        
-        /* 레트로 테마일 때 만석 옵션 스타일 */
-        .retro-section #mealAttendance option[value="course"] {
-            color: #666 !important;
-            background-color: var(--pixel-dark) !important;
-            opacity: 0.5;
-        }
     </style>
     
     <!-- 서비스 워커 등록 -->
     <!-- Version Check and Auto-refresh -->
     <script>
         // Define current version for cache busting
-        const SITE_VERSION = '2024-12-19-2';
+        const SITE_VERSION = '2025-01-09-1';
         
         // Auto-refresh on version change
         (async () => {
@@ -967,12 +956,11 @@
                 </div>
                 <div class="form-group">
                     <label id="mealAttendanceLabel">식사 유형</label>
-                    <select id="mealAttendance" name="mealAttendance" required style="font-size: 14px;" onchange="checkSoldOut(this)">
+                    <select id="mealAttendance" name="mealAttendance" required style="font-size: 14px;">
                         <option value="">선택해주세요</option>
-                        <option value="course" disabled style="color: #999; background-color: #f5f5f5;">전체 일정 : 코스 (만석)</option>
-                        <option value="buffet">전체 일정 : 뷔페</option>
+                        <option value="full_schedule">전체 일정</option>
                         <option value="greeting_only">일부 일정 : 인사만</option>
-                        <option value="meal_only">일부 일정 : 식사만 (뷔페)</option>
+                        <option value="meal_only">일부 일정 : 식사만</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -1011,22 +999,6 @@
 
     <!-- JavaScript -->
     <script>
-        // 만석 옵션 체크 함수
-        window.checkSoldOut = function(selectElement) {
-            // 이전 선택값 저장
-            if (!selectElement.dataset.previousValue) {
-                selectElement.dataset.previousValue = '';
-            }
-            
-            if (selectElement.value === 'course') {
-                alert('코스 요리는 만석되었습니다.\n뷔페를 선택해 주세요.');
-                // 이전 선택값으로 되돌리기
-                selectElement.value = selectElement.dataset.previousValue || '';
-            } else {
-                // 현재 선택값을 이전 값으로 저장
-                selectElement.dataset.previousValue = selectElement.value;
-            }
-        }
         
         // 모달 함수들 - 최상단에 정의
         window.openGuestbookModal = function() {
