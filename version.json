@@ -1,5 +1,5 @@
 {
-  "version": "2025-01-09-1",
-  "lastUpdated": "2025-01-09T00:00:00Z",
-  "description": "Simplified meal type options in RSVP form"
+  "version": "2025-01-09-2",
+  "lastUpdated": "2025-01-09T00:01:00Z",
+  "description": "Fixed navigation bar button sizing and removed smooth scrolling"
 }

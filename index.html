@@ -26,7 +26,7 @@
     <!-- Version Check and Auto-refresh -->
     <script>
         // Define current version for cache busting
-        const SITE_VERSION = '2025-01-09-1';
+        const SITE_VERSION = '2025-01-09-2';
         
         // Auto-refresh on version change
         (async () => {
@@ -132,7 +132,7 @@
             <button class="nav-item" data-section="wedding-info">일정</button>
             <button class="nav-item" data-section="photo-album">갤러리</button>
             <button class="nav-item" data-section="directions">오시는길</button>
-            <button class="nav-item" data-section="account-info">마음전하기</button>
+            <button class="nav-item" data-section="account-info">축의</button>
             <button class="nav-item nav-game" id="navGameButton">🎮게임</button>
             <button class="nav-item nav-rsvp" data-section="attendance">참석여부</button>
         </div>
@@ -153,7 +153,7 @@
             <button class="fab fab-secondary" onclick="scrollToWithOffset(document.querySelector('.account-info'), 100)" title="계좌번호">
                 <span>💰</span>
             </button>
-            <button class="fab fab-secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="맨위로">
+            <button class="fab fab-secondary" onclick="window.scrollTo({top: 0, behavior: 'auto'})" title="맨위로">
                 <span>⬆️</span>
             </button>
         </div>
@@ -1141,7 +1141,7 @@
             const returnPortal = document.getElementById('returnPortal');
             
             // 스크롤을 최상단으로
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'auto' });
             
             // 스타일시트 전환
             modernStyles.disabled = true;
@@ -1200,7 +1200,7 @@
             const returnPortal = document.getElementById('returnPortal');
             
             // 스크롤을 최상단으로
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'auto' });
             
             // 스타일시트 전환
             modernStyles.disabled = false;
@@ -2200,7 +2200,7 @@
                 
                 window.scrollTo({
                     top: offsetPosition,
-                    behavior: 'smooth'
+                    behavior: 'auto'
                 });
             }
             
@@ -2547,8 +2547,8 @@
         
         body.retro-active .nav-item {
             color: var(--pixel-yellow);
-            font-family: 'Press Start 2P', monospace;
-            font-size: 9px;
+            font-family: inherit;
+            font-size: 13px;
             background: rgba(255, 0, 110, 0.1);
             border: 2px solid transparent;
             padding: 8px 12px;
@@ -2605,23 +2605,37 @@
             }
             
             .nav-container {
-                padding: 8px 10px;
-                gap: 4px;
+                padding: 8px 2px;
+                gap: 1px;
             }
             
             .nav-item {
-                padding: 6px 8px;
-                font-size: 10px;
+                padding: 4px 5px;
+                font-size: 8px;
+                border-radius: 15px;
+            }
+            
+            .nav-item.nav-rsvp,
+            .nav-item.nav-game {
+                padding: 4px 6px;
+                font-size: 9px;
+            }
+            
+            .nav-item.nav-rsvp:hover,
+            .nav-item.nav-game:hover {
+                transform: scale(1.02);
             }
             
             body.retro-active .nav-item {
-                font-size: 6px;
-                padding: 5px 6px;
+                font-size: 8px;
+                padding: 4px 5px;
+                border-width: 1px;
             }
             
             body.retro-active .nav-item.nav-rsvp,
             body.retro-active .nav-item.nav-game {
-                font-size: 8px;
+                font-size: 9px;
+                padding: 4px 6px;
             }
             
             .floating-actions {
