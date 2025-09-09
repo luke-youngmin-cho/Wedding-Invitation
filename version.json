@@ -1,5 +1,5 @@
 {
-  "version": "2025-01-09-2",
-  "lastUpdated": "2025-01-09T00:01:00Z",
-  "description": "Fixed navigation bar button sizing and removed smooth scrolling"
+  "version": "2025-01-09-3",
+  "lastUpdated": "2025-01-09T00:02:00Z",
+  "description": "Fixed retro theme effects duplication and memory leak"
 }
